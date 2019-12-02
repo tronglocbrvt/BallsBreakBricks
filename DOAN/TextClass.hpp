@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "BackGround.hpp"
+#include <iostream>
 
 #define CHRACTER_SIZE 40
 

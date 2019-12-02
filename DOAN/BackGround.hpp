@@ -1,14 +1,17 @@
 #ifndef BackGround_hpp
 #define BackGround_hpp
 
-#include "Ball.hpp"
+//#include "Ball.hpp"
 #include <vector>
 #include <string>
 #include "TextClass.hpp"
 #include "mathfunction.hpp"
 
-#define _WIDTH_TABLE_GAME_ 1080
-#define _HEIGH_TABLE_GAME_ 540
+#define _WIDTH_SCREEN 1280
+#define _HEIGH_SCREEN 720
+
+#define _WIDTH_TABLE_GAME_ _WIDTH_SCREEN * 3 / 4
+#define _HEIGH_TABLE_GAME_ _HEIGH_SCREEN * 9 / 10
 #define _DIS_FROM_TOP_ 25
 
 #define _MAX_HEALTH_ 3
