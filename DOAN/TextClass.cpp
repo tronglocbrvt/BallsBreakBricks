@@ -1,5 +1,8 @@
 #include "TextClass.hpp"
 
+TextShow::TextShow(){
+    
+}
 TextShow::TextShow(std::string textS, std::string font, float posX, float posY){            // constructor -> chuỗi + tên font + vị trí in trên màn hình
     // update text
     setText(textS);
@@ -18,6 +21,24 @@ TextShow::TextShow(std::string textS, std::string font, float posX, float posY){
     setStyleFont(sf::Text::Bold);
     setColor(221, 0, 255);
  
+}
+void TextShow::set(std::string textS, std::string font, float posX, float posY){
+    // update text
+    setText(textS);
+    updateText();
+    
+    // update font
+    setFont(font);
+    
+    // set position
+    sf::FloatRect textRect(textT.getLocalBounds());
+    textT.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2);
+    setPosition(posX, posY);
+    
+    // set type
+    textT.setCharacterSize(CHRACTER_SIZE);
+    setStyleFont(sf::Text::Bold);
+    setColor(221, 0, 255);
 }
 void TextShow::setPosition(float posX, float posY){         // hàm setter cài đặt vị trí của text
     this->posX = posX;

@@ -20,7 +20,9 @@ protected:
     float posY;
     
 public:
+    TextShow();
     TextShow(std::string textS, std::string font, float posX, float posY);
+    void set(std::string textS, std::string font, float posX, float posY);
     void setPosition(float posX, float posY);
     void setText(std::string textS);
     void setFont(std::string font);

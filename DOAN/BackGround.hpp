@@ -10,9 +10,11 @@
 #define _WIDTH_SCREEN 1280
 #define _HEIGH_SCREEN 720
 
-#define _WIDTH_TABLE_GAME_ _WIDTH_SCREEN * 3 / 4
+#define _WIDTH_TABLE_GAME_ _WIDTH_SCREEN * 6.8 / 10
 #define _HEIGH_TABLE_GAME_ _HEIGH_SCREEN * 9 / 10
+
 #define _DIS_FROM_TOP_ 25
+#define _DIS_FROM_LEFT_ 25
 
 #define _MAX_HEALTH_ 3
 #define _THICK_LINE_ 5
@@ -45,10 +47,9 @@ public:
     float startTableX();
     float startTableY();
 };
+
 class TableInf {        // class khu vực xử lý về thông tin hiện trên màn hình
 private:
-    std::string namePlayerLeft;
-    std::string namePlayerRight;
     
     float posX;
     float posY;
@@ -56,24 +57,22 @@ private:
     int rateLeft;
     int rateRight;
     
-    sf::Texture hearticon;
+    bool isPersonLeft;
+    bool isPersonRight;
     
-    sf::Sprite HealthLeft[_MAX_HEALTH_];
-    sf::Sprite HealthRight[_MAX_HEALTH_];
-    
-    int healthLeft;
-    int healthRight;
+    // text
+    TextShow aaa;
     
 public:
     TableInf();
     virtual ~TableInf();
     
+    void setMode(bool isPersonLeft, bool isPersonRight);
     void drawInfTable(sf::RenderWindow &window);
     void setPosition(float x, float y);
-    
-    void setHealth(int left, int right);
+
     void setRate(int left, int right);
-    void setNamePlayer(std::string namePlayerLeft, std::string namePlayerRight);
+    
 };
 
 class BackGround {      // class khu vực tổng, quản lý
@@ -81,12 +80,10 @@ private:
     Table gameTable;
     TableInf tableinf;
 public:
-    BackGround();
+    BackGround(bool isPersonLeft, bool isPersonRight);
     virtual ~BackGround();
     
-    void setHealth(int left, int right);
     void setRate(int left, int right);
-    void setNamePlayer(std::string namePlayerLeft, std::string namePlayerRight);
     
     void draw(sf::RenderWindow &window);
     
