@@ -80,10 +80,7 @@ float Table::startTableY(){
 // class table information
 // Tutorial table
 TableInf::TableInf(){
-    TextShow tHeader;
-    TextShow rateA;
-    TextShow rateB;
-    TextShow devideSymbol;
+    
     
     // set vị trí của nền
     this->setPosition((_WIDTH_SCREEN - _WIDTH_TABLE_GAME_) / 2, _HEIGH_TABLE_GAME_ + _DIS_FROM_TOP_);
@@ -92,19 +89,19 @@ TableInf::TableInf(){
     this->rateRight = 0;
     this->rateLeft  = 0;
     
-    tHeader.set(std::string("INSTRUCTION"), std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/10);
+    this->tHeader.set(std::string("INSTRUCTION"), std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/10);
     
     // điểm bên trái đạt được
-    rateA.set(std::to_string(this->rateLeft), std::string("HACKED.ttf"),_WIDTH_SCREEN / 4, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
-    rateA.setColor(236, 3, 252);
+    this->rateA.set(std::to_string(this->rateLeft), std::string("HACKED.ttf"),_WIDTH_SCREEN / 4, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
+    this->rateA.setColor(236, 3, 252);
     
     // điểm bên phải đạt được
-    rateB.set(std::to_string(this->rateRight), std::string("HACKED.ttf"),_WIDTH_SCREEN * 3 / 4, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
-    rateB.setColor(236, 3, 252);
+    this->rateB.set(std::to_string(this->rateRight), std::string("HACKED.ttf"),_WIDTH_SCREEN * 3 / 4, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
+    this->rateB.setColor(236, 3, 252);
     
     // điểm phân chia
-    devideSymbol.set(std::string(" : "), std::string("HACKED.ttf"),_WIDTH_SCREEN * 2, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
-    devideSymbol.setColor(236, 3, 252);
+    this->devideSymbol.set(std::string(" : "), std::string("HACKED.ttf"),_WIDTH_SCREEN * 2, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
+    this->devideSymbol.setColor(236, 3, 252);
     
 }
 TableInf::~TableInf(){
@@ -123,15 +120,15 @@ void TableInf::setPosition(float x, float y){       // seter vị trí
 void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     
     // thay đổi kích thước hiển thị điểm
-//    rateA.scale(1.5);
-//    rateB.scale(1.5);
-//    devideSymbol.scale(3);
-//
-//    // vẽ điểm
-//    rateA.drawText(window);
-//    rateB.drawText(window);
-//    tHeader.drawText(window);
-//    devideSymbol.drawText(window);
+    rateA.scale(1.5);
+    rateB.scale(1.5);
+    devideSymbol.scale(3);
+
+    // vẽ điểm
+    rateA.drawText(window);
+    rateB.drawText(window);
+    tHeader.drawText(window);
+    devideSymbol.drawText(window);
     
     
 }

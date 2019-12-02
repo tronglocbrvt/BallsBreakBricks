@@ -3,7 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "BackGround.hpp"
+//#include "BackGround.hpp"
+#include "Define_Header.h"
 #include <iostream>
 
 #define CHRACTER_SIZE 40
