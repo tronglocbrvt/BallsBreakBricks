@@ -54,6 +54,8 @@ private:
     TextShow rateB;
     TextShow devideSymbol;
     
+    TextShow point;
+    
 public:
     TableInf();
     virtual ~TableInf();

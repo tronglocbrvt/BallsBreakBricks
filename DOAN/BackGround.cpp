@@ -83,7 +83,9 @@ TableInf::TableInf(){
     
     
     // set vị trí của nền
-    this->setPosition((_WIDTH_SCREEN - _WIDTH_TABLE_GAME_) / 2, _HEIGH_TABLE_GAME_ + _DIS_FROM_TOP_);
+    this->setPosition(_WIDTH_TABLE_GAME_ + _DIS_FROM_LEFT_ + 2*_THICK_LINE_, _DIS_FROM_TOP_);
+    
+    this->point.set("DTG", std::string("HACKED.ttf"), this->posX, this->posY);
  
     // set default tỷ số điểm
     this->rateRight = 0;
@@ -120,16 +122,17 @@ void TableInf::setPosition(float x, float y){       // seter vị trí
 void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     
     // thay đổi kích thước hiển thị điểm
-    rateA.scale(1.5);
-    rateB.scale(1.5);
-    devideSymbol.scale(3);
+    this->rateA.scale(1.5);
+    this->rateB.scale(1.5);
+    this->devideSymbol.scale(3);
 
     // vẽ điểm
-    rateA.drawText(window);
-    rateB.drawText(window);
-    tHeader.drawText(window);
-    devideSymbol.drawText(window);
+    this->rateA.drawText(window);
+    this->rateB.drawText(window);
+    this->tHeader.drawText(window);
+    this->devideSymbol.drawText(window);
     
+    this->point.drawText(window);
     
 }
 void TableInf::setRate(int left, int right){        // thiết lập điểm ban đầu

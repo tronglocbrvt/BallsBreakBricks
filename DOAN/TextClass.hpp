@@ -17,6 +17,7 @@ protected:
     sf::Text textT;             // biến Text trong sf
     sf::Text style;             // kiểu chữ
     
+    
     float posX;                 // vị trí in ra màn hình
     float posY;
     
