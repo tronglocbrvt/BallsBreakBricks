@@ -245,8 +245,13 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
         this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
         this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
         
-        // cập nhật vận tốc trên trục tung nếu có thay đổi
-        this->velocityY *= -1;
+        // cập nhật vận tốc trên trục nếu có thay đổi
+        if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
+            this->velocityX *= -1;
+        }
+        else{
+            this->velocityY *= -1;
+        }
 
         // cập nhật vận tốc mới vì đã chạm thanh
         this->updateVelocityY();
@@ -255,9 +260,15 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
         //
 
     }
-    // nếu chạm biên trên và dưới sẽ điều ngược lại trục tung
-    if ((this->posY <= _DIS_FROM_TOP_) || (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_))) {
+    // nếu chạm biên trên sẽ điều ngược lại trục tung
+    if (this->posY <= _DIS_FROM_TOP_) {
         this->velocityY *= -1;
+    }
+    
+    if (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)) {
+        this->velocityX = 0;
+        this->velocityY = 0;
+        return -1;
     }
 
     this->imgSpr.setPosition(this->posX, this->posY);
