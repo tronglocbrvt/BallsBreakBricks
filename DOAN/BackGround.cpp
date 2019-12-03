@@ -178,8 +178,6 @@ void TableInf::setScore(int score){        // thiết lập điểm ban đầu
     this->score = score;
 }
 
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // class background
 BackGround::BackGround(bool isPerson){
     this->tableinf.setMode(isPerson);

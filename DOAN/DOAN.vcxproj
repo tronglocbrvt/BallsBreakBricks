@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,11 +145,13 @@
   <ItemGroup>
     <ClInclude Include="BackGround.hpp" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Brick.hpp" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Define_Header.h" />
     <ClInclude Include="Display.hpp" />
     <ClInclude Include="mathfunction.hpp" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Object.hpp" />
     <ClInclude Include="OMG.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PvsP.hpp" />
