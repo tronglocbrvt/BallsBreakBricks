@@ -23,7 +23,7 @@
 
 #define _HEIGH_ICON_ 20
 #define _WIDTH_ICON_ 20
-#define _SPACE_BET_OBJ_ 10
+#define _SPACE_BET_OBJ_ 30
 
 namespace weapon {
     const std::string fire_ball = "Fire Ball";
@@ -31,5 +31,18 @@ namespace weapon {
     const std::string small_ball = "Tiny Ball";
     const std::string big_ball = "Big Ball";
 }
+
+#define NumberOfColor 8
+#define SpeechChangeColor 3
+enum MyColor{
+    Silver,
+    Asparagus,
+    Midnight,
+    Purple,
+    Red,
+    Yellow,
+    Blue,
+    Green
+};
 
 #endif /* Define_Header_h */
