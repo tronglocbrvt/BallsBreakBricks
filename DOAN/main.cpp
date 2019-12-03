@@ -24,6 +24,7 @@ int main(){
      */
 	
     sf::RenderWindow window(sf::VideoMode(_WIDTH_SCREEN, _HEIGH_SCREEN), "Balls Break Bricks", sf::Style::Close);
+
 	Menu menu(window.getSize().x, window.getSize().y);
 
     while (window.isOpen()) {
@@ -43,7 +44,9 @@ int main(){
 		menu.drawMenu(window);
 		window.display();
 
-    }
-   // play(window);
+    }  
+    
+    play(window);
+    
     return 0;
 }

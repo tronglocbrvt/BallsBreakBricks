@@ -86,6 +86,14 @@ float TextShow::getSizeText(){                              // trả về độ 
 float TextShow::getSizeCharacter(){                         // trả về kích thước của 1 ký tự
     return this->textT.getCharacterSize();
 }
+float TextShow::getheight(){
+    return this->textT.getGlobalBounds().height;
+}
+float TextShow::getBottom(){
+    sf::FloatRect textRect(this->textT.getGlobalBounds());
+    return textRect.top + textRect.height;
+}
+
 short TextShow::lengthText(){                               // trả về độ dài chuỗi
     return this->textS.length();
 }
@@ -94,4 +102,25 @@ float TextShow::getPositionX(){                             // trả về vị t
 }
 float TextShow::getPositionY(){                             // trả về vị trí của text theo Y
     return this->posY;
+}
+
+void TextShow::setOriginToMidHead(){
+    sf::FloatRect textRect(this->textT.getLocalBounds());
+    
+    this->textT.setOrigin(textRect.left, textRect.top + textRect.height/2);
+}
+void TextShow::setOriginToTopHead(){
+    sf::FloatRect textRect(this->textT.getLocalBounds());
+    
+    this->textT.setOrigin(textRect.left, textRect.top);
+}
+void TextShow::setOriginToMidle(){
+    sf::FloatRect textRect(this->textT.getLocalBounds());
+    
+    this->textT.setOrigin(textRect.left + textRect.width/2, textRect.top + textRect.height/2);
+}
+void TextShow::setOriginToMidTop(){
+    sf::FloatRect textRect(this->textT.getLocalBounds());
+    
+    this->textT.setOrigin(textRect.left + textRect.width/2, textRect.top);
 }

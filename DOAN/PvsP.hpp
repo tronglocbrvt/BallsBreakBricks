@@ -3,7 +3,7 @@
 #define PvsP_hpp
 
 #include "BackGround.hpp"
-
+#include "Ball.hpp"
 
 int play(sf::RenderWindow& window); // người với người chơi
 

@@ -6,8 +6,8 @@
 #include <string>
 #include "TextClass.hpp"
 #include "mathfunction.hpp"
+#include <map>
 //#include <SFML/Graphics.hpp>
-
 
 class Table {           // class khu vực xử lý đồ học nền game
 private:
@@ -42,34 +42,34 @@ private:
     float posX;
     float posY;
     
-    int rateLeft;
-    int rateRight;
+    int score;
     
-    bool isPersonLeft;
-    bool isPersonRight;
+    bool isPerson;
     
     // text
     TextShow tHeader;
-    TextShow score;
+    TextShow tScore;
     
-    TextShow tutorial;
-    TextShow weaponInf;
+    TextShow tTutorial;
+    TextShow tWeaponInf;
 //    TextShow
     
-    TextShow point1;
-    TextShow point2;
-    TextShow point3;
+//    TextShow point1;
+//    TextShow point2;
+//    TextShow point3;
     
 public:
     TableInf();
     virtual ~TableInf();
     
-    void setMode(bool isPersonLeft, bool isPersonRight);
+    void setMode(bool isPerson);
     void drawInfTable(sf::RenderWindow &window);
     void setPosition(float x, float y);
 
-    void setRate(int left, int right);
+    void setScore(int score);
     
+    sf::Time time;
+    sf::Clock clock;
 };
 
 class BackGround {      // class khu vực tổng, quản lý
@@ -80,10 +80,10 @@ private:
     sf::Texture BGimage;
     sf::Sprite BGsprite;
 public:
-    BackGround(bool isPersonLeft, bool isPersonRight);
+    BackGround(bool isPersonLeft);
     virtual ~BackGround();
     
-    void setRate(int left, int right);
+    void setScore(int score);
     
     void draw(sf::RenderWindow &window);
     

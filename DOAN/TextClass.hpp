@@ -38,9 +38,16 @@ public:
     float getSizeText();
     float getSizeCharacter();
     short lengthText();
+    float getheight();
+    float getBottom();
     
     float getPositionX();
     float getPositionY();
+    
+    void setOriginToMidHead();
+    void setOriginToTopHead();
+    void setOriginToMidle();
+    void setOriginToMidTop();
 };
 
 #endif /* TextClass_hpp */
