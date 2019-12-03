@@ -44,6 +44,6 @@ int main(){
 		window.display();
 
     }
-    //play(window);
+   // play(window);
     return 0;
 }
