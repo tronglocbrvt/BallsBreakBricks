@@ -1,6 +1,4 @@
-
 #include "PvsP.hpp"
-
 
 int play(sf::RenderWindow& window) {
 
@@ -50,7 +48,7 @@ int play(sf::RenderWindow& window) {
 		window.clear();
         
 		bg.draw(window);
-        
+
 		window.display();
 	}
 	return 0;

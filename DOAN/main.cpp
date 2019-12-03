@@ -1,18 +1,11 @@
-//
-//  main.cpp
-//  PongGame
-//
-//  Created by Thanh Phong Nguyen Dien on 12/2/19.
-//  Copyright © 2019 Thanh Phong Nguyen Dien. All rights reserved.
-//
-
 #include "OMG.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "PvsP.hpp"
 #include "BackGround.hpp"
-
+#include "Display.hpp"
+#include "Menu.h"
 int main(){
     
     /*
@@ -29,26 +22,28 @@ int main(){
         omg.printMenu(choice);    //in menu
     } while (choice != 3);
      */
-    
+	
     sf::RenderWindow window(sf::VideoMode(_WIDTH_SCREEN, _HEIGH_SCREEN), "Balls Break Bricks", sf::Style::Close);
-//
-//    while (window.isOpen()) {
-//        sf::Event event;
-//
-//        while (window.pollEvent(event)) {
-//            switch (event.type) {
-//                case sf::Event::Closed :
-//                    window.close();
-//                    break;
-//
-//                default:
-//                    break;
-//            }
-//        }
-//    }
-    play(window);
+	Menu menu(window.getSize().x, window.getSize().y);
 
-    
-    
+    while (window.isOpen()) {
+        sf::Event event;
+
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+                case sf::Event::Closed :
+                    window.close();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+		window.clear();
+		menu.drawMenu(window);
+		window.display();
+
+    }
+    //play(window);
     return 0;
 }

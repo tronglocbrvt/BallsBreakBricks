@@ -132,8 +132,10 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mathfunction.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OMG.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PvsP.cpp" />
@@ -144,7 +146,9 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Define_Header.h" />
+    <ClInclude Include="Display.hpp" />
     <ClInclude Include="mathfunction.hpp" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="OMG.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PvsP.hpp" />
