@@ -88,17 +88,9 @@ TableInf::TableInf(){
     this->tHeader.set(std::string("INSTRUCTION"), std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/10);
     
     // điểm bên trái đạt được
-    this->rateA.set(std::to_string(this->rateLeft), std::string("HACKED.ttf"),_WIDTH_SCREEN / 4, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
-    this->rateA.setColor(236, 3, 252);
-    
-    // điểm bên phải đạt được
-    this->rateB.set(std::to_string(this->rateRight), std::string("HACKED.ttf"),_WIDTH_SCREEN * 3 / 4, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
-    this->rateB.setColor(236, 3, 252);
-    
-    // điểm phân chia
-    this->devideSymbol.set(std::string(" : "), std::string("HACKED.ttf"),_WIDTH_TABLE_GAME_, (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_) / 2);
-    this->devideSymbol.setColor(236, 3, 252);
-    
+    this->score.set(std::to_string(this->rateLeft), std::string("HACKED.ttf"),_WIDTH_SCREEN / 4, _HEIGH_TABLE_GAME_ + (_HEIGH_SCREEN - (_HEIGH_TABLE_GAME_+_DIS_FROM_TOP_)) / 2);
+    this->score.setColor(236, 3, 252);
+  
     this->point1.set(".", std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/5);
     this->point2.set(".", std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/5);
     this->point3.set(".", std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/5);
@@ -124,15 +116,11 @@ void TableInf::setPosition(float x, float y){       // seter vị trí
 void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     
     // thay đổi kích thước hiển thị điểm
-    this->rateA.scale(1.5);
-    this->rateB.scale(1.5);
-    this->devideSymbol.scale(3);
+    this->score.scale(1.5);
 
     // vẽ điểm
-    this->rateA.drawText(window);
-    this->rateB.drawText(window);
+    this->score.drawText(window);
     this->tHeader.drawText(window);
-    this->devideSymbol.drawText(window);
     
     this->point1.drawText(window);
     this->point2.drawText(window);
@@ -149,6 +137,11 @@ void TableInf::setRate(int left, int right){        // thiết lập điểm ban
 // class background
 BackGround::BackGround(bool isPersonLeft, bool isPersonRight){
     this->tableinf.setMode(isPersonLeft, isPersonRight);
+    
+    if (!this->BGimage.loadFromFile("res/img/bricks_breaking_wall.png")) {
+        std::cout << "YS" << std::endl;
+    }
+    this->BGsprite.setTexture(this->BGimage);
 }
 BackGround::~BackGround(){
     
@@ -159,8 +152,10 @@ void BackGround::setRate(int left, int right){          // thiết lập điểm
 }
 void BackGround::draw(sf::RenderWindow &window){        // vẽ nền
    
+    
     this->gameTable.drawTable(window);
     this->tableinf.drawInfTable(window);
+    window.draw(this->BGsprite);
     
 }
 Table BackGround::getTableGame(){                       // getter nền game

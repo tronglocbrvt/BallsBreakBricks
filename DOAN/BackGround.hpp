@@ -50,9 +50,11 @@ private:
     
     // text
     TextShow tHeader;
-    TextShow rateA;
-    TextShow rateB;
-    TextShow devideSymbol;
+    TextShow score;
+    
+    TextShow tutorial;
+    TextShow weaponInf;
+//    TextShow
     
     TextShow point1;
     TextShow point2;
@@ -74,6 +76,9 @@ class BackGround {      // class khu vực tổng, quản lý
 private:
     Table gameTable;
     TableInf tableinf;
+    
+    sf::Texture BGimage;
+    sf::Sprite BGsprite;
 public:
     BackGround(bool isPersonLeft, bool isPersonRight);
     virtual ~BackGround();

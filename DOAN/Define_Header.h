@@ -9,8 +9,8 @@
 #ifndef Define_Header_h
 #define Define_Header_h
 
-#define _WIDTH_SCREEN 1280
-#define _HEIGH_SCREEN 720
+#define _WIDTH_SCREEN 980
+#define _HEIGH_SCREEN 540
 
 #define _WIDTH_TABLE_GAME_ _WIDTH_SCREEN * 4 / 10
 #define _HEIGH_TABLE_GAME_ _HEIGH_SCREEN * 9 / 10
@@ -24,5 +24,12 @@
 #define _HEIGH_ICON_ 20
 #define _WIDTH_ICON_ 20
 #define _SPACE_BET_OBJ_ 10
+
+namespace weapon {
+    const std::string fire_ball = "Fire Ball";
+    const std::string triple_ball = "Triple Ball";
+    const std::string small_ball = "Tiny Ball";
+    const std::string big_ball = "Big Ball";
+}
 
 #endif /* Define_Header_h */
