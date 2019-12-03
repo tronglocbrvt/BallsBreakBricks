@@ -15,8 +15,8 @@ private:
     sf::Vertex lineBotCorssBar[4];
     sf::Vertex lineLeftVerticalBar[4];
     sf::Vertex lineRightVerticalBar[4];
-    sf::Vertex lineMiddleVerticalBar[2];
-    sf::CircleShape middleCir;
+    
+    sf::RectangleShape BackGround;
     
     
     float posX;
@@ -54,7 +54,9 @@ private:
     TextShow rateB;
     TextShow devideSymbol;
     
-    TextShow point;
+    TextShow point1;
+    TextShow point2;
+    TextShow point3;
     
 public:
     TableInf();
