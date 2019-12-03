@@ -13,7 +13,7 @@ Display::Display(float width, float height)
 	}
 
 	bgMenu.setTexture(backgroundMenu);
-	bgMenu.scale(1.5, 1.5);
+	bgMenu.scale(0.8, 0.8);
 	bgMenu.setPosition(0, 0);
 
 	// font Game Name: PONG GAME
@@ -27,13 +27,13 @@ Display::Display(float width, float height)
 	gameName.setFillColor(sf::Color::Yellow);
 	gameName.setString("BALLS BREAK BRICKS");
 	gameName.setStyle(sf::Text::Bold);
-	gameName.setCharacterSize(80);
+	gameName.setCharacterSize(50);
 
 	// set gameName position
 	// center Ox
 	sf::FloatRect textRect(gameName.getLocalBounds());
 	gameName.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2);
-	gameName.setPosition(sf::Vector2f((width / 2), 140));
+	gameName.setPosition(sf::Vector2f((width / 2), 70));
 
 }
 
