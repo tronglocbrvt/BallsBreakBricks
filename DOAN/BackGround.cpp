@@ -85,7 +85,7 @@ TableInf::TableInf(){
     // set vị trí của nền
     this->setPosition(_WIDTH_TABLE_GAME_ + _DIS_FROM_LEFT_ + 2*_THICK_LINE_, _DIS_FROM_TOP_);
     
-    this->point.set("DTG", std::string("HACKED.ttf"), this->posX, this->posY);
+    this->point.set("abc", std::string("HACKED.ttf"), this->posX, this->posY);
  
     // set default tỷ số điểm
     this->rateRight = 0;
