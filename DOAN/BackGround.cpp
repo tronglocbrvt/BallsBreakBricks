@@ -138,10 +138,11 @@ void TableInf::setRate(int left, int right){        // thiết lập điểm ban
 BackGround::BackGround(bool isPersonLeft, bool isPersonRight){
     this->tableinf.setMode(isPersonLeft, isPersonRight);
     
-    if (!this->BGimage.loadFromFile("res/img/bricks_breaking_wall.png")) {
-        std::cout << "YS" << std::endl;
+    if (!this->BGimage.loadFromFile("res/img/BG_BreakBricks.png")) {
+        std::cout << "Cant find file" << std::endl;
     }
     this->BGsprite.setTexture(this->BGimage);
+    this->BGsprite.scale(_WIDTH_SCREEN * 1.0 / this->BGsprite.getTexture()->getSize().x, _HEIGH_SCREEN * 1.0 / this->BGsprite.getTexture()->getSize().y);
 }
 BackGround::~BackGround(){
     
@@ -152,10 +153,10 @@ void BackGround::setRate(int left, int right){          // thiết lập điểm
 }
 void BackGround::draw(sf::RenderWindow &window){        // vẽ nền
    
-    
+    window.draw(this->BGsprite);
     this->gameTable.drawTable(window);
     this->tableinf.drawInfTable(window);
-    window.draw(this->BGsprite);
+    
     
 }
 Table BackGround::getTableGame(){                       // getter nền game
