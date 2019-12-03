@@ -32,7 +32,7 @@ Table::Table(){
     
     
     this->BackGround.setSize(sf::Vector2f(_WIDTH_TABLE_GAME_ - widthLine/2, _HEIGH_TABLE_GAME_ - widthLine*1.45));
-    this->BackGround.setFillColor(sf::Color(204, 255, 204));
+    this->BackGround.setFillColor(sf::Color(121, 121, 121));
     this->BackGround.setPosition(this->posX, this->posY);
     
     

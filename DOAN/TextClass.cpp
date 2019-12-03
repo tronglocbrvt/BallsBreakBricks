@@ -91,10 +91,6 @@ float TextShow::getheight(){
 }
 float TextShow::getBottom(){
     sf::FloatRect textRect(this->textT.getGlobalBounds());
-    
-    std::cout << textRect.top + textRect.height << "ys" << std::endl;
-    std::cout << this->getheight() << std::endl;
-    
     return textRect.top + textRect.height;
 }
 
