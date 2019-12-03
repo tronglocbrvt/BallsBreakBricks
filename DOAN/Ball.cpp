@@ -239,11 +239,11 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
     }
 
     // kiểm tra chạm thanh
-
+//    std::cout << this->posX << " = " << this->posY << "\t$$$" << std::endl;
     if (this->checkClashToBar(positionBar)) {
         
-//        this->posX =
-//        this->posY = 
+        this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
+        this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
         
         // cập nhật vận tốc trên trục tung nếu có thay đổi
         this->velocityY *= -1;
@@ -260,9 +260,8 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
         this->velocityY *= -1;
     }
 
-
     this->imgSpr.setPosition(this->posX, this->posY);
-    std::cout << this->posX << " =| " << this->posY << std::endl;
+    
     return 0;  // did not crash
 
 }
@@ -298,16 +297,16 @@ void ThePong::normalizePosX() {         // điều chỉnh bóng không vượt 
     if (this->posX < _DIS_FROM_LEFT_) {
         this->posX = _DIS_FROM_LEFT_;
     }
-    if (this->posX > _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_) {
-        this->posX = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_;
+    if (this->posX + this->posXend > _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_) {
+        this->posX = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend;
     }
 }
 void ThePong::normalizePosY() {         // điều chỉnh bóng không vượt biên trên Oy
     if (this->posY < _DIS_FROM_TOP_) {
         this->posY = _DIS_FROM_TOP_;
     }
-    if (this->posY > _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) {
-        this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_;
+    if (this->posY + this->posYend > _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) {
+        this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - this->posYend;
     }
 }
 
