@@ -1,6 +1,7 @@
 ﻿#ifndef Brick_hpp
 #define Brick_hpp
 #include "Object.hpp"
+#include "Define_Header.h"
 
 class Brick:public Object
 {
@@ -8,9 +9,11 @@ private:
 	sf::RectangleShape rectangle;
 
 public:
-	Brick(float posX, float posY, float width, float height, char check, sf::Color color);
+	Brick(float posX, float posY, float width, float height, int type, sf::Color color);
+	void draw(sf::RenderWindow& window);
+	int collision(sf::FloatRect& boundingBox);
 
-	char special; // nhận biết gạch loại nào
+	int typeBrick; // nhận biết gạch loại nào: -1 là chướng ngại vật, 0 là bình thường, 1 là chức năng
 };
 
 #endif

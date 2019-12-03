@@ -1,10 +1,3 @@
-//
-//  Define_Header.h
-//  PongGame
-//
-//  Created by Thanh Phong Nguyen Dien on 12/2/19.
-//  Copyright © 2019 Thanh Phong Nguyen Dien. All rights reserved.
-//
 
 #ifndef Define_Header_h
 #define Define_Header_h
@@ -49,6 +42,9 @@
 #define _HEIGH_BAR_ 12
 #define _WIDTH_BAR_ _WIDTH_TABLE_GAME_/3.8
 
+// color of brick
+const sf::Color PREVENT_BRICK = sf::Color(255, 102, 0);
+const sf::Color SPECIAL_BRICK = sf::Color(255, 202, 58);
 // FRAME WINDOW
 #define MAX_FRAME_LIMIT 300
 #define FRAME ((_WIDTH_TABLE_GAME_ * 1.0 / _VELOCITY_X_ < MAX_FRAME_LIMIT) ? (_WIDTH_TABLE_GAME_ * 1.0 / _VELOCITY_X_) : MAX_FRAME_LIMIT)
