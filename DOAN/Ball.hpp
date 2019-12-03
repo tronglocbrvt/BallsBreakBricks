@@ -76,7 +76,10 @@ private:
     float velocityY;
     float acceleration;
 
-
+    TextShow point1;
+    TextShow point2;
+    TextShow point3;
+    TextShow point4;
 
 public:
     ThePong();
@@ -96,10 +99,10 @@ public:
     void resetPong(short toward); //     -1 - left ;     0 - random ;    1 - right
 
     void scale(float width, float heigh);
-//    short moveBall(sf::RenderWindow& window, Pos positionLeft, Pos positionRight);
-    short moveBall(sf::RenderWindow& window);
+    short moveBall(sf::RenderWindow& window, Pos positionBar);
+//    short moveBall(sf::RenderWindow& window);
 
-    bool checkClashToBar(Pos position, bool side);
+    bool checkClashToBar(Pos position);
     void normalizePosX();
     void normalizePosY();
 

@@ -43,7 +43,7 @@ int main(){
 		window.display();
 
     }  */
-    
+
     play(window);
     
     return 0;
