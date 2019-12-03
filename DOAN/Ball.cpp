@@ -122,6 +122,18 @@ ThePong::ThePong() {
     
     // điều chỉnh vị trí
     this->imgSpr.setPosition(this->posX - this->posXend * 1.0 / 2, this->posY);
+    
+    this->point1.set(".", std::string("HACKED.ttf"), 0, 0);
+//    this->point1.scale(0.5);
+
+    this->point2.set(".", std::string("HACKED.ttf"), 0, 0);
+//    this->point2.scale(0.2);
+    
+    this->point3.set(".", std::string("HACKED.ttf"), 0, 0);
+//    this->point3.scale(0.2);
+    
+    this->point4.set(".", std::string("HACKED.ttf"), 0, 0);
+//    this->point4.scale(0.2);
 
 }
 ThePong::ThePong(float x, float y, float veX, float veY) {
@@ -176,23 +188,10 @@ float ThePong::getVelocityY()           // lấy tốc độ theo y
 }
 
 void ThePong::updateVelocityX() {       // cập nhật tốc độ của x
-//    this->velocityX /= (myMath::squarerootOf(myMath::squareOf(this->velocityX) + myMath::squareOf(this->velocityY)));
     this->velocityX *= this->acceleration;
-    if (myMath::absFloat(this->velocityX) > _MAX_VELOCITY_) {
-        if (this->velocityX < 0) {
-            this->velocityX = -_MAX_VELOCITY_;
-        }
-        else this->velocityX = _MAX_VELOCITY_;
-    }
 }
 void ThePong::updateVelocityY() {       // cập nhật tốc độ của x
     this->velocityY *= this->acceleration;
-    if (myMath::absFloat(this->velocityY) > _MAX_VELOCITY_) {
-        if (this->velocityY < 0) {
-            this->velocityY = -_MAX_VELOCITY_;
-        }
-        else this->velocityY = _MAX_VELOCITY_;
-    }
 }
 void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho bóng, và đặt hướng đi ngẫu nhiên hay về một hướng
     // đưa bóng về giữa sân
@@ -216,105 +215,46 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
     this->imgSpr.scale(width, heigh);
 }
-short ThePong::moveBall(sf::RenderWindow& window) {    // hàm di chuyển bóngc
+short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
 
+    float pastPosX = this->posX;
+    float pastPosY = this->posY;
+    
+    // hàm di chuyển bóngc
+    
     // thay đổi vị trí bóng
     this->posX += this->velocityX;
     this->posY += this->velocityY;
     
-    if ((this->posX <= _DIS_FROM_LEFT_) || (this->posX + this->posXend >= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
-        
-//        this->velocityY *= 1;
-        this->velocityX *= -1;
-//        this->acceleration = 0;
-//        this->velocityY *= 0;
-//        this->velocityX *= 0;
-
-    }
-    
-
     // điều chỉnh nếu bóng vượt biên
     this->normalizePosX();
     this->normalizePosY();
-
-//    float rateDisFromMid = 1;
-//    bool normalMoveOfX = true;
     
-    // kiểm tra chạm thanh
-//    bool checkCrashToBarLeft = this->checkClashToBar(positionLeft, true);
-//    bool checkCrashToBarRight = this->checkClashToBar(positionRight, false);
+    if ((this->posX <= _DIS_FROM_LEFT_) || (this->posX + this->posXend >= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
 
-//    if (checkCrashToBarLeft || checkCrashToBarRight) {
-//        float minDis = 0;
-//        if (checkCrashToBarLeft) {
-//
-//            // trường hợp chạm biên trên của thanh trái
-//            if ((this->posX + myMath::absFloat(this->velocityX) <= positionLeft.x + positionLeft.endX) && (this->posY + this->posYend + myMath::absFloat(this->velocityY) >= positionLeft.y) && (this->posY + this->posYend + myMath::absFloat(this->velocityY) <= positionLeft.y + positionLeft.endY)) {
-//                this->velocityY *= -1;
-//                normalMoveOfX = false;
-//            }
-//            // trường hợp chạm biên dưới của thanh trái
-//            else if ((this->posX + myMath::absFloat(this->velocityX) <= positionLeft.x + positionLeft.endX) && (this->posY - myMath::absFloat(this->velocityY) >= positionLeft.y) && (this->posY - myMath::absFloat(this->velocityY) <= positionLeft.y + positionLeft.endY)) {
-//                this->velocityY *= -1;
-//                normalMoveOfX = false;
-//            }
-//            // >>>>>>>>>>>>>>>>>>>>>>>>>
-//            else {
-//                // lấy khoảng cách nhỏ nhất từ bóng đến điểm chính giữa khi chạm thanh
-//                minDis = (myMath::absFloat(this->posY - positionLeft.y + (positionLeft.endY) / 2) < myMath::absFloat(this->posY + this->posYend - positionLeft.y + (positionLeft.endY) / 2)) ? myMath::absFloat(this->posY - positionLeft.y + (positionLeft.endY) / 2) : myMath::absFloat(this->posY + this->posYend - positionLeft.y + (positionLeft.endY) / 2);
-//                // tính tỷ lệ thay đổi hướng trên trục tung
-//                rateDisFromMid = ((minDis / (positionLeft.endY) / 2));
-//            }
-//
-//        }
-//        else {
-//            // trường hợp chạm biên trên của thanh phải
-//            if ((this->posX + this->posXend - myMath::absFloat(this->velocityX) >= positionRight.x) && (this->posY + this->posYend + myMath::absFloat(this->velocityY) >= positionRight.y) && (this->posY + this->posXend + myMath::absFloat(this->velocityY) <= positionRight.y + positionRight.endY)) {
-//                this->velocityY *= -1;
-//                normalMoveOfX = false;
-//            }
-//            // trường hợp chạm biên dưới của thanh phải
-//            else if ((this->posX + this->posXend - myMath::absFloat(this->velocityX) >= positionRight.x) && (this->posY - myMath::absFloat(this->velocityY) >= positionRight.y) && (this->posY - myMath::absFloat(this->velocityY) <= positionRight.y + positionRight.endY)) {
-//                this->velocityY *= -1;
-//                normalMoveOfX = false;
-//            }
-//            // >>>>>>>>>>>>>>>>>>>>>>>>>
-//            else {
-//                // lấy khoảng cách nhỏ nhất từ bóng đến điểm chính giữa khi chạm thanh
-//                minDis = (myMath::absFloat(this->posY - positionRight.y + (positionRight.endY) / 2) < myMath::absFloat(this->posY + this->posYend - positionRight.y + (positionRight.endY) / 2)) ? myMath::absFloat(this->posY - positionRight.y + (positionRight.endY) / 2) : myMath::absFloat(this->posY + this->posYend - positionRight.y + (positionRight.endY) / 2);
-//
-//                // tính tỷ lệ thay đổi hướng trên trục tung
-//                rateDisFromMid = ((minDis / (positionRight.endY) / 2));
-//            }
-//
-//
-//        }
-//
-//        // cập nhật vận tốc trên trục tung nếu có thay đổi
-//        if (rateDisFromMid != 1) {
-//            if (myMath::absFloat(rateDisFromMid) > _MAX_CHANGE_VELOC_) {
-//                if (rateDisFromMid < 0) {
-//                    rateDisFromMid = -_MAX_CHANGE_VELOC_;
-//                }
-//                else rateDisFromMid = _MAX_CHANGE_VELOC_;
-//                this->velocityY *= (rateDisFromMid);
-//            }
-//
-//        }
-//        if (normalMoveOfX) {
-//            this->velocityX *= -1;
-//        }
-//        else{
-//            std::cout << "Error" << std::endl;
-//        }
-//
-//        // cập nhật vận tốc mới vì đã chạm thanh
-//        this->updateVelocityY();
-//        this->updateVelocityX();
-//
-//        //
-//
-//    }
+        this->velocityX *= -1;
+        
+//        return -1;
+
+    }
+
+    // kiểm tra chạm thanh
+
+    if (this->checkClashToBar(positionBar)) {
+        
+//        this->posX =
+//        this->posY = 
+        
+        // cập nhật vận tốc trên trục tung nếu có thay đổi
+        this->velocityY *= -1;
+
+        // cập nhật vận tốc mới vì đã chạm thanh
+        this->updateVelocityY();
+        this->updateVelocityX();
+
+        //
+
+    }
     // nếu chạm biên trên và dưới sẽ điều ngược lại trục tung
     if ((this->posY <= _DIS_FROM_TOP_) || (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_))) {
         this->velocityY *= -1;
@@ -322,39 +262,35 @@ short ThePong::moveBall(sf::RenderWindow& window) {    // hàm di chuyển bóng
 
 
     this->imgSpr.setPosition(this->posX, this->posY);
-
-//    if (checkCrashToBarLeft) {
-//        return -2;
-//    }
-//    else if (checkCrashToBarRight){
-//        return 2;
-//    }
+    std::cout << this->posX << " =| " << this->posY << std::endl;
     return 0;  // did not crash
 
 }
 
-bool ThePong::checkClashToBar(Pos position, bool side) {        // bắt sự kiện va vào thanh trượt
-    if (side) {
-        // trường hợp góc trên trái của bóng chạm thanh trái
-        if ((this->posX <= position.x + position.endX) && (this->posY >= position.y) && (this->posY <= position.y + position.endY)) {
+bool ThePong::checkClashToBar(Pos position) {        // bắt sự kiện va vào thanh trượt
+    
+    if (this->posY + this->posYend > position.y) {
+        // phần dưới trái của bóng chạm thanh
+        if ((position.x <= this->posX) && (this->posX <= position.x + position.endX))
+        {
             return true;
         }
-        // trường hợp góc dưới trái của bóng chạm thanh trái
-        else if ((this->posX <= position.x + position.endX) && (this->posY + this->posYend >= position.y) && (this->posY + this->posYend <= position.y + position.endY)) {
+        
+        else if ((position.x <= this->posX + this->posXend) && (this->posX + this->posXend <= position.x + position.endX))
+        {
             return true;
         }
+        // phần dưới phải của bóng chạm thanh
     }
-    else {
-        // trường hợp góc trên phải của bóng chạm thanh phải
-        if ((this->posX + this->posXend >= position.x) && (this->posY >= position.y) && (this->posY <= position.y + position.endY)) {
-            return true;
+    
+    this->point1.setPosition(position.x, position.y);
 
-        }
-        // trường hợp góc dưới phải của bóng chạm thanh phải
-        else if ((this->posX + this->posXend >= position.x) && (this->posY + this->posYend >= position.y) && (this->posY + this->posXend <= position.y + position.endY)) {
-            return true;
-        }
-    }
+    this->point2.setPosition(position.x + position.endX, position.y);
+
+    this->point3.setPosition(this->posX, this->posY + this->posYend);
+
+    this->point4.setPosition(this->posX + this->posXend, this->posY + this->posYend);
+    
     return false;
 }
 
@@ -377,4 +313,9 @@ void ThePong::normalizePosY() {         // điều chỉnh bóng không vượt 
 
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
+    
+    this->point1.drawText(window);
+    this->point2.drawText(window);
+    this->point3.drawText(window);
+    this->point4.drawText(window);
 }

@@ -4,6 +4,7 @@
 
 #include "BackGround.hpp"
 #include "Ball.hpp"
+#include "Paddle.hpp"
 
 int play(sf::RenderWindow& window); // người với người chơi
 
