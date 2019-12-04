@@ -4,7 +4,9 @@ int play(sf::RenderWindow& window) {
 
     // khởi tạo sân, bóng, 2 thanh
 	BackGround bg(1);
-    ThePong ball;
+	ThePong ball;
+	rewardItem test;
+	test.zoomBall(ball);
     TheBar bar;
     
     const int number = 17;
@@ -49,15 +51,15 @@ int play(sf::RenderWindow& window) {
 			bar.moveBar(window, false, true);
 			bar.draw(window);
 		}
-		
-        ball.moveBall(window, copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()));
-        
+
+		ball.moveBall(window, copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()));
+
         // in ra màn hình game
 		window.clear();
         
 		bg.draw(window);
         bar.draw(window);
-        ball.draw(window);
+		ball.draw(window);
         
         for (int i = 0; i < number; i++) 
 			for (int j = 0; j < number; j++) {
