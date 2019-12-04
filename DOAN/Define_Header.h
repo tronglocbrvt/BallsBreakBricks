@@ -2,11 +2,14 @@
 #ifndef Define_Header_h
 #define Define_Header_h
 
+#include <SFML/Graphics.hpp>
+#include <math.h>
+
 #define _WIDTH_SCREEN 980
 #define _HEIGH_SCREEN 540
 
-#define _WIDTH_TABLE_GAME_ _WIDTH_SCREEN * 4 / 10
-#define _HEIGH_TABLE_GAME_ _HEIGH_SCREEN * 9 / 10
+#define _WIDTH_TABLE_GAME_ (_WIDTH_SCREEN * 4 / 10)
+#define _HEIGH_TABLE_GAME_ (_HEIGH_SCREEN * 9 / 10)
 
 #define _DIS_FROM_TOP_ 25
 #define _DIS_FROM_LEFT_ 25
@@ -40,7 +43,13 @@
 #define _ANGLE_BUFF_ 0.3
 
 #define _HEIGH_BAR_ 12
-#define _WIDTH_BAR_ _WIDTH_TABLE_GAME_/3.8
+#define _WIDTH_BAR_ (_WIDTH_TABLE_GAME_/3.8)
+
+#define _GOLDEN_RATIO_ ((1 + sqrt(5))/2)
+#define _NUMBER_OF_BRICKS_PER_LINE_ 17
+#define _DIS_BETWEEN_BRICKS_ 1
+#define _WIDTH_BRICK_ (_WIDTH_TABLE_GAME_ * 1.0 / _NUMBER_OF_BRICKS_PER_LINE_ - _DIS_BETWEEN_BRICKS_)
+
 
 // color of brick
 const sf::Color PREVENT_BRICK = sf::Color(255, 102, 0);

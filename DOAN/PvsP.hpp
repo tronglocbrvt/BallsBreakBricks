@@ -5,6 +5,7 @@
 #include "BackGround.hpp"
 #include "Ball.hpp"
 #include "Paddle.hpp"
+#include "buildStage.hpp"
 
 int play(sf::RenderWindow& window); // người với người chơi
 

@@ -105,6 +105,8 @@ public:
     bool checkClashToBar(Pos position);
     void normalizePosX();
     void normalizePosY();
+    
+    sf::FloatRect getBoundBall();
 
     void draw(sf::RenderWindow& window);
 };

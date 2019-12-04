@@ -321,6 +321,10 @@ void ThePong::normalizePosY() {         // điều chỉnh bóng không vượt 
     }
 }
 
+sf::FloatRect ThePong::getBoundBall(){
+    return this->imgSpr.getGlobalBounds();
+}
+
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     
