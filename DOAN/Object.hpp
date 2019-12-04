@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿#ifndef Object_hpp
+#define Object_hpp
 #include <SFML/Graphics.hpp>
 
 class Object
@@ -11,4 +12,4 @@ public:
 
 	bool deleteObject = false; // gạch đã được va chạm chưa, nếu true thì xóa gạch
 };
-
+#endif

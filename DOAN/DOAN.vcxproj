@@ -132,6 +132,7 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="buildStage.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="DataPos.cpp" />
     <ClCompile Include="Display.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="BackGround.hpp" />
     <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Brick.hpp" />
+    <ClInclude Include="buildStage.hpp" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="DataPos.hpp" />
     <ClInclude Include="Define_Header.h" />

@@ -11,13 +11,16 @@ int play(sf::RenderWindow& window) {
     const float dis = 1;
     const float width = _WIDTH_TABLE_GAME_ * 1.0 / number - dis;
 //    const int width = 21.9;
-    sf::RectangleShape square[number];
-    for (int i = 0; i < number; i++) {
-        square[i].setSize(sf::Vector2f(width, width/1.5));
-        square[i].setPosition(_DIS_FROM_LEFT_ + i * (width + dis), _DIS_FROM_TOP_);
-        std::cout << (_DIS_FROM_LEFT_ + i * (width + dis)) << " = " << (_DIS_FROM_LEFT_ + i * (width) + width) << std::endl;
-    }
+    sf::RectangleShape square[number][number];
+	for (int i = 0; i < number; i++)
+	{
+		for (int j = 0; j < number; j++) {
+			square[i][j].setSize(sf::Vector2f(width, width / 1.5));
+			square[i][j].setPosition(_DIS_FROM_LEFT_ + i * (width + dis), _DIS_FROM_TOP_ + j * (width / 1.5 + dis));
+			std::cout << (_DIS_FROM_LEFT_ + i * (width + dis)) << " = " << (_DIS_FROM_LEFT_ + i * (width)+width) << std::endl;
+		}
 
+	}
     // khởi động chuỗi thông báo và tên
 	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + 50, _HEIGH_TABLE_GAME_ - 2 * _DIS_FROM_TOP_);
 
@@ -56,9 +59,10 @@ int play(sf::RenderWindow& window) {
         bar.draw(window);
         ball.draw(window);
         
-        for (int i = 0; i < number; i++) {
+        for (int i = 0; i < number; i++) 
+			for (int j = 0; j < number; j++) {
 
-            window.draw(square[i]);
+            window.draw(square[i][j]);
         }
 
 		window.display();
