@@ -41,7 +41,7 @@ int Brick::collision(sf::FloatRect& boundingBox)
 		// va chạm góc trên trái
 		// bounding.left: lưu vị trí x của góc tác động
 		// bounding.top: lưu vị trí y của góc tác động
-		else if (pow(pow(center.x - bounds.left, 2) + pow(center.y - bounds.top, 2), .5) < radius) {
+		else if (pow(pow(center.x - bounds.left, 2) + pow(center.y - bounds.top, 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
 			boundingBox.left = bounds.left;
@@ -50,7 +50,7 @@ int Brick::collision(sf::FloatRect& boundingBox)
 		}
 
 		// va chạm góc trên phải
-		else if (pow(pow(center.x - (bounds.left + bounds.width), 2) + pow(center.y - bounds.top, 2), .5) < radius) {
+		else if (pow(pow(center.x - (bounds.left + bounds.width), 2) + pow(center.y - bounds.top, 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
 			boundingBox.left = bounds.left + bounds.width;
@@ -60,7 +60,7 @@ int Brick::collision(sf::FloatRect& boundingBox)
 
 		// va chạm góc dưới phải
 		else if (pow(pow(center.x - (bounds.left + bounds.width), 2)
-			+ pow(center.y - (bounds.top + bounds.height), 2), .5) < radius) {
+			+ pow(center.y - (bounds.top + bounds.height), 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
 			boundingBox.left = bounds.left + bounds.width;
@@ -69,7 +69,7 @@ int Brick::collision(sf::FloatRect& boundingBox)
 		}
 
 		// va chạm góc dưới trái
-		else if (pow(pow(center.x - bounds.left, 2) + pow(center.y - (bounds.top + bounds.height), 2), .5) < radius) {
+		else if (pow(pow(center.x - bounds.left, 2) + pow(center.y - (bounds.top + bounds.height), 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
 			boundingBox.left = bounds.left;
