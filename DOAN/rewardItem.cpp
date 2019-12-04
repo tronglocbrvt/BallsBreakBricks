@@ -11,8 +11,6 @@ rewardItem::~rewardItem()
 
 void rewardItem::zoomBall(ThePong& ball)
 {
-//	ball.imgSpr.scale(_SIZE_PONG_ * 2.0 / ball.imgSpr.getTexture()->getSize().x, _SIZE_PONG_ * 2.0 / ball.imgSpr.getTexture()->getSize().y);
-    
     ball.scale(2.0, 2.0);
 
 	// getter vị trí cuối cùng quả bóng
