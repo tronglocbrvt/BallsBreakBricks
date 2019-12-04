@@ -10,7 +10,10 @@ private:
 	sf::RectangleShape rectangle;
 
 public:
+    Brick(){}
 	Brick(float posX, float posY, float width, float height, int type, sf::Color color);
+    
+    void set(float posX, float posY, float width, float height, int type);
 	void draw(sf::RenderWindow& window);
 	int collision(sf::FloatRect& boundingBox);
 
