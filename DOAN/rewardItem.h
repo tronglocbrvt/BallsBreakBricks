@@ -4,7 +4,8 @@
 #include "Paddle.hpp"
 #include "Brick.hpp"
 
-//class ThePong;
+
+class ThePong;
 class rewardItem
 {
 public:
