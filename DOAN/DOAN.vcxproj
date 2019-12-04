@@ -142,6 +142,7 @@
     <ClCompile Include="OMG.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PvsP.cpp" />
+    <ClCompile Include="rewardItem.cpp" />
     <ClCompile Include="TextClass.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,8 +158,9 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="OMG.h" />
-    <ClInclude Include="Paddle.h" />
+    <ClInclude Include="Paddle.hpp" />
     <ClInclude Include="PvsP.hpp" />
+    <ClInclude Include="rewardItem.h" />
     <ClInclude Include="TextClass.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

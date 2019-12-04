@@ -4,6 +4,7 @@
 
 #include "BackGround.hpp"
 #include "Ball.hpp"
+#include "rewardItem.h"
 #include "Paddle.hpp"
 #include "buildStage.hpp"
 

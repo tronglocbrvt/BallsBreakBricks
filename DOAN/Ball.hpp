@@ -55,7 +55,7 @@
 #include <string>
 #include <ctime>
 #include <math.h>
-
+#include "rewardItem.h"
 
 #define _NAME_GAME_ "The Pong Game"
 
@@ -87,11 +87,17 @@ public:
     virtual ~ThePong();
 
     void setPosX(float x);
+	void setImgSpr(float);
     void setPosY(float y);
+	void setPosXend(float x);
+	void setPosYend(float y);
+	void setPositionImgSpr(float x, float y);
+
     float getPosX();
     float getPosY();
     float getVelocityX();
     float getVelocityY();
+	sf::Sprite getImgSpr();
 
     void updateVelocityX();
     void updateVelocityY();
@@ -109,6 +115,7 @@ public:
     sf::FloatRect getBoundBall();
 
     void draw(sf::RenderWindow& window);
+	friend class rewardItem;
 };
 
 
