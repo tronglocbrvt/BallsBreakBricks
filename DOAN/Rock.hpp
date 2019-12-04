@@ -1,21 +1,21 @@
 //
-//  Brick.hpp
+//  Rock.hpp
 //  PongGame
 //
 //  Created by Thanh Phong Nguyen Dien on 12/4/19.
 //  Copyright © 2019 Thanh Phong Nguyen Dien. All rights reserved.
 //
 
-#ifndef Brick_hpp
-#define Brick_hpp
+#ifndef Rock_hpp
+#define Rock_hpp
 
-#include "Object.hpp"
+#include "Brick.hpp"
 
-class Brick : public Object {
+class Rock : public Brick {
 private:
 protected:
 public:
     
 };
 
-#endif /* Brick_hpp */
+#endif /* Rock_hpp */

@@ -6,7 +6,7 @@
 
 
 class ThePong;
-class rewardItem
+class rewardItem : public Object
 {
 public:
 	rewardItem();
