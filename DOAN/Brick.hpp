@@ -1,7 +1,8 @@
-﻿#ifndef Brick_hpp
+#ifndef Brick_hpp
 #define Brick_hpp
 #include "Object.hpp"
 #include "Define_Header.h"
+#include <math.h>
 
 class Brick:public Object
 {

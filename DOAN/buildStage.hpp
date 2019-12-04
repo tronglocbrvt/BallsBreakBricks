@@ -9,7 +9,7 @@ class buildStage
 {
 private: 
 	vector<Object*> listObject;
-
+    
 };
 
 #endif

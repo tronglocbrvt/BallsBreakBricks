@@ -7,16 +7,16 @@ int play(sf::RenderWindow& window) {
     ThePong ball;
     TheBar bar;
     
-    const int number = 15;
+    const int number = 17;
     const float dis = 1;
     const float width = _WIDTH_TABLE_GAME_ * 1.0 / number - dis;
-//    const int width = 21.9;
+    const float rateHei = 1.6180339887498948482;
     sf::RectangleShape square[number][number];
 	for (int i = 0; i < number; i++)
 	{
 		for (int j = 0; j < number; j++) {
-			square[i][j].setSize(sf::Vector2f(width, width / 1.5));
-			square[i][j].setPosition(_DIS_FROM_LEFT_ + i * (width + dis), _DIS_FROM_TOP_ + j * (width / 1.5 + dis));
+			square[i][j].setSize(sf::Vector2f(width, width / rateHei));
+			square[i][j].setPosition(_DIS_FROM_LEFT_ + i * (width + dis), _DIS_FROM_TOP_ + j * (width / rateHei + dis));
 			std::cout << (_DIS_FROM_LEFT_ + i * (width + dis)) << " = " << (_DIS_FROM_LEFT_ + i * (width)+width) << std::endl;
 		}
 
@@ -62,7 +62,10 @@ int play(sf::RenderWindow& window) {
         for (int i = 0; i < number; i++) 
 			for (int j = 0; j < number; j++) {
 
-            window.draw(square[i][j]);
+                if ((((i + 1)*(j + 1) + 1) / 3) % 2) {
+                    window.draw(square[i][j]);
+                }
+            
         }
 
 		window.display();
