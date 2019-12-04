@@ -116,6 +116,4 @@ public:
 	friend class rewardItem;
 };
 
-
-
 #endif /* Ball_hpp */
