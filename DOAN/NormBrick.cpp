@@ -22,7 +22,7 @@ void NormBrick::draw(sf::RenderWindow& window)
 //	window.draw(rectangle);
 }
 
-int NormBrick::collision(sf::FloatRect& boundingBox)
+int NormBrick::collision(const sf::FloatRect& boundingBox)
 {
 	sf::FloatRect bounds = rectangle.getGlobalBounds();
 	sf::Vector2f center(boundingBox.left + boundingBox.width / 2, boundingBox.top + boundingBox.height / 2);
