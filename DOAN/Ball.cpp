@@ -1,4 +1,3 @@
-
 #include "Ball.hpp"
 
 // the pong class
@@ -74,10 +73,7 @@ ThePong::~ThePong() {
 void ThePong::setPosX(float x) {        // đặt vị trí x
     this->posX = x;
 }
-void ThePong::setImgSpr(float x)
-{
-	this->imgSpr.scale(_SIZE_PONG_ * x / this->imgSpr.getTexture()->getSize().x, _SIZE_PONG_ * x / this->imgSpr.getTexture()->getSize().y);
-}
+
 void ThePong::setPosY(float y) {        // đặt vị trí y
     this->posY = y;
 }
@@ -89,10 +85,7 @@ void ThePong::setPosYend(float y)
 {
 	posYend = y;
 }
-void ThePong::setPositionImgSpr(float x, float y)
-{
-	this->imgSpr.setPosition(x, y);
-}
+
 float ThePong::getPosX() {              // lấy vị trí x
     return this->posX;
 }
@@ -107,11 +100,6 @@ float ThePong::getVelocityX()           // lấy tốc độ theo x
 float ThePong::getVelocityY()           // lấy tốc độ theo y
 {
     return velocityY;
-}
-
-sf::Sprite ThePong::getImgSpr()
-{
-	return imgSpr;
 }
 
 void ThePong::updateVelocityX() {       // cập nhật tốc độ của x
@@ -249,9 +237,7 @@ void ThePong::normalizePosY() {         // điều chỉnh bóng không vượt 
 }
 
 sf::FloatRect ThePong::getBoundBall(){
-    sf::FloatRect rect = this->imgSpr.getGlobalBounds();
-    
-    return rect;
+    return this->imgSpr.getGlobalBounds();
 }
 
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng

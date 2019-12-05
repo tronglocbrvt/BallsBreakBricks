@@ -31,7 +31,7 @@ buildStage::buildStage(int stage){
         for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
             if (this->mSignBricks[i][j]) {
                 
-//                this->mStage[i][j].set(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_), _WIDTH_BRICK_, _WIDTH_BRICK_ / _GOLDEN_RATIO_, this->mSignBricks[i][j]);
+                this->mStage[i][j].set(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_), _WIDTH_BRICK_, _WIDTH_BRICK_ / _GOLDEN_RATIO_, this->mSignBricks[i][j]);
                 
 //                this->mStage[i][j].setSize(sf::Vector2f(_WIDTH_BRICK_ , _WIDTH_BRICK_ / _GOLDEN_RATIO_));
 //
@@ -44,23 +44,16 @@ buildStage::buildStage(int stage){
     fs.close();
 }
 
-void buildStage::breakTheBrick(sf::FloatRect& ballBound){
-    static int counting = 0;
-    for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
-            for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
-//                if (this->mStage[i][j].collision(ballBound)) {
-//                    std::cout << counting++ << std::endl;
-//                }
-                
-            }
-        }
+void breakTheBrick(const sf::FloatRect& ballBound){
+    
 }
 
 void buildStage::draw(sf::RenderWindow &window){
     for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
         for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
             if (this->mSignBricks[i][j]) {
-//                this->mStage[i][j].draw(window);
+//                window.draw(this->mStage[i][j]);
+                this->mStage[i][j].draw(window);
             }
             
         }

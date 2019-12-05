@@ -1,6 +1,3 @@
-
-
-
 #ifndef PADDLE_HPP
 #define PADDLE_HPP
 
@@ -35,9 +32,12 @@ public:
     std::string getNameplayer();
     
     void setScores(int score);
+	void setLongBar(float length);
+	void setHeightBar(float height);
     void setPosY(float y);
     float getPosX();
     float getPosY();
+	sf::Sprite getImgSpr();
     float getWidth();
     float getHeigh();
     float getLongBar();

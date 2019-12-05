@@ -1,5 +1,3 @@
-
-
 #include "Paddle.hpp"
 
 // the bar class
@@ -81,6 +79,16 @@ void TheBar::setScores(int score){                          // cài đặt số 
     this->scores = score;
 }
 
+void TheBar::setLongBar(float length)
+{
+	longBar = length;
+}
+
+void TheBar::setHeightBar(float height)
+{
+	heigBar = height;
+}
+
 void TheBar::setPosY(float y){                              // cài vị trí thanh hiện đang ở đâu theo Y
     this->posY = y;
 }
@@ -89,6 +97,10 @@ float TheBar::getPosX(){                                    // lấy vị trí t
 }
 float TheBar::getPosY(){                                    // lấy vị trí thanh hiện đang ở đâu theo Y
     return this->posY;
+}
+sf::Sprite TheBar::getImgSpr()
+{
+	return imgSpr;
 }
 float TheBar::getWidth(){                                   // lấy chiều dài thanh
     return this->longBar;
@@ -103,7 +115,7 @@ float TheBar::getLongBar()                                  // lấy chiều dà
 }
 
 void TheBar::scale(float width, float heigh){               // cài đặt độ phóng của thanh
-    this->imgSpr.scale(heigh * 1.0 / this->heigBar, width * 1.0 / this->longBar);
+    this->imgSpr.scale(width, heigh);
 }
 void TheBar::moveBar(sf::RenderWindow &window, bool Left, bool Right){     // di chuyển thanh -> bool trái , bool phải
     // lưu vị trí cũ
