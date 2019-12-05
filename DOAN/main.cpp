@@ -1,4 +1,3 @@
-#include "OMG.h"
 #include <iostream>
 #include "PvsP.hpp"
 #include "BackGround.hpp"
