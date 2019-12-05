@@ -5,9 +5,11 @@ int play(sf::RenderWindow& window) {
     // khởi tạo sân, bóng, 2 thanh
 	BackGround bg(1);
 	ThePong ball;
-	rewardItem test;
-	test.zoomBall(ball);
     TheBar bar;
+
+	rewardItem test;
+	//test.widenBar(bar);
+
     buildStage stage(1);
     
 //    const int number = 17;
