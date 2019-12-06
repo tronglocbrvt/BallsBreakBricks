@@ -10,7 +10,7 @@ private:
 
 public:
 	normalBrick();
-	~normalBrick();
+	virtual ~normalBrick();
 
 	void draw(sf::RenderWindow& window);
 	void destroy();

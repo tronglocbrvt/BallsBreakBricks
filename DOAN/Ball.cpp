@@ -135,7 +135,7 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
     float pastPosX = this->posX;
     float pastPosY = this->posY;
     
-    // hàm di chuyển bóngc
+    // hàm di chuyển bóng
     
     // thay đổi vị trí bóng
     this->posX += this->velocityX;
@@ -243,8 +243,8 @@ sf::FloatRect ThePong::getBoundBall(){
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     
-    this->point1.drawText(window);
-    this->point2.drawText(window);
-    this->point3.drawText(window);
-    this->point4.drawText(window);
+  /*  point1.drawText(window);
+    point2.drawText(window);
+    point3.drawText(window);
+	point4.drawText(window);*/
 }
