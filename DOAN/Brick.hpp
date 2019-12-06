@@ -6,18 +6,17 @@
 
 class Brick:public Object
 {
-private: 
+protected: 
+	int typeBrick; // nhận biết gạch loại nào: -1 là chướng ngại vật, 0 là bình thường, 1 là chức năng
 	sf::RectangleShape rectangle;
-
 public:
     Brick(){}
 	Brick(float posX, float posY, float width, float height, int type, sf::Color color);
     
     void set(float posX, float posY, float width, float height, int type);
-	void draw(sf::RenderWindow& window);
+	virtual void draw(sf::RenderWindow& window);
 	int collision(sf::FloatRect& boundingBox);
-
-	int typeBrick; // nhận biết gạch loại nào: -1 là chướng ngại vật, 0 là bình thường, 1 là chức năng
+	virtual void destroy() = 0;
 };
 
 #endif

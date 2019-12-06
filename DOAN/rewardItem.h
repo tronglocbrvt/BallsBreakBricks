@@ -1,4 +1,4 @@
-#ifndef rewardItem_hpp
+﻿#ifndef rewardItem_hpp
 #define rewardItem_hpp
 
 #include "Brick.hpp"
@@ -13,8 +13,10 @@ public:
 	virtual ~rewardItem();
 
 	//void doubleScore();
-	//void separateScore();
-	//void fireBall();
+	//void separateScore();    => có score brick và va chạm mới xử lý được
+	void fireBall();
+
+
 	void widenBar(TheBar&);
 	void zoomBall(ThePong&);
 };
