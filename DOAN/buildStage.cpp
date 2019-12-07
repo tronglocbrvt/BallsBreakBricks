@@ -27,17 +27,17 @@ buildStage::buildStage(int stage) {
 	fs.close();
 	std::cout << _WIDTH_BRICK_ / _GOLDEN_RATIO_ << " = " << std::endl;
 
-	for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
-		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
-			if (this->mSignBricks[i][j])
-				mStage[i][j]->set(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_), _WIDTH_BRICK_, _WIDTH_BRICK_ / _GOLDEN_RATIO_, this->mSignBricks[i][j]);
+//	for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
+//		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
+//			if (this->mSignBricks[i][j])
+//				mStage[i][j]->set(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_), _WIDTH_BRICK_, _WIDTH_BRICK_ / _GOLDEN_RATIO_, this->mSignBricks[i][j]);
 
 			//                this->mStage[i][j].setSize(sf::Vector2f(_WIDTH_BRICK_ , _WIDTH_BRICK_ / _GOLDEN_RATIO_));
 			//
 			//                this->mStage[i][j].setPosition(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_));
-
-		}
-	}
+//
+//		}
+//	}
 }
 void breakTheBrick(const sf::FloatRect& ballBound){
     

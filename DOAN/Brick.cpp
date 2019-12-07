@@ -87,3 +87,6 @@ int Brick::collision(sf::FloatRect& boundingBox)
 	return -1; // không va chạm
 }
 
+void Brick::destroy(){
+    
+}
