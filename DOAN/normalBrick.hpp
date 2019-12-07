@@ -1,4 +1,4 @@
-﻿#ifndef rewardItem_hpp
+#ifndef rewardItem_hpp
 #define rewardItem_hpp
 #include "Brick.hpp"
 
@@ -11,9 +11,8 @@ private:
 public:
 	normalBrick();
 	virtual ~normalBrick();
-
-	void draw(sf::RenderWindow& window);
-	void destroy();
+    
+	virtual void destroy();
 };
 
 #endif

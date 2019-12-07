@@ -68,6 +68,8 @@ int play(sf::RenderWindow& window) {
 		bg.draw(window);
         bar.draw(window);
 		balls.drawBalls(window);
+        stage.draw(window);
+        
 		if (thread1.joinable())
 			thread1.join();
 

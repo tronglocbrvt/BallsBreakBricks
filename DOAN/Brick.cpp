@@ -1,25 +1,20 @@
 #include "Brick.hpp"
 
-Brick::Brick(float posX, float posY, float width, float height, int type):rectangle(sf::Vector2f(width, height))
-{
-	rectangle.setPosition(posX, posY);
-
-	rectangle.setFillColor(sf::Color(203, 15, 245));
-}
-
 void Brick::set(float posX, float posY, float width, float height, int type){
     
     this->rectangle.setSize(sf::Vector2f(width, height));
-    
+
     this->rectangle.setPosition(posX, posY);
 
-    rectangle.setFillColor(sf::Color(203, 15, 245));
-        
+//    rectangle.setFillColor(sf::Color(203, 15, 245));
+    this->score = type;
+
 }
 
 void Brick::draw(sf::RenderWindow& window)
 {
-	window.draw(rectangle);
+//	window.draw(this->imgSpr);
+    window.draw(this->rectangle);
 }
 
 int Brick::collision(sf::FloatRect& boundingBox)
@@ -85,8 +80,4 @@ int Brick::collision(sf::FloatRect& boundingBox)
 
 
 	return -1; // không va chạm
-}
-
-void Brick::destroy(){
-    
 }

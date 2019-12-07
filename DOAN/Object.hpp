@@ -4,7 +4,7 @@
 
 class Object
 {
-private:
+protected:
     sf::Texture imgTex;
     sf::Sprite imgSpr;
 public:
