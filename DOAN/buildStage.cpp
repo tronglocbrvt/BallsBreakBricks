@@ -33,11 +33,13 @@ buildStage::buildStage(int stage) {
                 case 1: // brick
                 case 2:
                 case 3:
-                    this->mStage[i][j] = new normalBrick();
+                    this->mStage[i][j] = new NormalBrick();
                     break;
                 case -1:    // rock
-                    
+                    this->mStage[i][j] = new RockBrick();
                     break;
+                case 9:
+                    this->mStage[i][j] = new SpecBricks();
                 default:
                     continue;
                     break;

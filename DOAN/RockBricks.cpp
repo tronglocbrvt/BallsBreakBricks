@@ -15,3 +15,7 @@ RockBrick::RockBrick(){
 RockBrick::~RockBrick(){
     
 }
+
+void RockBrick::destroy()
+{
+}

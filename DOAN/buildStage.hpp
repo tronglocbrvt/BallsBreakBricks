@@ -2,8 +2,9 @@
 #define buildStage_hpp
 
 #include "Define_Header.h"
-#include "normalBrick.hpp"
-
+#include "NormalBrick.hpp"
+#include "SpecBricks.hpp"
+#include "RockBricks.hpp"
 #include <vector>
 #include <iostream>
 #include <fstream>

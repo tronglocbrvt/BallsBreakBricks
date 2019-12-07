@@ -11,12 +11,14 @@
 
 #include "Brick.hpp"
 
-class RockBrick {
+class RockBrick : public Brick {
 protected:
-    
+    sf::RectangleShape rectangle;
 public:
     RockBrick();
     virtual ~RockBrick();
+    
+    virtual void destroy();
 };
 
 #endif /* RockBricks_hpp */

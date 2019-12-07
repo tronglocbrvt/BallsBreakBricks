@@ -9,14 +9,16 @@
 #ifndef SpecBricks_hpp
 #define SpecBricks_hpp
 
-#include "Object.hpp"
+#include "Brick.hpp"
 
-class SpecBricks {
+class SpecBricks : public Brick {
 protected:
-    
+    sf::RectangleShape rectangle;
 public:
     SpecBricks();
-    ~SpecBricks();
+    virtual ~SpecBricks();
+    
+    virtual void destroy();
 };
 
 #endif /* SpecBricks_hpp */

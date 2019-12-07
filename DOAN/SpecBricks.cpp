@@ -15,3 +15,7 @@ SpecBricks::SpecBricks(){
 SpecBricks::~SpecBricks(){
     
 }
+
+void SpecBricks::destroy()
+{
+}
