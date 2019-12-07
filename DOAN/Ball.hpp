@@ -23,8 +23,8 @@ private:
     sf::Texture textureBall;
     sf::Sprite imgSpr;
 
-    float posXend;
-    float posYend;
+    float posXend;  // width
+    float posYend;  // heigh
 
     float velocityX;
     float velocityY;

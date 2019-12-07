@@ -8,7 +8,8 @@ int play(sf::RenderWindow& window) {
 	BallsHandler balls;
 	balls.newBall();
 	balls.newBall();
-	balls.getBalls().at(1).setPosX(200);
+    
+	balls.getBalls().at(0).setPosX(200);
 	balls.getBalls().at(1).setPosY(400);
     TheBar bar;
 

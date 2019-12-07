@@ -147,13 +147,10 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
     if ((this->posX <= _DIS_FROM_LEFT_) || (this->posX + this->posXend >= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
 
         this->velocityX *= -1;
-        
-//        return -1;
 
     }
 
     // kiểm tra chạm thanh
-//    std::cout << this->posX << " = " << this->posY << "\t$$$" << std::endl;
     if (this->checkClashToBar(positionBar)) {
         
         this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
@@ -171,9 +168,40 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
         this->updateVelocityY();
         this->updateVelocityX();
 
-        //
-
     }
+    
+    // kiểm tra chạm gạch
+    
+     float middleX = this->posX + posXend/2;
+     float middleY = this->posY + posYend/2;
+     
+     unsigned short startX = (int)((middleX - _DIS_FROM_LEFT_) / _WIDTH_BRICK_) - 1;
+     unsigned short startY = (int)((middleY - _DIS_FROM_TOP_) / (_WIDTH_BRICK_ / _GOLDEN_RATIO_)) -1;
+    
+    if (startX < _NUMBER_OF_BRICKS_PER_LINE_ && startY < _NUMBER_OF_BRICKS_PER_LINE_) {
+        std::cout << "Yasuo: " << startX << " - " << startY << std::endl;
+        
+        for (unsigned short i = startX; i <= startX +3; i++){
+           for (unsigned short j = startY; j <= startY +3; j++){
+//               if (this->checkClashToBrick(<brick[i][j]>)){
+//                   this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
+//                   this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
+//
+//                   // cập nhật vận tốc trên trục nếu có thay đổi
+//                   if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
+//                       this->velocityX *= -1;      // chạm biên trái/phải của gạch
+//                   }
+//                   else{
+//                       this->velocityY *= -1;      // chạm biên trên/dưới của gạch
+//                   }
+//               }
+           }
+        }
+        
+    }
+    
+    
+    
     // nếu chạm biên trên sẽ điều ngược lại trục tung
     if (this->posY <= _DIS_FROM_TOP_) {
         this->velocityY *= -1;
