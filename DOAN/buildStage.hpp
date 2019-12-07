@@ -5,6 +5,7 @@
 #include "NormalBrick.hpp"
 #include "SpecBricks.hpp"
 #include "RockBricks.hpp"
+#include "Ball.hpp"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -27,6 +28,8 @@ public:
     void breakTheBrick(const sf::FloatRect& ballBound);
     
     void draw(sf::RenderWindow &window);
+    
+    friend class ThePong;
 };
 
 #endif

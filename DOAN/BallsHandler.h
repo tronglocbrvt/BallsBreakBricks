@@ -3,6 +3,7 @@
 #include "Ball.hpp"
 #include "Paddle.hpp"
 
+
 class BallsHandler
 {
 private:
@@ -10,7 +11,7 @@ private:
 public:
 	BallsHandler();
 	~BallsHandler();
-	void moveBalls(sf::RenderWindow& window, TheBar& bar, int);
+	void moveBalls(TheBar& bar, buildStage &stage, int);
 	unsigned int newBall();
 	unsigned int aliveBalls();
 	void drawBalls(sf::RenderWindow&);

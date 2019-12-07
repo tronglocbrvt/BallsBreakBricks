@@ -4,13 +4,13 @@ int play(sf::RenderWindow& window) {
 
     // khởi tạo sân, bóng, 2 thanh
 	BackGround bg(1);
-	//ThePong ball;
-	BallsHandler balls;
-	balls.newBall();
-	balls.newBall();
-    
-	balls.getBalls().at(0).setPosX(200);
-	balls.getBalls().at(1).setPosY(400);
+	ThePong ball;
+//	BallsHandler balls;
+//	balls.newBall();
+//	balls.newBall();
+//
+//	balls.getBalls().at(0).setPosX(200);
+//	balls.getBalls().at(1).setPosY(400);
     TheBar bar;
 
 	rewardItem test;
@@ -47,21 +47,23 @@ int play(sf::RenderWindow& window) {
 			bar.draw(window);
 		}
 
-		std::thread thread1(&BallsHandler::moveBalls, &balls, std::ref(window), std::ref(bar), 0);
-		std::thread thread2(&BallsHandler::moveBalls, &balls, std::ref(window), std::ref(bar), 1);
+//		std::thread thread1(&BallsHandler::moveBalls, &balls, std::ref(window), std::ref(bar), std::ref(stage), 0);
+//		std::thread thread2(&BallsHandler::moveBalls, &balls, std::ref(window), std::ref(bar), std::ref(stage), 1);
+        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage);
         // in ra màn hình game
 		window.clear();
         
 		bg.draw(window);
         bar.draw(window);
-		balls.drawBalls(window);
+//		balls.drawBalls(window);
+        ball.draw(window);
         stage.draw(window);
         
-		if (thread1.joinable())
-			thread1.join();
-
-		if (thread2.joinable())
-			thread2.join();
+//		if (thread1.joinable())
+//			thread1.join();
+//
+//		if (thread2.joinable())
+//			thread2.join();
 
 		window.display();
 	}

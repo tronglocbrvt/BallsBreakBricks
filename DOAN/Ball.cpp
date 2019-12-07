@@ -7,6 +7,7 @@ ThePong::ThePong() {
     if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
         std::cout << "Load file failed" << std::endl;
     }
+    
     this->imgSpr.setTexture(this->textureBall);
     this->imgSpr.scale(_SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().x, _SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().y);
 
@@ -20,8 +21,6 @@ ThePong::ThePong() {
     this->posYend = this->imgSpr.getTexture()->getSize().y * this->imgSpr.getScale().y;
 
     // khởi động vị trí quả bóng tạo vị trí chính giữa màn hình chơi
-//    this->posX = _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_;
-//    this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - this->posYend - _HEIGH_BAR_;
     this->resetPong(0);
     
     // điều chỉnh vị trí
@@ -49,6 +48,7 @@ ThePong::ThePong(float x, float y, float veX, float veY) {
     if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
         std::cout << "Load file failed" << std::endl;
     }
+    this->textureBall.setSmooth(true);
     this->imgSpr.setTexture(this->textureBall);
     this->imgSpr.scale(_SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().x, _SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().y);
 
@@ -67,6 +67,30 @@ ThePong::ThePong(float x, float y, float veX, float veY) {
 }
 ThePong::~ThePong() {
 
+}
+
+void ThePong::setter(){
+    if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
+        std::cout << "Load file failed" << std::endl;
+    }
+    
+    this->imgSpr.setTexture(this->textureBall);
+    this->imgSpr.scale(_SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().x, _SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().y);
+
+    // cài đặt tốc độ và gia tốc
+    this->velocityX = _VELOCITY_X_;
+    this->velocityY = _VELOCITY_Y_;
+    this->acceleration = _ACCELERATION_;
+
+    // getter vị trí cuối cùng quả bóng
+    this->posXend = this->imgSpr.getTexture()->getSize().x * this->imgSpr.getScale().x;
+    this->posYend = this->imgSpr.getTexture()->getSize().y * this->imgSpr.getScale().y;
+
+    // khởi động vị trí quả bóng tạo vị trí chính giữa màn hình chơi
+    this->resetPong(0);
+    
+    // điều chỉnh vị trí
+    this->imgSpr.setPosition(this->posX - this->posXend * 1.0 / 2, this->posY);
 }
 
 void ThePong::setPosX(float x) {        // đặt vị trí x
@@ -129,7 +153,7 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
     this->imgSpr.scale(width, heigh);
 }
-short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
+short ThePong::moveBall(Pos positionBar, buildStage &stage) {
 
     float pastPosX = this->posX;
     float pastPosY = this->posY;
@@ -175,15 +199,42 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
      float middleX = this->posX + posXend/2;
      float middleY = this->posY + posYend/2;
      
-     unsigned short startX = (int)((middleX - _DIS_FROM_LEFT_) / _WIDTH_BRICK_) - 1;
-     unsigned short startY = (int)((middleY - _DIS_FROM_TOP_) / (_WIDTH_BRICK_ / _GOLDEN_RATIO_)) -1;
+     short startX = (int)((middleX - _DIS_FROM_LEFT_) / (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_)) - 1;  // -1 -> 15
+     short startY = (int)((middleY - _DIS_FROM_TOP_) / (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_)) -1;     // -1 -> 16
+    
+    if (startX < 0) startX = 0;
+    if (startY < 0) startY = 0;
     
     if (startX < _NUMBER_OF_BRICKS_PER_LINE_ && startY < _NUMBER_OF_BRICKS_PER_LINE_) {
-        std::cout << "Yasuo: " << startX << " - " << startY << std::endl;
         
-        for (unsigned short i = startX; i <= startX +3; i++){
-           for (unsigned short j = startY; j <= startY +3; j++){
-//               if (this->checkClashToBrick(<brick[i][j]>)){
+        unsigned short toX, toY;
+        switch (startX) {
+            case _NUMBER_OF_BRICKS_PER_LINE_ -2:    // 15
+            case _NUMBER_OF_BRICKS_PER_LINE_ -3:    // 14
+                toX = _NUMBER_OF_BRICKS_PER_LINE_ -1;
+                break;
+            default:
+                toX = startX +3;
+                break;
+        }
+        switch (startY) {
+            case _NUMBER_OF_BRICKS_PER_LINE_ -1:    // 16
+            case _NUMBER_OF_BRICKS_PER_LINE_ -2:    // 15
+            case _NUMBER_OF_BRICKS_PER_LINE_ -3:    // 14
+                toY = _NUMBER_OF_BRICKS_PER_LINE_ -1;
+                break;
+            default:
+                toY = startY +3;
+                break;
+        }
+        
+        
+        for (unsigned short i = startX; i <= toX; i++){
+           for (unsigned short j = startY; j <= toY; j++){
+               if (stage.mSignBricks[i][j] != 0 && stage.mStage[i][j]->collision(this->imgSpr.getGlobalBounds())){
+//
+//                   std::cout << "crash" << std::endl;
+                   
 //                   this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
 //                   this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
 //
@@ -194,7 +245,8 @@ short ThePong::moveBall(sf::RenderWindow& window, Pos positionBar) {
 //                   else{
 //                       this->velocityY *= -1;      // chạm biên trên/dưới của gạch
 //                   }
-//               }
+               }
+//
            }
         }
         
@@ -270,8 +322,25 @@ sf::FloatRect ThePong::getBoundBall(){
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     
-  /*  point1.drawText(window);
+    point1.drawText(window);
     point2.drawText(window);
     point3.drawText(window);
-	point4.drawText(window);*/
+	point4.drawText(window);
 }
+//
+//template <class T, class Y>
+//struct MapStruct {
+//    T key;
+//    Y value;
+//
+//    MapStruct<T, Y> *pNext;
+//};
+//
+//
+//template <class T, class Y>
+//class MyMap {
+//private:
+//    MapStruct<T, Y> *phead;
+//public:
+//    // function...
+//};

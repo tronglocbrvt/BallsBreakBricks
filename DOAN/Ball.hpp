@@ -10,11 +10,12 @@
 #include <ctime>
 #include <math.h>
 #include "rewardItem.h"
+#include "buildStage.hpp"
 
 #define _NAME_GAME_ "The Pong Game"
 
 
-
+class buildStage;
 class ThePong {
 private:
     float posX;
@@ -40,6 +41,8 @@ public:
     ThePong(float, float, float, float);
     virtual ~ThePong();
 
+    void setter();
+    
     void setPosX(float x);
     void setPosY(float y);
 	void setPosXend(float x);
@@ -56,8 +59,7 @@ public:
     void resetPong(short toward); //     -1 - left ;     0 - random ;    1 - right
 
     void scale(float width, float heigh);
-    short moveBall(sf::RenderWindow& window, Pos positionBar);
-//    short moveBall(sf::RenderWindow& window);
+    short moveBall(Pos positionBar, buildStage &stage);
 
     bool checkClashToBar(Pos position);
     void normalizePosX();

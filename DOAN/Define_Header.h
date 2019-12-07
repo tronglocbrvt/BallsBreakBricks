@@ -37,7 +37,7 @@
 #define _ACCELERATION_ 1.1
 #define _ACCELERATION_BAR_ 5
 // cạnh quả bóng
-#define _SIZE_PONG_ 19
+#define _SIZE_PONG_ 17
 #define _SMALL_NUMBER_ 0.001
 #define _MAX_CHANGE_VELOC_ 3
 #define _ANGLE_BUFF_ 0.3

@@ -2,18 +2,17 @@
 
 BallsHandler::BallsHandler()
 {
-
 }
 
 BallsHandler::~BallsHandler()
 {
 }
 
-void BallsHandler::moveBalls(sf::RenderWindow& window, TheBar& bar, int i)
+void BallsHandler::moveBalls(TheBar& bar, buildStage &stage, int i)
 {
 	//for (int i = 0; i < aliveBalls(); i++)
 	//{
-		int check = myBalls[i].moveBall(window, copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()));
+		int check = myBalls[i].moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage);
 
 		if (aliveBalls() > 1 && check == -1)
 		{

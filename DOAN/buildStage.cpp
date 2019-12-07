@@ -19,7 +19,6 @@ buildStage::buildStage(int stage) {
             fs >> this->mSignBricks[i][j];
         }
     }
-    
 	fs.close();
 
 	for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
