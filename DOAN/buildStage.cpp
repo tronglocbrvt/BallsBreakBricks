@@ -7,7 +7,6 @@ buildStage::buildStage(int stage) {
     stream << "res/stage/Stage" << stage << ".txt";
     std::string dir;
     stream >> dir;
-    std::cout << dir << std::endl;
     
 	fs.open(dir, std::fstream::in);
 
@@ -22,7 +21,6 @@ buildStage::buildStage(int stage) {
     }
     
 	fs.close();
-	std::cout << _WIDTH_BRICK_ / _GOLDEN_RATIO_ << " = " << std::endl;
 
 	for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
 		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {

@@ -16,23 +16,7 @@ int play(sf::RenderWindow& window) {
 	//test.widenBar(bar);
 
     buildStage stage(1);
-    
-    
-    
-//    const int number = 17;
-//    const float dis = 1;
-//    const float width = _WIDTH_TABLE_GAME_ * 1.0 / number - dis;
-//    const float rateHei = _GOLDEN_RATIO_;
-//    sf::RectangleShape square[number][number];
-//	for (int i = 0; i < number; i++)
-//	{
-//		for (int j = 0; j < number; j++) {
-//			square[i][j].setSize(sf::Vector2f(width, width / rateHei));
-//			square[i][j].setPosition(_DIS_FROM_LEFT_ + i * (width + dis), _DIS_FROM_TOP_ + j * (width / rateHei + dis));
-//			std::cout << (_DIS_FROM_LEFT_ + i * (width + dis)) << " = " << (_DIS_FROM_LEFT_ + i * (width)+width) << std::endl;
-//		}
-//
-//	}
+
     // khởi động chuỗi thông báo và tên
 	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + 50, _HEIGH_TABLE_GAME_ - 2 * _DIS_FROM_TOP_);
 
@@ -77,17 +61,6 @@ int play(sf::RenderWindow& window) {
 
 		if (thread2.joinable())
 			thread2.join();
-		
-        //stage.draw(window);
-        
-//        for (int i = 0; i < number; i++)
-//			for (int j = 0; j < number; j++) {
-//
-//                if ((((i + 1)*(j + 1) + 1) / 3) % 2) {
-//                    window.draw(square[i][j]);
-//                }
-//
-//        }
 
 		window.display();
 	}

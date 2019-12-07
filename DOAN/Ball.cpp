@@ -2,7 +2,6 @@
 
 // the pong class
 ThePong::ThePong() {
-    
 
     // load file ảnh và cài đặt thông số cho quả bóng
     if (!this->textureBall.loadFromFile("res/img/pongball.png")) {

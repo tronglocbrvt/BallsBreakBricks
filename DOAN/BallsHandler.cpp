@@ -27,13 +27,13 @@ unsigned int BallsHandler::newBall()
 {
 	ThePong newBall;
 	myBalls.push_back(newBall);
-	return myBalls.size();
+	return (unsigned int)myBalls.size();
 
 }
 
 unsigned int BallsHandler::aliveBalls()
 {
-	return myBalls.size();
+	return (unsigned int)myBalls.size();
 }
 
 std::vector<ThePong>& BallsHandler::getBalls()
