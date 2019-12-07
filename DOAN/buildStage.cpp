@@ -37,6 +37,7 @@ buildStage::buildStage(int stage) {
                     break;
                 case 9:
                     this->mStage[i][j] = new SpecBricks();
+                    break;
                 default:
                     continue;
                     break;

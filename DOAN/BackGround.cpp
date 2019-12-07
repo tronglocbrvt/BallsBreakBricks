@@ -32,7 +32,7 @@ Table::Table(){
     
     
     this->BackGround.setSize(sf::Vector2f(_WIDTH_TABLE_GAME_ - widthLine/2, _HEIGH_TABLE_GAME_ - widthLine*1.45));
-    this->BackGround.setFillColor(sf::Color(121, 121, 121));
+    this->BackGround.setFillColor(sf::Color(192, 188, 194));
     this->BackGround.setPosition(this->posX, this->posY);
     
     
@@ -103,18 +103,6 @@ TableInf::TableInf(){
     this->tWeaponInf.setOriginToMidHead();
     this->tWeaponInf.setColor(236, 3, 252);
   
-//    this->point1.set(".", std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/5);
-//    this->point2.set(".", std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/5);
-//    this->point3.set(".", std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/5);
-//
-//    this->point1.setPosition(this->tHeader.getPositionX(), this->tHeader.getPositionY());
-//    this->point1.setColor(25, 25, 25);
-//
-//    this->point2.setPosition(this->tHeader.getPositionX(), this->tHeader.getBottom());
-//    this->point2.setColor(50, 50, 50);
-//
-//    this->point3.setPosition(this->tHeader.getPositionX(), this->tHeader.getBottom() + _SPACE_BET_OBJ_);
-//
     this->time = sf::seconds(0.01f);
     
 }
@@ -169,10 +157,6 @@ void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     }
     clock.restart();
     
-    
-//    this->point1.drawText(window);
-//    this->point2.drawText(window);
-//    this->point3.drawText(window);
 }
 void TableInf::setScore(int score){        // thiết lập điểm ban đầu
     this->score = score;

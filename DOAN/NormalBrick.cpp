@@ -10,6 +10,7 @@ NormalBrick::NormalBrick(int score){
         std::cout << "Load file failed" << std::endl;
         return;
     }
+    this->imgTex.setSmooth(true);
     
     this->imgSpr.setTexture(this->imgTex);
 }
