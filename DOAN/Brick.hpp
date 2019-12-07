@@ -9,8 +9,6 @@
 class Brick:public Object
 {
 protected:
-    sf::RectangleShape rectangle;
-    
     short score;
 
 public:
@@ -20,6 +18,8 @@ public:
 	virtual void draw(sf::RenderWindow& window);
     virtual void move() {}
 	virtual int collision(sf::FloatRect& boundingBox);
+    
+    virtual short getScore();
 };
 
 #endif

@@ -3,27 +3,24 @@
 
 buildStage::buildStage(int stage) {
 	std::fstream fs;
-	fs.open("res/file/Stage.txt", std::fstream::in);
+    std::stringstream stream;
+    stream << "res/stage/Stage" << stage << ".txt";
+    std::string dir;
+    stream >> dir;
+    std::cout << dir << std::endl;
+    
+	fs.open(dir, std::fstream::in);
 
 	std::string data;
+    
+    getline(fs, data); // get stage
 
-	while (getline(fs, data)) {
-		if (std::stoi(data) == stage) {
-			for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
-				for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
-					fs >> this->mSignBricks[i][j];
-				}
-			}
-			getline(fs, data); // get '/n'
-			getline(fs, data); // get empty line
-		}
-		else
-		{
-			for (int i = 0; i <= _NUMBER_OF_BRICKS_PER_LINE_; i++) {
-				getline(fs, data);
-			}
-		}
-	}
+    for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
+        for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
+            fs >> this->mSignBricks[i][j];
+        }
+    }
+    
 	fs.close();
 	std::cout << _WIDTH_BRICK_ / _GOLDEN_RATIO_ << " = " << std::endl;
 
@@ -33,7 +30,7 @@ buildStage::buildStage(int stage) {
                 case 1: // brick
                 case 2:
                 case 3:
-                    this->mStage[i][j] = new NormalBrick();
+                    this->mStage[i][j] = new NormalBrick(this->mSignBricks[i][j]);
                     break;
                 case -1:    // rock
                     this->mStage[i][j] = new RockBrick();
@@ -61,12 +58,14 @@ void buildStage::draw(sf::RenderWindow &window){
     for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
         for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
             if (this->mSignBricks[i][j]) {
-//              window.draw(this->mStage[i][j]);
                 this->mStage[i][j]->draw(window);
             }
             
         }
     }
+    
+//    NormalBrick br(2);
+//    br.draw(window);
 }
 
 

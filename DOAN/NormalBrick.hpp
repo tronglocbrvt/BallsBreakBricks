@@ -2,14 +2,15 @@
 #define rewardItem_hpp
 #include "Brick.hpp"
 
-class NormalBrick:public Brick
-{
-private: 
-	int score; // điểm của gạch
-	int type; // loại gạch normal, mỗi gạch normal có số điểm khác nhau
+#define widBrick 113
+#define heiBrick 47
 
+class NormalBrick : public Brick
+{
+protected:
 public:
-	NormalBrick();
+    NormalBrick();
+	NormalBrick(int score);
 	virtual ~NormalBrick();
     
 	virtual void destroy();

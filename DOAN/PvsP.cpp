@@ -17,6 +17,8 @@ int play(sf::RenderWindow& window) {
 
     buildStage stage(1);
     
+    
+    
 //    const int number = 17;
 //    const float dis = 1;
 //    const float width = _WIDTH_TABLE_GAME_ * 1.0 / number - dis;
