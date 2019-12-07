@@ -1,5 +1,5 @@
-#ifndef rewardItem_hpp
-#define rewardItem_hpp
+#ifndef NormalBrick_hpp
+#define NormalBrick_hpp
 #include "Brick.hpp"
 
 #define widBrick 113

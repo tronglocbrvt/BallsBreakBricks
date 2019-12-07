@@ -139,10 +139,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mathfunction.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="normalBrick.cpp" />
+    <ClCompile Include="NormalBrick.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PvsP.cpp" />
     <ClCompile Include="rewardItem.cpp" />
+    <ClCompile Include="RockBricks.cpp" />
+    <ClCompile Include="SpecBricks.cpp" />
     <ClCompile Include="TextClass.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,11 +158,13 @@
     <ClInclude Include="Display.hpp" />
     <ClInclude Include="mathfunction.hpp" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="normalBrick.hpp" />
+    <ClInclude Include="NormalBrick.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Paddle.hpp" />
     <ClInclude Include="PvsP.hpp" />
     <ClInclude Include="rewardItem.h" />
+    <ClInclude Include="RockBricks.hpp" />
+    <ClInclude Include="SpecBricks.hpp" />
     <ClInclude Include="TextClass.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
