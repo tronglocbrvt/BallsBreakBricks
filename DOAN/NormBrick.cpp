@@ -49,8 +49,8 @@ int NormBrick::collision(const sf::FloatRect& boundingBox)
 		else if (pow(pow(center.x - bounds.left, 2) + pow(center.y - bounds.top, 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
-			boundingBox.left = bounds.left;
-			boundingBox.top = bounds.top;
+//			boundingBox.left = bounds.left;
+//			boundingBox.top = bounds.top;
 			return 2;
 		}
 
@@ -58,8 +58,8 @@ int NormBrick::collision(const sf::FloatRect& boundingBox)
 		else if (pow(pow(center.x - (bounds.left + bounds.width), 2) + pow(center.y - bounds.top, 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
-			boundingBox.left = bounds.left + bounds.width;
-			boundingBox.top = bounds.top;
+//			boundingBox.left = bounds.left + bounds.width;
+//			boundingBox.top = bounds.top;
 			return 2;
 		}
 
@@ -68,8 +68,8 @@ int NormBrick::collision(const sf::FloatRect& boundingBox)
 			+ pow(center.y - (bounds.top + bounds.height), 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
-			boundingBox.left = bounds.left + bounds.width;
-			boundingBox.top = bounds.top + bounds.height;
+//			boundingBox.left = bounds.left + bounds.width;
+//			boundingBox.top = bounds.top + bounds.height;
 			return 2;
 		}
 
@@ -77,8 +77,8 @@ int NormBrick::collision(const sf::FloatRect& boundingBox)
 		else if (pow(pow(center.x - bounds.left, 2) + pow(center.y - (bounds.top + bounds.height), 2), 0.5) < radius) {
 
 			// lưu vị trí bóng
-			boundingBox.left = bounds.left;
-			boundingBox.top = bounds.top + bounds.height;
+//			boundingBox.left = bounds.left;
+//			boundingBox.top = bounds.top + bounds.height;
 			return 2;
 		}
 	}

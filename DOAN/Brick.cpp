@@ -1,31 +1,20 @@
 #include "Brick.hpp"
 
-Brick::Brick(float posX, float posY, float width, float height, int type, sf::Color color):rectangle(sf::Vector2f(width, height)), typeBrick(type)
+Brick::Brick(float posX, float posY, float width, float height, int type):rectangle(sf::Vector2f(width, height))
 {
 	rectangle.setPosition(posX, posY);
 
-	if (typeBrick == -1) // chướng ngại vật
-		rectangle.setFillColor(PREVENT_BRICK);
-	else if (typeBrick == 1) //  chức năng
-		rectangle.setFillColor(SPECIAL_BRICK);
-	else
-		rectangle.setFillColor(color);
+	rectangle.setFillColor(sf::Color(203, 15, 245));
 }
 
 void Brick::set(float posX, float posY, float width, float height, int type){
     
     this->rectangle.setSize(sf::Vector2f(width, height));
     
-    this->typeBrick = type;
-    
     this->rectangle.setPosition(posX, posY);
 
-    if (this->typeBrick == -1) // chướng ngại vật
-        this->rectangle.setFillColor(PREVENT_BRICK);
-    else if (this->typeBrick == 1) //  chức năng
-        rectangle.setFillColor(SPECIAL_BRICK);
-    else
-        rectangle.setFillColor(sf::Color(203, 15, 245));
+    rectangle.setFillColor(sf::Color(203, 15, 245));
+        
 }
 
 void Brick::draw(sf::RenderWindow& window)

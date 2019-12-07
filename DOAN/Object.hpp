@@ -1,15 +1,18 @@
-﻿#ifndef Object_hpp
+#ifndef Object_hpp
 #define Object_hpp
 #include <SFML/Graphics.hpp>
 
 class Object
 {
+private:
+    sf::Texture imgTex;
+    sf::Sprite imgSpr;
 public:
 	virtual ~Object() {};
 	virtual void draw(sf::RenderWindow&) = 0;
-	virtual void move() {};
+	virtual void move() = 0;
 	virtual int collision(sf::FloatRect&) = 0;
-
-	bool deleteObject = false; // gạch đã được va chạm chưa, nếu true thì xóa gạch
+    virtual void destroy() = 0;
+    
 };
 #endif
