@@ -3,6 +3,10 @@
 TextShow::TextShow(){
     
 }
+TextShow::~TextShow()
+{
+
+}
 TextShow::TextShow(std::string textS, std::string font, float posX, float posY){            // constructor -> chuỗi + tên font + vị trí in trên màn hình
     // update text
     setText(textS);
@@ -71,7 +75,7 @@ void TextShow::updateText(){                                // cập nhật text
 }
 void TextShow::drawText(sf::RenderWindow& window) {         // vẽ text lên window
 	// Draw it
-	window.draw(this->textT);
+	window.draw(textT);
 }
 void TextShow::scale(float scaleSize){                      // thay đổi kích thước chữ theo độ co giãn
     this->textT.setCharacterSize(scaleSize * CHRACTER_SIZE);

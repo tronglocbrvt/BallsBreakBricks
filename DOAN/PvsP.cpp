@@ -4,7 +4,12 @@ int play(sf::RenderWindow& window) {
 
     // khởi tạo sân, bóng, 2 thanh
 	BackGround bg(1);
-	ThePong ball;
+	//ThePong ball;
+	BallsHandler balls;
+	balls.newBall();
+	balls.newBall();
+	balls.getBalls().at(1).setPosX(200);
+	balls.getBalls().at(1).setPosY(400);
     TheBar bar;
 
 	rewardItem test;
@@ -55,15 +60,21 @@ int play(sf::RenderWindow& window) {
 			bar.draw(window);
 		}
 
-		ball.moveBall(window, copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()));
-
+		std::thread thread1(&BallsHandler::moveBalls, &balls, std::ref(window), std::ref(bar), 0);
+		std::thread thread2(&BallsHandler::moveBalls, &balls, std::ref(window), std::ref(bar), 1);
         // in ra màn hình game
 		window.clear();
         
 		bg.draw(window);
         bar.draw(window);
-		ball.draw(window);
-        stage.draw(window);
+		balls.drawBalls(window);
+		if (thread1.joinable())
+			thread1.join();
+
+		if (thread2.joinable())
+			thread2.join();
+		
+        //stage.draw(window);
         
 //        for (int i = 0; i < number; i++)
 //			for (int j = 0; j < number; j++) {

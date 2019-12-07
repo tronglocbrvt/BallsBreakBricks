@@ -9,6 +9,10 @@ rewardItem::~rewardItem()
 {
 }
 
+void rewardItem::fireBall()
+{
+}
+
 void rewardItem::widenBar(TheBar& bar)
 {
 	bar.setHeightBar(bar.getImgSpr().getTexture()->getSize().y);     // lấy kích thước theo chiều dài Oy

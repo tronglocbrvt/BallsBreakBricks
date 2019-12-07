@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="BallsHandler.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="buildStage.cpp" />
     <ClCompile Include="DataPos.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mathfunction.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="normalBrick.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PvsP.cpp" />
     <ClCompile Include="rewardItem.cpp" />
@@ -146,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="BackGround.hpp" />
     <ClInclude Include="Ball.hpp" />
+    <ClInclude Include="BallsHandler.h" />
     <ClInclude Include="Brick.hpp" />
     <ClInclude Include="buildStage.hpp" />
     <ClInclude Include="DataPos.hpp" />
@@ -153,6 +156,7 @@
     <ClInclude Include="Display.hpp" />
     <ClInclude Include="mathfunction.hpp" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="normalBrick.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Paddle.hpp" />
     <ClInclude Include="PvsP.hpp" />

@@ -7,9 +7,9 @@
 class Brick:public Object
 {
 private:
-    sf::RectangleShape rectangle;
-    
+    sf::RectangleShape rectangle;   
     short score;
+
 public:
     Brick(){}
 	Brick(float posX, float posY, float width, float height, int type);

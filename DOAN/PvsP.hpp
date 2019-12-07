@@ -7,6 +7,8 @@
 #include "rewardItem.h"
 #include "Paddle.hpp"
 #include "buildStage.hpp"
+#include "BallsHandler.h"
+#include <thread>
 
 int play(sf::RenderWindow& window); // người với người chơi
 
