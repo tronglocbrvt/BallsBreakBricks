@@ -9,6 +9,7 @@
 #include "buildStage.hpp"
 #include "BallsHandler.h"
 #include <thread>
+#include <future>
 
 
 int play(sf::RenderWindow& window); // người với người chơi
