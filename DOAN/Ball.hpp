@@ -35,6 +35,8 @@ private:
     TextShow point2;
     TextShow point3;
     TextShow point4;
+    
+    TextShow pointX[9];
 
 public:
     ThePong();
@@ -66,6 +68,7 @@ public:
     void normalizePosY();
     
     sf::FloatRect getBoundBall();
+    sf::Vector2f returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall);
 
     void draw(sf::RenderWindow& window);
 	friend class rewardItem;

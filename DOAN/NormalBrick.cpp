@@ -21,4 +21,5 @@ NormalBrick::~NormalBrick()
 
 void NormalBrick::destroy()
 {
+    this->imgSpr.~Sprite();
 }

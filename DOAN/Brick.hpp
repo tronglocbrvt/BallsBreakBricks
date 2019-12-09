@@ -17,9 +17,12 @@ public:
     virtual void set(float posX, float posY, float width, float height, int type);
 	virtual void draw(sf::RenderWindow& window);
     virtual void move() {}
-	virtual bool collision(sf::FloatRect ballRect);
+	virtual short collision(sf::FloatRect ballRect);
     
     virtual short getScore();
+    
+    virtual sf::FloatRect getBound();
+    
 };
 
 #endif
