@@ -16,6 +16,10 @@ SpecBricks::~SpecBricks(){
     
 }
 
+short SpecBricks::getScore(){
+    return 0;
+}
+
 void SpecBricks::destroy()
 {
 }

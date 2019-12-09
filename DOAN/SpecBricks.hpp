@@ -10,6 +10,7 @@ public:
     SpecBricks();
     virtual ~SpecBricks();
     
+    virtual short getScore();
     virtual void destroy();
 };
 

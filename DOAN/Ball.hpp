@@ -12,6 +12,7 @@
 #include "rewardItem.h"
 #include "buildStage.hpp"
 
+
 #define _NAME_GAME_ "The Pong Game"
 
 
@@ -61,7 +62,7 @@ public:
     void resetPong(short toward); //     -1 - left ;     0 - random ;    1 - right
 
     void scale(float width, float heigh);
-    short moveBall(Pos positionBar, buildStage &stage);
+    short moveBall(Pos positionBar, buildStage &stage, int &score);
 
     bool checkClashToBar(Pos position);
     void normalizePosX();

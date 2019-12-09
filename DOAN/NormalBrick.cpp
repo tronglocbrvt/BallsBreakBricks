@@ -19,6 +19,10 @@ NormalBrick::~NormalBrick()
 {
 }
 
+short NormalBrick::getScore(){
+    return this->score;
+}
+
 void NormalBrick::destroy()
 {
     this->imgSpr.~Sprite();

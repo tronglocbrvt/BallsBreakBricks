@@ -19,7 +19,7 @@ public:
     virtual void move() {}
 	virtual short collision(sf::FloatRect ballRect);
     
-    virtual short getScore();
+    virtual short getScore() = 0;
     
     virtual sf::FloatRect getBound();
     

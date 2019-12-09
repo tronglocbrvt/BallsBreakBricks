@@ -25,6 +25,7 @@ int play(sf::RenderWindow& window) {
 	//test.widenBar(bar);
 
     buildStage stage(1);
+    int score = 0;
 
     // khởi động chuỗi thông báo và tên
 	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + 50, _HEIGH_TABLE_GAME_ - 2 * _DIS_FROM_TOP_);
@@ -74,7 +75,12 @@ int play(sf::RenderWindow& window) {
 //		}
 		/*std::thread thread1(&ThePong::moveBall, &ball, std::ref(posBar), std::ref(stage));
 		std::thread thread2(&ThePong::moveBall, &ball1, std::ref(posBar), std::ref(stage));*/
-        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage);
+        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
+        
+        
+        bar.setScores(score);
+        bg.setScore(score);
+        
         // in ra màn hình game
 		window.clear();
         

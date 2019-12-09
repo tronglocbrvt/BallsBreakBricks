@@ -70,6 +70,8 @@ float Table::startTableY(){
     return _DIS_FROM_TOP_;
 }
 
+// ==================================================================
+// ==================================================================
 
 // class table information
 // Tutorial table
@@ -160,7 +162,12 @@ void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
 }
 void TableInf::setScore(int score){        // thiết lập điểm ban đầu
     this->score = score;
+    this->tScore.setText(std::string("Score: ") + std::to_string(this->score));
 }
+
+
+// ==================================================================
+// ==================================================================
 
 // class background
 BackGround::BackGround(bool isPerson){

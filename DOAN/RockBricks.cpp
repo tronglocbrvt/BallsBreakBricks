@@ -15,6 +15,10 @@ RockBrick::~RockBrick(){
     
 }
 
+short RockBrick::getScore(){
+    return 0;
+}
+
 void RockBrick::destroy()
 {
 }
