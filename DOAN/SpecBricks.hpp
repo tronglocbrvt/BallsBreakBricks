@@ -1,4 +1,4 @@
-﻿#ifndef SpecBricks_hpp
+#ifndef SpecBricks_hpp
 #define SpecBricks_hpp
 
 #include "Brick.hpp"
@@ -8,7 +8,7 @@
 
 class SpecBricks : public Brick {
 protected:
-	rewardItem Gift;
+//	rewardItem Gift;
 	sf::Texture textSpecial;
 	sf::Sprite imgSpecial;
 	int typeGift; // loại vật phẩm, ta sẽ random
@@ -19,7 +19,7 @@ public:
     
     virtual short getScore();
     virtual void destroy();
-	void dropGift(ThePong& ball, TheBar& bar, Pos positionBar);
+//	void dropGift(ThePong& ball, TheBar& bar, Pos positionBar);
 	bool checkClashBar(Pos position);
 	void drawGift(sf::RenderWindow& window);
 };

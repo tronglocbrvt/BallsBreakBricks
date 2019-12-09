@@ -1,4 +1,4 @@
-﻿#include "SpecBricks.hpp"
+#include "SpecBricks.hpp"
 
 
 SpecBricks::SpecBricks(){
@@ -66,46 +66,46 @@ void SpecBricks::destroy()
 {
 }
 
-void SpecBricks::dropGift(ThePong& ball, TheBar& bar, Pos positionBar)
-{
-	this->imgSpecial.setPosition(imgSpr.getPosition().x + veloc, imgSpr.getPosition().y + veloc); // cập nhật vị trí rơi
-	if (checkClashBar(positionBar))
-	{
-		switch (typeGift)
-		{
-		case 1:
-		{
-			Gift.doubleScore();
-			break;
-		}
-		case 2:
-		{
-			Gift.separateScore();
-			break;
-		}
-		case 3:
-		{
-			Gift.fireBall();
-			break;
-
-		}
-		case 4:
-		{
-			Gift.zoomBall(ball);
-			break;
-
-		}
-		case 5:
-		{
-			Gift.widenBar(bar);
-			break;
-
-		}
-		default:
-			break;
-		}
-	}
-}
+//void SpecBricks::dropGift(ThePong& ball, TheBar& bar, Pos positionBar)
+//{
+//	this->imgSpecial.setPosition(imgSpr.getPosition().x + veloc, imgSpr.getPosition().y + veloc); // cập nhật vị trí rơi
+//	if (checkClashBar(positionBar))
+//	{
+//		switch (typeGift)
+//		{
+//		case 1:
+//		{
+//			Gift.doubleScore();
+//			break;
+//		}
+//		case 2:
+//		{
+//			Gift.separateScore();
+//			break;
+//		}
+//		case 3:
+//		{
+//			Gift.fireBall();
+//			break;
+//
+//		}
+//		case 4:
+//		{
+//			Gift.zoomBall(ball);
+//			break;
+//
+//		}
+//		case 5:
+//		{
+//			Gift.widenBar(bar);
+//			break;
+//
+//		}
+//		default:
+//			break;
+//		}
+//	}
+//}
 
 bool SpecBricks::checkClashBar(Pos position)
 {

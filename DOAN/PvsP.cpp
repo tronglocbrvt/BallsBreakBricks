@@ -75,7 +75,7 @@ int play(sf::RenderWindow& window) {
 //		}
 		/*std::thread thread1(&ThePong::moveBall, &ball, std::ref(posBar), std::ref(stage));
 		std::thread thread2(&ThePong::moveBall, &ball1, std::ref(posBar), std::ref(stage));*/
-        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, bar);
+        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
         
         
         bar.setScores(score);
