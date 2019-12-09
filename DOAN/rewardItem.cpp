@@ -9,6 +9,14 @@ rewardItem::~rewardItem()
 {
 }
 
+void rewardItem::doubleScore()
+{
+}
+
+void rewardItem::separateScore()
+{
+}
+
 void rewardItem::fireBall()
 {
 }

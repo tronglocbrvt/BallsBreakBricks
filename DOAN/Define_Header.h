@@ -24,9 +24,9 @@
 #define sqr(x) x * x
 
 // vận tốc bóng theo x
-#define _VELOCITY_X_ 0.2
+#define _VELOCITY_X_ 0.3
 // vận tốc bóng theo y
-#define _VELOCITY_Y_ 0.2
+#define _VELOCITY_Y_ 0.3
 // vận tốc thanh trượt
 #define _VELOCITY_X_BAR_ 0.5
 // tốc độ thay đổi thay trượt
