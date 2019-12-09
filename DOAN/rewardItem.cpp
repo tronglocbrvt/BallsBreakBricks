@@ -9,19 +9,86 @@ rewardItem::~rewardItem()
 {
 }
 
-void rewardItem::doubleScore()
+void rewardItem::drawItem(sf::RenderWindow& window)
+{
+	window.draw(imgSpecial);
+}
+
+doubleScore::doubleScore()
+{
+	if (!this->textSpecial.loadFromFile("res/img/x2score.png")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	this->textSpecial.setSmooth(true);
+	this->imgSpecial.setTexture(this->textSpecial);
+}
+
+doubleScore::~doubleScore()
 {
 }
 
-void rewardItem::separateScore()
+void doubleScore::runItem(buildStage stage, int& score)
+{
+	
+}
+
+divideScore::divideScore()
+{
+	if (!this->textSpecial.loadFromFile("res/img/divide.png")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	this->textSpecial.setSmooth(true);
+	this->imgSpecial.setTexture(this->textSpecial);
+}
+
+divideScore::~divideScore()
 {
 }
 
-void rewardItem::fireBall()
+void divideScore::runItem()
 {
 }
 
-void rewardItem::widenBar(TheBar& bar)
+
+fireBall::fireBall()
+{
+	if (!this->textSpecial.loadFromFile("res/img/fireball.jpg")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	this->textSpecial.setSmooth(true);
+	this->imgSpecial.setTexture(this->textSpecial);
+}
+
+fireBall::~fireBall()
+{
+}
+
+void fireBall::runItem()
+{
+}
+
+widenBar::widenBar()
+{
+	if (!this->textSpecial.loadFromFile("res/img/widen.png")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	this->textSpecial.setSmooth(true);
+	this->imgSpecial.setTexture(this->textSpecial);
+}
+
+widenBar::~widenBar()
+{
+}
+
+void widenBar::runItem(TheBar& bar)
 {
 	bar.setHeightBar(bar.getImgSpr().getTexture()->getSize().y);     // lấy kích thước theo chiều dài Oy
 	bar.setLongBar(bar.getImgSpr().getTexture()->getSize().x);     // lấy kích thước theo chiều rộng Ox
@@ -32,7 +99,22 @@ void rewardItem::widenBar(TheBar& bar)
 	bar.setLongBar(bar.getLongBar() * bar.getImgSpr().getScale().x);
 }
 
-void rewardItem::zoomBall(ThePong& ball)
+zoomBall::zoomBall()
+{
+	if (!this->textSpecial.loadFromFile("res/img/zoomBall.jpg")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	this->textSpecial.setSmooth(true);
+	this->imgSpecial.setTexture(this->textSpecial);
+}
+
+zoomBall::~zoomBall()
+{
+}
+
+void zoomBall::runItem(ThePong& ball)
 {
 	ball.scale(2.0, 2.0);
 

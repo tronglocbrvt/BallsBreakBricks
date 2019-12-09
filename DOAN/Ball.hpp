@@ -62,7 +62,7 @@ public:
     void resetPong(short toward); //     -1 - left ;     0 - random ;    1 - right
 
     void scale(float width, float heigh);
-    short moveBall(Pos positionBar, buildStage &stage, int &score, TheBar& bar);
+    short moveBall(Pos positionBar, buildStage &stage, int &score);
 
     bool checkClashToBar(Pos position);
     void normalizePosX();
@@ -72,7 +72,7 @@ public:
     sf::Vector2f returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall);
 
     void draw(sf::RenderWindow& window);
-	friend class rewardItem;
+	friend class zoomBall;
 };
 
 #endif /* Ball_hpp */

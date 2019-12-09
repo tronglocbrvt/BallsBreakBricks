@@ -6,6 +6,7 @@
 #include "SpecBricks.hpp"
 #include "RockBricks.hpp"
 #include "Ball.hpp"
+#include "rewardItem.h"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -21,14 +22,13 @@ private:
     int mSignBricks[_NUMBER_OF_BRICKS_PER_LINE_][_NUMBER_OF_BRICKS_PER_LINE_];
     
     Brick* mStage[_NUMBER_OF_BRICKS_PER_LINE_][_NUMBER_OF_BRICKS_PER_LINE_];
-protected:
 public:
     buildStage(int stage);
     
-    void breakTheBrick(const sf::FloatRect& ballBound);
+    //void breakTheBrick(const sf::FloatRect& ballBound);
     
     void draw(sf::RenderWindow &window);
-    
+
     friend class ThePong;
 };
 

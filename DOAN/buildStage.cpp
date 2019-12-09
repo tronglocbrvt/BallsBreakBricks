@@ -54,13 +54,14 @@ buildStage::buildStage(int stage) {
 
 void buildStage::draw(sf::RenderWindow &window){
     for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
-        for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
-            if (this->mSignBricks[i][j]) {
-                this->mStage[i][j]->draw(window);
-            }
-            
-        }
+		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
+			if (this->mSignBricks[i][j]) {
+				this->mStage[i][j]->draw(window);
+			}
+
+		}
     }
+	
     
 //    NormalBrick br(2);
 //    br.draw(window);
