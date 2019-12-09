@@ -13,6 +13,8 @@ public:
 	NormalBrick(int score);
 	virtual ~NormalBrick();
     
+    virtual short getScore();
+    
 	virtual void destroy();
 };
 

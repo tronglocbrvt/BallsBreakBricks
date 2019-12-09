@@ -34,7 +34,7 @@
 // vận tốc bóng nhanh nhất
 #define _MAX_VELOCITY_ 10
 // tốc độ thay đổi vận tốc
-#define _ACCELERATION_ 1.01
+#define _ACCELERATION_ 1.1
 #define _ACCELERATION_BAR_ 5
 // cạnh quả bóng
 #define _SIZE_PONG_ 17

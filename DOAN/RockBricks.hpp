@@ -10,6 +10,7 @@ public:
     RockBrick();
     virtual ~RockBrick();
     
+    virtual short getScore();
     virtual void destroy();
 };
 

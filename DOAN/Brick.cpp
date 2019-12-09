@@ -21,11 +21,6 @@ short Brick::collision(sf::FloatRect ballRect)
 	return 0; // không va chạm
 }
 
-
-short Brick::getScore(){
-    return this->score;
-}
-
 sf::FloatRect Brick::getBound(){
     return this->imgSpr.getGlobalBounds();
 }

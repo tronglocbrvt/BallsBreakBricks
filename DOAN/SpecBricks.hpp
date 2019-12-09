@@ -14,6 +14,7 @@ public:
     SpecBricks();
     virtual ~SpecBricks();
     
+    virtual short getScore();
     virtual void destroy();
 	void dropGift(rewardItem& Gift, ThePong& ball, TheBar& bar);
 };
