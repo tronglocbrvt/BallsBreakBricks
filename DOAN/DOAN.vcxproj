@@ -136,6 +136,8 @@
     <ClCompile Include="buildStage.cpp" />
     <ClCompile Include="DataPos.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="highScore.cpp" />
+    <ClCompile Include="listHighScore.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mathfunction.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -156,6 +158,8 @@
     <ClInclude Include="DataPos.hpp" />
     <ClInclude Include="Define_Header.h" />
     <ClInclude Include="Display.hpp" />
+    <ClInclude Include="highScore.hpp" />
+    <ClInclude Include="listHighScore.hpp" />
     <ClInclude Include="mathfunction.hpp" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="NormalBrick.hpp" />

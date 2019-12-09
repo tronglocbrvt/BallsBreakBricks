@@ -66,6 +66,12 @@
     <ClCompile Include="SpecBricks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="highScore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listHighScore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.hpp">
@@ -120,6 +126,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NormalBrick.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="highScore.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="listHighScore.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
