@@ -72,7 +72,7 @@ public:
     sf::Vector2f returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall);
 
     void draw(sf::RenderWindow& window);
-	friend class rewardItem;
+	friend class zoomBall;
 };
 
 #endif /* Ball_hpp */

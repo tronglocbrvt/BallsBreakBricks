@@ -21,9 +21,6 @@ int play(sf::RenderWindow& window) {
 //	balls.getBalls().at(1).setPosY(400);
     TheBar bar;
 
-	rewardItem test;
-	//test.widenBar(bar);
-
     buildStage stage(1);
     int score = 0;
 
@@ -64,8 +61,8 @@ int play(sf::RenderWindow& window) {
 //		int m, n;
 //		for (int i = 0; i < Balls.size(); i++)
 //		{
-//			auto p = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage), std::ref(bar));
-//			auto p1 = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage), std::ref(bar));
+//			auto p = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage));
+//			auto p1 = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage));
 //			m = p.get();
 //			n = p1.get();
 //			if ((m == -1 || n == -1) && (Balls.size() > 1)) // chết bóng và số bóng > 1 ->xóa bóng

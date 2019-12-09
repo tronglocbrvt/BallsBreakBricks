@@ -4,6 +4,7 @@
 #include "Brick.hpp"
 #include "rewardItem.h"
 #include "DataPos.hpp"
+#include "Ball.hpp"
 #include <ctime>
 
 class SpecBricks : public Brick {

@@ -3,7 +3,6 @@
 
 SpecBricks::SpecBricks(){
     this->score = 9;
-	veloc = 0.5;
     if (!this->imgTex.loadFromFile("res/img/specBrick.png")) {
         std::cout << "Load file failed" << std::endl;
         return;
@@ -12,47 +11,7 @@ SpecBricks::SpecBricks(){
     
     this->imgSpr.setTexture(this->imgTex);
 
-	srand(time(NULL));
-	typeGift = rand() % 5 + 1;
-	if (typeGift == 1)
-	{
-		if (!this->textSpecial.loadFromFile("res/img/x2score.png")) {
-			std::cout << "Load file failed" << std::endl;
-			return;
-		}
-	}
-	else if (typeGift == 2)
-	{
-		if (!this->textSpecial.loadFromFile("res/img/divide.png")) {
-			std::cout << "Load file failed" << std::endl;
-			return;
-		}
-	}
-	else if (typeGift == 3)
-	{
-		if (!this->textSpecial.loadFromFile("res/img/fireball.jpg")) {
-			std::cout << "Load file failed" << std::endl;
-			return;
-		}
-	}
-	else if (typeGift == 4)
-	{
-		if (!this->textSpecial.loadFromFile("res/img/zoomBall.jpg")) {
-			std::cout << "Load file failed" << std::endl;
-			return;
-		}
-	}
-	else if (typeGift == 5)
-	{
-		if (!this->textSpecial.loadFromFile("res/img/widen.png")) {
-			std::cout << "Load file failed" << std::endl;
-			return;
-		}
-	}
-	this->textSpecial.setSmooth(true);
-	this->imgSpecial.setTexture(this->textSpecial);
-	this->imgSpecial.setScale(imgTex.getSize().x * 1.0 / this->textSpecial.getSize().x, imgTex.getSize().y * 1.0 / this->textSpecial.getSize().y);
-	this->imgSpecial.setPosition(imgSpr.getPosition().x, imgSpr.getPosition().y);
+	
 }
 SpecBricks::~SpecBricks(){
     

@@ -11,7 +11,7 @@ private:
 public:
 	BallsHandler();
 	~BallsHandler();
-	void moveBalls(TheBar& bar, buildStage &stage, int, int &);
+	void moveBalls(TheBar& bar, buildStage &stage, int, int&);
 	unsigned int newBall();
 	unsigned int aliveBalls();
 	void drawBalls(sf::RenderWindow&);
