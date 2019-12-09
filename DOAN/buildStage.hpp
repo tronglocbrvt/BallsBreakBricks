@@ -18,17 +18,28 @@ class buildStage
 {
 private: 
 	std::vector<Object*> listObject;
+    float timeLimit;
+    int maxScore;
     
     int mSignBricks[_NUMBER_OF_BRICKS_PER_LINE_][_NUMBER_OF_BRICKS_PER_LINE_];
     
     Brick* mStage[_NUMBER_OF_BRICKS_PER_LINE_][_NUMBER_OF_BRICKS_PER_LINE_];
+    
+//    rewardItem *mItem;
+    
+    sf::Clock clock;
+    sf::Time time;
+    
 public:
     buildStage(int stage);
     
     //void breakTheBrick(const sf::FloatRect& ballBound);
-    
+    void startClock();
     void draw(sf::RenderWindow &window);
 	Brick* getmStage(int i, int j);
+    float getTimeLimit();
+    float getTimePlaying();
+    int getMaxScore();
     friend class ThePong;
 };
 

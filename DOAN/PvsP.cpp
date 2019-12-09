@@ -1,5 +1,48 @@
 #include "PvsP.hpp"
 
+
+bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text){
+    bool cont = true;
+    // start ball when press space
+    while (window.isOpen() && cont) {
+        sf::Event event;
+        // bắt sự kiện
+        
+        while (window.pollEvent(event) && cont) {
+            switch (event.type) {
+            case sf::Event::KeyPressed:         // sự kiện nhấn phím
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                {
+                    cont = false;
+                    ball.resetPong(0);
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                {
+                    return false;
+                }
+                break;
+            case sf::Event::Closed:             // sự kiện đóng cửa sổ
+                window.close();
+                break;
+            default:
+                continue;
+            }
+        }
+        
+        // in ra màn hình game
+        window.clear();
+        
+        bg.draw(window);
+        bar.draw(window);
+        ball.draw(window);
+        stage.draw(window);
+        text.drawText(window);
+        
+        window.display();
+    }
+    return true;
+}
+
 int play(sf::RenderWindow& window) {
 
     // khởi tạo sân, bóng, 2 thanh
@@ -25,12 +68,22 @@ int play(sf::RenderWindow& window) {
     float score = 0;
 
     // khởi động chuỗi thông báo và tên
-	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + 50, _HEIGH_TABLE_GAME_ - 2 * _DIS_FROM_TOP_);
+	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
+    textshow.scale(0.8);
+    textshow.setOriginToMidle();
+    textshow.setColor(4, 74, 194);
 
-
+//    EndGame(window, stage, bar.getScores());
+    
+    if (!pauseGame(window, ball, bg, bar, stage, textshow)) {
+        return 0;
+    }
 	// start game
+    
+    stage.startClock();
 	while (window.isOpen()) {
 		sf::Event event;
+        
         // bắt sự kiện
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
@@ -72,8 +125,19 @@ int play(sf::RenderWindow& window) {
 //		}
 		/*std::thread thread1(&ThePong::moveBall, &ball, std::ref(posBar), std::ref(stage));
 		std::thread thread2(&ThePong::moveBall, &ball1, std::ref(posBar), std::ref(stage));*/
-        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
+        short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
         
+        if (staticOfBall == 1) {    // crashed into bottom line
+            if (!pauseGame(window, ball, bg, bar, stage, textshow)) {  // esc game
+                return 0;
+            }
+            else {
+                if (1) {        // hết mạng để chơi
+                    // do something
+                    return EndGame(window, stage, (bar.getScores() == stage.getMaxScore() ? bar.getScores() : 0) );
+                }
+            }
+        }
         
         bar.setScores(score);
         bg.setScore(score);
@@ -104,3 +168,71 @@ int play(sf::RenderWindow& window) {
 	return 0;
 }
 
+int EndGame(sf::RenderWindow& window, buildStage &stage, int score){
+    
+    sf::Texture imgTx;
+    imgTx.loadFromFile("res/img/endgame.png");
+    sf::Sprite imgSpr;
+    imgSpr.setTexture(imgTx);
+    imgSpr.scale(_WIDTH_SCREEN * 1.0 / imgTx.getSize().x, _HEIGH_SCREEN * 1.0 / imgTx.getSize().y);
+    
+    window.clear();
+    
+    const float sizeText = 0.06 * _HEIGH_SCREEN; // 6%
+    const float disToBelowText = sizeText * 0.5;
+    
+    TextShow tScore(std::string("Score:           ") + std::to_string(score), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, (_HEIGH_SCREEN - 4 * (sizeText + disToBelowText)) / 2);
+    tScore.setSize(sizeText);
+    tScore.setOriginToTopHead();
+    tScore.setColor(148, 235, 19);
+    
+    float time;
+    
+    time = stage.getTimePlaying();
+    TextShow tTimePlay(std::string("Time Playing: ") + std::to_string(int(time / 60)) + std::string("' ") + std::string(std::to_string(time - int(time / 60) * 60)).substr(0,4) + std::string("''"), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tScore.getBottom() + disToBelowText);
+    tTimePlay.setSize(sizeText);
+    tTimePlay.setOriginToTopHead();
+    tTimePlay.setColor(148, 235, 19);
+    
+    time = stage.getTimeLimit();
+    TextShow tTimeLimit(std::string("Time Limited:   ") + std::to_string(int(time / 60)) + std::string("' ") + std::string(std::to_string(time - int(time / 60) * 60)).substr(0,4) + std::string("''"), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimePlay.getBottom() + disToBelowText);
+    tTimeLimit.setSize(sizeText);
+    tTimeLimit.setOriginToTopHead();
+    tTimeLimit.setColor(148, 235, 19);
+    
+    std::cout << (1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ) << std::endl;
+    
+    TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string(score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ))).substr(0,1), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
+    tScoreAtEnd.setSize(sizeText);
+    tScoreAtEnd.setOriginToTopHead();
+    tScoreAtEnd.setColor(148, 235, 19);
+    
+    while (window.isOpen()) {
+        sf::Event event;
+        // bắt sự kiện
+        
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+            case sf::Event::KeyPressed:         // sự kiện nhấn phím
+            case sf::Event::Closed:             // sự kiện đóng cửa sổ
+                window.close();
+                break;
+            default:
+                continue;
+            }
+        }
+        
+        // in ra màn hình game
+        window.clear();
+        
+        window.draw(imgSpr);
+        tScore.drawText(window);
+        tTimePlay.drawText(window);
+        tTimeLimit.drawText(window);
+        tScoreAtEnd.drawText(window);
+        
+        window.display();
+    }
+    
+    return 0;
+}

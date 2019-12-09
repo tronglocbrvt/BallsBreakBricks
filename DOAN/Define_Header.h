@@ -76,4 +76,11 @@ enum MyColor{
     Green
 };
 
+
+enum TYPE_EFFECT_REWARD{
+    EFFECT_ON_BALL,
+    EFFECT_ON_BAR,
+    EFFECT_ON_SCORE,
+};
+
 #endif /* Define_Header_h */

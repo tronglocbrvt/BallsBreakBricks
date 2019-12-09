@@ -2,7 +2,6 @@
 #define SpecBricks_hpp
 
 #include "Brick.hpp"
-#include "rewardItem.h"
 #include "DataPos.hpp"
 #include "Ball.hpp"
 #include <ctime>

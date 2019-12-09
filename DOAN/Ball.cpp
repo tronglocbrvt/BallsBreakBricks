@@ -288,7 +288,9 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
 //						   SpecBricks special;
 //						   special.dropGift(*this, bar, positionBar); // ko ổn
 //					   }
+                       delete stage.mStage[i][j];
                    }
+                   
                }
                           
            }
@@ -305,9 +307,11 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
     }
     
     if (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)) {
+        stage.time += stage.clock.getElapsedTime();
+        stage.clock.~Clock();
         this->velocityX = 0;
         this->velocityY = 0;
-        return -1;
+        return 1; // crashed
     }
 
     this->imgSpr.setPosition(this->posX, this->posY);

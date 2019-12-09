@@ -2,6 +2,10 @@
 
 
 buildStage::buildStage(int stage) {
+    
+    this->time = sf::seconds(0.01f);
+    this->maxScore = 0;
+    
 	std::fstream fs;
     std::stringstream stream;
     stream << "res/stage/Stage" << stage << ".txt";
@@ -12,6 +16,9 @@ buildStage::buildStage(int stage) {
 
 	std::string data;
     
+    fs >> this->timeLimit;
+    fs >> this->timeLimit;
+    this->timeLimit *= 60;
     getline(fs, data); // get stage
 
     for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
@@ -28,6 +35,7 @@ buildStage::buildStage(int stage) {
                 case 2:
                 case 3:
                     this->mStage[i][j] = new NormalBrick(this->mSignBricks[i][j]);
+                    this->maxScore += this->mSignBricks[i][j];
                     break;
                 case -1:    // rock
                     this->mStage[i][j] = new RockBrick();
@@ -52,6 +60,10 @@ buildStage::buildStage(int stage) {
 //    }
 }
 
+void buildStage::startClock(){
+    this->clock.restart();
+}
+
 void buildStage::draw(sf::RenderWindow &window){
     for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
 		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
@@ -67,6 +79,15 @@ void buildStage::draw(sf::RenderWindow &window){
 //    br.draw(window);
 }
 
+float buildStage::getTimeLimit(){
+    return this->timeLimit;
+}
+float buildStage::getTimePlaying(){
+    return this->time.asSeconds();
+}
+int buildStage::getMaxScore(){
+    return this->maxScore;
+}
 Brick* buildStage::getmStage(int i, int j)
 {
 	return mStage[i][j];

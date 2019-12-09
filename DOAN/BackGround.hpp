@@ -58,6 +58,9 @@ private:
 //    TextShow point2;
 //    TextShow point3;
     
+    sf::Time time;
+    sf::Clock clock;
+    
 public:
     TableInf();
     virtual ~TableInf();
@@ -68,8 +71,6 @@ public:
 
     void setScore(int score);
     
-    sf::Time time;
-    sf::Clock clock;
 };
 
 class BackGround {      // class khu vực tổng, quản lý

@@ -29,9 +29,9 @@ doubleScore::~doubleScore()
 {
 }
 
-void doubleScore::runItem(buildStage stage, float& score, int i, int j)
+void doubleScore::runItem(float& score, int i, int j)
 {
-	score += 2 * stage.getmStage(i, j)->getScore();
+//	score += 2 * stage.getmStage(i, j)->getScore();
 }
 
 divideScore::divideScore()
@@ -49,9 +49,9 @@ divideScore::~divideScore()
 {
 }
 
-void divideScore::runItem(buildStage stage, float& score, int i, int j)
+void divideScore::runItem(float& score, int i, int j)
 {
-	score += 0.5 * stage.getmStage(i, j)->getScore();
+//	score += 0.5 * stage.getmStage(i, j)->getScore();
 }
 
 

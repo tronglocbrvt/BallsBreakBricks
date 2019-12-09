@@ -1,8 +1,9 @@
-﻿#ifndef rewardItem_hpp
+#ifndef rewardItem_hpp
 #define rewardItem_hpp
 
 #include "Ball.hpp"
 #include "Paddle.hpp"
+
 
 class ThePong;
 class TheBar;
@@ -21,14 +22,18 @@ public:
 
 };
 
+//===============================================================
+
 class doubleScore :public rewardItem
 {
 public:
 	doubleScore();
 	virtual ~doubleScore();
 
-	void runItem(buildStage stage, float &score, int i, int j);
+	void runItem(float &score, int i, int j);
 };
+
+//===============================================================
 
 class divideScore :public rewardItem
 {
@@ -36,8 +41,10 @@ public:
 	divideScore();
 	virtual ~divideScore();
 
-	void runItem(buildStage stage, float& score, int i, int j);
+	void runItem(float& score, int i, int j);
 };
+
+//===============================================================
 
 class fireBall :public rewardItem
 {
@@ -48,6 +55,7 @@ public:
 	void runItem();
 };
 
+//===============================================================
 
 class widenBar :public rewardItem
 {
@@ -57,6 +65,8 @@ public:
 
 	void runItem(TheBar& bar);
 };
+
+//===============================================================
 
 class zoomBall :public rewardItem
 {
