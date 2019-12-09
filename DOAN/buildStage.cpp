@@ -67,6 +67,11 @@ void buildStage::draw(sf::RenderWindow &window){
 //    br.draw(window);
 }
 
+Brick* buildStage::getmStage(int i, int j)
+{
+	return mStage[i][j];
+}
+
 
 
 

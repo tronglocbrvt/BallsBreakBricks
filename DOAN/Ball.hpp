@@ -62,7 +62,7 @@ public:
     void resetPong(short toward); //     -1 - left ;     0 - random ;    1 - right
 
     void scale(float width, float heigh);
-    short moveBall(Pos positionBar, buildStage &stage, int &score);
+    short moveBall(Pos positionBar, buildStage &stage, float &score);
 
     bool checkClashToBar(Pos position);
     void normalizePosX();

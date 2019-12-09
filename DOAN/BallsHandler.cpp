@@ -8,7 +8,7 @@ BallsHandler::~BallsHandler()
 {
 }
 
-void BallsHandler::moveBalls(TheBar& bar, buildStage &stage, int i, int &score)
+void BallsHandler::moveBalls(TheBar& bar, buildStage &stage, int i, float &score)
 {
 	//for (int i = 0; i < aliveBalls(); i++)
 	//{

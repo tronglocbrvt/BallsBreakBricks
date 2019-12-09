@@ -171,7 +171,7 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
     this->imgSpr.scale(width, heigh);
 }
-short ThePong::moveBall(Pos positionBar, buildStage &stage, int &score) {
+short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
 
     float pastPosX = this->posX;
     float pastPosY = this->posY;

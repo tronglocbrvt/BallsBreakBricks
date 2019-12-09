@@ -28,7 +28,7 @@ public:
     //void breakTheBrick(const sf::FloatRect& ballBound);
     
     void draw(sf::RenderWindow &window);
-
+	Brick* getmStage(int i, int j);
     friend class ThePong;
 };
 

@@ -6,6 +6,7 @@
 
 class ThePong;
 class TheBar;
+class buildStage;
 class rewardItem
 {
 protected:
@@ -26,7 +27,7 @@ public:
 	doubleScore();
 	virtual ~doubleScore();
 
-	void runItem(buildStage stage, int &score);
+	void runItem(buildStage stage, float &score, int i, int j);
 };
 
 class divideScore :public rewardItem
@@ -35,7 +36,7 @@ public:
 	divideScore();
 	virtual ~divideScore();
 
-	void runItem();
+	void runItem(buildStage stage, float& score, int i, int j);
 };
 
 class fireBall :public rewardItem

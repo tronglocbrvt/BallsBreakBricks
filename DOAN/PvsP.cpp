@@ -22,7 +22,7 @@ int play(sf::RenderWindow& window) {
     TheBar bar;
 
     buildStage stage(1);
-    int score = 0;
+    float score = 0;
 
     // khởi động chuỗi thông báo và tên
 	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + 50, _HEIGH_TABLE_GAME_ - 2 * _DIS_FROM_TOP_);
