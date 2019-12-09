@@ -64,8 +64,8 @@ int play(sf::RenderWindow& window) {
 //		int m, n;
 //		for (int i = 0; i < Balls.size(); i++)
 //		{
-//			auto p = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage));
-//			auto p1 = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage));
+//			auto p = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage), std::ref(bar));
+//			auto p1 = std::async(&ThePong::moveBall, &Balls[i], std::ref(posBar), std::ref(stage), std::ref(bar));
 //			m = p.get();
 //			n = p1.get();
 //			if ((m == -1 || n == -1) && (Balls.size() > 1)) // chết bóng và số bóng > 1 ->xóa bóng
@@ -75,7 +75,7 @@ int play(sf::RenderWindow& window) {
 //		}
 		/*std::thread thread1(&ThePong::moveBall, &ball, std::ref(posBar), std::ref(stage));
 		std::thread thread2(&ThePong::moveBall, &ball1, std::ref(posBar), std::ref(stage));*/
-        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
+        ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, bar);
         
         
         bar.setScores(score);

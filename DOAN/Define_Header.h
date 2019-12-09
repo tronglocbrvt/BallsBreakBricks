@@ -31,8 +31,6 @@
 #define _VELOCITY_X_BAR_ 0.5
 // tốc độ thay đổi thay trượt
 #define _VELOCITY_Y_BAR_STEP_ 0.1
-// vận tốc bóng nhanh nhất
-#define _MAX_VELOCITY_ 10
 // tốc độ thay đổi vận tốc
 #define _ACCELERATION_ 1.1
 #define _ACCELERATION_BAR_ 5

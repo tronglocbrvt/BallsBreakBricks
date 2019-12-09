@@ -171,7 +171,7 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
     this->imgSpr.scale(width, heigh);
 }
-short ThePong::moveBall(Pos positionBar, buildStage &stage, int &score) {
+short ThePong::moveBall(Pos positionBar, buildStage &stage, int &score, TheBar& bar) {
 
     float pastPosX = this->posX;
     float pastPosY = this->posY;
@@ -283,6 +283,11 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, int &score) {
                    score += stage.mStage[i][j]->getScore();
                    if (stage.mSignBricks[i][j] != -1) {
                        stage.mSignBricks[i][j] = 0;
+					   if (stage.mSignBricks[i][j] == 9)
+					   {
+						   SpecBricks special;
+						   special.dropGift(*this, bar, positionBar); // ko ổn
+					   }
                    }
                }
                           
