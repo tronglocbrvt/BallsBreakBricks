@@ -24,9 +24,9 @@
 #define sqr(x) x * x
 
 // vận tốc bóng theo x
-#define _VELOCITY_X_ 0.3
+#define _VELOCITY_X_ 0.2
 // vận tốc bóng theo y
-#define _VELOCITY_Y_ 0.3
+#define _VELOCITY_Y_ 0.2
 // vận tốc thanh trượt
 #define _VELOCITY_X_BAR_ 0.5
 // tốc độ thay đổi thay trượt
@@ -34,7 +34,7 @@
 // vận tốc bóng nhanh nhất
 #define _MAX_VELOCITY_ 10
 // tốc độ thay đổi vận tốc
-#define _ACCELERATION_ 1.1
+#define _ACCELERATION_ 1.01
 #define _ACCELERATION_BAR_ 5
 // cạnh quả bóng
 #define _SIZE_PONG_ 17

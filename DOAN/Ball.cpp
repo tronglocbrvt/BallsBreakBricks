@@ -23,20 +23,33 @@ ThePong::ThePong() {
     // khởi động vị trí quả bóng tạo vị trí chính giữa màn hình chơi
     this->resetPong(0);
     
+//    this->velocityX = -0.3;
+//    this->velocityY = 0.2;
+    
+    /*
+     
+     
+     
+     */
+    
     // điều chỉnh vị trí
     this->imgSpr.setPosition(this->posX - this->posXend * 1.0 / 2, this->posY);
     
     this->point1.set(".", std::string("HACKED.ttf"), 0, 0);
 //    this->point1.scale(0.5);
+    this->point1.setColor(15, 15, 15);
 
     this->point2.set(".", std::string("HACKED.ttf"), 0, 0);
 //    this->point2.scale(0.2);
+    this->point2.setColor(240, 40, 115);
     
     this->point3.set(".", std::string("HACKED.ttf"), 0, 0);
 //    this->point3.scale(0.2);
+    this->point3.setColor(80, 180, 80);
     
     this->point4.set(".", std::string("HACKED.ttf"), 0, 0);
 //    this->point4.scale(0.2);
+    this->point4.setColor(015, 105, 215);
     
     for (int i=0; i<9; i++) {
         this->pointX[i].set(".", std::string("HACKED.ttf"), 0, 0);
@@ -236,13 +249,11 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage) {
         }
         
         int count = 0;
-        bool conti = true;
         bool crashed = false;
         sf::FloatRect presentBall;
         sf::FloatRect rectBrick;
-        for (unsigned short i = startY; conti && i <= toY; i++){
+        for (unsigned short i = startY; i <= toY; i++){
            for (unsigned short j = startX; j <= toX; j++){
-//               std::cout << i << " - " << j << std::endl;
                // làm cho zui thôi
                if (stage.mSignBricks[i][j] != 0) {
                    this->pointX[count++].setPosition(stage.mStage[i][j]->getBound().left, stage.mStage[i][j]->getBound().top);
@@ -259,25 +270,12 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage) {
                        presentBall = sf::FloatRect(this->posX, this->posY, this->posXend, this->posYend);
                                          
                        ve = returnPosOnBorder(rectBrick, presentBall, pastBall);
-                      
+                       
                        this->point4.setPosition(ve.x, ve.y);
-                       
-                       if (this->velocityY != 0) {
-                           this->posX = ve.x;
-                           this->posY = ve.y;
-                       }
-                       
-//                       this->posX = ve.x;
-//                       this->posY = ve.y;
-                      
-                      //==================================
+                       this->posX = ve.x;
+                       this->posY = ve.y;
                       
                    }
-                   
-                   
-                   std::cout << "------------------------------" << std::endl;
-                   std::cout << ve.x << " - " << ve.y << std::endl;
-                   std::cout << "------------------------------" << std::endl;
                    
                    crashed = true;
                    
@@ -285,25 +283,10 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage) {
                    if (stage.mSignBricks[i][j] != -1) {
                        stage.mSignBricks[i][j] = 0;
                    }
-                   conti = false;
-//                   break;
                }
                           
            }
 
-        }
-        
-        // cập nhật vận tốc trên trục nếu có thay đổi
-        if (crashed) {
-            if ((this->posX > rectBrick.left + rectBrick.width) || (this->posX + presentBall.width < rectBrick.left)) {
-                this->velocityY = 0;
-                this->velocityX = 0;
-                
-//                this->velocityX *= -1;      // chạm biên trái/phải của gạch
-            }
-            else{
-                this->velocityY *= -1;      // chạm biên trên/dưới của gạch
-            }
         }
         
     }
@@ -372,16 +355,39 @@ sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect prese
     
     if (presentBall.top != pastBall.top) {
         if (presentBall.top - pastBall.top > 0) {          // go down
-            vect.x = pastBall.left + (presentBall.left - pastBall.left) * (1 - (brick.top - presentBall.height - pastBall.top) / (presentBall.top - pastBall.top));
             vect.y = brick.top - presentBall.height;
         }
         else                                                // go up
         {
-            vect.x = pastBall.left + (presentBall.left - pastBall.left) * (1 - (brick.top + brick.height - pastBall.top) / (presentBall.top - pastBall.top));
             vect.y = brick.top + brick.height;
         }
+        
+        vect.x = pastBall.left + (presentBall.left - pastBall.left) * (vect.y - pastBall.top) / (presentBall.top - pastBall.top);
+        
+        if ((vect.x + presentBall.width < brick.left) || (vect.x > brick.left + brick.width )) {
+            // chạm vào biên dọc của thanh
+            if (presentBall.left > pastBall.left) {         // go right
+                vect.x = brick.left - presentBall.width;
+            }
+            else                                            // go left
+            {
+                vect.x = brick.left + brick.width;
+            }
+            
+            vect.y = pastBall.top + (presentBall.top - pastBall.top) * (vect.x - pastBall.left) / (presentBall.left - pastBall.left);
+            
+            this->velocityX *= -1;
+        }
+        else
+        {
+            this->velocityY *= -1;
+        }
+        
+        this->point1.setPosition(pastBall.left, pastBall.top);
+        this->point2.setPosition(presentBall.left, presentBall.top);
+        this->point3.setPosition(brick.left, brick.top);
+        
     }
-    else std::cout << "========================" << std::endl;
     
     return vect;
 }
