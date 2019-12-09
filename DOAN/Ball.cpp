@@ -282,7 +282,12 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
                    stage.mStage[i][j]->destroy();
                    score += stage.mStage[i][j]->getScore();
                    if (stage.mSignBricks[i][j] != -1) {
-					   stage.mSignBricks[i][j] = 0;
+                       stage.mSignBricks[i][j] = 0;
+//					   if (stage.mSignBricks[i][j] == 9)
+//					   {
+//						   SpecBricks special;
+//						   special.dropGift(*this, bar, positionBar); // ko ổn
+//					   }
                    }
                }
                           

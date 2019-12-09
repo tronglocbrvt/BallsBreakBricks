@@ -1,4 +1,4 @@
-﻿#include "SpecBricks.hpp"
+#include "SpecBricks.hpp"
 
 
 SpecBricks::SpecBricks(){
@@ -66,30 +66,30 @@ void SpecBricks::destroy()
 //	}
 //}
 
-//bool SpecBricks::checkClashBar(Pos position)
-//{
-//	float posY = imgSpecial.getPosition().y;
-//	float posYend = textSpecial.getSize().y;
-//	float posX = imgSpecial.getPosition().x;
-//	float posXend = textSpecial.getSize().x;
-//	if (posY + posYend > position.y) {
-//		// phần dưới trái của bóng chạm thanh
-//		if ((position.x <= posX) && (posX <= position.x + position.endX))
-//		{
-//			return true;
-//		}
-//
-//		else if ((position.x <= posX + posXend) && (posX + posXend <= position.x + position.endX))
-//		{
-//			return true;
-//		}
-//		// phần dưới phải của bóng chạm thanh
-//	}
-//
-//	return false;
-//}
-//
-//void SpecBricks::drawGift(sf::RenderWindow& window)
-//{
-//	window.draw(imgSpecial);
-//}
+bool SpecBricks::checkClashBar(Pos position)
+{
+	float posY = imgSpecial.getPosition().y;
+	float posYend = textSpecial.getSize().y;
+	float posX = imgSpecial.getPosition().x;
+	float posXend = textSpecial.getSize().x;
+	if (posY + posYend > position.y) {
+		// phần dưới trái của bóng chạm thanh
+		if ((position.x <= posX) && (posX <= position.x + position.endX))
+		{
+			return true;
+		}
+
+		else if ((position.x <= posX + posXend) && (posX + posXend <= position.x + position.endX))
+		{
+			return true;
+		}
+		// phần dưới phải của bóng chạm thanh
+	}
+
+	return false;
+}
+
+void SpecBricks::drawGift(sf::RenderWindow& window)
+{
+	window.draw(imgSpecial);
+}
