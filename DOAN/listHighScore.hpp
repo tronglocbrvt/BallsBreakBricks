@@ -19,8 +19,10 @@ public:
 	listHighScore(float, float);
 	virtual ~listHighScore();
 
+	void addHighScore(highScore A);
 	int readFile();
-	void drawMenu(sf::RenderWindow& window, int levelCur);
+	void compareScore(highScore A);
+	void drawMenu(sf::RenderWindow& window);
 	int updateFile();
 };
 

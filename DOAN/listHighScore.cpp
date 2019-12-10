@@ -14,12 +14,14 @@ listHighScore::listHighScore(float width, float height):Display(width, height)
 	}
 
 	textHead.setFont(fontHead);
-	textHead.setFillColor(sf::Color::Magenta);
+	textHead.setFillColor(sf::Color::Cyan);
 	textHead.setString("HIGH SCORE");
 	textHead.setStyle(sf::Text::Underlined);
 	textHead.setCharacterSize(50);
 
-	setPositionText(textHead, 210);
+	setPositionText(textHead, 140);
+
+	readFile();
 }
 
 listHighScore::~listHighScore()
@@ -49,7 +51,7 @@ int listHighScore::readFile()
 	fi.seekg(0); // di chuyển con trỏ về đầu file
 	while (!fi.eof())
 	{
-		highScore A;
+		highScore A(0,1);
 		
 		fi >> A.level;
 		fi >> A.score;
@@ -66,50 +68,19 @@ int listHighScore::readFile()
 	return 1;
 }
 
-void listHighScore::drawMenu(sf::RenderWindow& window, int levelCur)
+void listHighScore::compareScore(highScore A)
 {
-	// read file highScore.txt
-	std::ifstream fi;
-
-	fi.open("res/file/highScore.txt");
-	if (fi.fail())
+	if (highScores[A.level - 1] < A)
 	{
-		std::cout << "Read file failed\n";
-		return;
+		highScores[A.level - 1] = A;
+
+		updateFile(); // ghi lại file 
 	}
+}
 
-	fi.seekg(0, std::ios::end); // di chuyển con trỏ từ đầu file đến cuối file
-	if (fi.tellg() == 0) // nếu số lượng đọc được là 0
-	{
-		return; // empty file 
-	}
-
-	fi.seekg(0); // di chuyển con trỏ về đầu file
-
-	highScores.clear(); // clear lại vector
-
-	// read high score vào file và thêm vào vector
-	highScore A;
-	while (fi >> A.level)
-	{
-		fi >> A.score;
-		fi >> A.date;
-		fi >> A.month;
-		fi >> A.year;
-		fi >> A.hour;
-		fi >> A.minute;
-		fi >> A.timeNow;
-		addHighScore(A);
-	}
-
-	fi.close();
-
-	for (int i = 0l i)
-	if (levelCur == A.level)
-
-	updateFile(); // ghi lại file 
-
-	while (window.isOpen()) {
+void listHighScore::drawMenu(sf::RenderWindow& window)
+{
+		while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			switch (event.type) {
@@ -129,7 +100,7 @@ void listHighScore::drawMenu(sf::RenderWindow& window, int levelCur)
 			{ 
 				highScores[i].textHigh.setFont(highScores[i].font);
 				highScores[i].textHigh.setFillColor(sf::Color::White);
-				highScores[i].name = std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
+				highScores[i].name = "Level " + std::to_string(highScores[i].level) +"\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
 				highScores[i].textHigh.setString(highScores[i].name);
 				highScores[i].textHigh.setStyle(sf::Text::Regular);
 				highScores[i].textHigh.setCharacterSize(40);
