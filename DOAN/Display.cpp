@@ -13,10 +13,10 @@ Display::Display(float width, float height)
 	}
 
 	bgMenu.setTexture(backgroundMenu);
-	bgMenu.scale(0.8, 0.8);
+	bgMenu.scale(0.8, 0.7);
 	bgMenu.setPosition(0, 0);
 
-	// font Game Name: PONG GAME
+	// font Game Name: BALLS BREAK BRICKS
 	if (!fontGameName.loadFromFile("res/fnt/venus.ttf"))
 	{
 		std::cout << "Load font failed" << std::endl;
@@ -24,7 +24,7 @@ Display::Display(float width, float height)
 
 	// set gameName
 	gameName.setFont(fontGameName);
-	gameName.setFillColor(sf::Color::Yellow);
+	gameName.setFillColor(sf::Color::Green);
 	gameName.setString("BALLS BREAK BRICKS");
 	gameName.setStyle(sf::Text::Bold);
 	gameName.setCharacterSize(50);
@@ -64,5 +64,5 @@ void Display::setPositionText(sf::Text& text, float height)
 void Display::drawMenu(sf::RenderWindow& window)
 {
 	window.draw(bgMenu); // vẽ background menu
-	window.draw(gameName); // vẽ tiêu đề "PONG GAME"
+	window.draw(gameName); // vẽ tiêu đề 
 }

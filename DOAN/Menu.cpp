@@ -1,4 +1,4 @@
-﻿#include "Menu.h"
+﻿#include "Menu.hpp"
 //#include "modeGame.hpp"
 
 Menu::Menu()
@@ -47,7 +47,7 @@ void Menu::setText(int select, std::string nameOption)
 	// set thông số đồ họa cho text
 	text[select].setFont(font);
 	text[select].setCharacterSize(40);
-	text[select].setFillColor(sf::Color::Green);
+	text[select].setFillColor(sf::Color::Yellow);
 	text[select].setStyle(sf::Text::Bold);
 	text[select].setString(nameOption);
 }
@@ -65,7 +65,7 @@ void Menu::moveUp() // nhấn phím UP
 {
 	if (selectOption - 1 >= 0) // do đi lên nên kiểm tra >= 0
 	{
-		text[selectOption].setFillColor(sf::Color::Green);
+		text[selectOption].setFillColor(sf::Color::Yellow);
 		text[selectOption].setCharacterSize(40);
 
 		// update position because changing size
@@ -85,7 +85,7 @@ void Menu::moveDown() // nhấn phím DOWN
 {
 	if (selectOption + 1 < _MAX_CHOICE_MENU) // do đi xuống nên kiểm tra < _MAX_CHOICE_MENU
 	{
-		text[selectOption].setFillColor(sf::Color::Green);
+		text[selectOption].setFillColor(sf::Color::Yellow);
 		text[selectOption].setCharacterSize(40);
 
 		// update position because changing size
@@ -112,10 +112,10 @@ void Menu::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 		selectOption = 0;
 
 		text[0].setFillColor(sf::Color::White);
-		text[1].setFillColor(sf::Color::Green);
-		text[2].setFillColor(sf::Color::Green);
-		text[3].setFillColor(sf::Color::Green);
-		text[4].setFillColor(sf::Color::Green);
+		text[1].setFillColor(sf::Color::Yellow);
+		text[2].setFillColor(sf::Color::Yellow);
+		text[3].setFillColor(sf::Color::Yellow);
+		text[4].setFillColor(sf::Color::Yellow);
 
 		text[0].setCharacterSize(60);
 		text[1].setCharacterSize(40);
@@ -133,11 +133,11 @@ void Menu::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 
 	else if (clickMouse(text[1], windows))
 	{
-		text[0].setFillColor(sf::Color::Green);
+		text[0].setFillColor(sf::Color::Yellow);
 		text[1].setFillColor(sf::Color::White);
-		text[2].setFillColor(sf::Color::Green);
-		text[3].setFillColor(sf::Color::Green);
-		text[4].setFillColor(sf::Color::Green);
+		text[2].setFillColor(sf::Color::Yellow);
+		text[3].setFillColor(sf::Color::Yellow);
+		text[4].setFillColor(sf::Color::Yellow);
 
 		text[0].setCharacterSize(40);
 		text[1].setCharacterSize(60);
@@ -157,11 +157,11 @@ void Menu::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 
 	else if (clickMouse(text[2], windows))
 	{
-		text[0].setFillColor(sf::Color::Green);
-		text[1].setFillColor(sf::Color::Green);
+		text[0].setFillColor(sf::Color::Yellow);
+		text[1].setFillColor(sf::Color::Yellow);
 		text[2].setFillColor(sf::Color::White);
-		text[3].setFillColor(sf::Color::Green);
-		text[4].setFillColor(sf::Color::Green);
+		text[3].setFillColor(sf::Color::Yellow);
+		text[4].setFillColor(sf::Color::Yellow);
 
 		text[0].setCharacterSize(40);
 		text[1].setCharacterSize(40);
@@ -182,11 +182,11 @@ void Menu::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 
 	else if (clickMouse(text[3], windows))
 	{
-		text[0].setFillColor(sf::Color::Green);
-		text[1].setFillColor(sf::Color::Green);
-		text[2].setFillColor(sf::Color::Green);
+		text[0].setFillColor(sf::Color::Yellow);
+		text[1].setFillColor(sf::Color::Yellow);
+		text[2].setFillColor(sf::Color::Yellow);
 		text[3].setFillColor(sf::Color::White);
-		text[4].setFillColor(sf::Color::Green);
+		text[4].setFillColor(sf::Color::Yellow);
 
 		text[0].setCharacterSize(40);
 		text[1].setCharacterSize(40);
@@ -206,10 +206,10 @@ void Menu::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 
 	else if (clickMouse(text[4], windows))
 	{
-		text[0].setFillColor(sf::Color::Green);
-		text[1].setFillColor(sf::Color::Green);
-		text[2].setFillColor(sf::Color::Green);
-		text[3].setFillColor(sf::Color::Green);
+		text[0].setFillColor(sf::Color::Yellow);
+		text[1].setFillColor(sf::Color::Yellow);
+		text[2].setFillColor(sf::Color::Yellow);
+		text[3].setFillColor(sf::Color::Yellow);
 		text[4].setFillColor(sf::Color::White);
 
 		text[0].setCharacterSize(40);
@@ -229,33 +229,33 @@ void Menu::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 	}
 }
 
-//void Menu::mouseSelect(sf::RenderWindow& window) // bắt sự kiện click chuột
-//{
-//	if (clickMouse(text[0], window)) // vào chọn chế độ chơi
-//	{
-//		modeGame mode(window.getSize().x, window.getSize().y);
-//		mode.runModeGame(window);
-//	}
-//	else if (clickMouse(text[1], window)) // vào chức năng tiếp tục chơi
-//	{
-//		continueGame cont;
-//		cont.runContinueGame(window);
-//	}
-//	else if (clickMouse(text[2], window)) // hiện bảng điểm cao
-//	{
-//		listHighScore list(window.getSize().x, window.getSize().y);
-//		list.drawMenu(window);
-//	}
-//	else if (clickMouse(text[3], window)) // hiện bảng giúp đỡ
-//	{
-//		helpMenu help(window.getSize().x, window.getSize().y);
-//		help.drawMenu(window);
-//	}
-//	else if (clickMouse(text[4], window)) // thoát game
-//	{
-//		window.close();
-//	}
-//}
+void Menu::mouseSelect(sf::RenderWindow& window) // bắt sự kiện click chuột
+{
+	if (clickMouse(text[0], window)) // vào chọn chế độ chơi
+	{
+		modeGame mode(window.getSize().x, window.getSize().y);
+		mode.runModeGame(window);
+	}
+	else if (clickMouse(text[1], window)) // vào chức năng tiếp tục chơi
+	{
+		/*continueGame cont;
+		cont.runContinueGame(window);*/
+	}
+	else if (clickMouse(text[2], window)) // hiện bảng điểm cao
+	{
+		listHighScore list(window.getSize().x, window.getSize().y);
+		list.drawMenu(window);
+	}
+	else if (clickMouse(text[3], window)) // hiện bảng giúp đỡ
+	{
+		helpMenu help(window.getSize().x, window.getSize().y);
+		help.drawMenu(window);
+	}
+	else if (clickMouse(text[4], window)) // thoát game
+	{
+		window.close();
+	}
+}
 
 int Menu::GetPressedItem() // lấy giá trị selectOption
 {

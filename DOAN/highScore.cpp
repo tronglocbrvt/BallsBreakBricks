@@ -1,13 +1,13 @@
 ﻿#include "highScore.hpp"
 
-highScore::highScore(int levelCur)
+highScore::highScore(float point, int levelCur)
 {
 	level = levelCur;
 	// lấy thời gian hiện tại;
 	timeNow = time(0);
 	tm* ltm = localtime(&timeNow);
 
-	score = 0; // default điểm bằng 0
+	score = point; 
 	date = ltm->tm_mday;
 	month = 1 + ltm->tm_mon;
 	year = 1900 + ltm->tm_year;

@@ -2,12 +2,13 @@
 #define Menu_hpp
 #define _MAX_CHOICE_MENU 5
 
-//#include "Ball.hpp"
-//#include "listHighScore.hpp"
+#include "Ball.hpp"
+#include "listHighScore.hpp"
 //#include "continueGame.hpp"
-//#include "Help.hpp"
+#include "Help.hpp"
 #include "PvsP.hpp"
 #include "Display.hpp"
+#include "modeGame.hpp"
 #include <string>
 
 class Menu :public Display

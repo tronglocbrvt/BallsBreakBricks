@@ -13,7 +13,7 @@ private:
 	sf::Font font;
 
 	int level;
-	int score;
+	float score;
 	int date;
 	int month;
 	int year;
@@ -26,7 +26,7 @@ private:
 	time_t timeNow;
 
 public:
-	highScore();
+	highScore(float, int);
 	virtual ~highScore();
 
 	void setPositionText(sf::Text&, float);

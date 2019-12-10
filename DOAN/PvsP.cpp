@@ -43,10 +43,10 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
     return true;
 }
 
-int play(sf::RenderWindow& window) {
+int play(sf::RenderWindow& window, int levelCur) {
 
     // khởi tạo sân, bóng, 2 thanh
-	BackGround bg(1);
+	BackGround bg(levelCur);
 	ThePong ball;
 //    ball.setPosX(225);
 //    ball.setPosY(150);
@@ -64,7 +64,7 @@ int play(sf::RenderWindow& window) {
 //	balls.getBalls().at(1).setPosY(400);
     TheBar bar;
 
-    buildStage stage(1);
+    buildStage stage(levelCur);
     float score = 0;
 
     // khởi động chuỗi thông báo và tên
@@ -134,7 +134,7 @@ int play(sf::RenderWindow& window) {
             else {
                 if (1) {        // hết mạng để chơi
                     // do something
-                    return EndGame(window, stage, (bar.getScores() == stage.getMaxScore() ? bar.getScores() : 0) );
+                    return EndGame(window, stage, (bar.getScores() == stage.getMaxScore() ? bar.getScores() : 0), levelCur);
                 }
             }
         }
@@ -168,7 +168,7 @@ int play(sf::RenderWindow& window) {
 	return 0;
 }
 
-int EndGame(sf::RenderWindow& window, buildStage &stage, int score){
+int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level){
     
     sf::Texture imgTx;
     imgTx.loadFromFile("res/img/endgame.png");
@@ -206,7 +206,10 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, int score){
     tScoreAtEnd.setSize(sizeText);
     tScoreAtEnd.setOriginToTopHead();
     tScoreAtEnd.setColor(148, 235, 19);
-    
+	listHighScore HighScore;
+	highScore scoreNew(score, level);
+	HighScore.compareScore(scoreNew);
+
     while (window.isOpen()) {
         sf::Event event;
         // bắt sự kiện

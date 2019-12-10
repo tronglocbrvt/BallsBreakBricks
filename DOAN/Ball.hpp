@@ -13,7 +13,7 @@
 #include "buildStage.hpp"
 
 
-#define _NAME_GAME_ "The Pong Game"
+#define _NAME_GAME_ "BALLS BREAK BRICKS"
 
 
 class buildStage;
