@@ -202,7 +202,7 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, int score){
     
     std::cout << (1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ) << std::endl;
     
-    TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string(score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ))).substr(0,1), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
+    TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string( score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ))).substr(0,1), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
     tScoreAtEnd.setSize(sizeText);
     tScoreAtEnd.setOriginToTopHead();
     tScoreAtEnd.setColor(148, 235, 19);
