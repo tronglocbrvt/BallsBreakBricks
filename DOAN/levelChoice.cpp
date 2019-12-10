@@ -23,42 +23,42 @@ levelChoice::levelChoice(float width, float height) :Display(width, height)
 	textMode[0].setFillColor(sf::Color::White);
 	textMode[0].setStyle(sf::Text::Bold);
 	textMode[0].setString("LEVEL 1");
-	setPositionText(textMode[0], 230);
+	setPositionText(textMode[0], 150);
 
 	textMode[1].setFont(fontMode);
 	textMode[1].setCharacterSize(40);
-	textMode[1].setFillColor(sf::Color::Red);
+	textMode[1].setFillColor(sf::Color::Yellow);
 	textMode[1].setStyle(sf::Text::Bold);
 	textMode[1].setString("LEVEL 2");
-	setPositionText(textMode[1], 380);
+	setPositionText(textMode[1], 220);
 
 	textMode[2].setFont(fontMode);
 	textMode[2].setCharacterSize(40);
-	textMode[2].setFillColor(sf::Color::Red);
+	textMode[2].setFillColor(sf::Color::Yellow);
 	textMode[2].setStyle(sf::Text::Bold);
 	textMode[2].setString("LEVEL 3");
-	setPositionText(textMode[1], 330);
+	setPositionText(textMode[2],290);
 
 	textMode[3].setFont(fontMode);
 	textMode[3].setCharacterSize(40);
-	textMode[3].setFillColor(sf::Color::Red);
+	textMode[3].setFillColor(sf::Color::Yellow);
 	textMode[3].setStyle(sf::Text::Bold);
 	textMode[3].setString("LEVEL 4");
-	setPositionText(textMode[1], 380);
+	setPositionText(textMode[3], 360);
 
 	textMode[4].setFont(fontMode);
 	textMode[4].setCharacterSize(40);
-	textMode[4].setFillColor(sf::Color::Red);
+	textMode[4].setFillColor(sf::Color::Yellow);
 	textMode[4].setStyle(sf::Text::Bold);
 	textMode[4].setString("LEVEL 5");
-	setPositionText(textMode[1], 430);
+	setPositionText(textMode[4], 430);
 
 	textMode[5].setFont(fontMode);
 	textMode[5].setCharacterSize(40);
-	textMode[5].setFillColor(sf::Color::Red);
+	textMode[5].setFillColor(sf::Color::Yellow);
 	textMode[5].setStyle(sf::Text::Bold);
 	textMode[5].setString("SPECIAL: LEVEL 6");
-	setPositionText(textMode[1], 480);
+	setPositionText(textMode[5], 500);
 
 	select = 0;
 }
@@ -76,11 +76,11 @@ void levelChoice::moveUp() // nhấn phím UP
 {
 	if (select - 1 >= 0)
 	{
-		textMode[select].setFillColor(sf::Color::Red);
+		textMode[select].setFillColor(sf::Color::Yellow);
 		textMode[select].setCharacterSize(40);
 
 		// update position because changing size
-		setPositionText(textMode[select], 230 + select * 50);
+		setPositionText(textMode[select], 150 + select * 70);
 
 		select--;
 
@@ -88,26 +88,26 @@ void levelChoice::moveUp() // nhấn phím UP
 		textMode[select].setCharacterSize(60);
 
 		// update position because changing size
-		setPositionText(textMode[select], 230 + select * 50);
+		setPositionText(textMode[select], 150 + select * 70);
 	}
 }
 
 void levelChoice::moveDown() // nhấn phím Down
 {
-	if (select + 1 < 2)
+	if (select + 1 < 6)
 	{
-		textMode[select].setFillColor(sf::Color::Red);
+		textMode[select].setFillColor(sf::Color::Yellow);
 		textMode[select].setCharacterSize(40);
 
 		// update position because changing size
-		setPositionText(textMode[select], 230 + select * 50);
+		setPositionText(textMode[select], 150 + select * 70);
 
 		select++;
 		textMode[select].setFillColor(sf::Color::White);
 		textMode[select].setCharacterSize(60);
 
 		// update position because changing size
-		setPositionText(textMode[select], 230 + select * 50);
+		setPositionText(textMode[select], 150 + select * 70);
 	}
 }
 
@@ -123,29 +123,158 @@ void levelChoice::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 		select = 0;
 
 		textMode[0].setFillColor(sf::Color::White);
-		textMode[1].setFillColor(sf::Color::Red);
+		textMode[1].setFillColor(sf::Color::Yellow);
+		textMode[2].setFillColor(sf::Color::Yellow);
+		textMode[3].setFillColor(sf::Color::Yellow);
+		textMode[4].setFillColor(sf::Color::Yellow);
+		textMode[5].setFillColor(sf::Color::Yellow);
 
 		textMode[0].setCharacterSize(60);
 		textMode[1].setCharacterSize(40);
+		textMode[2].setCharacterSize(40);
+		textMode[3].setCharacterSize(40);
+		textMode[4].setCharacterSize(40);
+		textMode[5].setCharacterSize(40);
 
 		// update position because changing size
-		setPositionText(textMode[0], 230);
-		setPositionText(textMode[1], 280);
+		setPositionText(textMode[0], 150);
+		setPositionText(textMode[1], 220);
+		setPositionText(textMode[2], 290);
+		setPositionText(textMode[3], 360);
+		setPositionText(textMode[4], 430);
+		setPositionText(textMode[5], 500);
 	}
 
 	if (clickMouse(textMode[1], windows))
 	{
 		select = 1;
 
-		textMode[0].setFillColor(sf::Color::Red);
+		textMode[0].setFillColor(sf::Color::Yellow);
 		textMode[1].setFillColor(sf::Color::White);
+		textMode[2].setFillColor(sf::Color::Yellow);
+		textMode[3].setFillColor(sf::Color::Yellow);
+		textMode[4].setFillColor(sf::Color::Yellow);
+		textMode[5].setFillColor(sf::Color::Yellow);
 
 		textMode[0].setCharacterSize(40);
 		textMode[1].setCharacterSize(60);
+		textMode[2].setCharacterSize(40);
+		textMode[3].setCharacterSize(40);
+		textMode[4].setCharacterSize(40);
+		textMode[5].setCharacterSize(40);
 
 		// update position because changing size
-		setPositionText(textMode[0], 230);
-		setPositionText(textMode[1], 280);
+		setPositionText(textMode[0], 150);
+		setPositionText(textMode[1], 220);
+		setPositionText(textMode[2], 290);
+		setPositionText(textMode[3], 360);
+		setPositionText(textMode[4], 430);
+		setPositionText(textMode[5], 500);
+	}
+
+	if (clickMouse(textMode[2], windows))
+	{
+		select = 2;
+
+		textMode[0].setFillColor(sf::Color::Yellow);
+		textMode[1].setFillColor(sf::Color::Yellow);
+		textMode[2].setFillColor(sf::Color::White);
+		textMode[3].setFillColor(sf::Color::Yellow);
+		textMode[4].setFillColor(sf::Color::Yellow);
+		textMode[5].setFillColor(sf::Color::Yellow);
+
+		textMode[0].setCharacterSize(40);
+		textMode[1].setCharacterSize(40);
+		textMode[2].setCharacterSize(60);
+		textMode[3].setCharacterSize(40);
+		textMode[4].setCharacterSize(40);
+		textMode[5].setCharacterSize(40);
+
+		// update position because changing size
+		setPositionText(textMode[0], 150);
+		setPositionText(textMode[1], 220);
+		setPositionText(textMode[2], 290);
+		setPositionText(textMode[3], 360);
+		setPositionText(textMode[4], 430);
+		setPositionText(textMode[5], 500);
+	}
+	if (clickMouse(textMode[3], windows))
+	{
+		select = 3;
+
+		textMode[0].setFillColor(sf::Color::Yellow);
+		textMode[1].setFillColor(sf::Color::Yellow);
+		textMode[2].setFillColor(sf::Color::Yellow);
+		textMode[3].setFillColor(sf::Color::White);
+		textMode[4].setFillColor(sf::Color::Yellow);
+		textMode[5].setFillColor(sf::Color::Yellow);
+
+		textMode[0].setCharacterSize(40);
+		textMode[1].setCharacterSize(40);
+		textMode[2].setCharacterSize(40);
+		textMode[3].setCharacterSize(60);
+		textMode[4].setCharacterSize(40);
+		textMode[5].setCharacterSize(40);
+
+		// update position because changing size
+		setPositionText(textMode[0], 150);
+		setPositionText(textMode[1], 220);
+		setPositionText(textMode[2], 290);
+		setPositionText(textMode[3], 360);
+		setPositionText(textMode[4], 430);
+		setPositionText(textMode[5], 500);
+	}
+	if (clickMouse(textMode[4], windows))
+	{
+		select = 4;
+
+		textMode[0].setFillColor(sf::Color::Yellow);
+		textMode[1].setFillColor(sf::Color::Yellow);
+		textMode[2].setFillColor(sf::Color::Yellow);
+		textMode[3].setFillColor(sf::Color::Yellow);
+		textMode[4].setFillColor(sf::Color::White);
+		textMode[5].setFillColor(sf::Color::Yellow);
+
+		textMode[0].setCharacterSize(40);
+		textMode[1].setCharacterSize(40);
+		textMode[2].setCharacterSize(40);
+		textMode[3].setCharacterSize(40);
+		textMode[4].setCharacterSize(60);
+		textMode[5].setCharacterSize(40);
+
+		// update position because changing size
+		setPositionText(textMode[0], 150);
+		setPositionText(textMode[1], 220);
+		setPositionText(textMode[2], 290);
+		setPositionText(textMode[3], 360);
+		setPositionText(textMode[4], 430);
+		setPositionText(textMode[5], 500);
+	}
+	if (clickMouse(textMode[5], windows))
+	{
+		select = 5;
+
+		textMode[0].setFillColor(sf::Color::Yellow);
+		textMode[1].setFillColor(sf::Color::Yellow);
+		textMode[2].setFillColor(sf::Color::Yellow);
+		textMode[3].setFillColor(sf::Color::Yellow);
+		textMode[4].setFillColor(sf::Color::Yellow);
+		textMode[5].setFillColor(sf::Color::White);
+
+		textMode[0].setCharacterSize(40);
+		textMode[1].setCharacterSize(40);
+		textMode[2].setCharacterSize(40);
+		textMode[3].setCharacterSize(40);
+		textMode[4].setCharacterSize(40);
+		textMode[5].setCharacterSize(60);
+
+		// update position because changing size
+		setPositionText(textMode[0], 150);
+		setPositionText(textMode[1], 220);
+		setPositionText(textMode[2], 290);
+		setPositionText(textMode[3], 360);
+		setPositionText(textMode[4], 430);
+		setPositionText(textMode[5], 500);
 	}
 }
 
@@ -157,7 +286,7 @@ void levelChoice::mouseSelect(sf::RenderWindow& window) // bắt sự kiện cli
 	}
 	if (clickMouse(textMode[1], window))
 	{
-		//playPvsC(window); // chạy chế độ PvsC
+		//playPvsC(window, select + 1); // chạy chế độ PvsC
 	}
 }
 

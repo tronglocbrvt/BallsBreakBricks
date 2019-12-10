@@ -23,15 +23,15 @@ modeGame::modeGame(float width, float height):Display(width, height)
 	textMode[0].setFillColor(sf::Color::White);
 	textMode[0].setStyle(sf::Text::Bold);
 	textMode[0].setString("PLAYER VS PLAYER");
-	setPositionText(textMode[0], 300);
+	setPositionText(textMode[0], 200);
 
 	// set dòng chữ hiện chế độ PvsPC
 	textMode[1].setFont(fontMode);
 	textMode[1].setCharacterSize(40);
-	textMode[1].setFillColor(sf::Color::Red);
+	textMode[1].setFillColor(sf::Color::Yellow);
 	textMode[1].setStyle(sf::Text::Bold);
 	textMode[1].setString("PLAYER VS COMPUTER");
-	setPositionText(textMode[1], 380);
+	setPositionText(textMode[1], 300);
 
 	select = 0;
 }
@@ -49,11 +49,11 @@ void modeGame::moveUp() // nhấn phím UP
 {
 	if (select - 1 >= 0)
 	{
-		textMode[select].setFillColor(sf::Color::Red);
+		textMode[select].setFillColor(sf::Color::Yellow);
 		textMode[select].setCharacterSize(40);
 
 		// update position because changing size
-		setPositionText(textMode[select], 300 + select * 80);
+		setPositionText(textMode[select], 200 + select * 100);
 
 		select--;
 
@@ -61,7 +61,7 @@ void modeGame::moveUp() // nhấn phím UP
 		textMode[select].setCharacterSize(60);
 
 		// update position because changing size
-		setPositionText(textMode[select], 300 + select * 80);
+		setPositionText(textMode[select], 200 + select * 100);
 	}
 }
 
@@ -69,18 +69,18 @@ void modeGame::moveDown() // nhấn phím Down
 {
 	if (select + 1 < 2)
 	{
-		textMode[select].setFillColor(sf::Color::Red);
+		textMode[select].setFillColor(sf::Color::Yellow);
 		textMode[select].setCharacterSize(40);
 
 		// update position because changing size
-		setPositionText(textMode[select], 300 + select * 80);
+		setPositionText(textMode[select], 200 + select * 100);
 
 		select++;
 		textMode[select].setFillColor(sf::Color::White);
 		textMode[select].setCharacterSize(60);
 
 		// update position because changing size
-		setPositionText(textMode[select], 300 + select * 80);
+		setPositionText(textMode[select], 200 + select * 100);
 	}
 }
 
@@ -96,29 +96,29 @@ void modeGame::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 		select = 0;
 
 		textMode[0].setFillColor(sf::Color::White);
-		textMode[1].setFillColor(sf::Color::Red);
+		textMode[1].setFillColor(sf::Color::Yellow);
 
 		textMode[0].setCharacterSize(60);
 		textMode[1].setCharacterSize(40);
 
 		// update position because changing size
-		setPositionText(textMode[0], 300);
-		setPositionText(textMode[1], 380);
+		setPositionText(textMode[0], 200);
+		setPositionText(textMode[1], 300);
 	}
 
 	if (clickMouse(textMode[1], windows))
 	{
 		select = 1;
 
-		textMode[0].setFillColor(sf::Color::Red);
+		textMode[0].setFillColor(sf::Color::Yellow);
 		textMode[1].setFillColor(sf::Color::White);
 
 		textMode[0].setCharacterSize(40);
 		textMode[1].setCharacterSize(60);
 
 		// update position because changing size
-		setPositionText(textMode[0], 300);
-		setPositionText(textMode[1], 380);
+		setPositionText(textMode[0], 200);
+		setPositionText(textMode[1], 300);
 	}
 }
 
@@ -172,7 +172,7 @@ void modeGame::runModeGame(sf::RenderWindow& window)
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 
-					levelChoice choice;
+					levelChoice choice(window.getSize().x, window.getSize().y);
 					choice.runLevelChoice(window, GetPressedItem());
 				}
 			}
