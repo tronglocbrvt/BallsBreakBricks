@@ -55,6 +55,7 @@ public:
     float getSpeed();
     bool checkAbove(sf::Vector2f point);
     float disToBar(sf::Vector2f point);
+    void moveToMidTabGame();
 };
 
 

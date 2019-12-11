@@ -181,3 +181,28 @@ float TheBar::disToBar(sf::Vector2f point){
         return (point.x - (this->posX + this->longBar));
     }
 }
+
+void TheBar::moveToMidTabGame(){
+    // nếu thanh sang trái
+    if (this->getPosMidXOfPaddle() > _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2) {
+        // đặt vị trí Y
+        if (this->posX - this->velocityX < _DIS_FROM_LEFT_) {
+            this->posX = _DIS_FROM_LEFT_;
+        }
+        else {
+            this->posX -= this->velocityX;
+        }
+        
+    }
+    // nếu thanh sang phải
+    else
+    {
+        // đặt vị trí Y
+        if ((this->posX + this->longBar + this->velocityX) > (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
+            this->posX = _DIS_FROM_LEFT_  + _WIDTH_TABLE_GAME_ - this->longBar;
+        }
+        else {
+            this->posX += this->velocityX;
+        }
+    }
+}

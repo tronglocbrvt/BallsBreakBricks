@@ -79,8 +79,11 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // người với máy
             }
             speepup = false;
         }
-        if (!ball.checkGoDown()) {
+        else
+        {
             speepup = true;
+            
+            bar.moveToMidTabGame();
         }
         
         short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
