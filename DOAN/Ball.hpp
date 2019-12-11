@@ -19,6 +19,9 @@
 class buildStage;
 class ThePong {
 private:
+    
+    sf::FloatRect pastBall;
+    
     float posX;
     float posY;
 
@@ -38,6 +41,8 @@ private:
     TextShow point4;
     
     TextShow pointX[9];
+    
+    sf::Vertex lineBall[2];
 
 public:
     ThePong();
@@ -70,6 +75,12 @@ public:
     
     sf::FloatRect getBoundBall();
     sf::Vector2f returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall);
+    
+    bool checkGoDown();
+    sf::Vector2f posAtBotInFuture();
+    float lengthOfVector();
+    float distanceToPointFromCenter(sf::Vector2f point);
+    sf::Vector2f middle();
 
     void draw(sf::RenderWindow& window);
 	friend class zoomBall;

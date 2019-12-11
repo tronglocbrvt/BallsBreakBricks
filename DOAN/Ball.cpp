@@ -176,7 +176,7 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
     float pastPosX = this->posX;
     float pastPosY = this->posY;
     
-    sf::FloatRect pastBall = this->imgSpr.getGlobalBounds();
+    this->pastBall = this->imgSpr.getGlobalBounds();
     
     // hàm di chuyển bóng
     
@@ -269,7 +269,7 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
                       
                        presentBall = sf::FloatRect(this->posX, this->posY, this->posXend, this->posYend);
                                          
-                       ve = returnPosOnBorder(rectBrick, presentBall, pastBall);
+                       ve = returnPosOnBorder(rectBrick, presentBall, this->pastBall);
                        
                        this->point4.setPosition(ve.x, ve.y);
                        this->posX = ve.x;
@@ -401,6 +401,70 @@ sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect prese
     
     return vect;
 }
+bool ThePong::checkGoDown(){
+    return (this->velocityY > 0);
+}
+sf::Vector2f ThePong::posAtBotInFuture(){
+        
+    float alp = (this->velocityY / this->velocityX);
+    float bet = (this->posY + this->posYend/2) - alp * (this->posX + this->posXend/2);
+    
+//    float x = 0;
+//    float y = alp * x + bet;
+    
+    this->lineBall[0] = sf::Vertex(sf::Vector2f((this->posX + this->posXend/2), (this->posY + this->posYend/2)), sf::Color::Blue);
+    this->lineBall[1] = sf::Vertex(sf::Vector2f(((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) - bet) / alp, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)), sf::Color::Blue);
+    
+    float posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) - bet) / alp;
+    
+    while (true) {
+        
+        std::cout << "DTG" << std::endl;
+        
+        if (_DIS_FROM_LEFT_ + this->posXend/2 <= posXInFut && posXInFut <= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2) {
+            return sf::Vector2f(posXInFut, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_));
+        }
+        
+        else
+        {
+            float posXCen;
+            float posYCen;
+            
+            if (posXInFut < _DIS_FROM_LEFT_ + this->posXend/2) {
+//                return sf::Vector2f(_DIS_FROM_LEFT_ + this->posXend/2, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_));
+                
+                posXCen = _DIS_FROM_LEFT_ + this->posXend/2;
+                posYCen = alp * posXCen + bet;
+                
+            }
+            else
+            {
+//                return sf::Vector2f(_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_));
+                
+                posXCen = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2;
+                posYCen = alp * posXCen + bet;
+                
+            }
+            
+            alp *= -1;
+            bet = (posYCen) - alp * (posXCen);
+            
+            posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) - bet) / alp;
+        }
+    }
+    
+    return sf::Vector2f(_DIS_FROM_LEFT_, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_);
+}
+float ThePong::lengthOfVector(){
+    return sqrt(sqr(this->velocityX) + sqr(this->velocityY));
+}
+float ThePong::distanceToPointFromCenter(sf::Vector2f point){
+    return sqrt(sqr(this->posX - point.x) + sqr(this->posY - point.y));
+}
+sf::Vector2f ThePong::middle(){
+    return sf::Vector2f(this->posX + this->posXend/2, this->posY + this->posYend/2);
+}
+
 
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
@@ -414,5 +478,6 @@ void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
         this->pointX[i].setPosition(0, 0);
     }
     
+    window.draw(this->lineBall, 2, sf::Lines);
     
 }

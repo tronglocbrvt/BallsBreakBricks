@@ -12,7 +12,7 @@
 #include <future>
 #include "listHighScore.hpp"
 
-bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text);
+bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text, sf::Keyboard::Key key);
 int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level);
 int play(sf::RenderWindow& window, int levelCur); // người với người chơi
 

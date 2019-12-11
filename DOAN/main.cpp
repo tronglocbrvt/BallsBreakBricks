@@ -1,5 +1,6 @@
 #include <iostream>
 #include "PvsP.hpp"
+#include "ComputerPlay.hpp"
 #include "BackGround.hpp"
 #include "Display.hpp"
 #include "Menu.hpp"
@@ -10,11 +11,15 @@ int main(int argc, const char* argv[]) {
 	window.setFramerateLimit(FRAME);
 	window.setKeyRepeatEnabled(true);
 
-	Menu menu(window.getSize().x, window.getSize().y);
-	helpMenu help(window.getSize().x, window.getSize().y);
-	modeGame mode(window.getSize().x, window.getSize().y);
-	listHighScore high(window.getSize().x, window.getSize().y);
+//	Menu menu(window.getSize().x, window.getSize().y);
+//	helpMenu help(window.getSize().x, window.getSize().y);
+//	modeGame mode(window.getSize().x, window.getSize().y);
+//	listHighScore high(window.getSize().x, window.getSize().y);
+    
+//    play(window, 1);
+    CPlay(window, 1);
 
+    /*
 	while (window.isOpen()) {
 
 		sf::Event event;
@@ -52,7 +57,7 @@ int main(int argc, const char* argv[]) {
 					{
 						/*continueGame cont;
 						cont.runContinueGame(window);
-						break;*/
+						break;
 					}
 					case 2:
 						high.drawMenu(window);
@@ -75,5 +80,6 @@ int main(int argc, const char* argv[]) {
 		window.display();
 
 	}
+*/
 	return 0;
 }

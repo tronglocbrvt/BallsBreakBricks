@@ -18,6 +18,7 @@ protected:
     
     float velocityX;
     float acceleration;
+    float maxSpeed;
     
     std::string namePlayer;
     int scores;
@@ -47,6 +48,13 @@ public:
     void draw(sf::RenderWindow &window);
     
     void haveScore(short score);
+    
+    float getPosMidXOfPaddle();
+    
+    void speedUp(float rate);
+    float getSpeed();
+    bool checkAbove(sf::Vector2f point);
+    float disToBar(sf::Vector2f point);
 };
 
 

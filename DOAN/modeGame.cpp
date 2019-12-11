@@ -1,4 +1,4 @@
-﻿#include "modeGame.hpp"
+#include "modeGame.hpp"
 
 modeGame::modeGame()
 {
@@ -136,6 +136,8 @@ int modeGame::mouseSelect(sf::RenderWindow& window) // bắt sự kiện click c
 		choice.runLevelChoice(window, GetPressedItem()); // máy chơi
 		return 1;
 	}
+    
+    return -1;
 }
 
 void modeGame::runModeGame(sf::RenderWindow& window)

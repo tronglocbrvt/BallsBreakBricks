@@ -85,6 +85,10 @@ float buildStage::getTimeLimit(){
 float buildStage::getTimePlaying(){
     return this->time.asSeconds();
 }
+void buildStage::updateTime(){
+    this->time += clock.getElapsedTime();
+    clock.restart();
+}
 int buildStage::getMaxScore(){
     return this->maxScore;
 }

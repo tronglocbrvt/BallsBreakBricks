@@ -23,6 +23,7 @@ TheBar::TheBar(){
     // set tốc độ di chuyển theo chiều Oy
     this->velocityX = _VELOCITY_X_BAR_;
     this->acceleration = _ACCELERATION_BAR_;
+    this->maxSpeed = 3 * _VELOCITY_X_BAR_;
     
     // set default information
     this->namePlayer = "Player";
@@ -155,4 +156,28 @@ void TheBar::draw(sf::RenderWindow &window){            // thể hiện trên m�
 }
 void TheBar::haveScore(short score){                               // tăng điểm
     this->scores += scores;
+}
+float TheBar::getPosMidXOfPaddle(){
+    return (this->posX + this->longBar/2);
+}
+void TheBar::speedUp(float rate){
+    this->velocityX *= (1 + rate);
+    if (this->velocityX > this->maxSpeed) {
+        this->velocityX = this->maxSpeed;
+    }
+}
+
+float TheBar::getSpeed(){
+    return this->velocityX;
+}
+bool TheBar::checkAbove(sf::Vector2f point){
+    return ((this->posX <= point.x) && (point.x <= this->posX + this->longBar));
+}
+float TheBar::disToBar(sf::Vector2f point){
+    if (this->getPosMidXOfPaddle() > point.x) {
+        return (this->posX - point.x);
+    }
+    else{
+        return (point.x - (this->posX + this->longBar));
+    }
 }

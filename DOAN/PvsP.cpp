@@ -1,7 +1,7 @@
 #include "PvsP.hpp"
 
 
-bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text){
+bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text, sf::Keyboard::Key key){
     bool cont = true;
     // start ball when press space
     while (window.isOpen() && cont) {
@@ -11,10 +11,12 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
         while (window.pollEvent(event) && cont) {
             switch (event.type) {
             case sf::Event::KeyPressed:         // sự kiện nhấn phím
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                if (sf::Keyboard::isKeyPressed(key))
                 {
                     cont = false;
-                    ball.resetPong(0);
+                    if (key == sf::Keyboard::Space) {
+                        ball.resetPong(0);
+                    }
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
@@ -75,7 +77,7 @@ int play(sf::RenderWindow& window, int levelCur) {
 
 //    EndGame(window, stage, bar.getScores());
     
-    if (!pauseGame(window, ball, bg, bar, stage, textshow)) {
+    if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space)) {
         return 0;
     }
 	// start game
@@ -128,7 +130,7 @@ int play(sf::RenderWindow& window, int levelCur) {
         short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
         
         if (staticOfBall == 1) {    // crashed into bottom line
-            if (!pauseGame(window, ball, bg, bar, stage, textshow)) {  // esc game
+            if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space)) {  // esc game
                 return 0;
             }
             else {
@@ -202,13 +204,15 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level)
     
     std::cout << (1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ) << std::endl;
     
-    TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string( score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ))).substr(0,1), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
+    TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string( int(score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) )))), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
     tScoreAtEnd.setSize(sizeText);
     tScoreAtEnd.setOriginToTopHead();
     tScoreAtEnd.setColor(148, 235, 19);
-	listHighScore HighScore;
-	highScore scoreNew(score, level);
-	HighScore.compareScore(scoreNew);
+    
+    
+//	listHighScore HighScore;
+//	highScore scoreNew(score, level);
+//	HighScore.compareScore(scoreNew);
 
     while (window.isOpen()) {
         sf::Event event;

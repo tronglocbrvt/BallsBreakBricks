@@ -39,6 +39,7 @@ public:
 	Brick* getmStage(int i, int j);
     float getTimeLimit();
     float getTimePlaying();
+    void updateTime();
     int getMaxScore();
     friend class ThePong;
 };
