@@ -419,8 +419,6 @@ sf::Vector2f ThePong::posAtBotInFuture(){
     
     while (true) {
         
-        std::cout << "DTG" << std::endl;
-        
         if (_DIS_FROM_LEFT_ + this->posXend/2 <= posXInFut && posXInFut <= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2) {
             return sf::Vector2f(posXInFut, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_));
         }
@@ -431,7 +429,6 @@ sf::Vector2f ThePong::posAtBotInFuture(){
             float posYCen;
             
             if (posXInFut < _DIS_FROM_LEFT_ + this->posXend/2) {
-//                return sf::Vector2f(_DIS_FROM_LEFT_ + this->posXend/2, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_));
                 
                 posXCen = _DIS_FROM_LEFT_ + this->posXend/2;
                 posYCen = alp * posXCen + bet;
@@ -439,7 +436,6 @@ sf::Vector2f ThePong::posAtBotInFuture(){
             }
             else
             {
-//                return sf::Vector2f(_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_));
                 
                 posXCen = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2;
                 posYCen = alp * posXCen + bet;
