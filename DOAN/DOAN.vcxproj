@@ -134,6 +134,7 @@
     <ClCompile Include="BallsHandler.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="buildStage.cpp" />
+    <ClCompile Include="ComputerPlay.cpp" />
     <ClCompile Include="DataPos.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Help.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="BallsHandler.h" />
     <ClInclude Include="Brick.hpp" />
     <ClInclude Include="buildStage.hpp" />
+    <ClInclude Include="ComputerPlay.hpp" />
     <ClInclude Include="DataPos.hpp" />
     <ClInclude Include="Define_Header.h" />
     <ClInclude Include="Display.hpp" />
