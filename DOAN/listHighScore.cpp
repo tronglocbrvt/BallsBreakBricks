@@ -49,11 +49,10 @@ int listHighScore::readFile()
 	}
 
 	fi.seekg(0); // di chuyển con trỏ về đầu file
-	while (!fi.eof())
-	{
-		highScore A(0,1);
-		
-		fi >> A.level;
+	highScores.clear();
+	highScore A(-1, 1);
+	while (fi >> A.level)
+	{		
 		fi >> A.score;
 		fi >> A.date;
 		fi >> A.month;

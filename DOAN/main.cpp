@@ -17,7 +17,7 @@ int main(int argc, const char* argv[]) {
 //	listHighScore high(window.getSize().x, window.getSize().y);
     
 //    play(window, 1);
-    CPlay(window, 1);
+    play(window, 1);
 
     /*
 	while (window.isOpen()) {
