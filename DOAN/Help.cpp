@@ -15,13 +15,13 @@ helpMenu::helpMenu(float width, float height) :Display(width, height)
 	}
 
 	helpHeadText.setFont(font);
-	helpHeadText.setFillColor(sf::Color::Magenta);
+	helpHeadText.setFillColor(sf::Color::Yellow);
 	helpHeadText.setString("HELP");
 	helpHeadText.setStyle(sf::Text::Underlined);
 	helpHeadText.setCharacterSize(50);
 
 	// set thông số đồ họa cho các dòng hướng dẫn
-	setPositionText(helpHeadText, 210);
+	setPositionText(helpHeadText, 140);
 
 	if (!fontText.loadFromFile("res/fnt/JerseyM54.ttf"))
 	{
@@ -30,20 +30,20 @@ helpMenu::helpMenu(float width, float height) :Display(width, height)
 
 	setText(0, "GAME WITH PLAYER\n");
 	helpText[0].setFillColor(sf::Color::Green);
-	setPositionText(helpText[0], 290);
+	setPositionText(helpText[0], 220);
 
 	setText(2, "SCORING METHOD\n");
 	helpText[2].setFillColor(sf::Color::Green);
-	setPositionText(helpText[0], 410);
+	setPositionText(helpText[2], 340);
 
 	setText(5, "PRESS SPACE TO START/CONTINUE GAME\n");
 	helpText[5].setFillColor(sf::Color::Green);
-	setPositionText(helpText[5], 580);
+	setPositionText(helpText[5], 490);
 
 	setText(6, "PRESS ESC TO COME BACK MAIN MENU ANYTIME\n");
 	helpText[6].setFillColor(sf::Color::Magenta);
 	helpText[6].setStyle(sf::Text::Bold);
-	setPositionText(helpText[5], 640);
+	setPositionText(helpText[6], 530);
 
 	if (!fontText.loadFromFile("res/fnt/Truly.otf"))
 	{
@@ -52,15 +52,19 @@ helpMenu::helpMenu(float width, float height) :Display(width, height)
 
 	setText(1, "Press A or left-key to Move left\nPress D or right-key to Move right");
 	helpText[1].setCharacterSize(25);
-	setPositionText(helpText[1], 350);
+	setPositionText(helpText[1], 260);
 
-	setText(3, "Red Brick: 1\t\tPurple Brick: 2\t\tBlue Brick: 3\nGift Brick: Double Score, Divide Score, Fire Ball, Zoom Ball, Widen Bar, Become Rock");
+	setText(3, "Red Brick: 1\t\tPurple Brick: 2\t\tBlue Brick: 3");
 	helpText[3].setCharacterSize(25);
-	setPositionText(helpText[3], 490);
+	setPositionText(helpText[3], 370);
+
+	setText(7, "Gift Brick: Double Score, Divide Score, Fire Ball, Zoom Ball, Widen Bar, Become Rock");
+	helpText[7].setCharacterSize(25);
+	setPositionText(helpText[7], 400);
 
 	setText(4, "LAST SCORE DEPENDS ON FINISHED TIME STAGE");
 	helpText[4].setCharacterSize(25);
-	setPositionText(helpText[4], 550);
+	setPositionText(helpText[4], 430);
 }
 
 helpMenu::~helpMenu()
