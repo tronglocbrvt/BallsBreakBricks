@@ -31,7 +31,7 @@ TheBar::TheBar(){
 
 }
 
-TheBar::TheBar(bool side, float posX, int score, int health, std::string name)  // true = side A - left     false = side B - right          constructor: set theo thông tin ban đầu
+TheBar::TheBar(bool side, float posX, float posY, int score)// true = side A - left     false = side B - right          constructor: set theo thông tin ban đầu
 {
     if (!this->textureBar.loadFromFile("res/img/barRed.png")) {
         std::cout << "Load File Failed";
@@ -50,15 +50,18 @@ TheBar::TheBar(bool side, float posX, int score, int health, std::string name)  
     this->heigBar = this->heigBar * this->imgSpr.getScale().y;
     this->longBar = this->longBar * this->imgSpr.getScale().x;
     
+	// set vị trí Ox
+	this->posX = posX;
+
     // set vị trí Oy
-    this->posX = posX;
+    this->posY = posY;
 
     // set tốc độ di chuyển theo chiều Ox
     this->velocityX = _VELOCITY_X_BAR_;
     this->acceleration = _ACCELERATION_BAR_;
 
     // set default information
-    this->namePlayer = name;
+ 
     this->scores = score;
 }
 

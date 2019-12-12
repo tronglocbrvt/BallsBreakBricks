@@ -11,15 +11,15 @@ int main(int argc, const char* argv[]) {
 	window.setFramerateLimit(FRAME);
 	window.setKeyRepeatEnabled(true);
 
-//	Menu menu(window.getSize().x, window.getSize().y);
-//	helpMenu help(window.getSize().x, window.getSize().y);
-//	modeGame mode(window.getSize().x, window.getSize().y);
-//	listHighScore high(window.getSize().x, window.getSize().y);
-    
-//    play(window, 1);
-    play(window, 1);
+	Menu menu(window.getSize().x, window.getSize().y);
+	helpMenu help(window.getSize().x, window.getSize().y);
+	modeGame mode(window.getSize().x, window.getSize().y);
+	listHighScore high(window.getSize().x, window.getSize().y);
 
-    /*
+	//    play(window, 1);
+	   // play(window, 1);
+
+
 	while (window.isOpen()) {
 
 		sf::Event event;
@@ -55,7 +55,7 @@ int main(int argc, const char* argv[]) {
 						break;
 					case 1:
 					{
-						/*continueGame cont;
+						continueGame cont;
 						cont.runContinueGame(window);
 						break;
 					}
@@ -80,6 +80,5 @@ int main(int argc, const char* argv[]) {
 		window.display();
 
 	}
-*/
 	return 0;
 }

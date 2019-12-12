@@ -25,7 +25,7 @@ protected:
     
 public:
     TheBar();
-    TheBar(bool, float, int, int, std::string);
+    TheBar(bool, float, float, int);
     virtual ~TheBar();
     
     void setNamePlayer(std::string name);
