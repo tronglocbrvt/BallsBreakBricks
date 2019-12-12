@@ -1,18 +1,10 @@
-//
-//  ComputerPlay.cpp
-//  PongGame
-//
-//  Created by Thanh Phong Nguyen Dien on 12/10/19.
-//  Copyright © 2019 Thanh Phong Nguyen Dien. All rights reserved.
-//
-
 #include "ComputerPlay.hpp"
 
 
-int CPlay(sf::RenderWindow& window, int levelCur)   // người với máy
+int CPlay(sf::RenderWindow& window, int levelCur)   // máy
 {
     // khởi tạo sân, bóng, 2 thanh
-    BackGround bg(levelCur);
+    BackGround bg(0);
     ThePong ball;
     TheBar bar;
 
@@ -29,7 +21,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // người với máy
 
 //    EndGame(window, stage, bar.getScores());
     
-    if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space)) {
+    if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 0, levelCur)) {
         return 0;
     }
     // start game
@@ -41,10 +33,12 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // người với máy
         // bắt sự kiện
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
+				saveGame(ball, bar, 0, stage, levelCur);
                 window.close();
             }
             else if (sf::Event::KeyPressed) {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					saveGame(ball, bar, 0, stage, levelCur);
                     return 0;
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
@@ -55,7 +49,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // người với máy
                     textshow.setOriginToMidle();
                     textshow.setColor(4, 74, 194);
                     
-                    pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P);
+                    pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, 0, levelCur);
                 }
             }
         }
@@ -90,7 +84,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // người với máy
         stage.updateTime();
         
         if (staticOfBall == 1) {    // crashed into bottom line
-            if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space)) {  // esc game
+            if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 0, levelCur)) {  // esc game
                 return 0;
             }
             else {

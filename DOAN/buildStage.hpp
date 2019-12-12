@@ -31,17 +31,21 @@ private:
     sf::Time time;
     
 public:
+	buildStage();
     buildStage(int stage);
     
     //void breakTheBrick(const sf::FloatRect& ballBound);
+	void setTime(float);
     void startClock();
     void draw(sf::RenderWindow &window);
+	int getmSignBricks(int i, int j);
 	Brick* getmStage(int i, int j);
     float getTimeLimit();
     float getTimePlaying();
     void updateTime();
     int getMaxScore();
     friend class ThePong;
+	friend class continueGame;
 };
 
 #endif
