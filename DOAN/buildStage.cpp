@@ -1,5 +1,11 @@
 #include "buildStage.hpp"
 
+buildStage::buildStage()
+{
+	this->time = sf::seconds(0.01f);
+	this->maxScore = 0;
+
+}
 
 buildStage::buildStage(int stage) {
     
@@ -122,6 +128,10 @@ buildStage::buildStage(std::string nameFile){
 //    }
 }
 
+void buildStage::setTime(float temp)
+{
+	time = sf::seconds(temp);
+}
 
 void buildStage::startClock(){
     this->clock.restart();
@@ -139,6 +149,11 @@ void buildStage::draw(sf::RenderWindow &window){
     
 //    NormalBrick br(2);
 //    br.draw(window);
+}
+
+int buildStage::getmSignBricks(int i, int j)
+{
+	return mSignBricks[i][j];
 }
 
 float buildStage::getTimeLimit(){

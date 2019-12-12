@@ -4,7 +4,7 @@
 
 #include "Ball.hpp"
 #include "listHighScore.hpp"
-//#include "continueGame.hpp"
+#include "continueGame.hpp"
 #include "Help.hpp"
 #include "PvsP.hpp"
 #include "Display.hpp"

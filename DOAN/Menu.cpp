@@ -238,8 +238,8 @@ void Menu::mouseSelect(sf::RenderWindow& window) // bắt sự kiện click chu�
 	}
 	else if (clickMouse(text[1], window)) // vào chức năng tiếp tục chơi
 	{
-		/*continueGame cont;
-		cont.runContinueGame(window);*/
+		continueGame cont;
+		cont.runContinueGame(window);
 	}
 	else if (clickMouse(text[2], window)) // hiện bảng điểm cao
 	{

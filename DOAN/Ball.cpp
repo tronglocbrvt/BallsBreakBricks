@@ -83,7 +83,28 @@ ThePong::ThePong(float x, float y, float veX, float veY) {
     this->posYend = this->imgSpr.getTexture()->getSize().y * this->imgSpr.getScale().y;
 
     // chỉnh vị trí theo điểm tâm
-    this->imgSpr.setPosition(this->posX - this->posXend * 1.0 / 2, this->posY - this->posYend * 1.0 / 2);
+
+	this->imgSpr.setPosition(this->posX - this->posXend * 1.0 / 2, this->posY);
+	this->point1.set(".", std::string("HACKED.ttf"), 0, 0);
+	//    this->point1.scale(0.5);
+	this->point1.setColor(15, 15, 15);
+
+	this->point2.set(".", std::string("HACKED.ttf"), 0, 0);
+	//    this->point2.scale(0.2);
+	this->point2.setColor(240, 40, 115);
+
+	this->point3.set(".", std::string("HACKED.ttf"), 0, 0);
+	//    this->point3.scale(0.2);
+	this->point3.setColor(80, 180, 80);
+
+	this->point4.set(".", std::string("HACKED.ttf"), 0, 0);
+	//    this->point4.scale(0.2);
+	this->point4.setColor(015, 105, 215);
+
+	for (int i = 0; i < 9; i++) {
+		this->pointX[i].set(".", std::string("HACKED.ttf"), 0, 0);
+		this->pointX[i].setColor(25, 25, 135);
+	}
 
 }
 ThePong::~ThePong() {

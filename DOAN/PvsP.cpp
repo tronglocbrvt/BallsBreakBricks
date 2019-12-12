@@ -1,7 +1,7 @@
 #include "PvsP.hpp"
 
 
-bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text, sf::Keyboard::Key key){
+bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text, sf::Keyboard::Key key, bool mode, int level){
     bool cont = true;
     // start ball when press space
     while (window.isOpen() && cont) {
@@ -14,16 +14,18 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
                 if (sf::Keyboard::isKeyPressed(key))
                 {
                     cont = false;
-                    if (key == sf::Keyboard::Space) {
-                        ball.resetPong(0);
-                    }
+                    //if (key == sf::Keyboard::Space) {
+                    //    ball.resetPong(0);
+                    //}
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
+					saveGame(ball, bar, mode, stage, level);
                     return false;
                 }
                 break;
-            case sf::Event::Closed:             // sự kiện đóng cửa sổ
+            case sf::Event::Closed: // sự kiện đóng cửa sổ
+				saveGame(ball, bar, mode, stage, level);
                 window.close();
                 break;
             default:
@@ -47,8 +49,8 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
 
 int play(sf::RenderWindow& window, int levelCur) {
 
-    // khởi tạo sân, bóng, 2 thanh
-	BackGround bg(levelCur);
+    // khởi tạo sân, bóng, thanh
+	BackGround bg(1);
 	ThePong ball;
 //    ball.setPosX(225);
 //    ball.setPosY(150);
@@ -78,7 +80,7 @@ int play(sf::RenderWindow& window, int levelCur) {
 
 //    EndGame(window, stage, bar.getScores());
     
-    if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space)) {
+    if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 1, levelCur)) {
         return 0;
     }
 	// start game
@@ -90,10 +92,12 @@ int play(sf::RenderWindow& window, int levelCur) {
         // bắt sự kiện
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
+				saveGame(ball, bar, 1, stage, levelCur);
 				window.close();
 			}
 			else if (sf::Event::KeyPressed) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					saveGame(ball, bar, 1, stage, levelCur);
 					return 0;
 				}
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
@@ -104,7 +108,7 @@ int play(sf::RenderWindow& window, int levelCur) {
                     textshow.setOriginToMidle();
                     textshow.setColor(4, 74, 194);
                     
-                    pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P);
+					pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, 1, levelCur);
                 }
 			}
 		}
@@ -142,7 +146,7 @@ int play(sf::RenderWindow& window, int levelCur) {
         stage.updateTime();
         
         if (staticOfBall == 1) {    // crashed into bottom line
-            if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space)) {  // esc game
+            if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 1, levelCur)) {  // esc game
                 return 0;
             }
             else {
@@ -185,8 +189,60 @@ int play(sf::RenderWindow& window, int levelCur) {
 	return 0;
 }
 
+void saveGame(ThePong ball, TheBar bar, bool mode, buildStage stage, int level)
+{
+	std::ofstream fo;
+
+	fo.open("res/file/saveGame.txt");
+	if (fo.fail())
+	{
+		std::cout << "Open file failed\n";
+		return;
+	}
+
+	fo << ball.getPosX() << " ";
+	fo << ball.getPosY() << " ";
+	fo << ball.getVelocityX() << " ";
+	fo << ball.getVelocityY() << " ";
+
+	fo << bar.getPosX() << " ";
+	fo << bar.getPosY() << " ";
+
+	fo << bar.getScores() << " ";
+
+	fo << mode << " "; // lưu chế độ chơi, 0 = PvsC, 1 = PvsP
+
+	fo << level << " ";
+	fo << stage.getTimeLimit() << " ";
+	fo << stage.getTimePlaying() << std::endl;
+
+	for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
+		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
+			fo <<  stage.getmSignBricks(i, j) << " ";
+		}
+		fo << std::endl;
+	}
+
+	fo.close();
+}
+
+void fileEmpty() // làm cho file rỗng
+{
+	std::ofstream fo;
+
+	fo.open("res/file/saveGame.txt");
+	if (fo.fail())
+	{
+		std::cout << "Open file failed\n";
+		return;
+	}
+
+	fo.close();
+}
+
 int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level){
     
+	fileEmpty();
     sf::Texture imgTx;
     imgTx.loadFromFile("res/img/endgame.png");
     sf::Sprite imgSpr;
@@ -223,9 +279,9 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level)
     tScoreAtEnd.setColor(148, 235, 19);
     
     
-//	listHighScore HighScore;
-//	highScore scoreNew(score, level);
-//	HighScore.compareScore(scoreNew);
+	listHighScore HighScore(window.getSize().x, window.getSize().y);
+	highScore scoreNew(score, level);
+	HighScore.compareScore(scoreNew);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -234,7 +290,8 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level)
         while (window.pollEvent(event)) {
             switch (event.type) {
             case sf::Event::KeyPressed:         // sự kiện nhấn phím
-            case sf::Event::Closed:             // sự kiện đóng cửa sổ
+				return 0;
+			case sf::Event::Closed:             // sự kiện đóng cửa sổ
                 window.close();
                 break;
             default:

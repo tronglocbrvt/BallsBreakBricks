@@ -49,11 +49,10 @@ int listHighScore::readFile()
 	}
 
 	fi.seekg(0); // di chuyển con trỏ về đầu file
-	while (!fi.eof())
-	{
-		highScore A(0,1);
-		
-		fi >> A.level;
+	highScores.clear();
+	highScore A(-1, 1);
+	while (fi >> A.level)
+	{		
 		fi >> A.score;
 		fi >> A.date;
 		fi >> A.month;
@@ -99,12 +98,12 @@ void listHighScore::drawMenu(sf::RenderWindow& window)
 			for (int i = 0; i < highScores.size(); i++) // in các điểm cao
 			{ 
 				highScores[i].textHigh.setFont(highScores[i].font);
-				highScores[i].textHigh.setFillColor(sf::Color::White);
+				highScores[i].textHigh.setFillColor(sf::Color::Yellow);
 				highScores[i].name = "Level " + std::to_string(highScores[i].level) +"\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
 				highScores[i].textHigh.setString(highScores[i].name);
 				highScores[i].textHigh.setStyle(sf::Text::Regular);
 				highScores[i].textHigh.setCharacterSize(40);
-				setPositionText(highScores[i].textHigh, 280 + i * 80);
+				setPositionText(highScores[i].textHigh, 150 + i * 70);
 				window.draw(highScores[i].textHigh);
 
 			}
