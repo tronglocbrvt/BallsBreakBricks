@@ -34,6 +34,8 @@ private:
     float velocityX;
     float velocityY;
     float acceleration;
+    
+    bool crashedIntoTreasure;
 
     TextShow point1;
     TextShow point2;
@@ -55,6 +57,7 @@ public:
     void setPosY(float y);
 	void setPosXend(float x);
 	void setPosYend(float y);
+    void setVelocityXY(float velocityX, float velocityY);
 
     float getPosX();
     float getPosY();
@@ -65,6 +68,7 @@ public:
     void updateVelocityY();
 
     void resetPong(short toward); //     -1 - left ;     0 - random ;    1 - right
+    void resetPositionToMidBot();
 
     void scale(float width, float heigh);
     short moveBall(Pos positionBar, buildStage &stage, float &score);
@@ -81,6 +85,8 @@ public:
     float lengthOfVector();
     float distanceToPointFromCenter(sf::Vector2f point);
     sf::Vector2f middle();
+    
+    bool isGotTreasure();
 
     void draw(sf::RenderWindow& window);
 	friend class zoomBall;

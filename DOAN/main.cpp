@@ -4,6 +4,7 @@
 #include "BackGround.hpp"
 #include "Display.hpp"
 #include "Menu.hpp"
+#include "SpecialLevel.hpp"
 
 int main(int argc, const char* argv[]) {
 
@@ -17,7 +18,12 @@ int main(int argc, const char* argv[]) {
 //	listHighScore high(window.getSize().x, window.getSize().y);
     
 //    play(window, 1);
-    CPlay(window, 1);
+//    CPlay(window, 1);
+    
+    ThePong ball;
+    
+    SpecialLevel SStage(1);
+    SStage.runGame(window);
 
     /*
 	while (window.isOpen()) {

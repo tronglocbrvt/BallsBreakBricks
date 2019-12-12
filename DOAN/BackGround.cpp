@@ -75,7 +75,7 @@ float Table::startTableY(){
 
 // class table information
 // Tutorial table
-TableInf::TableInf(){
+TableInf::TableInf(short mode){
     
     // set vị trí của nền
     this->setPosition(_WIDTH_TABLE_GAME_ + _DIS_FROM_LEFT_ + 2*_THICK_LINE_, _DIS_FROM_TOP_ - _THICK_LINE_);
@@ -83,6 +83,20 @@ TableInf::TableInf(){
     
     // set default tỷ số điểm
     this->score = 0;
+    this->mode = mode;
+    this->time = sf::seconds(0.01f);
+    
+    switch (this->mode) {
+        case 0:             // person
+                
+            break;
+        case 1:             // computer
+            break;
+        case 2:             // special mode
+            break;
+        default:
+            break;
+    }
     
     this->tHeader.set(std::string("INSTRUCTION"), std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/10);
     this->tHeader.scale(1.6);
@@ -104,21 +118,23 @@ TableInf::TableInf(){
     this->tWeaponInf.scale(0.8);
     this->tWeaponInf.setOriginToMidHead();
     this->tWeaponInf.setColor(236, 3, 252);
-  
-    this->time = sf::seconds(0.01f);
-    
 }
 TableInf::~TableInf(){
     
 }
 
-void TableInf::setMode(bool isPerson){
-    this->isPerson = isPerson;
+void TableInf::setMode(short mode){
+    this->mode = mode;
+    
+    
 }
 
 void TableInf::setPosition(float x, float y){       // seter vị trí
     this->posX = x;
     this->posY = y;
+}
+short TableInf::getMode(){
+    return this->mode;
 }
 void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     
@@ -170,8 +186,8 @@ void TableInf::setScore(int score){        // thiết lập điểm ban đầu
 // ==================================================================
 
 // class background
-BackGround::BackGround(bool isPerson){
-    this->tableinf.setMode(isPerson);
+BackGround::BackGround(short mode) : tableinf(mode){
+    this->tableinf.setMode(mode);
     
     if (!this->BGimage.loadFromFile("res/img/BG_BreakBricks.png")) {
         std::cout << "Cant find file" << std::endl;
@@ -186,6 +202,10 @@ BackGround::~BackGround(){
 void BackGround::setScore(int score){          // thiết lập điểm
     this->tableinf.setScore(score);
 }
+short BackGround::getMode(){
+    return this->tableinf.getMode();
+}
+
 void BackGround::draw(sf::RenderWindow &window){        // vẽ nền
    
     window.draw(this->BGsprite);

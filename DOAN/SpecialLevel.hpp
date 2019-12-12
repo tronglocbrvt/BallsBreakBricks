@@ -13,21 +13,34 @@
 #include <string>
 #include <sstream>
 #include "PvsP.hpp"
+#include "buildStage.hpp"
 
 
-class SpecialLevel {
+class SpecialLevel{
 protected:
     std::string nameFile;
+    int level;
+    short health;
+    
+    ThePong ball;
+    buildStage stage;
+    BackGround bg;
+    
+    sf::Mouse mouse;
+    sf::Vertex wayOfBall[2];
+    
 public:
-    SpecialLevel();
-    SpecialLevel(std::string nameStage);
+    SpecialLevel(int stage);
     virtual ~SpecialLevel();
     
-    virtual void loadStage(std::string nameStage);
+    virtual void loadStage(int stage);
     
     virtual void showLoading();
+    virtual bool pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keyboard::Key key);
     
-    virtual void runGame(sf::RenderWindow &window);
+    virtual void setLine(sf::Vector2i toward);
+    virtual sf::Vector2i chooseLineOfFire(sf::RenderWindow& window);
+    virtual short runGame(sf::RenderWindow &window);
     
 };
 

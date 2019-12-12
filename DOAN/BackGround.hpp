@@ -44,7 +44,7 @@ private:
     
     int score;
     
-    bool isPerson;
+    short mode;
     
     // text
     TextShow tHeader;
@@ -62,12 +62,13 @@ private:
     sf::Clock clock;
     
 public:
-    TableInf();
+    TableInf(short mode);
     virtual ~TableInf();
     
-    void setMode(bool isPerson);
+    void setMode(short mode);
     void drawInfTable(sf::RenderWindow &window);
     void setPosition(float x, float y);
+    short getMode();
 
     void setScore(int score);
     
@@ -81,10 +82,11 @@ private:
     sf::Texture BGimage;
     sf::Sprite BGsprite;
 public:
-    BackGround(bool isPersonLeft);
+    BackGround(short mode);
     virtual ~BackGround();
     
     void setScore(int score);
+    short getMode();
     
     void draw(sf::RenderWindow &window);
     

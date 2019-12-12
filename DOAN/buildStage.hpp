@@ -16,7 +16,7 @@
 
 class buildStage
 {
-private: 
+protected: 
 	std::vector<Object*> listObject;
     float timeLimit;
     int maxScore;
@@ -32,6 +32,7 @@ private:
     
 public:
     buildStage(int stage);
+    buildStage(std::string nameFile);
     
     //void breakTheBrick(const sf::FloatRect& ballBound);
     void startClock();

@@ -83,4 +83,6 @@ enum TYPE_EFFECT_REWARD{
     EFFECT_ON_SCORE,
 };
 
+
 #endif /* Define_Header_h */
+

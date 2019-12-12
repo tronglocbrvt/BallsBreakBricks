@@ -198,7 +198,7 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level)
     const float sizeText = 0.06 * _HEIGH_SCREEN; // 6%
     const float disToBelowText = sizeText * 0.5;
     
-    TextShow tScore(std::string("Score:           ") + std::to_string(score), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, (_HEIGH_SCREEN - 4 * (sizeText + disToBelowText)) / 2);
+    TextShow tScore(std::string("Score:           ") + std::to_string(int(score)), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, (_HEIGH_SCREEN - 4 * (sizeText + disToBelowText)) / 2);
     tScore.setSize(sizeText);
     tScore.setOriginToTopHead();
     tScore.setColor(148, 235, 19);
@@ -216,8 +216,6 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level)
     tTimeLimit.setSize(sizeText);
     tTimeLimit.setOriginToTopHead();
     tTimeLimit.setColor(148, 235, 19);
-    
-    std::cout << (1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ) << std::endl;
     
     TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string( int(score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) )))), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
     tScoreAtEnd.setSize(sizeText);

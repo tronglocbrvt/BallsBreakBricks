@@ -1,8 +1,11 @@
 #include "Ball.hpp"
 
+
 // the pong class
 ThePong::ThePong() {
 
+    this->crashedIntoTreasure = false;
+    
     // load file ảnh và cài đặt thông số cho quả bóng
     if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
         std::cout << "Load file failed" << std::endl;
@@ -33,7 +36,7 @@ ThePong::ThePong() {
      */
     
     // điều chỉnh vị trí
-    this->imgSpr.setPosition(this->posX - this->posXend * 1.0 / 2, this->posY);
+    this->imgSpr.setPosition(this->posX, this->posY);
     
     this->point1.set(".", std::string("HACKED.ttf"), 0, 0);
 //    this->point1.scale(0.5);
@@ -126,6 +129,10 @@ void ThePong::setPosYend(float y)
 {
 	posYend = y;
 }
+void ThePong::setVelocityXY(float velocityX, float velocityY){
+    this->velocityX = velocityX;
+    this->velocityY = velocityY;
+}
 
 float ThePong::getPosX() {              // lấy vị trí x
     return this->posX;
@@ -166,6 +173,11 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
 
     // reset gia tốc
     this->acceleration = _ACCELERATION_;
+}
+void ThePong::resetPositionToMidBot(){
+    this->posX = _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_;
+    this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - this->posYend - _HEIGH_BAR_;
+    this->imgSpr.setPosition(this->posX, this->posY);
 }
 
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
@@ -282,6 +294,10 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
                    stage.mStage[i][j]->destroy();
                    score += stage.mStage[i][j]->getScore();
                    if (stage.mSignBricks[i][j] != -1) {
+                       if (stage.mSignBricks[i][j] == 8)
+                          {
+                              this->crashedIntoTreasure = true;
+                          }
                        stage.mSignBricks[i][j] = 0;
 //					   if (stage.mSignBricks[i][j] == 9)
 //					   {
@@ -461,6 +477,9 @@ sf::Vector2f ThePong::middle(){
     return sf::Vector2f(this->posX + this->posXend/2, this->posY + this->posYend/2);
 }
 
+bool ThePong::isGotTreasure(){
+    return this->crashedIntoTreasure;
+}
 
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
