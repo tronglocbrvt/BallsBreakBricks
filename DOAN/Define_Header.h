@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <math.h>
+#include <iostream>
 
 #define _WIDTH_SCREEN 980
 #define _HEIGH_SCREEN 540

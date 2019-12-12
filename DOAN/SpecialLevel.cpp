@@ -12,6 +12,7 @@
 SpecialLevel::SpecialLevel(int stage) : bg(2), stage(std::string("SpecialStage") + std::to_string(stage) + std::string(".txt")){
     
     this->bg.setTurn(1);
+    this->ball.setPosY(_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - ball.getHeight()/2);
     
 //    this->stage = 1;
     this->nameFile = std::string("SpecialStage") + std::to_string(stage) + std::string(".txt");
@@ -117,7 +118,13 @@ void SpecialLevel::setLine(sf::Vector2i toward){
     }
 
     
-
+    float degree = atan( (from.y - to.y) / (to.x - from.x) ) * 180 / M_PI;
+    if (degree < 0) {
+        degree = 180 + degree;
+    }
+    this->gun.rotateGun(degree);
+    
+    
     this->wayOfBall[0] = sf::Vertex(sf::Vector2f(from.x, from.y), sf::Color::Red);
     this->wayOfBall[1] = sf::Vertex(sf::Vector2f(to.x, to.y), sf::Color::Red);
 
@@ -160,6 +167,7 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
         this->ball.draw(window);
         this->stage.draw(window);
         window.draw(this->wayOfBall, 2, sf::Lines);
+        this->gun.draw(window);
         
         window.display();
     }
@@ -248,10 +256,11 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
         // in ra màn hình game
         window.clear();
 
-        bg.draw(window);
+        this->bg.draw(window);
 //        bar.draw(window);
-        ball.draw(window);
-        stage.draw(window);
+        this->ball.draw(window);
+        this->stage.draw(window);
+        this->gun.draw(window);
 //        window.draw(this->wayOfBall, 2, sf::Lines);
         
         window.display();

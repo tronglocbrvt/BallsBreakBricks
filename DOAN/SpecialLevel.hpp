@@ -14,6 +14,7 @@
 #include <sstream>
 #include "PvsP.hpp"
 #include "buildStage.hpp"
+#include "Gun.hpp"
 
 #define _MIN_RADIAN_ 40
 #define _MIN_Y_ (((_WIDTH_TABLE_GAME_ * 1.0) / 2) * tan(_MIN_RADIAN_ * M_PI / 180))
@@ -27,6 +28,7 @@ protected:
     ThePong ball;
     buildStage stage;
     BackGround bg;
+    Gun gun;
     
     sf::Mouse mouse;
     sf::Vertex wayOfBall[2];

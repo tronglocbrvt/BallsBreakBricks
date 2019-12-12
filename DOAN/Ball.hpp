@@ -58,7 +58,10 @@ public:
 	void setPosXend(float x);
 	void setPosYend(float y);
     void setVelocityXY(float velocityX, float velocityY);
+    void setMidBot();
 
+    float getHeight();
+    float getWidth();
     float getPosX();
     float getPosY();
     float getVelocityX();

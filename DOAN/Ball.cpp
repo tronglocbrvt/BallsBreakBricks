@@ -26,15 +26,6 @@ ThePong::ThePong() {
     // khởi động vị trí quả bóng tạo vị trí chính giữa màn hình chơi
     this->resetPong(0);
     
-//    this->velocityX = -0.3;
-//    this->velocityY = 0.2;
-    
-    /*
-     
-     
-     
-     */
-    
     // điều chỉnh vị trí
     this->imgSpr.setPosition(this->posX, this->posY);
     
@@ -137,10 +128,12 @@ void ThePong::setter(){
 
 void ThePong::setPosX(float x) {        // đặt vị trí x
     this->posX = x;
+    this->imgSpr.setPosition(this->posX, this->posY);
 }
 
 void ThePong::setPosY(float y) {        // đặt vị trí y
     this->posY = y;
+    this->imgSpr.setPosition(this->posX, this->posY);
 }
 void ThePong::setPosXend(float x)
 {
@@ -155,6 +148,12 @@ void ThePong::setVelocityXY(float velocityX, float velocityY){
     this->velocityY = velocityY;
 }
 
+float ThePong::getHeight(){
+    return this->posYend;
+}
+float ThePong::getWidth(){
+    return this->posXend;
+}
 float ThePong::getPosX() {              // lấy vị trí x
     return this->posX;
 }
@@ -179,7 +178,7 @@ void ThePong::updateVelocityY() {       // cập nhật tốc độ của x
 }
 void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho bóng, và đặt hướng đi ngẫu nhiên hay về một hướng
     // đưa bóng về giữa sân
-    this->posX = _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_;
+    this->posX = _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_ - this->posXend/2;
     this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - this->posYend - _HEIGH_BAR_;
 
     // đặt ngẫu nhiên tốc độ bóng
