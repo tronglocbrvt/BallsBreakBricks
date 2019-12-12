@@ -15,6 +15,8 @@
 #include "PvsP.hpp"
 #include "buildStage.hpp"
 
+#define _MIN_RADIAN_ 40
+#define _MIN_Y_ (((_WIDTH_TABLE_GAME_ * 1.0) / 2) * tan(_MIN_RADIAN_ * M_PI / 180))
 
 class SpecialLevel{
 protected:

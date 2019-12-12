@@ -72,6 +72,7 @@ bool SpecialLevel::pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keybo
 }
 
 void SpecialLevel::setLine(sf::Vector2i toward){
+    
     sf::Vector2f from = this->ball.middle();
     sf::Vector2f to;
 
@@ -100,8 +101,20 @@ void SpecialLevel::setLine(sf::Vector2i toward){
             to.y = _DIS_FROM_TOP_;
             to.x = (to.y - bet) / alp;
         }
+        
+        if (to.y > _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _MIN_Y_) {
+            to.y = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _MIN_Y_;
+            to.x = (to.y - bet) / alp;
+            if (to.x > _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_) {
+                to.x = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_;
+            }
+            else if (to.x < _DIS_FROM_LEFT_){
+                to.x = _DIS_FROM_LEFT_;
+            }
+        }
     }
 
+    
 
     this->wayOfBall[0] = sf::Vertex(sf::Vector2f(from.x, from.y), sf::Color::Red);
     this->wayOfBall[1] = sf::Vertex(sf::Vector2f(to.x, to.y), sf::Color::Red);
@@ -146,6 +159,12 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
         this->stage.draw(window);
         window.draw(this->wayOfBall, 2, sf::Lines);
 
+        sf::Vertex ver[2];
+        ver[0] = sf::Vertex(sf::Vector2f(_DIS_FROM_LEFT_, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _MIN_Y_), sf::Color::Red);
+        ver[1] = sf::Vertex(sf::Vector2f(_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _MIN_Y_), sf::Color::Red);
+        
+        window.draw(ver, 2, sf::Lines);
+        
         window.display();
     }
     return sf::Vector2i();
@@ -237,7 +256,7 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
         ball.draw(window);
         stage.draw(window);
 //        window.draw(this->wayOfBall, 2, sf::Lines);
-
+        
         window.display();
     }
     return 0;
