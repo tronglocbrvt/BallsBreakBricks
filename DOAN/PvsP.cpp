@@ -50,7 +50,7 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
 int play(sf::RenderWindow& window, int levelCur) {
 
     // khởi tạo sân, bóng, thanh
-	BackGround bg(1);
+	BackGround bg(0);
 	ThePong ball;
 //    ball.setPosX(225);
 //    ball.setPosY(150);

@@ -4,7 +4,7 @@
 int CPlay(sf::RenderWindow& window, int levelCur)   // máy
 {
     // khởi tạo sân, bóng, 2 thanh
-    BackGround bg(0);
+    BackGround bg(1);
     ThePong ball;
     TheBar bar;
 

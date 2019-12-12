@@ -83,41 +83,80 @@ TableInf::TableInf(short mode){
     
     // set default tỷ số điểm
     this->score = 0;
+    this->turn = 1;
+    this->maxturn = 3;
     this->mode = mode;
     this->time = sf::seconds(0.01f);
-    
-    switch (this->mode) {
-        case 0:             // person
-                
-            break;
-        case 1:             // computer
-            break;
-        case 2:             // special mode
-            break;
-        default:
-            break;
-    }
     
     this->tHeader.set(std::string("INSTRUCTION"), std::string("HACKED.ttf"), this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, _HEIGH_SCREEN/10);
     this->tHeader.scale(1.6);
     this->tHeader.setOriginToMidle();
     
-    this->tTutorial.set(std::string("        PRESS SPACE TO CONTINUE\n               OR ESC TO EXIT\n Press A or left-key to Move left\nPress D or right-key to Move right"), std::string("HACKED.ttf"), 0,0);
-    this->tTutorial.setOriginToMidTop();
-    this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);
-    this->tTutorial.scale(0.8);
-    this->tTutorial.setOriginToMidTop();
-    // điểm bên trái đạt được
+    switch (this->mode) {
+        case 0:             // person
+            this->tTutorial.set(std::string("        PRESS SPACE TO CONTINUE\n               OR ESC TO EXIT\n Press A or left-key to Move left\nPress D or right-key to Move right"), std::string("HACKED.ttf"), 0,0);
+            this->tTutorial.setOriginToMidTop();
+            this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);
+            this->tTutorial.scale(0.8);
+            this->tTutorial.setOriginToMidTop();
+            // điểm bên trái đạt được
+            
+            this->tScore.set( std::string("Score: ") + std::to_string(this->score), std::string("HACKED.ttf"),this->posX, this->tTutorial.getBottom() + 3*_SPACE_BET_OBJ_);
+            this->tScore.scale(0.8);
+            this->tScore.setOriginToMidHead();
+            this->tScore.setColor(236, 3, 252);
+            
+            this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
+            this->tWeaponInf.scale(0.8);
+            this->tWeaponInf.setOriginToMidHead();
+            this->tWeaponInf.setColor(236, 3, 252);
+            break;
+        case 1:             // computer
+            this->tTutorial.set(std::string("PRESS SPACE TO CONTINUE\n         OR ESC TO EXIT"), std::string("HACKED.ttf"), 0,0);
+            this->tTutorial.setOriginToMidTop();
+            this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);
+            this->tTutorial.scale(0.8);
+            this->tTutorial.setOriginToMidTop();
+            // điểm bên trái đạt được
+            
+            this->tScore.set( std::string("Score: ") + std::to_string(this->score), std::string("HACKED.ttf"),this->posX, this->tTutorial.getBottom() + 3*_SPACE_BET_OBJ_);
+            this->tScore.scale(0.8);
+            this->tScore.setOriginToMidHead();
+            this->tScore.setColor(236, 3, 252);
+            
+            this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
+            this->tWeaponInf.scale(0.8);
+            this->tWeaponInf.setOriginToMidHead();
+            this->tWeaponInf.setColor(236, 3, 252);
+            break;
+            break;
+        case 2:             // special mode
+            this->tTutorial.set(std::string("        PRESS SPACE TO CONTINUE\n               OR ESC TO EXIT\n USE MOUSE TO CHOOSE THE DIRECTION\n   AND PRESS LEFT-MOUSE TO SHOOT"), std::string("HACKED.ttf"), 0,0);
+            this->tTutorial.setOriginToMidTop();
+            this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);
+            this->tTutorial.scale(0.8);
+            this->tTutorial.setOriginToMidTop();
+            // điểm bên trái đạt được
+            
+            this->tScore.set( std::string("Turn: ") + std::to_string(this->turn) + std::string("/") + std::to_string(this->maxturn), std::string("HACKED.ttf"),this->posX, this->tTutorial.getBottom() + 3*_SPACE_BET_OBJ_);
+            this->tScore.scale(0.8);
+            this->tScore.setOriginToMidHead();
+            this->tScore.setColor(236, 3, 252);
+            
+            this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
+            this->tWeaponInf.scale(0.8);
+            this->tWeaponInf.setOriginToMidHead();
+            this->tWeaponInf.setColor(236, 3, 252);
+            break;
+            break;
+            break;
+        default:
+            break;
+    }
     
-    this->tScore.set( std::string("Score: ") + std::to_string(this->score), std::string("HACKED.ttf"),this->posX, this->tTutorial.getBottom() + 3*_SPACE_BET_OBJ_);
-    this->tScore.scale(0.8);
-    this->tScore.setOriginToMidHead();
-    this->tScore.setColor(236, 3, 252);
     
-    this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
-    this->tWeaponInf.scale(0.8);
-    this->tWeaponInf.setOriginToMidHead();
-    this->tWeaponInf.setColor(236, 3, 252);
+    
+    
 }
 TableInf::~TableInf(){
     
@@ -125,8 +164,6 @@ TableInf::~TableInf(){
 
 void TableInf::setMode(short mode){
     this->mode = mode;
-    
-    
 }
 
 void TableInf::setPosition(float x, float y){       // seter vị trí
@@ -180,7 +217,17 @@ void TableInf::setScore(int score){        // thiết lập điểm ban đầu
     this->score = score;
     this->tScore.setText(std::string("Score: ") + std::to_string(this->score));
 }
-
+void TableInf::setTurn(short turn){
+    this->turn = turn;
+    if (this->turn > this->maxturn) {
+        this->tScore.setText( std::string("Turn: -/-"));
+    }
+    
+    else this->tScore.setText( std::string("Turn: ") + std::to_string(this->turn) + std::string("/") + std::to_string(this->maxturn) );
+}
+void TableInf::setMaxTurn(short maxturn){
+    this->maxturn = maxturn;
+}
 
 // ==================================================================
 // ==================================================================
@@ -202,6 +249,13 @@ BackGround::~BackGround(){
 void BackGround::setScore(int score){          // thiết lập điểm
     this->tableinf.setScore(score);
 }
+void BackGround::setTurn(short turn){
+    this->tableinf.setTurn(turn);
+}
+void BackGround::setMaxTurn(short maxturn){
+    this->tableinf.setMaxTurn(maxturn);
+}
+
 short BackGround::getMode(){
     return this->tableinf.getMode();
 }

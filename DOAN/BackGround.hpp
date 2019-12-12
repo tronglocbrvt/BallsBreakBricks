@@ -43,6 +43,8 @@ private:
     float posY;
     
     int score;
+    short turn;
+    short maxturn;
     
     short mode;
     
@@ -71,6 +73,8 @@ public:
     short getMode();
 
     void setScore(int score);
+    void setTurn(short turn);
+    void setMaxTurn(short maxturn);
     
 };
 
@@ -86,6 +90,8 @@ public:
     virtual ~BackGround();
     
     void setScore(int score);
+    void setTurn(short turn);
+    void setMaxTurn(short maxturn);
     short getMode();
     
     void draw(sf::RenderWindow &window);

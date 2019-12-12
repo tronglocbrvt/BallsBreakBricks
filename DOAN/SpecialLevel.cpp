@@ -11,6 +11,8 @@
 
 SpecialLevel::SpecialLevel(int stage) : bg(2), stage(std::string("SpecialStage") + std::to_string(stage) + std::string(".txt")){
     
+    this->bg.setTurn(1);
+    
 //    this->stage = 1;
     this->nameFile = std::string("SpecialStage") + std::to_string(stage) + std::string(".txt");
     this->health = 3;
@@ -158,12 +160,6 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
         this->ball.draw(window);
         this->stage.draw(window);
         window.draw(this->wayOfBall, 2, sf::Lines);
-
-        sf::Vertex ver[2];
-        ver[0] = sf::Vertex(sf::Vector2f(_DIS_FROM_LEFT_, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _MIN_Y_), sf::Color::Red);
-        ver[1] = sf::Vertex(sf::Vector2f(_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _MIN_Y_), sf::Color::Red);
-        
-        window.draw(ver, 2, sf::Lines);
         
         window.display();
     }
@@ -232,6 +228,7 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
                 return 0;
             }
             else {
+                this->bg.setTurn(3 - this->health +1);
                 if (this->health == 0) {        // hết mạng để chơi
                     // do something
                     return EndGame(window, this->stage, (this->ball.isGotTreasure() ? 100 : 0), this->level, ball.isGotTreasure());
