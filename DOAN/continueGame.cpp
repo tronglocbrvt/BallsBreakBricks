@@ -62,7 +62,7 @@ continueGame::continueGame()
 			case 2:
 			case 3:
 				stage.mStage[i][j] = new NormalBrick(stage.mSignBricks[i][j]);
-				stage.maxScore += stage.mSignBricks[i][j];
+				stage.availableBricks++;
 				break;
 			case -1:    // rock
 				stage.mStage[i][j] = new RockBrick();
@@ -226,12 +226,12 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 			}
 			else {
 				if (1) {        // hết mạng để chơi
-					return EndGame(window, stage, (bar.getScores() == stage.getMaxScore() ? bar.getScores() : 0), level);
+					return EndGame(window, stage, bar.getScores(), level, (stage.getAvailableBricks() == 0));
 				}
 			}
 		}
-		if (bar.getScores() == stage.getMaxScore()) {
-			EndGame(window, stage, bar.getScores(), level);
+		if (stage.getAvailableBricks() == 0) {
+			EndGame(window, stage, bar.getScores(), level, true);
 		}
 
 		bar.setScores(score);

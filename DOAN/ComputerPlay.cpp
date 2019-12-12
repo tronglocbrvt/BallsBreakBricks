@@ -90,12 +90,12 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             else {
                 if (1) {        // hết mạng để chơi
                     // do something
-                    return EndGame(window, stage, (bar.getScores() == stage.getMaxScore() ? bar.getScores() : 0), levelCur);
+                    return EndGame(window, stage, bar.getScores(), levelCur, (stage.getAvailableBricks() == 0));
                 }
             }
         }
-        if (bar.getScores() == stage.getMaxScore()) {
-            EndGame(window, stage, bar.getScores(), levelCur);
+        if (stage.getAvailableBricks() == 0) {
+            EndGame(window, stage, bar.getScores(), levelCur, true);
         }
         
         bar.setScores(score);

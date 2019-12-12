@@ -19,7 +19,7 @@ class buildStage
 protected: 
 	std::vector<Object*> listObject;
     float timeLimit;
-    int maxScore;
+    int availableBricks;
     
     int mSignBricks[_NUMBER_OF_BRICKS_PER_LINE_][_NUMBER_OF_BRICKS_PER_LINE_];
     
@@ -44,7 +44,7 @@ public:
     float getTimeLimit();
     float getTimePlaying();
     void updateTime();
-    int getMaxScore();
+    int getAvailableBricks();
     friend class ThePong;
 	friend class continueGame;
 };

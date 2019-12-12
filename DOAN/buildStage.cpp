@@ -3,14 +3,14 @@
 buildStage::buildStage()
 {
 	this->time = sf::seconds(0.01f);
-	this->maxScore = 0;
+	this->availableBricks = 0;
 
 }
 
 buildStage::buildStage(int stage) {
     
     this->time = sf::seconds(0.01f);
-    this->maxScore = 0;
+    this->availableBricks = 0;
     
     std::fstream fs;
     std::stringstream stream;
@@ -42,7 +42,7 @@ buildStage::buildStage(int stage) {
                 case 2:
                 case 3:
                     this->mStage[i][j] = new NormalBrick(this->mSignBricks[i][j]);
-                    this->maxScore += this->mSignBricks[i][j];
+                    this->availableBricks++;
                     break;
                 case -1:    // rock
                     this->mStage[i][j] = new RockBrick();
@@ -70,7 +70,7 @@ buildStage::buildStage(int stage) {
 buildStage::buildStage(std::string nameFile){
     
     this->time = sf::seconds(0.01f);
-    this->maxScore = 0;
+    this->availableBricks = 0;
     
     std::fstream fs;
     std::stringstream stream;
@@ -102,7 +102,7 @@ buildStage::buildStage(std::string nameFile){
                 case 2:
                 case 3:
                     this->mStage[i][j] = new NormalBrick(this->mSignBricks[i][j]);
-                    this->maxScore += this->mSignBricks[i][j];
+                    this->availableBricks++;
                     break;
                 case -1:    // rock
                     this->mStage[i][j] = new RockBrick();
@@ -166,8 +166,8 @@ void buildStage::updateTime(){
     this->time += clock.getElapsedTime();
     clock.restart();
 }
-int buildStage::getMaxScore(){
-    return this->maxScore;
+int buildStage::getAvailableBricks(){
+    return this->availableBricks;
 }
 Brick* buildStage::getmStage(int i, int j)
 {

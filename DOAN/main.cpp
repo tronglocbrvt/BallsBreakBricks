@@ -12,11 +12,11 @@ int main(int argc, const char* argv[]) {
 	window.setFramerateLimit(FRAME);
 	window.setKeyRepeatEnabled(true);
 
-//    play(window, 1);
+    play(window, 1);
 //    CPlay(window, 1);
     
-    SpecialLevel SStage(1);
-    SStage.runGame(window);
+//    SpecialLevel SStage(1);
+//    SStage.runGame(window);
 
 //	Menu menu(window.getSize().x, window.getSize().y);
 //	helpMenu help(window.getSize().x, window.getSize().y);

@@ -319,6 +319,9 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
                           {
                               this->crashedIntoTreasure = true;
                           }
+                       else if (1 <= stage.mSignBricks[i][j] && stage.mSignBricks[i][j] <= 3){
+                           stage.availableBricks--;
+                       }
                        stage.mSignBricks[i][j] = 0;
 //					   if (stage.mSignBricks[i][j] == 9)
 //					   {

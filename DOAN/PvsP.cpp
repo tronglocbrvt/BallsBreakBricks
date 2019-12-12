@@ -70,7 +70,6 @@ int play(sf::RenderWindow& window, int levelCur) {
 
     buildStage stage(levelCur);
     float score = 0;
-    bool speepup = true;
 
     // khởi động chuỗi thông báo và tên
 	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
@@ -152,12 +151,12 @@ int play(sf::RenderWindow& window, int levelCur) {
             else {
                 if (1) {        // hết mạng để chơi
                     // do something
-                    return EndGame(window, stage, (bar.getScores() == stage.getMaxScore() ? bar.getScores() : 0), levelCur);
+                    return EndGame(window, stage, bar.getScores(), levelCur, (stage.getAvailableBricks() == 0));
                 }
             }
         }
-        if (bar.getScores() == stage.getMaxScore()) {
-            EndGame(window, stage, bar.getScores(), levelCur);
+        if (stage.getAvailableBricks() == 0) {
+            EndGame(window, stage, bar.getScores(), levelCur, true);
         }
         
         bar.setScores(score);
@@ -240,7 +239,7 @@ void fileEmpty() // làm cho file rỗng
 	fo.close();
 }
 
-int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level){
+int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level, bool isWinner){
     
 	fileEmpty();
     sf::Texture imgTx;
@@ -273,7 +272,16 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level)
     tTimeLimit.setOriginToTopHead();
     tTimeLimit.setColor(148, 235, 19);
     
-    TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string( int(score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) )))), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
+    int total;
+    if (isWinner) {
+        total =  int(score *(1 + (stage.getTimeLimit() - stage.getTimePlaying()) / (stage.getTimeLimit()) ));
+    }
+    else
+    {
+        total = int(score);
+    }
+    
+    TextShow tScoreAtEnd(std::string("Total Score:  ") + std::string(std::to_string(total)), std::string("HACKED.ttf"), _WIDTH_SCREEN / 2 - 5 * sizeText, tTimeLimit.getBottom() + disToBelowText);
     tScoreAtEnd.setSize(sizeText);
     tScoreAtEnd.setOriginToTopHead();
     tScoreAtEnd.setColor(148, 235, 19);
