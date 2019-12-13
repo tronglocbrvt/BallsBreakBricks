@@ -206,12 +206,6 @@ void ThePong::scale(float width, float heigh) {     // thay đổi kích thướ
 short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, BackGround& bg) {
 	if (timeEnd <= stage.getTimePlaying())
 	{
-		// load file ảnh và cài đặt thông số bóng
-		/*if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
-			std::cout << "Load file failed" << std::endl;
-		}
-		this->textureBall.setSmooth(true);
-		this->imgSpr.setTexture(this->textureBall);*/
 		if (checkGift == 3) // thay đổi size ball
 			scale(_SIZE_PONG_ / this->getWidth(), _SIZE_PONG_ / this->getHeight());
 
