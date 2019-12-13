@@ -209,3 +209,9 @@ void TheBar::moveToMidTabGame(){
         }
     }
 }
+float TheBar::rateOfChange(float posXOnBar){
+    float sectionToMid = abs(this->posX + this->longBar/2 - posXOnBar);
+    
+    return (4 * sectionToMid / this->longBar);
+    
+}

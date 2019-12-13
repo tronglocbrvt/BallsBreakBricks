@@ -239,6 +239,8 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
         else{
             this->velocityY *= -1;
         }
+        
+        
 
         // cập nhật vận tốc mới vì đã chạm thanh
         this->updateVelocityY();
