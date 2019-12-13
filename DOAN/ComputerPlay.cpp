@@ -95,7 +95,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             }
         }
         if (stage.getAvailableBricks() == 0) {
-            EndGame(window, stage, bar.getScores(), levelCur, true);
+            return EndGame(window, stage, bar.getScores(), levelCur, true);
         }
         
         bar.setScores(score);

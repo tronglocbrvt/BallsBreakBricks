@@ -156,7 +156,7 @@ int play(sf::RenderWindow& window, int levelCur) {
             }
         }
         if (stage.getAvailableBricks() == 0) {
-            EndGame(window, stage, bar.getScores(), levelCur, true);
+            return EndGame(window, stage, bar.getScores(), levelCur, true);
         }
         
         bar.setScores(score);
@@ -297,13 +297,13 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level,
         
         while (window.pollEvent(event)) {
             switch (event.type) {
-            case sf::Event::KeyPressed:         // sự kiện nhấn phím
-				return 0;
-			case sf::Event::Closed:             // sự kiện đóng cửa sổ
-                window.close();
-                break;
-            default:
-                continue;
+                case sf::Event::KeyPressed:         // sự kiện nhấn phím
+                    return 0;
+                case sf::Event::Closed:             // sự kiện đóng cửa sổ
+                    window.close();
+                    break;
+                default:
+                    continue;
             }
         }
         

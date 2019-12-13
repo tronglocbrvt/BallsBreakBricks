@@ -302,7 +302,7 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
             }
         }
         if (this->ball.isGotTreasure()) {
-            EndGame(window, this->stage, 100, this->level, true);
+            return EndGame(window, this->stage, 100, this->level, true);
         }
 
 
