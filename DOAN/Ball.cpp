@@ -218,7 +218,8 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 		else if (checkGift == 4) // thay đổi size bar
 			bar.scale(_WIDTH_BAR_ / bar.getLongBar(), _HEIGH_BAR_ / bar.getHeigh());
 		
-		bg.Giftimage.~Texture();
+		//bg.Giftimage.~Texture();
+		bg.Giftsprite.setPosition(0, 0);
 	
 		timeEnd = 1000;
 		checkGift = 0; // het vat pham
@@ -368,7 +369,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 						{
 							timeEnd = stage.getTimePlaying() + 10; // time cua moi vat pham la 10s
 							srand((int)time(0));
-							checkGift = 3 + rand() % 1; // random ngau nhien vat pham 
+							checkGift = 1 + rand() % 4; // random ngau nhien vat pham 
 							/*
 							1. Double Score
 							2. Divide Score
@@ -376,7 +377,19 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 							4. Widen Bar
 
 							 */
-							if (checkGift == 3)
+							if (checkGift == 1)
+							{
+								rewardItem* gift = new doubleScore;
+								gift->drawItem(bg);
+								delete gift;
+							}
+							else if (checkGift == 2)
+							{
+								rewardItem* gift = new divideScore;
+								gift->drawItem(bg);
+								delete gift;
+							}
+							else if (checkGift == 3)
 							{
 								rewardItem* gift = new zoomBall;
 								gift->runItem(*this);
@@ -387,6 +400,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 							{
 								rewardItem* gift = new widenBar;
 								gift->runItem(bar);
+								gift->drawItem(bg);
 								delete gift;
 							}
 						}

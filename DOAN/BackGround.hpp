@@ -53,7 +53,7 @@ private:
     TextShow tScore;
     
     TextShow tTutorial;
-    TextShow tWeaponInf;
+    TextShow tWeaponInf[5];
 //    TextShow
     
 //    TextShow point1;

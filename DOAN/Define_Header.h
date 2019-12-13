@@ -58,10 +58,11 @@ const sf::Color SPECIAL_BRICK = sf::Color(255, 202, 58);
 #define FRAME ((_WIDTH_TABLE_GAME_ * 1.0 / _VELOCITY_X_ < MAX_FRAME_LIMIT) ? (_WIDTH_TABLE_GAME_ * 1.0 / _VELOCITY_X_) : MAX_FRAME_LIMIT)
 
 namespace weapon {
-    const std::string fire_ball = "Fire Ball";
-    const std::string triple_ball = "Triple Ball";
-    const std::string small_ball = "Tiny Ball";
-    const std::string big_ball = "Big Ball";
+    const std::string double_score = "Double Score";
+    const std::string divide_score = "Divide Score";
+    const std::string widen_bar = "Widen Bar";
+	const std::string big_ball = "Big Ball";
+	const std::string become_rock = "Become Rock";
 }
 
 #define NumberOfColor 8

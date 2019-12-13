@@ -10,10 +10,6 @@ class TheBar;
 class buildStage;
 class rewardItem
 {
-protected:
-	sf::Texture textSpecial;
-	sf::Sprite imgSpecial;
-
 public:
 	rewardItem();
 	virtual ~rewardItem();

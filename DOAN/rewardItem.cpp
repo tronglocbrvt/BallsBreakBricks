@@ -23,14 +23,6 @@ void rewardItem::runItem(ThePong& ball)
 
 doubleScore::doubleScore()
 {
-	if (!this->textSpecial.loadFromFile("res/img/x2score.png")) {
-		std::cout << "Load file failed" << std::endl;
-		return;
-	}
-
-	this->textSpecial.setSmooth(true);
-	this->imgSpecial.setTexture(this->textSpecial);
-	imgSpecial.setPosition(600, 300);
 }
 
 doubleScore::~doubleScore()
@@ -51,19 +43,13 @@ void doubleScore::drawItem(BackGround& bg)
 
 	bg.Giftimage.setSmooth(true);
 	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.setPosition(600, 300);
+	bg.Giftsprite.scale(0.5, 0.5);
+	bg.Giftsprite.setPosition(800, 230);
 }
 
 divideScore::divideScore()
 {
-	if (!this->textSpecial.loadFromFile("res/img/divide.png")) {
-		std::cout << "Load file failed" << std::endl;
-		return;
-	}
-
-	this->textSpecial.setSmooth(true);
-	this->imgSpecial.setTexture(this->textSpecial);
-	imgSpecial.setPosition(600, 300);
+	
 }
 
 divideScore::~divideScore()
@@ -84,19 +70,13 @@ void divideScore::drawItem(BackGround& bg)
 
 	bg.Giftimage.setSmooth(true);
 	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.setPosition(600, 300);
+	bg.Giftsprite.scale(0.5,0.5);
+	bg.Giftsprite.setPosition(800, 230);
 }
 
 widenBar::widenBar()
 {
-	if (!this->textSpecial.loadFromFile("res/img/widen.png")) {
-		std::cout << "Load file failed" << std::endl;
-		return;
-	}
 
-	this->textSpecial.setSmooth(true);
-	this->imgSpecial.setTexture(this->textSpecial);
-	imgSpecial.setPosition(400, 300);
 }
 
 widenBar::~widenBar()
@@ -123,19 +103,13 @@ void widenBar::drawItem(BackGround& bg)
 
 	bg.Giftimage.setSmooth(true);
 	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.setPosition(600, 300); 
+	bg.Giftsprite.scale(0.6, 0.6);
+	bg.Giftsprite.setPosition(800, 230);
 }
 
 zoomBall::zoomBall()
 {
-	if (!this->textSpecial.loadFromFile("res/img/zoomBall.jpg")) {
-		std::cout << "Load file failed" << std::endl;
-		return;
-	}
-
-	this->textSpecial.setSmooth(true);
-	this->imgSpecial.setTexture(this->textSpecial);
-	imgSpecial.setPosition(400, 300);
+	
 }
 
 zoomBall::~zoomBall()
@@ -163,5 +137,6 @@ void zoomBall::drawItem(BackGround& bg)
 
 	bg.Giftimage.setSmooth(true);
 	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.setPosition(600, 300);
+	bg.Giftsprite.scale(0.1, 0.1);
+	bg.Giftsprite.setPosition(800, 230);
 }

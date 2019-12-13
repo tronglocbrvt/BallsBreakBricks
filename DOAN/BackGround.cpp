@@ -106,10 +106,30 @@ TableInf::TableInf(short mode){
             this->tScore.setOriginToMidHead();
             this->tScore.setColor(236, 3, 252);
             
-            this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
-            this->tWeaponInf.scale(0.8);
-            this->tWeaponInf.setOriginToMidHead();
-            this->tWeaponInf.setColor(236, 3, 252);
+			this->tWeaponInf[0].set(std::string("Gifts: ") + weapon::double_score, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
+			this->tWeaponInf[0].scale(0.8);
+			this->tWeaponInf[0].setOriginToMidHead();
+			this->tWeaponInf[0].setColor(236, 3, 252);
+
+			this->tWeaponInf[1].set(std::string("         ") + weapon::divide_score, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 2.5 * _SPACE_BET_OBJ_);
+			this->tWeaponInf[1].scale(0.8);
+			this->tWeaponInf[1].setOriginToMidHead();
+			this->tWeaponInf[1].setColor(236, 3, 252);
+
+			this->tWeaponInf[2].set(std::string("         ") + weapon::big_ball, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 4 * _SPACE_BET_OBJ_);
+			this->tWeaponInf[2].scale(0.8);
+			this->tWeaponInf[2].setOriginToMidHead();
+			this->tWeaponInf[2].setColor(236, 3, 252);
+
+			this->tWeaponInf[3].set(std::string("         ") + weapon::widen_bar, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 5.5 * _SPACE_BET_OBJ_);
+			this->tWeaponInf[3].scale(0.8);
+			this->tWeaponInf[3].setOriginToMidHead();
+			this->tWeaponInf[3].setColor(236, 3, 252);
+
+			this->tWeaponInf[4].set(std::string("         ") + weapon::become_rock, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 7 * _SPACE_BET_OBJ_);
+			this->tWeaponInf[4].scale(0.8);
+			this->tWeaponInf[4].setOriginToMidHead();
+			this->tWeaponInf[4].setColor(236, 3, 252);
             break;
         case 1:             // computer
             this->tTutorial.set(std::string("PRESS SPACE TO CONTINUE\n         OR ESC TO EXIT"), std::string("HACKED.ttf"), 0,0);
@@ -124,10 +144,30 @@ TableInf::TableInf(short mode){
             this->tScore.setOriginToMidHead();
             this->tScore.setColor(236, 3, 252);
             
-            this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
-            this->tWeaponInf.scale(0.8);
-            this->tWeaponInf.setOriginToMidHead();
-            this->tWeaponInf.setColor(236, 3, 252);
+            this->tWeaponInf[0].set(std::string("Gifts: ") + weapon::double_score, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
+            this->tWeaponInf[0].scale(0.8);
+            this->tWeaponInf[0].setOriginToMidHead();
+            this->tWeaponInf[0].setColor(236, 3, 252);
+
+			this->tWeaponInf[1].set(std::string("         ") + weapon::divide_score, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 2.5*_SPACE_BET_OBJ_);
+			this->tWeaponInf[1].scale(0.8);
+			this->tWeaponInf[1].setOriginToMidHead();
+			this->tWeaponInf[1].setColor(236, 3, 252);
+
+			this->tWeaponInf[2].set(std::string("         ") + weapon::big_ball, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 4*_SPACE_BET_OBJ_);
+			this->tWeaponInf[2].scale(0.8);
+			this->tWeaponInf[2].setOriginToMidHead();
+			this->tWeaponInf[2].setColor(236, 3, 252);
+
+			this->tWeaponInf[3].set(std::string("         ") + weapon::widen_bar, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 5.5*_SPACE_BET_OBJ_);
+			this->tWeaponInf[3].scale(0.8);
+			this->tWeaponInf[3].setOriginToMidHead();
+			this->tWeaponInf[3].setColor(236, 3, 252);
+
+			this->tWeaponInf[4].set(std::string("         ") + weapon::become_rock, std::string("HACKED.ttf"), this->posX, this->tScore.getBottom() + 7*_SPACE_BET_OBJ_);
+			this->tWeaponInf[4].scale(0.8);
+			this->tWeaponInf[4].setOriginToMidHead();
+			this->tWeaponInf[4].setColor(236, 3, 252);
             break;
             break;
         case 2:             // special mode
@@ -143,10 +183,10 @@ TableInf::TableInf(short mode){
             this->tScore.setOriginToMidHead();
             this->tScore.setColor(236, 3, 252);
             
-            this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
+           /* this->tWeaponInf.set( std::string("Weapon: ") + weapon::fire_ball, std::string("HACKED.ttf"),this->posX, this->tScore.getBottom() + _SPACE_BET_OBJ_);
             this->tWeaponInf.scale(0.8);
             this->tWeaponInf.setOriginToMidHead();
-            this->tWeaponInf.setColor(236, 3, 252);
+            this->tWeaponInf.setColor(236, 3, 252);*/
             break;
             break;
             break;
@@ -179,7 +219,11 @@ void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     this->tScore.drawText(window);
     this->tHeader.drawText(window);
     this->tTutorial.drawText(window);
-    this->tWeaponInf.drawText(window);
+
+	for (int i = 0; i < 5; i++)
+	{
+		tWeaponInf[i].drawText(window);
+	}
 	
     time += clock.getElapsedTime();
     switch (int(time.asSeconds() * SpeechChangeColor) % NumberOfColor) {
@@ -265,7 +309,9 @@ void BackGround::draw(sf::RenderWindow &window){        // vẽ nền
     window.draw(this->BGsprite);
     this->gameTable.drawTable(window);
     this->tableinf.drawInfTable(window);
-	window.draw(Giftsprite);
+
+	if(Giftsprite.getPosition() != sf::Vector2f(0,0))
+		window.draw(Giftsprite);
 }
 Table BackGround::getTableGame(){                       // getter nền game
     return this->gameTable;
