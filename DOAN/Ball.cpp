@@ -207,12 +207,12 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float 
 	if (timeEnd <= stage.getTimePlaying())
 	{
 		// load file ảnh và cài đặt thông số bóng
-		if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
+		/*if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
 			std::cout << "Load file failed" << std::endl;
 		}
 		this->textureBall.setSmooth(true);
-		this->imgSpr.setTexture(this->textureBall);
-		this->imgSpr.scale(_SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().x, _SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().y);
+		this->imgSpr.setTexture(this->textureBall);*/
+		scale(_SIZE_PONG_ / this->getWidth(), _SIZE_PONG_/this->getHeight());
 		timeEnd = 1000; 
 		checkGift = 0; // het vat pham
 
@@ -325,11 +325,16 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float 
                    
                    stage.mStage[i][j]->destroy();
                    score += stage.mStage[i][j]->getScore();
+				   std::cout << checkGift << std::endl;
 				   if (checkGift == 1)
 				   {
+					   std::cout << "1";
 					   rewardItem* gift = new doubleScore;
+					   std::cout << "2";
 					   gift->runItem(score, i, j, stage);
+					   std::cout << "3";
 					   gift->drawItem(window);
+					   std::cout << "4";
 					   delete gift;
 				   }
 				   else if (checkGift == 2)
@@ -360,7 +365,7 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float 
 					   {
 						   timeEnd = stage.getTimePlaying() + 5; // time cua moi vat pham la 10s
 						   srand((int)time(0));
-						   checkGift = 3 + rand() % 1; // random ngau nhien vat pham 
+						   checkGift = 1 + rand() % 1; // random ngau nhien vat pham 
 						   /*
 						   1. Double Score
 						   2. Divide Score
