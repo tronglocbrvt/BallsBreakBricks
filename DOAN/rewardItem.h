@@ -4,7 +4,7 @@
 #include "Ball.hpp"
 #include "Paddle.hpp"
 
-
+class BackGround;
 class ThePong;
 class TheBar;
 class buildStage;
@@ -21,7 +21,7 @@ public:
 	virtual void runItem(float& score, int i, int j, buildStage &stage);
 	virtual void runItem(TheBar& bar);
 	virtual void runItem(ThePong& ball);
-	void drawItem(sf::RenderWindow& window);
+	virtual void drawItem(BackGround& bg) = 0;
 };
 
 //===============================================================
@@ -33,6 +33,7 @@ public:
 	virtual ~doubleScore();
 
 	void runItem(float &score, int i, int j, buildStage& stage);
+	void drawItem(BackGround& bg);
 };
 
 //===============================================================
@@ -44,6 +45,7 @@ public:
 	virtual ~divideScore();
 
 	void runItem(float& score, int i, int j, buildStage& stage);
+	void drawItem(BackGround& bg);
 };
 
 
@@ -56,6 +58,7 @@ public:
 	virtual ~widenBar();
 
 	void runItem(TheBar& bar);
+	void drawItem(BackGround& bg);
 };
 
 //===============================================================
@@ -67,6 +70,7 @@ public:
 	virtual ~zoomBall();
 
 	void runItem(ThePong& ball);
+	void drawItem(BackGround& bg);
 };
 
 #endif

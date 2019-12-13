@@ -141,9 +141,9 @@ int play(sf::RenderWindow& window, int levelCur) {
 //		}
 		/*std::thread thread1(&ThePong::moveBall, &ball, std::ref(posBar), std::ref(stage));
 		std::thread thread2(&ThePong::moveBall, &ball1, std::ref(posBar), std::ref(stage));*/
-		float timeEnd = 1000;
-		int checkGift = 0;
-        short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, timeEnd, checkGift, bar, window);
+		static float timeEnd = 1000;
+		static int checkGift = 0;
+        short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, timeEnd, checkGift, bar, bg);
         stage.updateTime();
         
         if (staticOfBall == 1) {    // crashed into bottom line

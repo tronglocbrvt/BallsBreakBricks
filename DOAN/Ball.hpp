@@ -74,7 +74,7 @@ public:
     void resetPositionToMidBot();
 
     void scale(float width, float heigh);
-    short moveBall(Pos positionBar, buildStage &stage, float &score, float &timeEnd, int& checkGift, TheBar& bar, sf::RenderWindow& window);
+    short moveBall(Pos positionBar, buildStage &stage, float &score, float &timeEnd, int& checkGift, TheBar& bar, BackGround& bg);
 
     bool checkClashToBar(Pos position);
     void normalizePosX();

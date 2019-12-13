@@ -42,7 +42,7 @@ private:
     float posX;
     float posY;
     
-    int score;
+    float score;
     short turn;
     short maxturn;
     
@@ -72,7 +72,7 @@ public:
     void setPosition(float x, float y);
     short getMode();
 
-    void setScore(int score);
+    void setScore(float score);
     void setTurn(short turn);
     void setMaxTurn(short maxturn);
     
@@ -89,7 +89,7 @@ public:
     BackGround(short mode);
     virtual ~BackGround();
     
-    void setScore(int score);
+    void setScore(float score);
     void setTurn(short turn);
     void setMaxTurn(short maxturn);
     short getMode();
@@ -97,6 +97,9 @@ public:
     void draw(sf::RenderWindow &window);
     
     Table getTableGame();
+
+	sf::Texture Giftimage;
+	sf::Sprite Giftsprite;
 };
 
 #endif /* BackGround_hpp */
