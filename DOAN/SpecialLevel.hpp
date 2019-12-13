@@ -9,8 +9,10 @@
 #include "buildStage.hpp"
 #include "Gun.hpp"
 
-#define _MIN_RADIAN_ 20
+#define _MIN_RADIAN_ 30
+
 #define _MIN_Y_ (((_WIDTH_TABLE_GAME_ * 1.0) / 2) * tan(_MIN_RADIAN_ * M_PI / 180))
+#define _RADIUS_ 40
 
 class SpecialLevel{
 protected:
@@ -25,6 +27,7 @@ protected:
     
     sf::Mouse mouse;
     sf::Vertex wayOfBall[2];
+    
     
 public:
     SpecialLevel(int stage);

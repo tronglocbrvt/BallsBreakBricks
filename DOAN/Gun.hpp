@@ -4,6 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include "Define_Header.h"
 
+#include "BackGround.hpp"
+#include "Ball.hpp"
+#include "buildStage.hpp"
+
 class Gun {
 protected:
     sf::Texture texDais;
@@ -18,8 +22,9 @@ public:
     Gun();
     virtual ~Gun();
     
-    virtual void fire();
+    virtual void fire(sf::RenderWindow &window, BackGround &bg, buildStage &stage, ThePong &ball);
     virtual void rotateGun(float degree);
+    virtual sf::Vector2f getOrigin();
     
     virtual void draw(sf::RenderWindow &window);
 };
