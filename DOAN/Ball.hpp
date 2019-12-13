@@ -81,7 +81,7 @@ public:
     void normalizePosY();
     
     sf::FloatRect getBoundBall();
-    sf::Vector2f returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall, int checkGift);
+    sf::Vector2f returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall);
     
     bool checkGoDown();
     sf::Vector2f posAtBotInFuture();

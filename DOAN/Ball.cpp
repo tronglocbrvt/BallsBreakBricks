@@ -238,9 +238,8 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 	this->normalizePosY();
 
 	if ((this->posX <= _DIS_FROM_LEFT_) || (this->posX + this->posXend >= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
-
+		
 		this->velocityX *= -1;
-
 	}
 
 	// kiểm tra chạm thanh
@@ -251,9 +250,11 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 		// cập nhật vận tốc trên trục nếu có thay đổi
 		if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
+			
 			this->velocityX *= -1;
+		
 		}
-		else {
+		else {			
 			this->velocityY *= -1;
 		}
 
@@ -320,7 +321,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 						presentBall = sf::FloatRect(this->posX, this->posY, this->posXend, this->posYend);
 
-						ve = returnPosOnBorder(rectBrick, presentBall, this->pastBall, checkGift);
+						ve = returnPosOnBorder(rectBrick, presentBall, this->pastBall);
 
 						this->point4.setPosition(ve.x, ve.y);
 						this->posX = ve.x;
@@ -365,7 +366,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 						{
 							timeEnd = stage.getTimePlaying() + 10; // time cua moi vat pham la 10s
 							srand((int)time(0));
-							checkGift = 4 + rand() % 1; // random ngau nhien vat pham 
+							checkGift = 3 + rand() % 1; // random ngau nhien vat pham 
 							/*
 							1. Double Score
 							2. Divide Score
@@ -397,59 +398,59 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 			}
 
 		}
-
-		switch (checkGift)
-		{
-		case 1:
-		{
-			rewardItem* gift = new doubleScore;
-			gift->drawItem(window);
-			delete gift;
-			break;
-		}
-		case 2:
-		{
-			rewardItem* gift = new divideScore;
-			gift->drawItem(window);
-			delete gift;
-			break;
-		}
-		case 3:
-		{
-			rewardItem* gift = new zoomBall;
-			gift->drawItem(window);
-			delete gift;
-			break;
-		}
-		case 4:
-		{
-			rewardItem* gift = new widenBar;
-			gift->drawItem(window);
-			delete gift;
-			break;
-		}
-		default:
-			break;
-
-		}
-		// nếu chạm biên trên sẽ điều ngược lại trục tung
-		if (this->posY <= _DIS_FROM_TOP_) {
-			this->velocityY *= -1;
-		}
-
-		if (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)) {
-			stage.time += stage.clock.getElapsedTime();
-			stage.clock.~Clock();
-			this->velocityX = 0;
-			this->velocityY = 0;
-			return 1; // crashed
-		}
-
-		this->imgSpr.setPosition(this->posX, this->posY);
-
-		return 0;  // did not crash
-
 	}
+
+	/*switch (checkGift)
+	{
+	case 1:
+	{
+		rewardItem* gift = new doubleScore;
+		gift->drawItem(window);
+		delete gift;
+		break;
+	}
+	case 2:
+	{
+		rewardItem* gift = new divideScore;
+		gift->drawItem(window);
+		delete gift;
+		break;
+	}
+	case 3:
+	{
+		rewardItem* gift = new zoomBall;
+		gift->drawItem(window);
+		delete gift;
+		break;
+	}
+	case 4:
+	{
+		rewardItem* gift = new widenBar;
+		gift->drawItem(window);
+		delete gift;
+		break;
+	}
+	default:
+		break;
+
+	}*/
+	// nếu chạm biên trên sẽ điều ngược lại trục tung
+	if (this->posY <= _DIS_FROM_TOP_) {
+		this->velocityY *= -1;
+	}
+
+	if (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)) {
+		stage.time += stage.clock.getElapsedTime();
+		stage.clock.~Clock();
+		this->velocityX = 0;
+		this->velocityY = 0;
+		return 1; // crashed
+	}
+
+	this->imgSpr.setPosition(this->posX, this->posY);
+
+	return 0;  // did not crash
+
 }
 bool ThePong::checkClashToBar(Pos position) {        // bắt sự kiện va vào thanh trượt
     
@@ -490,7 +491,7 @@ void ThePong::normalizePosY() {         // điều chỉnh bóng không vượt 
 sf::FloatRect ThePong::getBoundBall(){
     return this->imgSpr.getGlobalBounds();
 }
-sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall, int checkGift){
+sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall){
 
     sf::Vector2f vect;
     
@@ -517,11 +518,14 @@ sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect prese
             
             vect.y = pastBall.top + (presentBall.top - pastBall.top) * (vect.x - pastBall.left) / (presentBall.left - pastBall.left);
             
-            this->velocityX *= -1;
+			if (checkGift != 3)
+				this->velocityX *= -1;
+			else
+				this->velocityX *= -1.5;
         }
         else
         {
-            this->velocityY *= -1;
+			this->velocityY *= -1;
         }
         
         this->point1.setPosition(pastBall.left, pastBall.top);
