@@ -242,6 +242,9 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             // cơ chế làm thay đổi hướng bóng khi chạm thanh
             float lengthVector = this->getVecloc();
             this->velocityX *= bar.rateOfChange(this->getBoundBall());
+            if (abs(this->velocityX) > lengthVector * cos(5 * M_PI / 180)) {
+                this->velocityX = lengthVector * cos(5 * M_PI / 180) * (this->velocityX / abs(this->velocityX));
+            }
             this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
         }
         
