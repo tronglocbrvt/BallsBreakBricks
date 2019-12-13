@@ -1,6 +1,6 @@
 #ifndef Ball_hpp
 #define Ball_hpp
-
+#define _USE_MATH_DEFINES
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "BackGround.hpp"

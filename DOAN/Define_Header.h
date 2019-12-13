@@ -35,7 +35,7 @@
 // tốc độ thay đổi thay trượt
 #define _VELOCITY_Y_BAR_STEP_ 0.1
 // tốc độ thay đổi vận tốc
-#define _ACCELERATION_ 1.02
+#define _ACCELERATION_ 1.01
 #define _ACCELERATION_BAR_ 5
 // cạnh quả bóng
 #define _SIZE_PONG_ 17
@@ -45,6 +45,9 @@
 
 #define _HEIGH_BAR_ 12
 #define _WIDTH_BAR_ (_WIDTH_TABLE_GAME_/3.8)
+
+#define _HEIGH_GIFT_ 100
+#define _WIDTH_GIFT_ 100
 
 #define _GOLDEN_RATIO_ ((1 + sqrt(5))/2)
 #define _NUMBER_OF_BRICKS_PER_LINE_ 17
