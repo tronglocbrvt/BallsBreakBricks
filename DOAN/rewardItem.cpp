@@ -21,12 +21,6 @@ void rewardItem::runItem(ThePong& ball)
 {
 }
 
-void rewardItem::drawItem(sf::RenderWindow& window)
-{
-	window.draw(imgSpecial);
-}
-
-
 doubleScore::doubleScore()
 {
 	if (!this->textSpecial.loadFromFile("res/img/x2score.png")) {
@@ -48,6 +42,18 @@ void doubleScore::runItem(float& score, int i, int j, buildStage& stage)
 	score += stage.getmStage(i, j)->getScore();
 }
 
+void doubleScore::drawItem(BackGround& bg)
+{
+	if (!bg.Giftimage.loadFromFile("res/img/x2score.png")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	bg.Giftimage.setSmooth(true);
+	bg.Giftsprite.setTexture(bg.Giftimage);
+	bg.Giftsprite.setPosition(600, 300);
+}
+
 divideScore::divideScore()
 {
 	if (!this->textSpecial.loadFromFile("res/img/divide.png")) {
@@ -67,6 +73,18 @@ divideScore::~divideScore()
 void divideScore::runItem(float& score, int i, int j, buildStage& stage)
 {
 	score -= (float)stage.getmStage(i, j)->getScore()/2;
+}
+
+void divideScore::drawItem(BackGround& bg)
+{
+	if (!bg.Giftimage.loadFromFile("res/img/divide.png")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	bg.Giftimage.setSmooth(true);
+	bg.Giftsprite.setTexture(bg.Giftimage);
+	bg.Giftsprite.setPosition(600, 300);
 }
 
 widenBar::widenBar()
@@ -96,6 +114,18 @@ void widenBar::runItem(TheBar& bar)
 	bar.setLongBar(bar.getLongBar() * bar.getImgSpr().getScale().x);
 }
 
+void widenBar::drawItem(BackGround& bg)
+{
+	if (!bg.Giftimage.loadFromFile("res/img/widen.png")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	bg.Giftimage.setSmooth(true);
+	bg.Giftsprite.setTexture(bg.Giftimage);
+	bg.Giftsprite.setPosition(600, 300); 
+}
+
 zoomBall::zoomBall()
 {
 	if (!this->textSpecial.loadFromFile("res/img/zoomBall.jpg")) {
@@ -122,4 +152,16 @@ void zoomBall::runItem(ThePong& ball)
 
 	// điều chỉnh vị trí
 	ball.imgSpr.setPosition(ball.posX - ball.posXend * 1.0 / 2, ball.posY);
+}
+
+void zoomBall::drawItem(BackGround& bg)
+{
+	if (!bg.Giftimage.loadFromFile("res/img/zoomBall.jpg")) {
+		std::cout << "Load file failed" << std::endl;
+		return;
+	}
+
+	bg.Giftimage.setSmooth(true);
+	bg.Giftsprite.setTexture(bg.Giftimage);
+	bg.Giftsprite.setPosition(600, 300);
 }

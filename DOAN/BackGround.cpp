@@ -265,8 +265,7 @@ void BackGround::draw(sf::RenderWindow &window){        // vẽ nền
     window.draw(this->BGsprite);
     this->gameTable.drawTable(window);
     this->tableinf.drawInfTable(window);
-    
-    
+	window.draw(Giftsprite);
 }
 Table BackGround::getTableGame(){                       // getter nền game
     return this->gameTable;

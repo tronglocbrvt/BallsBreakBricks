@@ -97,6 +97,9 @@ public:
     void draw(sf::RenderWindow &window);
     
     Table getTableGame();
+
+	sf::Texture Giftimage;
+	sf::Sprite Giftsprite;
 };
 
 #endif /* BackGround_hpp */

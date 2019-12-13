@@ -203,7 +203,7 @@ void ThePong::resetPositionToMidBot(){
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
     this->imgSpr.scale(width, heigh);
 }
-short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, sf::RenderWindow& window) {
+short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, BackGround& bg) {
 	if (timeEnd <= stage.getTimePlaying())
 	{
 		// load file ảnh và cài đặt thông số bóng
@@ -217,7 +217,9 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 		else if (checkGift == 4) // thay đổi size bar
 			bar.scale(_WIDTH_BAR_ / bar.getLongBar(), _HEIGH_BAR_ / bar.getHeigh());
-
+		
+		bg.Giftimage.~Texture();
+	
 		timeEnd = 1000;
 		checkGift = 0; // het vat pham
 
@@ -378,14 +380,13 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 							{
 								rewardItem* gift = new zoomBall;
 								gift->runItem(*this);
-								gift->drawItem(window);
+								gift->drawItem(bg);
 								delete gift;
 							}
 							else if (checkGift == 4)
 							{
 								rewardItem* gift = new widenBar;
 								gift->runItem(bar);
-								gift->drawItem(window);
 								delete gift;
 							}
 						}
