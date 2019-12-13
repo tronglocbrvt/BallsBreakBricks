@@ -232,6 +232,25 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 	// hàm di chuyển bóng
 
+    // kiểm tra chạm thanh
+    if (this->checkClashToBar(positionBar)) {
+        
+        this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
+        this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
+        
+        // cập nhật vận tốc trên trục nếu có thay đổi
+        if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
+            this->velocityX *= -1;
+        }
+        else{
+            this->velocityY *= -1;
+            
+            // cơ chế làm thay đổi hướng bóng khi chạm thanh
+            float lengthVector = this->getVecloc();
+            this->velocityX *= bar.rateOfChange(this->getBoundBall());
+            this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
+        }
+        
 	// thay đổi vị trí bóng
 	this->posX += this->velocityX;
 	this->posY += this->velocityY;
@@ -240,6 +259,146 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 	this->normalizePosX();
 	this->normalizePosY();
 
+    }
+    
+    // kiểm tra chạm gạch
+    
+     float middleX = this->posX + posXend/2;
+     float middleY = this->posY + posYend/2;
+     
+     short startX = (int)((middleX - _DIS_FROM_LEFT_) / (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_)) - 1;  // -1 -> 15
+     short startY = (int)((middleY - _DIS_FROM_TOP_) / (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_)) -1;     // -1 -> 16
+    
+    if (startX < 0) startX = 0;
+    if (startY < 0) startY = 0;
+    
+    if (startX < _NUMBER_OF_BRICKS_PER_LINE_ && startY < _NUMBER_OF_BRICKS_PER_LINE_) {
+        
+        unsigned short toX, toY;
+        switch (startX) {
+            case _NUMBER_OF_BRICKS_PER_LINE_ -2:    // 15
+            case _NUMBER_OF_BRICKS_PER_LINE_ -3:    // 14
+                toX = _NUMBER_OF_BRICKS_PER_LINE_ -1;
+                break;
+            default:
+                toX = startX +2;
+                break;
+        }
+        switch (startY) {
+            case _NUMBER_OF_BRICKS_PER_LINE_ -1:    // 16
+            case _NUMBER_OF_BRICKS_PER_LINE_ -2:    // 15
+            case _NUMBER_OF_BRICKS_PER_LINE_ -3:    // 14
+                toY = _NUMBER_OF_BRICKS_PER_LINE_ -1;
+                break;
+            default:
+                toY = startY +2;
+                break;
+        }
+        
+        int count = 0;
+        bool crashed = false;
+        sf::FloatRect presentBall;
+        sf::FloatRect rectBrick;
+        for (unsigned short i = startY; i <= toY; i++){
+           for (unsigned short j = startX; j <= toX; j++){
+               // làm cho zui thôi
+               if (stage.mSignBricks[i][j] != 0) {
+                   this->pointX[count++].setPosition(stage.mStage[i][j]->getBound().left, stage.mStage[i][j]->getBound().top);
+               }
+               // kiểm tra thật sự
+               sf::Vector2f ve;
+               if (stage.mSignBricks[i][j] != 0 && stage.mStage[i][j]->collision(this->imgSpr.getGlobalBounds())){
+                   
+                   if (!crashed) {
+                       rectBrick = stage.mStage[i][j]->getBound();
+                                          
+                      //==================================
+                      
+                       presentBall = sf::FloatRect(this->posX, this->posY, this->posXend, this->posYend);
+                                         
+                       ve = returnPosOnBorder(rectBrick, presentBall, this->pastBall);
+                       
+                       this->point4.setPosition(ve.x, ve.y);
+                       this->posX = ve.x;
+                       this->posY = ve.y;
+                      
+                   }
+                   
+                   crashed = true;
+                   
+                   stage.mStage[i][j]->destroy();
+                   score += stage.mStage[i][j]->getScore();
+//				   std::cout << checkGift << std::endl;
+				   if (checkGift == 1)
+				   {
+//					   std::cout << "1";
+					   rewardItem* gift = new doubleScore;
+//					   std::cout << "2";
+					   gift->runItem(score, i, j, stage);
+//					   std::cout << "3";
+					   gift->drawItem(window);
+//					   std::cout << "4";
+					   delete gift;
+				   }
+				   else if (checkGift == 2)
+				   {
+					   rewardItem* gift = new divideScore;
+					   gift->runItem(score, i, j, stage);
+					   gift->drawItem(window);
+					   delete gift;
+				   }
+                   if (stage.mSignBricks[i][j] != -1) {
+                       if (stage.mSignBricks[i][j] == 8)
+                          {
+                              this->crashedIntoTreasure = true;
+                          }
+                       else if (1 <= stage.mSignBricks[i][j] && stage.mSignBricks[i][j] <= 3){
+                           stage.availableBricks--;
+                       }
+
+					   if (stage.mSignBricks[i][j] == 9 && checkGift != 0)
+					   {
+						   stage.mSignBricks[i][j] = -1;
+						   delete stage.mStage[i][j];
+						   stage.mStage[i][j] = new RockBrick;
+						   continue;
+					   }
+
+					   else if (stage.mSignBricks[i][j] == 9 &&  checkGift == 0)
+					   {
+						   timeEnd = stage.getTimePlaying() + 5; // time cua moi vat pham la 10s
+						   srand((int)time(0));
+						   checkGift = 1 + rand() % 1; // random ngau nhien vat pham 
+						   /*
+						   1. Double Score
+						   2. Divide Score
+						   3. Zoom Ball
+						   4. Widen Bar
+						  
+							*/
+						   if (checkGift == 3)
+						   {
+							   rewardItem* gift = new zoomBall;
+							   gift->runItem(*this);
+							   gift->drawItem(window);
+							   delete gift;
+						   }
+						   else if (checkGift == 4)
+						   {
+							   rewardItem* gift = new widenBar;
+							   gift->runItem(bar);
+							   gift->drawItem(window);
+							   delete gift;
+						   }
+					   }
+					   stage.mSignBricks[i][j] = 0;
+                       delete stage.mStage[i][j];
+                   }
+                   
+               }
+                          
+           }
+           
 	if ((this->posX <= _DIS_FROM_LEFT_) || (this->posX + this->posXend >= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
 		
 		this->velocityX *= -1;
@@ -550,6 +709,9 @@ sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect prese
 bool ThePong::checkGoDown(){
     return (this->velocityY > 0);
 }
+bool ThePong::checkGoLeft(){
+    return (this->velocityX < 0);
+}
 sf::Vector2f ThePong::posAtBotInFuture(){
         
     float alp = (this->velocityY / this->velocityX);
@@ -610,7 +772,27 @@ sf::Vector2f ThePong::middle(){
 bool ThePong::isGotTreasure(){
     return this->crashedIntoTreasure;
 }
+float ThePong::getVecloc(){
+    return sqrt(sqr(this->velocityX) + sqr(this->velocityY));
+}
 
+sf::Vector2f ThePong::getReflexInfut(float posYFut, sf::Vector2f from){
+    sf::Vector2f futPoint;
+    
+    if (this->posX == this->pastBall.left) {
+        return sf::Vector2f(this->pastBall.left + pastBall.width/2, posYFut);
+    }
+    
+    // y = alp * x + bet
+    
+    float alp = - this->velocityY / this->velocityX;
+    float bet = from.y - alp * from.x;
+    
+    futPoint.y = posYFut;
+    futPoint.x = (futPoint.y - bet) / alp;
+    
+    return futPoint;
+}
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     

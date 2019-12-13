@@ -6,6 +6,8 @@
 #include <math.h>
 #include <iostream>
 
+#define _NAME_GAME_ "BALLS BREAK BRICKS"
+
 #define _WIDTH_SCREEN 980
 #define _HEIGH_SCREEN 540
 
