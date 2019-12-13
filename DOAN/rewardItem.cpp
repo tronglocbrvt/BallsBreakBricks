@@ -9,10 +9,23 @@ rewardItem::~rewardItem()
 {
 }
 
+void rewardItem::runItem(float& score, int i, int j, buildStage& stage)
+{
+}
+
+void rewardItem::runItem(TheBar& bar)
+{
+}
+
+void rewardItem::runItem(ThePong& ball)
+{
+}
+
 void rewardItem::drawItem(sf::RenderWindow& window)
 {
 	window.draw(imgSpecial);
 }
+
 
 doubleScore::doubleScore()
 {
@@ -23,15 +36,17 @@ doubleScore::doubleScore()
 
 	this->textSpecial.setSmooth(true);
 	this->imgSpecial.setTexture(this->textSpecial);
+	imgSpecial.setPosition(600, 300);
 }
 
 doubleScore::~doubleScore()
 {
 }
 
-void doubleScore::runItem(float& score, int i, int j)
+void doubleScore::runItem(float& score, int i, int j, buildStage& stage)
 {
-//	score += 2 * stage.getmStage(i, j)->getScore();
+	std::cout << "haha";
+	score += stage.getmStage(i, j)->getScore();
 }
 
 divideScore::divideScore()
@@ -43,35 +58,16 @@ divideScore::divideScore()
 
 	this->textSpecial.setSmooth(true);
 	this->imgSpecial.setTexture(this->textSpecial);
+	imgSpecial.setPosition(600, 300);
 }
 
 divideScore::~divideScore()
 {
 }
 
-void divideScore::runItem(float& score, int i, int j)
+void divideScore::runItem(float& score, int i, int j, buildStage& stage)
 {
-//	score += 0.5 * stage.getmStage(i, j)->getScore();
-}
-
-
-fireBall::fireBall()
-{
-	if (!this->textSpecial.loadFromFile("res/img/fireball.jpg")) {
-		std::cout << "Load file failed" << std::endl;
-		return;
-	}
-
-	this->textSpecial.setSmooth(true);
-	this->imgSpecial.setTexture(this->textSpecial);
-}
-
-fireBall::~fireBall()
-{
-}
-
-void fireBall::runItem()
-{
+	score -= stage.getmStage(i, j)->getScore()/2;
 }
 
 widenBar::widenBar()
@@ -83,6 +79,7 @@ widenBar::widenBar()
 
 	this->textSpecial.setSmooth(true);
 	this->imgSpecial.setTexture(this->textSpecial);
+	imgSpecial.setPosition(400, 300);
 }
 
 widenBar::~widenBar()
@@ -109,6 +106,7 @@ zoomBall::zoomBall()
 
 	this->textSpecial.setSmooth(true);
 	this->imgSpecial.setTexture(this->textSpecial);
+	imgSpecial.setPosition(400, 300);
 }
 
 zoomBall::~zoomBall()

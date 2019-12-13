@@ -12,7 +12,7 @@
 SpecialLevel::SpecialLevel(int stage) : bg(2), stage(std::string("SpecialStage") + std::to_string(stage) + std::string(".txt")){
     
     this->bg.setTurn(1);
-    this->ball.setPosY(_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - ball.getHeight()/2);
+    this->ball.setPosY(_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - ball.getHeight());
     
 //    this->stage = 1;
     this->nameFile = std::string("SpecialStage") + std::to_string(stage) + std::string(".txt");
@@ -226,8 +226,11 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
 //            }
             
         }
-
-        short staticOfBall = ball.moveBall(copyPos(0, 0, 0, 0), this->stage, score);
+		float timeEnd = -1;
+		int checkGift = 0;
+		TheBar bar;
+		short staticOfBall = ball.moveBall(copyPos(0,0,0,0), stage, score, timeEnd, checkGift, bar, window);
+        //short staticOfBall = ball.moveBall(copyPos(0, 0, 0, 0), this->stage, score);
         this->stage.updateTime();
 
         if (staticOfBall == 1) {    // crashed into bottom line

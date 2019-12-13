@@ -10,16 +10,16 @@ BallsHandler::~BallsHandler()
 
 void BallsHandler::moveBalls(TheBar& bar, buildStage &stage, int i, float &score)
 {
-	//for (int i = 0; i < aliveBalls(); i++)
-	//{
-		int check = myBalls[i].moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
+	////for (int i = 0; i < aliveBalls(); i++)
+	////{
+	//	int check = myBalls[i].moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
 
-		if (aliveBalls() > 1 && check == -1)
-		{
-			myBalls.erase(myBalls.begin() + i);
-			return;
-		}
-	//}
+	//	if (aliveBalls() > 1 && check == -1)
+	//	{
+	//		myBalls.erase(myBalls.begin() + i);
+	//		return;
+	//	}
+	////}
 }
 
 unsigned int BallsHandler::newBall()

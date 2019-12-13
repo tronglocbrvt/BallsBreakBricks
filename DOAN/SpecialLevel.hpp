@@ -1,13 +1,6 @@
-//
-//  SpecialLevel.hpp
-//  PongGame
-//
-//  Created by Thanh Phong Nguyen Dien on 12/11/19.
-//  Copyright © 2019 Thanh Phong Nguyen Dien. All rights reserved.
-//
-
 #ifndef SpecialLevel_hpp
 #define SpecialLevel_hpp
+#define _USE_MATH_DEFINES
 
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -16,7 +9,7 @@
 #include "buildStage.hpp"
 #include "Gun.hpp"
 
-#define _MIN_RADIAN_ 40
+#define _MIN_RADIAN_ 20
 #define _MIN_Y_ (((_WIDTH_TABLE_GAME_ * 1.0) / 2) * tan(_MIN_RADIAN_ * M_PI / 180))
 
 class SpecialLevel{

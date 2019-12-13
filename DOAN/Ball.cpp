@@ -203,8 +203,20 @@ void ThePong::resetPositionToMidBot(){
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
     this->imgSpr.scale(width, heigh);
 }
-short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
+short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float &timeEnd, int &checkGift, TheBar& bar, sf::RenderWindow& window) {
+	if (timeEnd <= stage.getTimePlaying())
+	{
+		// load file ảnh và cài đặt thông số bóng
+		if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
+			std::cout << "Load file failed" << std::endl;
+		}
+		this->textureBall.setSmooth(true);
+		this->imgSpr.setTexture(this->textureBall);
+		this->imgSpr.scale(_SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().x, _SIZE_PONG_ * 1.0 / this->imgSpr.getTexture()->getSize().y);
+		timeEnd = 1000; 
+		checkGift = 0; // het vat pham
 
+	}
     float pastPosX = this->posX;
     float pastPosY = this->posY;
     
@@ -313,6 +325,20 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
                    
                    stage.mStage[i][j]->destroy();
                    score += stage.mStage[i][j]->getScore();
+				   if (checkGift == 1)
+				   {
+					   rewardItem* gift = new doubleScore;
+					   gift->runItem(score, i, j, stage);
+					   gift->drawItem(window);
+					   delete gift;
+				   }
+				   else if (checkGift == 2)
+				   {
+					   rewardItem* gift = new divideScore;
+					   gift->runItem(score, i, j, stage);
+					   gift->drawItem(window);
+					   delete gift;
+				   }
                    if (stage.mSignBricks[i][j] != -1) {
                        if (stage.mSignBricks[i][j] == 8)
                           {
@@ -321,12 +347,43 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
                        else if (1 <= stage.mSignBricks[i][j] && stage.mSignBricks[i][j] <= 3){
                            stage.availableBricks--;
                        }
-                       stage.mSignBricks[i][j] = 0;
-//					   if (stage.mSignBricks[i][j] == 9)
-//					   {
-//						   SpecBricks special;
-//						   special.dropGift(*this, bar, positionBar); // ko ổn
-//					   }
+
+					   if (stage.mSignBricks[i][j] == 9 && checkGift != 0)
+					   {
+						   stage.mSignBricks[i][j] = -1;
+						   delete stage.mStage[i][j];
+						   stage.mStage[i][j] = new RockBrick;
+						   continue;
+					   }
+
+					   else if (stage.mSignBricks[i][j] == 9 &&  checkGift == 0)
+					   {
+						   timeEnd = stage.getTimePlaying() + 5; // time cua moi vat pham la 10s
+						   srand((int)time(0));
+						   checkGift = 3 + rand() % 1; // random ngau nhien vat pham 
+						   /*
+						   1. Double Score
+						   2. Divide Score
+						   3. Zoom Ball
+						   4. Widen Bar
+						  
+							*/
+						   if (checkGift == 3)
+						   {
+							   rewardItem* gift = new zoomBall;
+							   gift->runItem(*this);
+							   gift->drawItem(window);
+							   delete gift;
+						   }
+						   else if (checkGift == 4)
+						   {
+							   rewardItem* gift = new widenBar;
+							   gift->runItem(bar);
+							   gift->drawItem(window);
+							   delete gift;
+						   }
+					   }
+					   stage.mSignBricks[i][j] = 0;
                        delete stage.mStage[i][j];
                    }
                    
@@ -338,7 +395,40 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score) {
         
     }
     
-    
+	if (checkGift != 0)
+	{
+		switch (checkGift)
+		{
+		case 1:
+		{
+			rewardItem* gift = new doubleScore;
+			gift->drawItem(window);
+			delete gift;
+			break;
+		}
+		case 2:
+		{
+			rewardItem* gift = new divideScore;
+			gift->drawItem(window);
+			delete gift;
+			break;
+		}
+		case 3:
+		{
+			rewardItem* gift = new zoomBall;
+			gift->drawItem(window);
+			delete gift;
+			break;
+		}
+		case 4:
+		{
+			rewardItem* gift = new widenBar;
+			gift->drawItem(window);
+			delete gift;
+			break;
+		}
+		}
+	}
     
     // nếu chạm biên trên sẽ điều ngược lại trục tung
     if (this->posY <= _DIS_FROM_TOP_) {
