@@ -217,8 +217,8 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 				bar.moveToMidTabGame();
 			}
 		}
-		float timeEnd = 1000;
-		int checkGift = 0;
+		static float timeEnd = 1000;
+		static int checkGift = 0;
 		short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, timeEnd, checkGift, bar, window);		stage.updateTime();
 
 		if (staticOfBall == 1) {    // crashed into bottom line

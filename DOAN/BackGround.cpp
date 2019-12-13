@@ -213,7 +213,7 @@ void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     clock.restart();
     
 }
-void TableInf::setScore(int score){        // thiết lập điểm ban đầu
+void TableInf::setScore(float score){        // thiết lập điểm ban đầu
     this->score = score;
     this->tScore.setText(std::string("Score: ") + std::to_string(this->score));
 }
@@ -246,7 +246,7 @@ BackGround::~BackGround(){
     
 }
 
-void BackGround::setScore(int score){          // thiết lập điểm
+void BackGround::setScore(float score){          // thiết lập điểm
     this->tableinf.setScore(score);
 }
 void BackGround::setTurn(short turn){

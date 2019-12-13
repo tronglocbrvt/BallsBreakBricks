@@ -203,7 +203,7 @@ void ThePong::resetPositionToMidBot(){
 void ThePong::scale(float width, float heigh) {     // thay đổi kích thước bóng kiểu co giãn
     this->imgSpr.scale(width, heigh);
 }
-short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float &timeEnd, int &checkGift, TheBar& bar, sf::RenderWindow& window) {
+short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, sf::RenderWindow& window) {
 	if (timeEnd <= stage.getTimePlaying())
 	{
 		// load file ảnh và cài đặt thông số bóng
@@ -212,198 +212,192 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float 
 		}
 		this->textureBall.setSmooth(true);
 		this->imgSpr.setTexture(this->textureBall);*/
-		scale(_SIZE_PONG_ / this->getWidth(), _SIZE_PONG_/this->getHeight());
-		timeEnd = 1000; 
+		if (checkGift == 3) // thay đổi size ball
+			scale(_SIZE_PONG_ / this->getWidth(), _SIZE_PONG_ / this->getHeight());
+
+		else if (checkGift == 4) // thay đổi size bar
+			bar.scale(_WIDTH_BAR_ / bar.getLongBar(), _HEIGH_BAR_ / bar.getHeigh());
+
+		timeEnd = 1000;
 		checkGift = 0; // het vat pham
 
 	}
-    float pastPosX = this->posX;
-    float pastPosY = this->posY;
-    
-    this->pastBall = this->imgSpr.getGlobalBounds();
-    
-    // hàm di chuyển bóng
-    
-    // thay đổi vị trí bóng
-    this->posX += this->velocityX;
-    this->posY += this->velocityY;
-    
-    // điều chỉnh nếu bóng vượt biên
-    this->normalizePosX();
-    this->normalizePosY();
-    
-    if ((this->posX <= _DIS_FROM_LEFT_) || (this->posX + this->posXend >= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
+	float pastPosX = this->posX;
+	float pastPosY = this->posY;
 
-        this->velocityX *= -1;
+	this->pastBall = this->imgSpr.getGlobalBounds();
 
-    }
+	// hàm di chuyển bóng
 
-    // kiểm tra chạm thanh
-    if (this->checkClashToBar(positionBar)) {
-        
-        this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
-        this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
-        
-        // cập nhật vận tốc trên trục nếu có thay đổi
-        if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
-            this->velocityX *= -1;
-        }
-        else{
-            this->velocityY *= -1;
-        }
-        
-        
+	// thay đổi vị trí bóng
+	this->posX += this->velocityX;
+	this->posY += this->velocityY;
 
-        // cập nhật vận tốc mới vì đã chạm thanh
-        this->updateVelocityY();
-        this->updateVelocityX();
+	// điều chỉnh nếu bóng vượt biên
+	this->normalizePosX();
+	this->normalizePosY();
 
-    }
-    
-    // kiểm tra chạm gạch
-    
-     float middleX = this->posX + posXend/2;
-     float middleY = this->posY + posYend/2;
-     
-     short startX = (int)((middleX - _DIS_FROM_LEFT_) / (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_)) - 1;  // -1 -> 15
-     short startY = (int)((middleY - _DIS_FROM_TOP_) / (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_)) -1;     // -1 -> 16
-    
-    if (startX < 0) startX = 0;
-    if (startY < 0) startY = 0;
-    
-    if (startX < _NUMBER_OF_BRICKS_PER_LINE_ && startY < _NUMBER_OF_BRICKS_PER_LINE_) {
-        
-        unsigned short toX, toY;
-        switch (startX) {
-            case _NUMBER_OF_BRICKS_PER_LINE_ -2:    // 15
-            case _NUMBER_OF_BRICKS_PER_LINE_ -3:    // 14
-                toX = _NUMBER_OF_BRICKS_PER_LINE_ -1;
-                break;
-            default:
-                toX = startX +2;
-                break;
-        }
-        switch (startY) {
-            case _NUMBER_OF_BRICKS_PER_LINE_ -1:    // 16
-            case _NUMBER_OF_BRICKS_PER_LINE_ -2:    // 15
-            case _NUMBER_OF_BRICKS_PER_LINE_ -3:    // 14
-                toY = _NUMBER_OF_BRICKS_PER_LINE_ -1;
-                break;
-            default:
-                toY = startY +2;
-                break;
-        }
-        
-        int count = 0;
-        bool crashed = false;
-        sf::FloatRect presentBall;
-        sf::FloatRect rectBrick;
-        for (unsigned short i = startY; i <= toY; i++){
-           for (unsigned short j = startX; j <= toX; j++){
-               // làm cho zui thôi
-               if (stage.mSignBricks[i][j] != 0) {
-                   this->pointX[count++].setPosition(stage.mStage[i][j]->getBound().left, stage.mStage[i][j]->getBound().top);
-               }
-               // kiểm tra thật sự
-               sf::Vector2f ve;
-               if (stage.mSignBricks[i][j] != 0 && stage.mStage[i][j]->collision(this->imgSpr.getGlobalBounds())){
-                   
-                   if (!crashed) {
-                       rectBrick = stage.mStage[i][j]->getBound();
-                                          
-                      //==================================
-                      
-                       presentBall = sf::FloatRect(this->posX, this->posY, this->posXend, this->posYend);
-                                         
-                       ve = returnPosOnBorder(rectBrick, presentBall, this->pastBall);
-                       
-                       this->point4.setPosition(ve.x, ve.y);
-                       this->posX = ve.x;
-                       this->posY = ve.y;
-                      
-                   }
-                   
-                   crashed = true;
-                   
-                   stage.mStage[i][j]->destroy();
-                   score += stage.mStage[i][j]->getScore();
-				   std::cout << checkGift << std::endl;
-				   if (checkGift == 1)
-				   {
-					   std::cout << "1";
-					   rewardItem* gift = new doubleScore;
-					   std::cout << "2";
-					   gift->runItem(score, i, j, stage);
-					   std::cout << "3";
-					   gift->drawItem(window);
-					   std::cout << "4";
-					   delete gift;
-				   }
-				   else if (checkGift == 2)
-				   {
-					   rewardItem* gift = new divideScore;
-					   gift->runItem(score, i, j, stage);
-					   gift->drawItem(window);
-					   delete gift;
-				   }
-                   if (stage.mSignBricks[i][j] != -1) {
-                       if (stage.mSignBricks[i][j] == 8)
-                          {
-                              this->crashedIntoTreasure = true;
-                          }
-                       else if (1 <= stage.mSignBricks[i][j] && stage.mSignBricks[i][j] <= 3){
-                           stage.availableBricks--;
-                       }
+	if ((this->posX <= _DIS_FROM_LEFT_) || (this->posX + this->posXend >= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_)) {
 
-					   if (stage.mSignBricks[i][j] == 9 && checkGift != 0)
-					   {
-						   stage.mSignBricks[i][j] = -1;
-						   delete stage.mStage[i][j];
-						   stage.mStage[i][j] = new RockBrick;
-						   continue;
-					   }
+		this->velocityX *= -1;
 
-					   else if (stage.mSignBricks[i][j] == 9 &&  checkGift == 0)
-					   {
-						   timeEnd = stage.getTimePlaying() + 5; // time cua moi vat pham la 10s
-						   srand((int)time(0));
-						   checkGift = 1 + rand() % 1; // random ngau nhien vat pham 
-						   /*
-						   1. Double Score
-						   2. Divide Score
-						   3. Zoom Ball
-						   4. Widen Bar
-						  
-							*/
-						   if (checkGift == 3)
-						   {
-							   rewardItem* gift = new zoomBall;
-							   gift->runItem(*this);
-							   gift->drawItem(window);
-							   delete gift;
-						   }
-						   else if (checkGift == 4)
-						   {
-							   rewardItem* gift = new widenBar;
-							   gift->runItem(bar);
-							   gift->drawItem(window);
-							   delete gift;
-						   }
-					   }
-					   stage.mSignBricks[i][j] = 0;
-                       delete stage.mStage[i][j];
-                   }
-                   
-               }
-                          
-           }
+	}
 
-        }
-        
-    }
-    
-	if (checkGift != 0)
-	{
+	// kiểm tra chạm thanh
+	if (this->checkClashToBar(positionBar)) {
+
+		this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
+		this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
+
+		// cập nhật vận tốc trên trục nếu có thay đổi
+		if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
+			this->velocityX *= -1;
+		}
+		else {
+			this->velocityY *= -1;
+		}
+
+
+
+		// cập nhật vận tốc mới vì đã chạm thanh
+		this->updateVelocityY();
+		this->updateVelocityX();
+
+	}
+
+	// kiểm tra chạm gạch
+
+	float middleX = this->posX + posXend / 2;
+	float middleY = this->posY + posYend / 2;
+
+	short startX = (int)((middleX - _DIS_FROM_LEFT_) / (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_)) - 1;  // -1 -> 15
+	short startY = (int)((middleY - _DIS_FROM_TOP_) / (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_)) - 1;     // -1 -> 16
+
+	if (startX < 0) startX = 0;
+	if (startY < 0) startY = 0;
+
+	if (startX < _NUMBER_OF_BRICKS_PER_LINE_ && startY < _NUMBER_OF_BRICKS_PER_LINE_) {
+
+		unsigned short toX, toY;
+		switch (startX) {
+		case _NUMBER_OF_BRICKS_PER_LINE_ - 2:    // 15
+		case _NUMBER_OF_BRICKS_PER_LINE_ - 3:    // 14
+			toX = _NUMBER_OF_BRICKS_PER_LINE_ - 1;
+			break;
+		default:
+			toX = startX + 2;
+			break;
+		}
+		switch (startY) {
+		case _NUMBER_OF_BRICKS_PER_LINE_ - 1:    // 16
+		case _NUMBER_OF_BRICKS_PER_LINE_ - 2:    // 15
+		case _NUMBER_OF_BRICKS_PER_LINE_ - 3:    // 14
+			toY = _NUMBER_OF_BRICKS_PER_LINE_ - 1;
+			break;
+		default:
+			toY = startY + 2;
+			break;
+		}
+
+		int count = 0;
+		bool crashed = false;
+		sf::FloatRect presentBall;
+		sf::FloatRect rectBrick;
+		for (unsigned short i = startY; i <= toY; i++) {
+			for (unsigned short j = startX; j <= toX; j++) {
+				// làm cho zui thôi
+				if (stage.mSignBricks[i][j] != 0) {
+					this->pointX[count++].setPosition(stage.mStage[i][j]->getBound().left, stage.mStage[i][j]->getBound().top);
+				}
+				// kiểm tra thật sự
+				sf::Vector2f ve;
+				if (stage.mSignBricks[i][j] != 0 && stage.mStage[i][j]->collision(this->imgSpr.getGlobalBounds())) {
+
+					if (!crashed) {
+						rectBrick = stage.mStage[i][j]->getBound();
+
+						//==================================
+
+						presentBall = sf::FloatRect(this->posX, this->posY, this->posXend, this->posYend);
+
+						ve = returnPosOnBorder(rectBrick, presentBall, this->pastBall, checkGift);
+
+						this->point4.setPosition(ve.x, ve.y);
+						this->posX = ve.x;
+						this->posY = ve.y;
+
+					}
+
+					crashed = true;
+					stage.mStage[i][j]->destroy();
+					score += stage.mStage[i][j]->getScore();
+					if (checkGift == 1)
+					{
+						rewardItem* gift = new doubleScore;
+						gift->runItem(score, i, j, stage);
+						delete gift;
+					}
+					else if (checkGift == 2)
+					{
+						rewardItem* gift = new divideScore;
+						gift->runItem(score, i, j, stage);
+						delete gift;
+					}
+					if (stage.mSignBricks[i][j] != -1) {
+						if (stage.mSignBricks[i][j] == 8)
+						{
+							this->crashedIntoTreasure = true;
+						}
+						else if (1 <= stage.mSignBricks[i][j] && stage.mSignBricks[i][j] <= 3) {
+							stage.availableBricks--;
+						}
+
+						if (stage.mSignBricks[i][j] == 9 && checkGift != 0)
+						{
+							stage.mSignBricks[i][j] = -1;
+							delete stage.mStage[i][j];
+							stage.mStage[i][j] = new RockBrick;
+							stage.mStage[i][j]->set(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_), _WIDTH_BRICK_, _WIDTH_BRICK_ / _GOLDEN_RATIO_, stage.mSignBricks[i][j]);
+							continue;
+						}
+
+						else if (stage.mSignBricks[i][j] == 9 && checkGift == 0)
+						{
+							timeEnd = stage.getTimePlaying() + 10; // time cua moi vat pham la 10s
+							srand((int)time(0));
+							checkGift = 4 + rand() % 1; // random ngau nhien vat pham 
+							/*
+							1. Double Score
+							2. Divide Score
+							3. Zoom Ball
+							4. Widen Bar
+
+							 */
+							if (checkGift == 3)
+							{
+								rewardItem* gift = new zoomBall;
+								gift->runItem(*this);
+								gift->drawItem(window);
+								delete gift;
+							}
+							else if (checkGift == 4)
+							{
+								rewardItem* gift = new widenBar;
+								gift->runItem(bar);
+								gift->drawItem(window);
+								delete gift;
+							}
+						}
+						stage.mSignBricks[i][j] = 0;
+						delete stage.mStage[i][j];
+					}
+
+				}
+
+			}
+
+		}
+
 		switch (checkGift)
 		{
 		case 1:
@@ -434,28 +428,29 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float 
 			delete gift;
 			break;
 		}
+		default:
+			break;
+
 		}
+		// nếu chạm biên trên sẽ điều ngược lại trục tung
+		if (this->posY <= _DIS_FROM_TOP_) {
+			this->velocityY *= -1;
+		}
+
+		if (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)) {
+			stage.time += stage.clock.getElapsedTime();
+			stage.clock.~Clock();
+			this->velocityX = 0;
+			this->velocityY = 0;
+			return 1; // crashed
+		}
+
+		this->imgSpr.setPosition(this->posX, this->posY);
+
+		return 0;  // did not crash
+
 	}
-    
-    // nếu chạm biên trên sẽ điều ngược lại trục tung
-    if (this->posY <= _DIS_FROM_TOP_) {
-        this->velocityY *= -1;
-    }
-    
-    if (this->posY + this->posYend >= (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)) {
-        stage.time += stage.clock.getElapsedTime();
-        stage.clock.~Clock();
-        this->velocityX = 0;
-        this->velocityY = 0;
-        return 1; // crashed
-    }
-
-    this->imgSpr.setPosition(this->posX, this->posY);
-    
-    return 0;  // did not crash
-
 }
-
 bool ThePong::checkClashToBar(Pos position) {        // bắt sự kiện va vào thanh trượt
     
     if (this->posY + this->posYend > position.y) {
@@ -495,7 +490,7 @@ void ThePong::normalizePosY() {         // điều chỉnh bóng không vượt 
 sf::FloatRect ThePong::getBoundBall(){
     return this->imgSpr.getGlobalBounds();
 }
-sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall){
+sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall, int checkGift){
 
     sf::Vector2f vect;
     

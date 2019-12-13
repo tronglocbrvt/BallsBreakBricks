@@ -45,7 +45,6 @@ doubleScore::~doubleScore()
 
 void doubleScore::runItem(float& score, int i, int j, buildStage& stage)
 {
-	std::cout << "haha";
 	score += stage.getmStage(i, j)->getScore();
 }
 
@@ -67,7 +66,7 @@ divideScore::~divideScore()
 
 void divideScore::runItem(float& score, int i, int j, buildStage& stage)
 {
-	score -= stage.getmStage(i, j)->getScore()/2;
+	score -= (float)stage.getmStage(i, j)->getScore()/2;
 }
 
 widenBar::widenBar()
@@ -115,7 +114,7 @@ zoomBall::~zoomBall()
 
 void zoomBall::runItem(ThePong& ball)
 {
-	ball.scale(2.0, 2.0);
+	ball.scale(1.5, 1.5);
 
 	// getter vị trí cuối cùng quả bóng
 	ball.posXend = ball.imgSpr.getTexture()->getSize().x * ball.imgSpr.getScale().x;
