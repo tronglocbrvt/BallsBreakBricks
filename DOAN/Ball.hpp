@@ -91,6 +91,7 @@ public:
     float distanceToPointFromCenter(sf::Vector2f point);
     sf::Vector2f middle();
     
+    bool isNearlyVertical();
     bool isGotTreasure();
     float getVecloc();
     sf::Vector2f getReflexInfut(float posYFut, sf::Vector2f from);

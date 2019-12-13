@@ -132,7 +132,7 @@ void zoomBall::runItem(ThePong& ball)
 	// getter vị trí cuối cùng quả bóng
 	ball.posXend = ball.imgSpr.getTexture()->getSize().x * ball.imgSpr.getScale().x;
 	ball.posYend = ball.imgSpr.getTexture()->getSize().y * ball.imgSpr.getScale().y;
-
+    
 	// điều chỉnh vị trí
 	ball.imgSpr.setPosition(ball.posX - ball.posXend * 1.0 / 2, ball.posY);
 }

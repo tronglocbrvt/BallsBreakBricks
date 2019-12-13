@@ -79,16 +79,24 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             
             float rateOfChange = abs(nearest.x - (bar.getPosMidXOfPaddle())) / abs(reflex.x - (bar.getPosMidXOfPaddle()));
             
+//            std::cout << rateOfChange << " - " << abs(reflex.x - (bar.getPosMidXOfPaddle())) << " = " << abs(nearest.x - (bar.getPosMidXOfPaddle())) << std::endl;
+            
             if (rateOfChange > 2) {
                 rateOfChange = 2;
             }
             
             if (futurePos.x < (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) {
-                bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+                if ((0.85 <= rateOfChange && rateOfChange <= 1.15) && ball.isNearlyVertical()) {
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
+                }
+                else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
             else
             {
-                bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+                if ((0.85 <= rateOfChange && rateOfChange <= 1.15) && ball.isNearlyVertical()) {
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
+                }
+                else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
             
             
