@@ -90,7 +90,6 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             {
                 bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
-            std::cout << abs(nearest.x - (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) << " | " << abs(reflex.x - (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) << " =| " << rateOfChange << std::endl;
             
             
             // di chuyển thanh tới đón bóng
