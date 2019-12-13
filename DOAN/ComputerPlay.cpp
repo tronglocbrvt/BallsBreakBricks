@@ -86,11 +86,17 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             }
             
             if (futurePos.x < (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) {
-                bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+                if ((0.85 <= rateOfChange && rateOfChange <= 1.15) && ball.isNearlyVertical()) {
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
+                }
+                else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
             else
             {
-                bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+                if ((0.85 <= rateOfChange && rateOfChange <= 1.15) && ball.isNearlyVertical()) {
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
+                }
+                else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
             
             

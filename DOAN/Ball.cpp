@@ -578,6 +578,11 @@ sf::Vector2f ThePong::middle(){
     return sf::Vector2f(this->posX + this->posXend/2, this->posY + this->posYend/2);
 }
 
+
+bool ThePong::isNearlyVertical(){
+    return (abs(pastBall.left - this->posX) <= 5);
+    
+}
 bool ThePong::isGotTreasure(){
     return this->crashedIntoTreasure;
 }
