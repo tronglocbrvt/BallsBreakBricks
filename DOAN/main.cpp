@@ -12,7 +12,7 @@ int main(int argc, const char* argv[]) {
 	window.setFramerateLimit(FRAME);
 	window.setKeyRepeatEnabled(true);
 
-   //play(window, 1);
+//   play(window, 1);
    CPlay(window, 1);
     
    /* SpecialLevel SStage(2);

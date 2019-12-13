@@ -12,6 +12,8 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
     float score = 0;
     bool speepup = true;
     
+    sf::Vertex lineAlp1[2];
+    sf::Vertex lineAlp2[2];
 
     // khởi động chuỗi thông báo và tên
     TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
@@ -57,6 +59,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
         if (ball.checkGoDown()) {
             sf::Vector2f futurePos = ball.posAtBotInFuture();
 
+            // tăng tốc nếu cần
             if (speepup) {
                 float rateDis = ((ball.distanceToPointFromCenter(futurePos)/ball.lengthOfVector()) / abs(bar.disToBar(futurePos)/bar.getSpeed()));
                 if (0 < rateDis && rateDis < 1) {
@@ -64,13 +67,42 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
                 }
             }
 
-            if (bar.getPosMidXOfPaddle() < futurePos.x) {
+            // test
+            sf::Vector2f nearest = stage.nearestBrickToPoint(futurePos, ball.checkGoLeft());
+            sf::Vector2f reflex = ball.getReflexInfut(nearest.y, futurePos);
+            
+            lineAlp1[0] = sf::Vertex(futurePos, sf::Color::Black);
+            lineAlp1[1] = sf::Vertex(nearest, sf::Color::Black);
+
+            lineAlp2[0] = sf::Vertex(futurePos, sf::Color::Blue);
+            lineAlp2[1] = sf::Vertex(reflex, sf::Color::Blue);
+            
+            float rateOfChange = abs(nearest.x - (bar.getPosMidXOfPaddle())) / abs(reflex.x - (bar.getPosMidXOfPaddle()));
+            
+            if (rateOfChange > 2) {
+                rateOfChange = 2;
+            }
+            
+            if (futurePos.x < (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) {
+                bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+            }
+            else
+            {
+                bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+            }
+            std::cout << abs(nearest.x - (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) << " | " << abs(reflex.x - (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) << " =| " << rateOfChange << std::endl;
+            
+            
+            // di chuyển thanh tới đón bóng
+            if (bar.getCatchPoint().x < futurePos.x) {
                 bar.moveBar(window, false, true);
             }
-            else if (bar.getPosMidXOfPaddle() > futurePos.x)
+            else if (bar.getCatchPoint().x > futurePos.x)
             {
                 bar.moveBar(window, true, false);
             }
+            
+            
             speepup = false;
         }
         else
@@ -109,6 +141,9 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
         bar.draw(window);
         ball.draw(window);
         stage.draw(window);
+        
+        window.draw(lineAlp1, 2, sf::Lines);
+        window.draw(lineAlp2, 2, sf::Lines);
 
         window.display();
     }

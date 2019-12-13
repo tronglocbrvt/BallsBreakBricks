@@ -45,6 +45,9 @@ public:
     float getTimePlaying();
     void updateTime();
     int getAvailableBricks();
+    
+    sf::Vector2f nearestBrickToPoint(sf::Vector2f point, bool left);
+    
     friend class ThePong;
 	friend class continueGame;
 };

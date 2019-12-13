@@ -45,7 +45,7 @@ doubleScore::~doubleScore()
 
 void doubleScore::runItem(float& score, int i, int j, buildStage& stage)
 {
-	std::cout << "haha";
+//	std::cout << "haha";
 	score += stage.getmStage(i, j)->getScore();
 }
 

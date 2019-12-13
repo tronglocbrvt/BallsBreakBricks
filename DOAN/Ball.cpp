@@ -250,8 +250,12 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float 
         }
         else{
             this->velocityY *= -1;
+            
+            // cơ chế làm thay đổi hướng bóng khi chạm thanh
+            float lengthVector = this->getVecloc();
+            this->velocityX *= bar.rateOfChange(this->getBoundBall());
+            this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
         }
-        
         
 
         // cập nhật vận tốc mới vì đã chạm thanh
@@ -327,16 +331,16 @@ short ThePong::moveBall(Pos positionBar, buildStage &stage, float &score, float 
                    
                    stage.mStage[i][j]->destroy();
                    score += stage.mStage[i][j]->getScore();
-				   std::cout << checkGift << std::endl;
+//				   std::cout << checkGift << std::endl;
 				   if (checkGift == 1)
 				   {
-					   std::cout << "1";
+//					   std::cout << "1";
 					   rewardItem* gift = new doubleScore;
-					   std::cout << "2";
+//					   std::cout << "2";
 					   gift->runItem(score, i, j, stage);
-					   std::cout << "3";
+//					   std::cout << "3";
 					   gift->drawItem(window);
-					   std::cout << "4";
+//					   std::cout << "4";
 					   delete gift;
 				   }
 				   else if (checkGift == 2)
@@ -540,6 +544,9 @@ sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect prese
 bool ThePong::checkGoDown(){
     return (this->velocityY > 0);
 }
+bool ThePong::checkGoLeft(){
+    return (this->velocityX < 0);
+}
 sf::Vector2f ThePong::posAtBotInFuture(){
         
     float alp = (this->velocityY / this->velocityX);
@@ -600,7 +607,27 @@ sf::Vector2f ThePong::middle(){
 bool ThePong::isGotTreasure(){
     return this->crashedIntoTreasure;
 }
+float ThePong::getVecloc(){
+    return sqrt(sqr(this->velocityX) + sqr(this->velocityY));
+}
 
+sf::Vector2f ThePong::getReflexInfut(float posYFut, sf::Vector2f from){
+    sf::Vector2f futPoint;
+    
+    if (this->posX == this->pastBall.left) {
+        return sf::Vector2f(this->pastBall.left + pastBall.width/2, posYFut);
+    }
+    
+    // y = alp * x + bet
+    
+    float alp = - this->velocityY / this->velocityX;
+    float bet = from.y - alp * from.x;
+    
+    futPoint.y = posYFut;
+    futPoint.x = (futPoint.y - bet) / alp;
+    
+    return futPoint;
+}
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     

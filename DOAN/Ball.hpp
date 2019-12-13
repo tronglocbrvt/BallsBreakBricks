@@ -13,7 +13,7 @@
 #include "buildStage.hpp"
 
 
-#define _NAME_GAME_ "BALLS BREAK BRICKS"
+#define _MAX_RAD_BET_VEC_Ox_ 10
 
 class TheBar;
 class buildStage;
@@ -84,12 +84,16 @@ public:
     sf::Vector2f returnPosOnBorder(sf::FloatRect brick, sf::FloatRect presentBall, sf::FloatRect pastBall);
     
     bool checkGoDown();
+    bool checkGoLeft();
+    
     sf::Vector2f posAtBotInFuture();
     float lengthOfVector();
     float distanceToPointFromCenter(sf::Vector2f point);
     sf::Vector2f middle();
     
     bool isGotTreasure();
+    float getVecloc();
+    sf::Vector2f getReflexInfut(float posYFut, sf::Vector2f from);
 
     void draw(sf::RenderWindow& window);
 	friend class zoomBall;

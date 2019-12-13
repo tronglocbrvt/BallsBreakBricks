@@ -20,6 +20,7 @@ public:
 	virtual short collision(sf::FloatRect ballRect);
     
     virtual short getScore() = 0;
+    virtual sf::Vector2f getCentroid();
     
     virtual sf::FloatRect getBound();
     

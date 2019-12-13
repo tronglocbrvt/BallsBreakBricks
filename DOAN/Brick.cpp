@@ -21,6 +21,11 @@ short Brick::collision(sf::FloatRect ballRect)
 	return 0; // không va chạm
 }
 
+sf::Vector2f Brick::getCentroid(){
+    sf::FloatRect obj = this->imgSpr.getGlobalBounds();
+    return sf::Vector2f(obj.left + obj.width/2, obj.top + obj.height/2);
+}
+
 sf::FloatRect Brick::getBound(){
     return this->imgSpr.getGlobalBounds();
 }

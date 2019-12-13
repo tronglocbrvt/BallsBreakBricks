@@ -174,7 +174,46 @@ Brick* buildStage::getmStage(int i, int j)
 	return mStage[i][j];
 }
 
-
+sf::Vector2f buildStage::nearestBrickToPoint(sf::Vector2f point, bool left){
+    float minDis2Point = sqrt(sqr(_HEIGH_TABLE_GAME_) + sqr(_WIDTH_TABLE_GAME_));
+    
+    sf::Vector2f pointMin;
+    
+    short start = 0;
+    short finish = 0;
+    if (left) {
+        start = 0;
+        finish = _NUMBER_OF_BRICKS_PER_LINE_ / 2;
+    }
+    else
+    {
+        start = _NUMBER_OF_BRICKS_PER_LINE_ / 2;
+        finish = _NUMBER_OF_BRICKS_PER_LINE_;
+    }
+    
+    for (short i = _NUMBER_OF_BRICKS_PER_LINE_ -1; i >= 0; i--) {
+        for (short j = start; j < finish; j++) {
+            if (this->mSignBricks[i][j] > 0) {
+                float distance = Object::DisBet2Point(point, this->mStage[i][j]->getCentroid());
+                
+                if (minDis2Point > distance) {
+                    minDis2Point = distance;
+                    
+                    pointMin.x = this->mStage[i][j]->getCentroid().x;
+                    pointMin.y = this->mStage[i][j]->getCentroid().y;
+                    
+                }
+            }
+        }
+        
+        if (pointMin.x != 0) {
+            return pointMin;
+        }
+        
+    }
+    
+    return sf::Vector2f();
+}
 
 
 

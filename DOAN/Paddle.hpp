@@ -19,9 +19,12 @@ protected:
     float velocityX;
     float acceleration;
     float maxSpeed;
+    sf::Vector2f catchPoint;
     
     std::string namePlayer;
     int scores;
+    
+    TextShow points;
     
 public:
     TheBar();
@@ -36,6 +39,9 @@ public:
 	void setLongBar(float length);
 	void setHeightBar(float height);
     void setPosY(float y);
+    void setCatchPoint(sf::Vector2f point);
+    
+    sf::Vector2f getCatchPoint();
     float getPosX();
     float getPosY();
 	sf::Sprite getImgSpr();
@@ -57,7 +63,8 @@ public:
     float disToBar(sf::Vector2f point);
     void moveToMidTabGame();
     
-    float rateOfChange(float posXOnBar);
+    float rateOfChange(sf::FloatRect rect);
+    
 };
 
 
