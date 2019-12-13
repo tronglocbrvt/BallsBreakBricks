@@ -205,15 +205,22 @@ void ThePong::scale(float width, float heigh) {     // thay đổi kích thướ
 }
 short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, BackGround& bg) {
     
-//    std::cout << this
+//    std::cout << this->posX << " - " << this->posY << std::endl;
     
 	if (timeEnd <= stage.getTimePlaying())
 	{
 		if (checkGift == 3) // thay đổi size ball
-			scale(_SIZE_PONG_ / this->getWidth(), _SIZE_PONG_ / this->getHeight());
+        {
+            scale(_SIZE_PONG_ / this->getWidth(), _SIZE_PONG_ / this->getHeight());
+            this->posXend = _SIZE_PONG_;
+            this->posYend = _SIZE_PONG_;
+        }
 
 		else if (checkGift == 4) // thay đổi size bar
-			bar.scale(_WIDTH_BAR_ / bar.getLongBar(), _HEIGH_BAR_ / bar.getHeigh());
+        {
+            bar.scale(_WIDTH_BAR_ / bar.getLongBar(), _HEIGH_BAR_ / bar.getHeigh());
+            bar.setLongBar(_WIDTH_BAR_);
+        }
 
 		//bg.Giftimage.~Texture();
 		bg.Giftsprite.setPosition(0, 0);
@@ -227,30 +234,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 	this->pastBall = this->imgSpr.getGlobalBounds();
 
-//	// di chuyển bóng
-
-//    // kiểm tra chạm thanh
-    if (this->checkClashToBar(positionBar)) {
-
-        this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
-        this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
-
-        // cập nhật vận tốc trên trục nếu có thay đổi
-        if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
-            this->velocityX *= -1;
-        }
-        else{
-            this->velocityY *= -1;
-
-            // cơ chế làm thay đổi hướng bóng khi chạm thanh
-            float lengthVector = this->getVecloc();
-            this->velocityX *= bar.rateOfChange(this->getBoundBall());
-            if (abs(this->velocityX) > lengthVector * cos(5 * M_PI / 180)) {
-                this->velocityX = lengthVector * cos(5 * M_PI / 180) * (this->velocityX / abs(this->velocityX));
-            }
-            this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
-        }
-    }
+	// di chuyển bóng
 
 	// thay đổi vị trí bóng
 	posX += velocityX;
@@ -266,28 +250,27 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 	}
 
 	// kiểm tra chạm thanh
-	if (this->checkClashToBar(positionBar)) {
+    if (this->checkClashToBar(positionBar)) {
 
-		this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
-		this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
+        this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
+        this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
 
-		// cập nhật vận tốc trên trục nếu có thay đổi
-		if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
+        // cập nhật vận tốc trên trục nếu có thay đổi
+        if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
+            this->velocityX *= -1;
+        }
+        else{
+            this->velocityY *= -1;
 
-			this->velocityX *= -1;
-
-		}
-		else {
-			this->velocityY *= -1;
-		}
-
-
-
-		// cập nhật vận tốc mới vì đã chạm thanh
-		this->updateVelocityY();
-		this->updateVelocityX();
-
-	}
+            // cơ chế làm thay đổi hướng bóng khi chạm thanh
+            float lengthVector = this->getVecloc();
+            this->velocityX *= bar.rateOfChange(this->getBoundBall());
+            if (abs(this->velocityX) > lengthVector * cos(20 * M_PI / 180)) {
+                this->velocityX = lengthVector * cos(20 * M_PI / 180) * (this->velocityX / abs(this->velocityX));
+            }
+            this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
+        }
+    }
 
 	// kiểm tra chạm gạch
 
@@ -547,14 +530,14 @@ sf::Vector2f ThePong::posAtBotInFuture(){
 //    float y = alp * x + bet;
     
     this->lineBall[0] = sf::Vertex(sf::Vector2f((this->posX + this->posXend/2), (this->posY + this->posYend/2)), sf::Color::Blue);
-    this->lineBall[1] = sf::Vertex(sf::Vector2f(((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) - bet) / alp, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_)), sf::Color::Blue);
+    this->lineBall[1] = sf::Vertex(sf::Vector2f(((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_)), sf::Color::Blue);
     
-    float posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) - bet) / alp;
+    float posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp;
     
     while (true) {
         
         if (_DIS_FROM_LEFT_ + this->posXend/2 <= posXInFut && posXInFut <= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2) {
-            return sf::Vector2f(posXInFut, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_));
+            return sf::Vector2f(posXInFut, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_));
         }
         
         else
@@ -579,11 +562,11 @@ sf::Vector2f ThePong::posAtBotInFuture(){
             alp *= -1;
             bet = (posYCen) - alp * (posXCen);
             
-            posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_) - bet) / alp;
+            posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp;
         }
     }
     
-    return sf::Vector2f(_DIS_FROM_LEFT_, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_);
+    return sf::Vector2f(_DIS_FROM_LEFT_, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
 }
 float ThePong::lengthOfVector(){
     return sqrt(sqr(this->velocityX) + sqr(this->velocityY));

@@ -79,6 +79,8 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             
             float rateOfChange = abs(nearest.x - (bar.getPosMidXOfPaddle())) / abs(reflex.x - (bar.getPosMidXOfPaddle()));
             
+//            std::cout << rateOfChange << " - " << abs(reflex.x - (bar.getPosMidXOfPaddle())) << " = " << abs(nearest.x - (bar.getPosMidXOfPaddle())) << std::endl;
+            
             if (rateOfChange > 2) {
                 rateOfChange = 2;
             }
