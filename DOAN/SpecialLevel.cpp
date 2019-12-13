@@ -12,7 +12,7 @@
 SpecialLevel::SpecialLevel(int stage) : bg(2), stage(std::string("SpecialStage") + std::to_string(stage) + std::string(".txt")){
     
     this->bg.setTurn(1);
-    this->ball.setPosY(_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - ball.getHeight()/2);
+    this->ball.setPosY(_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - ball.getHeight());
     
 //    this->stage = 1;
     this->nameFile = std::string("SpecialStage") + std::to_string(stage) + std::string(".txt");
@@ -20,6 +20,7 @@ SpecialLevel::SpecialLevel(int stage) : bg(2), stage(std::string("SpecialStage")
     
     this->wayOfBall[0] = sf::Vertex(sf::Vector2f(this->ball.middle().x, this->ball.middle().y), sf::Color::Red);
     this->wayOfBall[1] = sf::Vertex(sf::Vector2f(this->ball.middle().x, this->ball.middle().y), sf::Color::Red);
+    
     
 }
 SpecialLevel::~SpecialLevel(){
@@ -67,6 +68,7 @@ bool SpecialLevel::pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keybo
 //        bar.draw(window);
         this->ball.draw(window);
         this->stage.draw(window);
+        this->gun.draw(window);
         text.drawText(window);
         
         window.display();
@@ -76,8 +78,16 @@ bool SpecialLevel::pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keybo
 
 void SpecialLevel::setLine(sf::Vector2i toward){
     
-    sf::Vector2f from = this->ball.middle();
+//    sf::Vector2f from = this->ball.middle();
+    
+    float posiX0 = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2;
+    float posiY0 = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_;
+    
+    sf::Vector2f from = sf::Vector2f(posiX0, posiY0);
     sf::Vector2f to;
+    
+    float alp = 0;
+    float bet = 0;
 
     if (toward.x == from.x) {
         // x = a
@@ -87,8 +97,8 @@ void SpecialLevel::setLine(sf::Vector2i toward){
     else
     {
         // y = alp * x + bet
-        float alp = (toward.y - from.y) / (toward.x - from.x);
-        float bet = from.y - alp * from.x;
+        alp = (toward.y - from.y) / (toward.x - from.x);
+        bet = from.y - alp * from.x;
 
         if (toward.x > from.x) {
             to.x = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_;
@@ -114,20 +124,62 @@ void SpecialLevel::setLine(sf::Vector2i toward){
             else if (to.x < _DIS_FROM_LEFT_){
                 to.x = _DIS_FROM_LEFT_;
             }
+            
+            alp = (to.y - from.y) / (to.x - from.x);
+            bet = from.y - alp * from.x;
         }
     }
 
-    
+    // xoay ụ súng
     float degree = atan( (from.y - to.y) / (to.x - from.x) ) * 180 / M_PI;
     if (degree < 0) {
         degree = 180 + degree;
     }
     this->gun.rotateGun(degree);
     
+    // xoay bóng
+    float posiX;
+    float posiY;
+    if (from.x == to.x) {
+        posiX = to.x;
+        posiY = -sqrt(sqr(_RADIUS_) - sqr(posiX - (_WIDTH_TABLE_GAME_/2 + _DIS_FROM_LEFT_))) + (_HEIGH_TABLE_GAME_ + _DIS_FROM_TOP_);
+        
+    }
+    else
+    {
+
+        float delta = sqr(alp * bet - posiX0 - posiY0 * alp) - (1 + sqr(alp)) * (sqr(bet) - 2 * posiY0 * bet + sqr(posiX0) + sqr(posiY0) - sqr(_RADIUS_));
+        
+        if (delta < 0) {
+            return;
+        }
+
+        if (alp > 0) {
+            posiX = ((posiX0 + posiY0 * alp - alp * bet) - sqrt(delta)) / (1 + sqr(alp));
+        }
+        else
+        {
+            posiX = ((posiX0 + posiY0 * alp - alp * bet) + sqrt(delta)) / (1 + sqr(alp));
+        }
+
+        posiY = alp * posiX + bet;
+        
+        
+//        std::cout << posiX << " | " << posiY << std::endl;
+//        std::cout << "[" << posiX0 - _RADIUS_ << ", " << posiX0 + _RADIUS_ << "] |-| [" << posiY0 - _RADIUS_ << ", " << posiY0 + _RADIUS_ << "]" << std::endl;
+        
+    }
+    
+//    std::cout << posiX << " | " << posiY << std::endl;
+    
+    ball.setPosX(posiX - ball.getWidth()/2);
+    ball.setPosY(posiY - ball.getHeight()/2);
+    
     
     this->wayOfBall[0] = sf::Vertex(sf::Vector2f(from.x, from.y), sf::Color::Red);
     this->wayOfBall[1] = sf::Vertex(sf::Vector2f(to.x, to.y), sf::Color::Red);
 
+    // y = a * x + b;
 
     // set veloc of ball
     const float velocRate = 1.5;
@@ -145,6 +197,7 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
             case sf::Event::MouseButtonPressed:         // sự kiện nhấn phím
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                 {
+                    this->gun.fire(window, bg, stage, ball);
                     return sf::Mouse::getPosition(window);
                 }
                 break;
