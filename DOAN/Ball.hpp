@@ -15,7 +15,7 @@
 
 #define _NAME_GAME_ "BALLS BREAK BRICKS"
 
-
+class TheBar;
 class buildStage;
 class ThePong {
 private:
@@ -74,7 +74,7 @@ public:
     void resetPositionToMidBot();
 
     void scale(float width, float heigh);
-    short moveBall(Pos positionBar, buildStage &stage, float &score);
+    short moveBall(Pos positionBar, buildStage &stage, float &score, float &timeEnd, int& checkGift, TheBar& bar, sf::RenderWindow& window);
 
     bool checkClashToBar(Pos position);
     void normalizePosX();

@@ -138,6 +138,7 @@
     <ClCompile Include="continueGame.cpp" />
     <ClCompile Include="DataPos.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="highScore.cpp" />
     <ClCompile Include="levelChoice.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="rewardItem.cpp" />
     <ClCompile Include="RockBricks.cpp" />
     <ClCompile Include="SpecBricks.cpp" />
+    <ClCompile Include="SpecialLevel.cpp" />
     <ClCompile Include="TextClass.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +167,7 @@
     <ClInclude Include="DataPos.hpp" />
     <ClInclude Include="Define_Header.h" />
     <ClInclude Include="Display.hpp" />
+    <ClInclude Include="Gun.hpp" />
     <ClInclude Include="Help.hpp" />
     <ClInclude Include="highScore.hpp" />
     <ClInclude Include="levelChoice.hpp" />
@@ -179,6 +182,7 @@
     <ClInclude Include="rewardItem.h" />
     <ClInclude Include="RockBricks.hpp" />
     <ClInclude Include="SpecBricks.hpp" />
+    <ClInclude Include="SpecialLevel.hpp" />
     <ClInclude Include="TextClass.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

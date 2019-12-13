@@ -99,7 +99,7 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 	bool speepup = true;
 
 	// khởi động chuỗi thông báo và tên
-	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
+	TextShow textshow(std::string("Press P to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
 	textshow.scale(0.8);
 	textshow.setOriginToMidle();
 	textshow.setColor(4, 74, 194);
@@ -144,7 +144,7 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 
 	//	window.display();
 
-	if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, mode, level)) {
+	if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, mode, level)) {
 		return 0;
 	}
 
@@ -217,8 +217,9 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 				bar.moveToMidTabGame();
 			}
 		}
-		short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score);
-		stage.updateTime();
+		float timeEnd = 1000;
+		int checkGift = 0;
+		short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, timeEnd, checkGift, bar, window);		stage.updateTime();
 
 		if (staticOfBall == 1) {    // crashed into bottom line
 			if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, mode, level)) {  // esc game

@@ -279,8 +279,11 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
 //            }
             
         }
-
-        short staticOfBall = ball.moveBall(copyPos(0, 0, 0, 0), this->stage, score);
+		float timeEnd = -1;
+		int checkGift = 0;
+		TheBar bar;
+		short staticOfBall = ball.moveBall(copyPos(0,0,0,0), stage, score, timeEnd, checkGift, bar, window);
+        //short staticOfBall = ball.moveBall(copyPos(0, 0, 0, 0), this->stage, score);
         this->stage.updateTime();
 
         if (staticOfBall == 1) {    // crashed into bottom line

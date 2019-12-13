@@ -13,13 +13,15 @@ class rewardItem
 protected:
 	sf::Texture textSpecial;
 	sf::Sprite imgSpecial;
+
 public:
 	rewardItem();
 	virtual ~rewardItem();
 
-	virtual void runItem() = 0;
+	virtual void runItem(float& score, int i, int j, buildStage &stage);
+	virtual void runItem(TheBar& bar);
+	virtual void runItem(ThePong& ball);
 	void drawItem(sf::RenderWindow& window);
-
 };
 
 //===============================================================
@@ -30,7 +32,7 @@ public:
 	doubleScore();
 	virtual ~doubleScore();
 
-	void runItem(float &score, int i, int j);
+	void runItem(float &score, int i, int j, buildStage& stage);
 };
 
 //===============================================================
@@ -41,19 +43,9 @@ public:
 	divideScore();
 	virtual ~divideScore();
 
-	void runItem(float& score, int i, int j);
+	void runItem(float& score, int i, int j, buildStage& stage);
 };
 
-//===============================================================
-
-class fireBall :public rewardItem
-{
-public:
-	fireBall();
-	virtual ~fireBall();
-
-	void runItem();
-};
 
 //===============================================================
 

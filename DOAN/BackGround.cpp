@@ -180,7 +180,7 @@ void TableInf::drawInfTable(sf::RenderWindow &window){      // hàm vẽ
     this->tHeader.drawText(window);
     this->tTutorial.drawText(window);
     this->tWeaponInf.drawText(window);
-    
+	
     time += clock.getElapsedTime();
     switch (int(time.asSeconds() * SpeechChangeColor) % NumberOfColor) {
         case MyColor::Silver:
@@ -271,3 +271,4 @@ void BackGround::draw(sf::RenderWindow &window){        // vẽ nền
 Table BackGround::getTableGame(){                       // getter nền game
     return this->gameTable;
 }
+
