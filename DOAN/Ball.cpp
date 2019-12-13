@@ -204,6 +204,9 @@ void ThePong::scale(float width, float heigh) {     // thay đổi kích thướ
     this->imgSpr.scale(width, heigh);
 }
 short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, BackGround& bg) {
+    
+//    std::cout << this
+    
 	if (timeEnd <= stage.getTimePlaying())
 	{
 		if (checkGift == 3) // thay đổi size ball
@@ -224,21 +227,21 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 	this->pastBall = this->imgSpr.getGlobalBounds();
 
-	// di chuyển bóng
+//	// di chuyển bóng
 
-    // kiểm tra chạm thanh
+//    // kiểm tra chạm thanh
     if (this->checkClashToBar(positionBar)) {
-        
+
         this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
         this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
-        
+
         // cập nhật vận tốc trên trục nếu có thay đổi
         if ((this->posX > positionBar.x + positionBar.endX) || (this->posX + this->posXend < positionBar.x)) {
             this->velocityX *= -1;
         }
         else{
             this->velocityY *= -1;
-            
+
             // cơ chế làm thay đổi hướng bóng khi chạm thanh
             float lengthVector = this->getVecloc();
             this->velocityX *= bar.rateOfChange(this->getBoundBall());
@@ -247,7 +250,8 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             }
             this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
         }
-        
+    }
+
 	// thay đổi vị trí bóng
 	posX += velocityX;
 	posY += velocityY;
@@ -385,7 +389,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 						{
 							timeEnd = stage.getTimePlaying() + 10; // time cua moi vat pham la 10s
 							srand((int)time(0));
-							checkGift = 1 + rand() % 4; // random ngau nhien vat pham 
+							checkGift = 1 + rand() % 4; // random ngau nhien vat pham
 							/*
 							1. Double Score
 							2. Divide Score
