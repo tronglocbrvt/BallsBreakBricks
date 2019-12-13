@@ -517,11 +517,7 @@ sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect prese
             }
             
             vect.y = pastBall.top + (presentBall.top - pastBall.top) * (vect.x - pastBall.left) / (presentBall.left - pastBall.left);
-            
-			if (checkGift != 3)
-				this->velocityX *= -1;
-			else
-				this->velocityX *= -1.5;
+            this->velocityX *= -1;
         }
         else
         {
