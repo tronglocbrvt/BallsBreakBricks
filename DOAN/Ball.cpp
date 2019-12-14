@@ -213,7 +213,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 	// kiểm tra chạm thanh
     if (this->checkClashToBar(positionBar)) {
 
-        this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
+//        this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
         
         this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
         this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
@@ -228,17 +228,17 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             // cơ chế làm thay đổi hướng bóng khi chạm thanh
             float lengthVector = this->getVecloc();
             this->velocityX *= bar.rateOfChange(this->getBoundBall());
-            
+
             if (abs(this->velocityX) < 0.01) {
                 if (this->velocityX >= 0) {
                     this->velocityX = (this->velocityX / lengthVector + 0.005);
                 }
                 else this->velocityX = -(this->velocityX / lengthVector + 0.005);
             }
-            
+
             if (abs(this->velocityX) > lengthVector * cos(20 * M_PI / 180)) {
                 this->velocityX = lengthVector * cos(20 * M_PI / 180) * (this->velocityX / abs(this->velocityX));
-                
+
             }
             this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
         }
@@ -279,7 +279,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 			break;
 		}
 
-		int count = 0;
+		
 		bool crashed = false;
 		sf::FloatRect presentBall;
 		sf::FloatRect rectBrick;
