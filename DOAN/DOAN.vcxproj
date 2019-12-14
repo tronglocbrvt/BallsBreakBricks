@@ -131,7 +131,6 @@
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="BallsHandler.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="buildStage.cpp" />
     <ClCompile Include="ComputerPlay.cpp" />
@@ -160,7 +159,6 @@
   <ItemGroup>
     <ClInclude Include="BackGround.hpp" />
     <ClInclude Include="Ball.hpp" />
-    <ClInclude Include="BallsHandler.h" />
     <ClInclude Include="Brick.hpp" />
     <ClInclude Include="buildStage.hpp" />
     <ClInclude Include="ComputerPlay.hpp" />
