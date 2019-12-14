@@ -190,6 +190,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 		checkGift = 0; // het vat pham
 
 	}
+	
 	float pastPosX = this->posX;
 	float pastPosY = this->posY;
 
@@ -212,6 +213,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 	// kiểm tra chạm thanh
     if (this->checkClashToBar(positionBar)) {
+		std::cout << getVelocityX() << " " << getVelocityY() << std::endl;
 
 //        this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
         
