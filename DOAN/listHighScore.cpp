@@ -17,9 +17,9 @@ listHighScore::listHighScore(float width, float height):Display(width, height)
 	textHead.setFillColor(sf::Color::Cyan);
 	textHead.setString("HIGH SCORE");
 	textHead.setStyle(sf::Text::Underlined);
-	textHead.setCharacterSize(50);
+	textHead.setCharacterSize(40);
 
-	setPositionText(textHead, 140);
+	setPositionText(textHead, 130);
 
 	readFile();
 }
@@ -99,11 +99,18 @@ void listHighScore::drawMenu(sf::RenderWindow& window)
 			{ 
 				highScores[i].textHigh.setFont(highScores[i].font);
 				highScores[i].textHigh.setFillColor(sf::Color::Yellow);
-				highScores[i].name = "Level " + std::to_string(highScores[i].level) +"\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
+			
+				if (i == 2)
+					highScores[i].name = "SPECIAL 1\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
+				else if (i == 5)
+					highScores[i].name = "SPECIAL 2\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
+				else
+					highScores[i].name = " LEVEL  " + std::to_string(highScores[i].level) + "\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
+
 				highScores[i].textHigh.setString(highScores[i].name);
 				highScores[i].textHigh.setStyle(sf::Text::Regular);
 				highScores[i].textHigh.setCharacterSize(40);
-				setPositionText(highScores[i].textHigh, 150 + i * 70);
+				setPositionText(highScores[i].textHigh, 190 + i * 60);
 				window.draw(highScores[i].textHigh);
 
 			}

@@ -1,6 +1,7 @@
 #ifndef levelChoice_hpp
 #define levelChoice_hpp
 #include "Menu.hpp"
+#include "SpecialLevel.hpp"
 
 class levelChoice :public Display
 {

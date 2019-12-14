@@ -4,7 +4,6 @@
 #include "Display.hpp"
 #include <fstream>
 #include <vector>
-#include <algorithm>
 
 class highScore;
 class listHighScore:public Display
