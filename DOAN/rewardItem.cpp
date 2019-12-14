@@ -47,7 +47,7 @@ void doubleScore::drawItem(BackGround& bg)
 	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
 	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
 	bg.Giftsprite.scale(width, height);
-	bg.Giftsprite.setPosition(800, 230);
+	bg.Giftsprite.setPosition(800, 300);
 }
 
 divideScore::divideScore()
@@ -77,7 +77,7 @@ void divideScore::drawItem(BackGround& bg)
 	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
 	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
 	bg.Giftsprite.scale(width, height);
-	bg.Giftsprite.setPosition(800, 230);
+	bg.Giftsprite.setPosition(800, 300);
 }
 
 widenBar::widenBar()
@@ -113,7 +113,7 @@ void widenBar::drawItem(BackGround& bg)
 	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
 	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
 	bg.Giftsprite.scale(width, height);
-	bg.Giftsprite.setPosition(800, 230);
+	bg.Giftsprite.setPosition(800, 300);
 }
 
 zoomBall::zoomBall()
@@ -150,5 +150,5 @@ void zoomBall::drawItem(BackGround& bg)
 	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
 	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
 	bg.Giftsprite.scale(width, height);
-	bg.Giftsprite.setPosition(800, 230);
+	bg.Giftsprite.setPosition(800, 300);
 }

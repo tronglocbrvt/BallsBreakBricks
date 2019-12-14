@@ -92,7 +92,7 @@ TableInf::TableInf(short mode){
     this->tHeader.setOriginToMidle();
     
     switch (this->mode) {
-        case 0:             // person
+        case 1:             // person
             this->tTutorial.set(std::string("        PRESS SPACE TO CONTINUE\n               OR ESC TO EXIT\n Press A or left-key to Move left\nPress D or right-key to Move right"), std::string("HACKED.ttf"), 0,0);
             this->tTutorial.setOriginToMidTop();
             this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);
@@ -130,7 +130,7 @@ TableInf::TableInf(short mode){
 			this->tWeaponInf[4].setOriginToMidHead();
 			this->tWeaponInf[4].setColor(236, 3, 252);
             break;
-        case 1:             // computer
+        case 0:             // computer
             this->tTutorial.set(std::string("PRESS SPACE TO CONTINUE\n         OR ESC TO EXIT"), std::string("HACKED.ttf"), 0,0);
             this->tTutorial.setOriginToMidTop();
             this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);
@@ -138,7 +138,7 @@ TableInf::TableInf(short mode){
             this->tTutorial.setOriginToMidTop();
             // điểm bên trái đạt được
             
-            this->tScore.set( std::string("Score: ") + std::to_string(this->score), std::string("HACKED.ttf"),this->posX, this->tTutorial.getBottom() + 3*_SPACE_BET_OBJ_);
+            this->tScore.set( std::string("Score: ") + std::to_string(this->score), std::string("HACKED.ttf"),this->posX, this->tTutorial.getBottom() + 2*_SPACE_BET_OBJ_);
             this->tScore.scale(0.8);
             this->tScore.setOriginToMidHead();
             this->tScore.setColor(236, 3, 252);

@@ -29,6 +29,7 @@ void SpecialLevel::showLoading(){
 }
 bool SpecialLevel::pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keyboard::Key key){
     
+	TheBar bar;
     // start ball when press space
     while (window.isOpen()) {
         sf::Event event;
@@ -43,10 +44,10 @@ bool SpecialLevel::pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keybo
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
-                    return false;
+					return false;
                 }
                 break;
-            case sf::Event::Closed:             // sự kiện đóng cửa sổ
+            case sf::Event::Closed: // sự kiện đóng cửa sổ
                 window.close();
                 break;
             default:
@@ -215,8 +216,8 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
 
 short SpecialLevel::runGame(sf::RenderWindow &window){
     // khởi tạo sân, bóng, 2 thanh
-    
-
+	float timeEnd = 1000;
+	int checkGift = 0;
     // khởi động chuỗi thông báo và tên
     TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
     textshow.scale(0.8);
@@ -238,31 +239,30 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
         sf::Event event;
 
         // bắt sự kiện
-        while (window.pollEvent(event)) {
-            
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-            
-            if (event.type == sf::Event::KeyPressed) {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                    return 0;
-                }
-                else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-                {
+		while (window.pollEvent(event)) {
 
-                    TextShow textshow(std::string("Press P to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
-                    textshow.scale(0.8);
-                    textshow.setOriginToMidle();
-                    textshow.setColor(4, 74, 194);
+			if (event.type == sf::Event::Closed) {
+				window.close();
+			}
 
-                    this->pauseGame(window, textshow, sf::Keyboard::P);
-                }
-            }
-            
-        }
-		float timeEnd = -1;
-		int checkGift = 0;
+			if (event.type == sf::Event::KeyPressed) {
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					return 0;
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+				{
+
+					TextShow textshow(std::string("Press P to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
+					textshow.scale(0.8);
+					textshow.setOriginToMidle();
+					textshow.setColor(4, 74, 194);
+
+					this->pauseGame(window, textshow, sf::Keyboard::P);
+				}
+			}
+
+		}
+
 		TheBar bar;
 		short staticOfBall = ball.moveBall(copyPos(0,0,0,0), stage, score, timeEnd, checkGift, bar, bg);
         this->stage.updateTime();

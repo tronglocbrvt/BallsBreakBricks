@@ -13,7 +13,7 @@ private:
 	sf::Font font;
 
 	int level;
-	float score;
+	int score;
 	int date;
 	int month;
 	int year;

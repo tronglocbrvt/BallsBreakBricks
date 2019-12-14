@@ -15,8 +15,8 @@ int main(int argc, const char* argv[]) {
 //   play(window, 1);
    //CPlay(window, 1);
     
-   SpecialLevel SStage(3);
-   SStage.runGame(window);
+ /*  SpecialLevel SStage(3);
+   SStage.runGame(window);*/
 
 	Menu menu(window.getSize().x, window.getSize().y);
 	helpMenu help(window.getSize().x, window.getSize().y);

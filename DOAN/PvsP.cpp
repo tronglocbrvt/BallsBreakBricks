@@ -1,7 +1,7 @@
 #include "PvsP.hpp"
 
 
-bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text, sf::Keyboard::Key key, bool mode, int level){
+bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &bar, buildStage &stage, TextShow &text, sf::Keyboard::Key key, bool mode, int level, int checkGift, float timEnd){
     bool cont = true;
     // start ball when press space
     while (window.isOpen() && cont) {
@@ -17,12 +17,12 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
-					saveGame(ball, bar, mode, stage, level);
+					saveGame(ball, bar, mode, stage, level, checkGift, timEnd);
                     return false;
                 }
                 break;
             case sf::Event::Closed: // sự kiện đóng cửa sổ
-				saveGame(ball, bar, mode, stage, level);
+				saveGame(ball, bar, mode, stage, level, checkGift, timEnd);
                 window.close();
                 break;
             default:
@@ -47,7 +47,7 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
 int play(sf::RenderWindow& window, int levelCur) {
 
     // khởi tạo sân, bóng, thanh
-	BackGround bg(0);
+	BackGround bg(1);
 	ThePong ball;
 //    ball.setPosX(225);
 //    ball.setPosY(150);
@@ -74,9 +74,11 @@ int play(sf::RenderWindow& window, int levelCur) {
     textshow.setOriginToMidle();
     textshow.setColor(4, 74, 194);
 
+	static float timeEnd = 1000;
+	static int checkGift = 0;
 //    EndGame(window, stage, bar.getScores());
     
-    if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 1, levelCur)) {
+    if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 1, levelCur, checkGift, timeEnd)) {
         return 0;
     }
 	// start game
@@ -88,12 +90,12 @@ int play(sf::RenderWindow& window, int levelCur) {
         // bắt sự kiện
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				saveGame(ball, bar, 1, stage, levelCur);
+				saveGame(ball, bar, 1, stage, levelCur, checkGift, timeEnd);
 				window.close();
 			}
 			else if (sf::Event::KeyPressed) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-					saveGame(ball, bar, 1, stage, levelCur);
+					saveGame(ball, bar, 1, stage, levelCur, checkGift, timeEnd);
 					return 0;
 				}
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
@@ -104,7 +106,7 @@ int play(sf::RenderWindow& window, int levelCur) {
                     textshow.setOriginToMidle();
                     textshow.setColor(4, 74, 194);
                     
-					pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, 1, levelCur);
+					pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, 1, levelCur, checkGift, timeEnd);
                 }
 			}
 		}
@@ -138,13 +140,12 @@ int play(sf::RenderWindow& window, int levelCur) {
 //		}
 		/*std::thread thread1(&ThePong::moveBall, &ball, std::ref(posBar), std::ref(stage));
 		std::thread thread2(&ThePong::moveBall, &ball1, std::ref(posBar), std::ref(stage));*/
-		static float timeEnd = 1000;
-		static int checkGift = 0;
+		
         short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, timeEnd, checkGift, bar, bg);
         stage.updateTime();
         
         if (staticOfBall == 1) {    // crashed into bottom line
-            if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 1, levelCur)) {  // esc game
+            if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 1, levelCur, checkGift, timeEnd)) {  // esc game
                 return 0;
             }
             else {
@@ -187,7 +188,7 @@ int play(sf::RenderWindow& window, int levelCur) {
 	return 0;
 }
 
-void saveGame(ThePong ball, TheBar bar, bool mode, buildStage stage, int level)
+void saveGame(ThePong ball, TheBar bar, bool mode, buildStage stage, int level, int checkGift, float timeEnd)
 {
 	std::ofstream fo;
 
@@ -212,7 +213,9 @@ void saveGame(ThePong ball, TheBar bar, bool mode, buildStage stage, int level)
 
 	fo << level << " ";
 	fo << stage.getTimeLimit() << " ";
-	fo << stage.getTimePlaying() << std::endl;
+	fo << stage.getTimePlaying() << " ";
+	fo << checkGift << " ";
+	fo << timeEnd << std::endl;
 
 	for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
 		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {

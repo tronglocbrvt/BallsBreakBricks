@@ -25,6 +25,9 @@ private:
 	bool mode; // mode = 0: PvsC; mode = 1: PvsP
 	int level;
 	buildStage stage;
+
+	int checkGift;
+	float timeEnd;
 public:
 	continueGame();
 	virtual ~continueGame();

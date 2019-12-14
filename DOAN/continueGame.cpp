@@ -48,6 +48,9 @@ continueGame::continueGame()
 	fi >> temp;
 	stage.setTime(temp);
 
+	fi >> checkGift;
+	fi >> timeEnd;
+
 	for (int i = 0; i < _NUMBER_OF_BRICKS_PER_LINE_; i++) {
 		for (int j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
 			fi >> stage.mSignBricks[i][j];
@@ -88,63 +91,54 @@ continueGame::~continueGame()
 
 int continueGame::runContinueGame(sf::RenderWindow& window)
 {
-
 	if (ballPosX == -1) // file rỗng
 		return 0;
 
 	// thiết lập game với các thông số đã đọc từ file
-	ThePong ball(ballPosX, ballPosY, ballVelocX, ballVelocY);
 	BackGround bg(mode);
+
+	ThePong ball(ballPosX, ballPosY, ballVelocX, ballVelocY);
 	TheBar bar(true, barPosX, barPosY, score);
+
+	bg.setScore(score);
+	if (checkGift == 1)
+	{
+		rewardItem* gift = new doubleScore;
+		gift->drawItem(bg);
+		delete gift;
+	}
+	else if (checkGift == 2)
+	{
+		rewardItem* gift = new divideScore;
+		gift->drawItem(bg);
+		delete gift;
+	}
+	else if (checkGift == 3)
+	{
+		rewardItem* gift = new zoomBall;
+		gift->runItem(ball);
+		gift->drawItem(bg);
+		delete gift;
+	}
+	else if (checkGift == 4)
+	{
+		rewardItem* gift = new widenBar;
+		gift->runItem(bar);
+		gift->drawItem(bg);
+		delete gift;
+	}
+
 	bool speepup = true;
 
 	// khởi động chuỗi thông báo và tên
-	TextShow textshow(std::string("Press P to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
+	TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
 	textshow.scale(0.8);
 	textshow.setOriginToMidle();
 	textshow.setColor(4, 74, 194);
 
 	bool cont = true;
 
-	////start ball when press space
-	//while (window.isOpen() && cont) {
-	//	sf::Event event;
-
-	//	while (window.pollEvent(event) && cont) {
-	//		switch (event.type) {
-	//		case sf::Event::KeyPressed:
-	//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	//			{
-	//				cont = false;
-	//			}
-	//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	//			{
-	//				saveGame(ball, bar, mode, stage);
-	//				return 0;
-	//			}
-	//			break;
-	//		case sf::Event::Closed:
-	//			saveGame(ball, bar, mode, stage);
-	//			window.close();
-	//			break;
-	//		default:
-	//			continue;
-	//		}
-	//	}
-
-	//	bg.setScore(score);
-
-	//	// in ra màn hình game
-	//	window.clear();
-
-	//	bg.draw(window);
-	//	bar.draw(window);
-	//	ball.draw(window);
-	//	stage.draw(window);
-
-	//	window.display();
-
-	if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, mode, level)) {
+	if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, mode, level, checkGift, timeEnd)) {
 		return 0;
 	}
 
@@ -158,12 +152,12 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 		// bắt sự kiện
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				saveGame(ball, bar, mode, stage, level);
+				saveGame(ball, bar, mode, stage, level, checkGift, timeEnd);
 				window.close();
 			}
 			else if (sf::Event::KeyPressed) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-					saveGame(ball, bar, mode, stage, level);
+					saveGame(ball, bar, mode, stage, level, checkGift, timeEnd);
 					return 0;
 				}
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
@@ -174,7 +168,7 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 					textshow.setOriginToMidle();
 					textshow.setColor(4, 74, 194);
 
-					pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, mode, level);
+					pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::P, mode, level, checkGift, timeEnd);
 				}
 			}
 		}
@@ -217,13 +211,12 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 				bar.moveToMidTabGame();
 			}
 		}
-		static float timeEnd = 1000;
-		static int checkGift = 0;
+
 		short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, timeEnd, checkGift, bar, bg);		
 		stage.updateTime();
 
 		if (staticOfBall == 1) {    // crashed into bottom line
-			if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, mode, level)) {  // esc game
+			if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, mode, level, checkGift, timeEnd)) {  // esc game
 				return 0;
 			}
 			else {
