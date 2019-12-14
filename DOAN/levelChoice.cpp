@@ -36,28 +36,28 @@ levelChoice::levelChoice(float width, float height) :Display(width, height)
 	textMode[2].setCharacterSize(40);
 	textMode[2].setFillColor(sf::Color::Yellow);
 	textMode[2].setStyle(sf::Text::Bold);
-	textMode[2].setString("LEVEL 3");
+	textMode[2].setString("SPECIAL 1");
 	setPositionText(textMode[2],290);
 
 	textMode[3].setFont(fontMode);
 	textMode[3].setCharacterSize(40);
 	textMode[3].setFillColor(sf::Color::Yellow);
 	textMode[3].setStyle(sf::Text::Bold);
-	textMode[3].setString("LEVEL 4");
+	textMode[3].setString("LEVEL 3");
 	setPositionText(textMode[3], 360);
 
 	textMode[4].setFont(fontMode);
 	textMode[4].setCharacterSize(40);
 	textMode[4].setFillColor(sf::Color::Yellow);
 	textMode[4].setStyle(sf::Text::Bold);
-	textMode[4].setString("LEVEL 5");
+	textMode[4].setString("LEVEL 4");
 	setPositionText(textMode[4], 430);
 
 	textMode[5].setFont(fontMode);
 	textMode[5].setCharacterSize(40);
 	textMode[5].setFillColor(sf::Color::Yellow);
 	textMode[5].setStyle(sf::Text::Bold);
-	textMode[5].setString("SPECIAL: LEVEL 6");
+	textMode[5].setString("SPECIAL 2");
 	setPositionText(textMode[5], 500);
 
 	select = 0;
@@ -135,7 +135,7 @@ void levelChoice::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 		textMode[3].setCharacterSize(40);
 		textMode[4].setCharacterSize(40);
 		textMode[5].setCharacterSize(40);
-
+	
 		// update position because changing size
 		setPositionText(textMode[0], 150);
 		setPositionText(textMode[1], 220);
@@ -143,6 +143,7 @@ void levelChoice::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 		setPositionText(textMode[3], 360);
 		setPositionText(textMode[4], 430);
 		setPositionText(textMode[5], 500);
+		
 	}
 
 	if (clickMouse(textMode[1], windows))
@@ -282,11 +283,25 @@ void levelChoice::mouseSelect(sf::RenderWindow& window) // bắt sự kiện cli
 {
 	if (clickMouse(textMode[0], window))
 	{
-		play(window, select + 1); // chạy chế độ PvsP
+		if (select == 2 || select == 5)
+		{
+			SpecialLevel SStage(select + 1);
+			SStage.runGame(window);
+
+		}
+		else
+			play(window, select + 1); // chạy chế độ player
 	}
 	if (clickMouse(textMode[1], window))
 	{
-		//playPvsC(window, select + 1); // chạy chế độ PvsC
+		if (select == 2 || select == 5)
+		{
+			SpecialLevel SStage(select + 1);
+			SStage.runGame(window);
+
+		}
+		else
+		CPlay(window, select + 1); // chạy chế độ tự động
 	}
 }
 
@@ -326,11 +341,31 @@ void levelChoice::runLevelChoice(sf::RenderWindow& window, int choice)
 					switch (choice)
 					{
 					case 0:
-						play(window, select+1); //  chạy PvcP
+					{
+						if (select == 2 || select == 5)
+						{
+							SpecialLevel SStage(select + 1);
+							SStage.runGame(window);
+
+						}
+						else
+							play(window, select + 1); //  chạy player
+
 						break;
+					}	
 					case 1:
-						//playPvsC(window); // chạy PvsC
+					{
+						if (select == 2 || select == 5)
+						{
+							SpecialLevel SStage(select + 1);
+							SStage.runGame(window);
+
+						}
+						else
+							CPlay(window, select + 1); //  chạy player
+
 						break;
+					}
 					}
 					break;
 			default:
