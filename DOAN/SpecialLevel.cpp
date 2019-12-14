@@ -262,8 +262,8 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
             }
             
         }
-		float timeEnd = -1;
-		int checkGift = 0;
+		static float timeEnd = 1000;
+		static int checkGift = 0;
 
 		short staticOfBall = ball.moveBall(copyPos(0,0,0,0), stage, score, timeEnd, checkGift, bar, bg);
         this->stage.updateTime();
