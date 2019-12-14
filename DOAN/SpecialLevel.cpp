@@ -70,9 +70,13 @@ bool SpecialLevel::pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keybo
     return true;
 }
 
-void SpecialLevel::setLine(sf::Vector2i toward){
+bool SpecialLevel::setLine(sf::Vector2i toward){
     
 //    sf::Vector2f from = this->ball.middle();
+    
+    if (toward.x == 0) {
+        return false;
+    }
     
     float posiX0 = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2;
     float posiY0 = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_;
@@ -145,7 +149,7 @@ void SpecialLevel::setLine(sf::Vector2i toward){
         float delta = sqr(alp * bet - posiX0 - posiY0 * alp) - (1 + sqr(alp)) * (sqr(bet) - 2 * posiY0 * bet + sqr(posiX0) + sqr(posiY0) - sqr(_RADIUS_));
         
         if (delta < 0) {
-            return;
+            return false;
         }
 
         if (alp > 0) {
@@ -174,6 +178,8 @@ void SpecialLevel::setLine(sf::Vector2i toward){
     float lVec = sqrt(sqr(from.x - to.x) + sqr(from.y - to.y));
     ball.setVelocityXY(_VELOCITY_X_ * velocRate / lVec * (to.x - from.x), _VELOCITY_Y_ * velocRate / lVec * (to.y - from.y));
     
+    return true;
+    
 }
 sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
     while (window.isOpen()) {
@@ -182,22 +188,25 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
 
         while (window.pollEvent(event)) {
             switch (event.type) {
-            case sf::Event::MouseButtonPressed:         // sự kiện nhấn phím
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-                {
-                    this->gun.fire(window, bg, stage, ball);
-                    return sf::Mouse::getPosition(window);
+                case sf::Event::MouseButtonPressed:         // sự kiện nhấn phím
+                    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                    {
+                        this->gun.fire(window, bg, stage, ball);
+                        return sf::Mouse::getPosition(window);
+                    }
+                    break;
+                case sf::Event::MouseMoved:
+                    this->setLine(sf::Mouse::getPosition(window));
+                    break;
+                case sf::Event::KeyPressed:
+                    return sf::Vector2i();
+                    break;
+                case sf::Event::Closed:             // sự kiện đóng cửa sổ
+                    window.close();
+                    break;
+                default:
+                    continue;
                 }
-                break;
-            case sf::Event::MouseMoved:
-                this->setLine(sf::Mouse::getPosition(window));
-                break;
-            case sf::Event::Closed:             // sự kiện đóng cửa sổ
-                window.close();
-                break;
-            default:
-                continue;
-            }
         }
 
         // in ra màn hình game
@@ -230,7 +239,10 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
 //        return 0;
 //    }
     
-    this->setLine(this->chooseLineOfFire(window));
+    if (!this->setLine(this->chooseLineOfFire(window))) {
+        return 0;
+    }
+    
     
     // start game
     TheBar bar;
@@ -281,7 +293,9 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
                 else
                 {
                     this->ball.resetPositionToMidBot();
-                    this->setLine(this->chooseLineOfFire(window));
+                    if (!this->setLine(this->chooseLineOfFire(window))) {
+                        return 0;
+                    }
                 }
             }
         }

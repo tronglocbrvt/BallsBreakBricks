@@ -38,7 +38,7 @@ public:
     virtual void showLoading();
     virtual bool pauseGame(sf::RenderWindow& window, TextShow &text, sf::Keyboard::Key key);
     
-    virtual void setLine(sf::Vector2i toward);
+    virtual bool setLine(sf::Vector2i toward);
     virtual sf::Vector2i chooseLineOfFire(sf::RenderWindow& window);
     virtual short runGame(sf::RenderWindow &window);
     
