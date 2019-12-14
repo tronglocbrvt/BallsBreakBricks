@@ -172,7 +172,7 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 				}
 			}
 		}
-		if (mode == 1)
+		if (mode == 0)
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 				bar.moveBar(window, true, false);
@@ -183,7 +183,7 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 				bar.draw(window);
 			}
 		}
-		else if (mode == 0)
+		else if (mode == 1)
 		{
 			if (ball.checkGoDown()) {
 				sf::Vector2f futurePos = ball.posAtBotInFuture();
@@ -221,12 +221,12 @@ int continueGame::runContinueGame(sf::RenderWindow& window)
 			}
 			else {
 				if (1) {        // hết mạng để chơi
-					return EndGame(window, stage, bar.getScores(), level, (stage.getAvailableBricks() == 0));
+					return EndGame(window, stage, bar.getScores(), level, (stage.getAvailableBricks() == 0), mode);
 				}
 			}
 		}
 		if (stage.getAvailableBricks() == 0) {
-			EndGame(window, stage, bar.getScores(), level, true);
+			EndGame(window, stage, bar.getScores(), level, true, mode);
 		}
 
 		bar.setScores(score);

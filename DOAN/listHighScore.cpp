@@ -5,7 +5,7 @@ listHighScore::listHighScore()
 
 }
 
-listHighScore::listHighScore(float width, float height):Display(width, height)
+listHighScore::listHighScore(float width, float height, int mode):Display(width, height)
 {
 	// set thông số đồ họa cho tiêu đề
 	if (!fontHead.loadFromFile("res/fnt/venus.ttf"))
@@ -21,7 +21,7 @@ listHighScore::listHighScore(float width, float height):Display(width, height)
 
 	setPositionText(textHead, 130);
 
-	readFile();
+	readFile(mode);
 }
 
 listHighScore::~listHighScore()
@@ -34,11 +34,15 @@ void listHighScore::addHighScore(highScore A) // thêm điểm cao vào vector
 	highScores.push_back(A);
 }
 
-int listHighScore::readFile()
+int listHighScore::readFile(int mode)
 {
 	std::ifstream fi;
 
-	fi.open("res/file/highScore.txt");
+	if(mode == 0)
+		fi.open("res/file/highScoreP.txt");
+	else
+		fi.open("res/file/highScoreC.txt");
+
 	if (fi.fail())
 		std::cout << "Read file failed\n";
 
@@ -67,17 +71,17 @@ int listHighScore::readFile()
 	return 1;
 }
 
-void listHighScore::compareScore(highScore A)
+void listHighScore::compareScore(highScore A, int mode)
 {
 	if (highScores[A.level - 1] < A)
 	{
 		highScores[A.level - 1] = A;
 
-		updateFile(); // ghi lại file 
+		updateFile(mode); // ghi lại file 
 	}
 }
 
-void listHighScore::drawMenu(sf::RenderWindow& window)
+void listHighScore::drawMenu(sf::RenderWindow& window, int mode)
 {
 		while (window.isOpen()) {
 		sf::Event event;
@@ -100,11 +104,11 @@ void listHighScore::drawMenu(sf::RenderWindow& window)
 				highScores[i].textHigh.setFont(highScores[i].font);
 				highScores[i].textHigh.setFillColor(sf::Color::Yellow);
 			
-				if (i == 2)
+				if (mode == 0 && i == 2)
 					highScores[i].name = "SPECIAL 1\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
-				else if (i == 5)
+				else if (mode == 0 && i == 5)
 					highScores[i].name = "SPECIAL 2\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
-				else
+				else 
 					highScores[i].name = " LEVEL  " + std::to_string(highScores[i].level) + "\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
 
 				highScores[i].textHigh.setString(highScores[i].name);
@@ -120,11 +124,15 @@ void listHighScore::drawMenu(sf::RenderWindow& window)
 	}
 }
 
-int listHighScore::updateFile()
+int listHighScore::updateFile(int mode)
 {
 	std::ofstream fo;
 
-	fo.open("res/file/highScore.txt");
+	if (mode == 0)
+		fo.open("res/file/highScoreP.txt");
+	else
+		fo.open("res/file/highScoreC.txt");
+
 	if (fo.fail())
 	{
 		std::cout << "Open file failed\n";

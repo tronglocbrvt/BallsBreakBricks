@@ -276,7 +276,7 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
                 this->bg.setTurn(3 - this->health +1);
                 if (this->health == 0) {        // hết mạng để chơi
                     // do something
-                    return EndGame(window, this->stage, (this->ball.isGotTreasure() ? 100 : 0), this->level, ball.isGotTreasure());
+                    return EndGame(window, this->stage, (this->ball.isGotTreasure() ? 100 : 0), this->level, ball.isGotTreasure(), 0);
                 }
                 else
                 {
@@ -286,7 +286,7 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
             }
         }
         if (this->ball.isGotTreasure()) {
-            return EndGame(window, this->stage, 100, this->level, true);
+            return EndGame(window, this->stage, 100, this->level, true, 0);
         }
 
 

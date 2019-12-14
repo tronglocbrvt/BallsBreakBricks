@@ -243,8 +243,8 @@ void Menu::mouseSelect(sf::RenderWindow& window) // bắt sự kiện click chu�
 	}
 	else if (clickMouse(text[2], window)) // hiện bảng điểm cao
 	{
-		listHighScore list(window.getSize().x, window.getSize().y);
-		list.drawMenu(window);
+		modeGame mode(window.getSize().x, window.getSize().y);
+		mode.runModeHigh(window);
 	}
 	else if (clickMouse(text[3], window)) // hiện bảng giúp đỡ
 	{

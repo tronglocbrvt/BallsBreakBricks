@@ -22,7 +22,7 @@ private:
 
 	float score;
 	
-	bool mode; // mode = 0: PvsC; mode = 1: PvsP
+	bool mode; // 0: person; 1: computer
 	int level;
 	buildStage stage;
 

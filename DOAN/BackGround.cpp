@@ -92,7 +92,7 @@ TableInf::TableInf(short mode){
     this->tHeader.setOriginToMidle();
     
     switch (this->mode) {
-        case 1:             // person
+        case 0:             // person
             this->tTutorial.set(std::string("        PRESS SPACE TO CONTINUE\n               OR ESC TO EXIT\n Press A or left-key to Move left\nPress D or right-key to Move right"), std::string("HACKED.ttf"), 0,0);
             this->tTutorial.setOriginToMidTop();
             this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);
@@ -130,7 +130,7 @@ TableInf::TableInf(short mode){
 			this->tWeaponInf[4].setOriginToMidHead();
 			this->tWeaponInf[4].setColor(236, 3, 252);
             break;
-        case 0:             // computer
+        case 1:             // computer
             this->tTutorial.set(std::string("PRESS SPACE TO CONTINUE\n         OR ESC TO EXIT"), std::string("HACKED.ttf"), 0,0);
             this->tTutorial.setOriginToMidTop();
             this->tTutorial.setPosition(this->posX + (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_)/2, this->tHeader.getBottom() + _SPACE_BET_OBJ_);

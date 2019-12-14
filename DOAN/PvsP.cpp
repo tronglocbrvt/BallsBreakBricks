@@ -47,7 +47,7 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
 int play(sf::RenderWindow& window, int levelCur) {
 
     // khởi tạo sân, bóng, thanh
-	BackGround bg(1);
+	BackGround bg(0);
 	ThePong ball;
 //    ball.setPosX(225);
 //    ball.setPosY(150);
@@ -90,12 +90,12 @@ int play(sf::RenderWindow& window, int levelCur) {
         // bắt sự kiện
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				saveGame(ball, bar, 1, stage, levelCur, checkGift, timeEnd);
+				saveGame(ball, bar, 0, stage, levelCur, checkGift, timeEnd);
 				window.close();
 			}
 			else if (sf::Event::KeyPressed) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-					saveGame(ball, bar, 1, stage, levelCur, checkGift, timeEnd);
+					saveGame(ball, bar, 0, stage, levelCur, checkGift, timeEnd);
 					return 0;
 				}
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
@@ -151,12 +151,12 @@ int play(sf::RenderWindow& window, int levelCur) {
             else {
                 if (1) {        // hết mạng để chơi
                     // do something
-                    return EndGame(window, stage, bar.getScores(), levelCur, (stage.getAvailableBricks() == 0));
+                    return EndGame(window, stage, bar.getScores(), levelCur, (stage.getAvailableBricks() == 0), 0);
                 }
             }
         }
         if (stage.getAvailableBricks() == 0) {
-            return EndGame(window, stage, bar.getScores(), levelCur, true);
+            return EndGame(window, stage, bar.getScores(), levelCur, true, 0);
         }
         
         bar.setScores(score);
@@ -241,7 +241,7 @@ void fileEmpty() // làm cho file rỗng
 	fo.close();
 }
 
-int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level, bool isWinner){
+int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level, bool isWinner, int mode){
     
 	fileEmpty();
     sf::Texture imgTx;
@@ -288,9 +288,9 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level,
     tScoreAtEnd.setOriginToTopHead();
     tScoreAtEnd.setColor(148, 235, 19);
 
-	listHighScore HighScore(window.getSize().x, window.getSize().y);
+	listHighScore HighScore(window.getSize().x, window.getSize().y, mode);
 	highScore scoreNew(total, level);
-	HighScore.compareScore(scoreNew);
+	HighScore.compareScore(scoreNew, mode);
 
 
     while (window.isOpen()) {

@@ -15,14 +15,14 @@ private:
 
 public:
 	listHighScore();
-	listHighScore(float, float);
+	listHighScore(float, float, int);
 	virtual ~listHighScore();
 
 	void addHighScore(highScore A);
-	int readFile();
-	void compareScore(highScore A);
-	void drawMenu(sf::RenderWindow& window);
-	int updateFile();
+	int readFile(int mode);
+	void compareScore(highScore A, int mode);
+	void drawMenu(sf::RenderWindow& window, int mode);
+	int updateFile(int mode);
 };
 
 #endif

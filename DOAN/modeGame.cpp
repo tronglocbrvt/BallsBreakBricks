@@ -22,7 +22,7 @@ modeGame::modeGame(float width, float height):Display(width, height)
 	textMode[0].setCharacterSize(60);
 	textMode[0].setFillColor(sf::Color::White);
 	textMode[0].setStyle(sf::Text::Bold);
-	textMode[0].setString("PLAYER VS PLAYER");
+	textMode[0].setString("GAME WITH PLAYER");
 	setPositionText(textMode[0], 200);
 
 	// set dòng chữ hiện chế độ PvsPC
@@ -30,7 +30,7 @@ modeGame::modeGame(float width, float height):Display(width, height)
 	textMode[1].setCharacterSize(40);
 	textMode[1].setFillColor(sf::Color::Yellow);
 	textMode[1].setStyle(sf::Text::Bold);
-	textMode[1].setString("PLAYER VS COMPUTER");
+	textMode[1].setString("GAME WITH COMPUTER");
 	setPositionText(textMode[1], 300);
 
 	select = 0;
@@ -183,6 +183,51 @@ void modeGame::runModeGame(sf::RenderWindow& window)
 		drawMenu(window);
 		window.display();
 		//return GetPressedItem();
+	}
+}
+
+void modeGame::runModeHigh(sf::RenderWindow& window)
+{
+	while (window.isOpen()) {
+		sf::Event event;
+		while (window.pollEvent(event)) {
+			switch (event.type) {
+
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::MouseMoved:
+				mouseMoved(window); // di chuyển chuột
+				break;
+			case sf::Event::MouseButtonPressed:
+			{
+				mouseSelect(window); // click chuột
+				break;
+			}
+
+			case sf::Event::KeyPressed:
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+					moveUp(); // di chuyển lên
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+					moveDown(); // di chuyển xuống
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					return;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+
+					listHighScore listHigh(window.getSize().x, window.getSize().y, GetPressedItem());
+					listHigh.drawMenu(window, GetPressedItem());
+				}
+			}
+		}
+		window.clear();
+		drawMenu(window);
+		window.display();
 	}
 }
 

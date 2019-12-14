@@ -53,26 +53,3 @@ bool highScore::operator<(const highScore&A) // toán tử so sánh giữa 2 đ�
 		return (score < A.score) ? true : false;
 	}
 }
-
-void highScore::writeFile() // ghi thông tin điểm, thời gian vào file
-{
-	std::ofstream fo;
-
-	fo.open("res/file/highScore.txt", std::ios::app);
-	if (fo.fail())
-	{
-		std::cout << "Open file failed\n";
-		return;
-	}
-	
-	fo << level << " ";
-	fo << score << " ";
-	fo << date << " ";
-	fo << month << " ";
-	fo << year << " ";
-	fo << hour << " ";
-	fo << minute << " ";
-	fo << timeNow << "\n";
-
-	fo.close();
-}

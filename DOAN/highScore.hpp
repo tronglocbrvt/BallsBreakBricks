@@ -33,7 +33,7 @@ public:
 	void setScore(int);
 
 	bool operator <(const highScore&);
-	void writeFile();
+
 	friend class listHighScore;
 };
 #endif

@@ -21,8 +21,7 @@ int main(int argc, const char* argv[]) {
 	Menu menu(window.getSize().x, window.getSize().y);
 	helpMenu help(window.getSize().x, window.getSize().y);
 	modeGame mode(window.getSize().x, window.getSize().y);
-	listHighScore high(window.getSize().x, window.getSize().y);
-
+	
 	while (window.isOpen()) {
 
 		sf::Event event;
@@ -63,7 +62,7 @@ int main(int argc, const char* argv[]) {
 						break;
 					}
 					case 2:
-						high.drawMenu(window);
+						mode.runModeHigh(window);
 						break;
 					case 3:
 						help.drawMenu(window);

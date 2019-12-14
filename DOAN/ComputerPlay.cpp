@@ -5,7 +5,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
 {
     
     // khởi tạo sân, bóng, 2 thanh
-    BackGround bg(0);
+    BackGround bg(1);
     ThePong ball;
     TheBar bar;
 
@@ -37,12 +37,12 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
         // bắt sự kiện
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-				saveGame(ball, bar, 0, stage, levelCur, checkGift, timeEnd);
+				saveGame(ball, bar, 1, stage, levelCur, checkGift, timeEnd);
                 window.close();
             }
             else if (sf::Event::KeyPressed) {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-					saveGame(ball, bar, 0, stage, levelCur, checkGift, timeEnd);
+					saveGame(ball, bar, 1, stage, levelCur, checkGift, timeEnd);
                     return 0;
                 }
                 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
@@ -130,13 +130,13 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             else {
                 if (1) {        // hết mạng để chơi
                     // do something
-                    return EndGame(window, stage, bar.getScores(), levelCur, (stage.getAvailableBricks() == 0));
+                    return EndGame(window, stage, bar.getScores(), levelCur, (stage.getAvailableBricks() == 0) , 1);
                 }
             }
         }
         
         if (stage.getAvailableBricks() == 0) {
-            return EndGame(window, stage, bar.getScores(), levelCur, true);
+            return EndGame(window, stage, bar.getScores(), levelCur, true, 1);
         }
         
         bar.setScores(score);
