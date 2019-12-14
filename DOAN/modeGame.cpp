@@ -124,7 +124,7 @@ void modeGame::mouseMoved(sf::RenderWindow& windows) // di chuyển chuột
 
 int modeGame::mouseSelect(sf::RenderWindow& window) // bắt sự kiện click chuột
 {
-	levelChoice choice;
+	levelChoice choice(window.getSize().x, window.getSize().y);
 
 	if (clickMouse(textMode[0], window))
 	{
@@ -138,6 +138,25 @@ int modeGame::mouseSelect(sf::RenderWindow& window) // bắt sự kiện click c
 	}
     
     return -1;
+}
+
+int modeGame::mouseSelectHigh(sf::RenderWindow& window)
+{
+	
+	if (clickMouse(textMode[0], window))
+	{
+		listHighScore listHigh(window.getSize().x, window.getSize().y, GetPressedItem());
+		listHigh.drawMenu(window, GetPressedItem());
+		return 0; // player chơi
+	}
+	if (clickMouse(textMode[1], window))
+	{
+		listHighScore listHigh(window.getSize().x, window.getSize().y, GetPressedItem());
+		listHigh.drawMenu(window, GetPressedItem());
+		return 1;
+	}
+
+	return -1;
 }
 
 void modeGame::runModeGame(sf::RenderWindow& window)
@@ -201,7 +220,7 @@ void modeGame::runModeHigh(sf::RenderWindow& window)
 				break;
 			case sf::Event::MouseButtonPressed:
 			{
-				mouseSelect(window); // click chuột
+				mouseSelectHigh(window); // click chuột
 				break;
 			}
 

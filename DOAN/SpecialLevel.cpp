@@ -188,7 +188,7 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
 
         while (window.pollEvent(event)) {
             switch (event.type) {
-                case sf::Event::MouseButtonPressed:         // sự kiện nhấn phím
+                case sf::Event::MouseButtonPressed:         // sự kiện nhấn chuột
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                     {
                         this->gun.fire(window, bg, stage, ball);
@@ -235,9 +235,9 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
 
     float score = 0;
 
-//    if (!this->pauseGame(window, textshow, sf::Keyboard::Space)) {
-//        return 0;
-//    }
+    if (!this->pauseGame(window, textshow, sf::Keyboard::Space)) {
+        return 0;
+    }
     
     if (!this->setLine(this->chooseLineOfFire(window))) {
         return 0;
@@ -258,7 +258,7 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
 				window.close();
 			}
 
-			if (event.type == sf::Event::KeyPressed) {
+			else if (sf::Event::KeyPressed) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 					return 0;
 				}

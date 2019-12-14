@@ -54,9 +54,6 @@
     <ClCompile Include="rewardItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BallsHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NormalBrick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -135,9 +132,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Paddle.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BallsHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RockBricks.hpp">

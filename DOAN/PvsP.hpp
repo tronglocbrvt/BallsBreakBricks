@@ -7,7 +7,6 @@
 #include "rewardItem.h"
 #include "Paddle.hpp"
 #include "buildStage.hpp"
-#include "BallsHandler.h"
 #include <thread>
 #include <future>
 #include "listHighScore.hpp"

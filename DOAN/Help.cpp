@@ -36,7 +36,7 @@ helpMenu::helpMenu(float width, float height) :Display(width, height)
 	helpText[2].setFillColor(sf::Color::Green);
 	setPositionText(helpText[2], 340);
 
-	setText(5, "PRESS SPACE TO START, PRESS P TO PAUSE/CONTINUE GAME");
+	setText(5, "PRESS SPACE TO START, PRESS P TO PAUSE/CONTINUE GAME\n");
 	helpText[5].setFillColor(sf::Color::Green);
 	setPositionText(helpText[5], 490);
 
