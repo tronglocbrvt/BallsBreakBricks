@@ -9,7 +9,8 @@ SpecialLevel::SpecialLevel(int stage) : bg(2), stage(std::string("SpecialStage")
 //    this->stage = 1;
     this->nameFile = std::string("SpecialStage") + std::to_string(stage) + std::string(".txt");
     this->health = 3;
-    
+	this->level = stage;
+
     this->wayOfBall[0] = sf::Vertex(sf::Vector2f(this->ball.middle().x, this->ball.middle().y), sf::Color::Red);
     this->wayOfBall[1] = sf::Vertex(sf::Vector2f(this->ball.middle().x, this->ball.middle().y), sf::Color::Red);
     

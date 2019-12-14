@@ -287,7 +287,7 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level,
     
     
 	listHighScore HighScore(window.getSize().x, window.getSize().y);
-	highScore scoreNew(score, level);
+	highScore scoreNew(total, level);
 	HighScore.compareScore(scoreNew);
 
     while (window.isOpen()) {
