@@ -30,26 +30,6 @@ ThePong::ThePong() {
     // điều chỉnh vị trí
     this->imgSpr.setPosition(this->posX, this->posY);
     
-    this->point1.set(".", std::string("HACKED.ttf"), 0, 0);
-//    this->point1.scale(0.5);
-    this->point1.setColor(15, 15, 15);
-
-    this->point2.set(".", std::string("HACKED.ttf"), 0, 0);
-//    this->point2.scale(0.2);
-    this->point2.setColor(240, 40, 115);
-    
-    this->point3.set(".", std::string("HACKED.ttf"), 0, 0);
-//    this->point3.scale(0.2);
-    this->point3.setColor(80, 180, 80);
-    
-    this->point4.set(".", std::string("HACKED.ttf"), 0, 0);
-//    this->point4.scale(0.2);
-    this->point4.setColor(015, 105, 215);
-    
-    for (int i=0; i<9; i++) {
-        this->pointX[i].set(".", std::string("HACKED.ttf"), 0, 0);
-        this->pointX[i].setColor(25, 25, 135);
-    }
 
 }
 ThePong::ThePong(float x, float y, float veX, float veY) {
@@ -77,26 +57,7 @@ ThePong::ThePong(float x, float y, float veX, float veY) {
     // chỉnh vị trí theo điểm tâm
 
 	this->imgSpr.setPosition(this->posX - this->posXend * 1.0 / 2, this->posY);
-	this->point1.set(".", std::string("HACKED.ttf"), 0, 0);
-	//    this->point1.scale(0.5);
-	this->point1.setColor(15, 15, 15);
-
-	this->point2.set(".", std::string("HACKED.ttf"), 0, 0);
-	//    this->point2.scale(0.2);
-	this->point2.setColor(240, 40, 115);
-
-	this->point3.set(".", std::string("HACKED.ttf"), 0, 0);
-	//    this->point3.scale(0.2);
-	this->point3.setColor(80, 180, 80);
-
-	this->point4.set(".", std::string("HACKED.ttf"), 0, 0);
-	//    this->point4.scale(0.2);
-	this->point4.setColor(015, 105, 215);
-
-	for (int i = 0; i < 9; i++) {
-		this->pointX[i].set(".", std::string("HACKED.ttf"), 0, 0);
-		this->pointX[i].setColor(25, 25, 135);
-	}
+	
 
 }
 ThePong::~ThePong() {
@@ -324,10 +285,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 		sf::FloatRect rectBrick;
 		for (unsigned short i = startY; i <= toY; i++) {
 			for (unsigned short j = startX; j <= toX; j++) {
-				// làm cho zui thôi
-				if (stage.mSignBricks[i][j] != 0) {
-					this->pointX[count++].setPosition(stage.mStage[i][j]->getBound().left, stage.mStage[i][j]->getBound().top);
-				}
+				
 				// kiểm tra thật sự
 				sf::Vector2f ve;
 				if (stage.mSignBricks[i][j] != 0 && stage.mStage[i][j]->collision(this->imgSpr.getGlobalBounds())) {
@@ -341,7 +299,6 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 
 						ve = returnPosOnBorder(rectBrick, presentBall, this->pastBall);
 
-						this->point4.setPosition(ve.x, ve.y);
 						this->posX = ve.x;
 						this->posY = ve.y;
 
@@ -519,10 +476,6 @@ sf::Vector2f ThePong::returnPosOnBorder(sf::FloatRect brick, sf::FloatRect prese
 			this->velocityY *= -1;
         }
         
-        this->point1.setPosition(pastBall.left, pastBall.top);
-        this->point2.setPosition(presentBall.left, presentBall.top);
-        this->point3.setPosition(brick.left, brick.top);
-        
     }
     
     return vect;
@@ -545,8 +498,8 @@ sf::Vector2f ThePong::posAtBotInFuture(){
 //    float x = 0;
 //    float y = alp * x + bet;
     
-    this->lineBall[0] = sf::Vertex(sf::Vector2f((this->posX + this->posXend/2), (this->posY + this->posYend/2)), sf::Color::Blue);
-    this->lineBall[1] = sf::Vertex(sf::Vector2f(((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_)), sf::Color::Blue);
+//    this->lineBall[0] = sf::Vertex(sf::Vector2f((this->posX + this->posXend/2), (this->posY + this->posYend/2)), sf::Color::Blue);
+//    this->lineBall[1] = sf::Vertex(sf::Vector2f(((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_)), sf::Color::Blue);
 
     float posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp;
 
@@ -596,8 +549,7 @@ sf::Vector2f ThePong::middle(){
 
 
 bool ThePong::isNearlyVertical(){
-    return (abs(this->pastTouchOnPaddle.x - this->posX) <= 3);
-    
+    return (abs(this->pastTouchOnPaddle.x - this->posX) <= 10);
 }
 bool ThePong::isGotTreasure(){
     return this->crashedIntoTreasure;
@@ -626,15 +578,7 @@ sf::Vector2f ThePong::getReflexInfut(float posYFut, sf::Vector2f from){
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     
-    point1.drawText(window);
-    point2.drawText(window);
-    point3.drawText(window);
-	point4.drawText(window);
-    for (int i=0; i<9; i++) {
-        this->pointX[i].drawText(window);
-        this->pointX[i].setPosition(0, 0);
-    }
     
-    window.draw(this->lineBall, 2, sf::Lines);
+//    window.draw(this->lineBall, 2, sf::Lines);
     
 }

@@ -24,7 +24,6 @@ protected:
     std::string namePlayer;
     int scores;
     
-    TextShow points;
     
 public:
     TheBar();

@@ -31,7 +31,6 @@ TheBar::TheBar(){
     
     this->catchPoint = sf::Vector2f(_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_);
     
-    this->points.set(".", "HACKED.ttf", this->catchPoint.x, this->catchPoint.y);
     
 }
 
@@ -104,7 +103,6 @@ void TheBar::setPosY(float y){                              // cài vị trí th
 void TheBar::setCatchPoint(sf::Vector2f point){
     this->catchPoint = point;
     
-    this->points.setPosition(this->catchPoint.x, this->catchPoint.y);
 }
 
 sf::Vector2f TheBar::getCatchPoint(){
@@ -172,7 +170,7 @@ void TheBar::draw(sf::RenderWindow &window){            // thể hiện trên m�
     this->imgSpr.setPosition(this->posX, this->posY);
     window.draw(this->imgSpr);
     
-    this->points.drawText(window);
+    
 }
 void TheBar::haveScore(short score){                               // tăng điểm
     this->scores += scores;

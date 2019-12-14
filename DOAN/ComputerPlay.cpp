@@ -13,8 +13,8 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
     float score = 0;
     bool speepup = true;
     
-    sf::Vertex lineAlp1[2];
-    sf::Vertex lineAlp2[2];
+//    sf::Vertex lineAlp1[2];
+//    sf::Vertex lineAlp2[2];
 
     // khởi động chuỗi thông báo và tên
     TextShow textshow(std::string("Press Space to continue"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
@@ -72,11 +72,11 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             sf::Vector2f nearest = stage.nearestBrickToPoint(futurePos, ball.checkGoLeft());
             sf::Vector2f reflex = ball.getReflexInfut(nearest.y, futurePos);
 
-            lineAlp1[0] = sf::Vertex(futurePos, sf::Color::Black);
-            lineAlp1[1] = sf::Vertex(nearest, sf::Color::Black);
-
-            lineAlp2[0] = sf::Vertex(futurePos, sf::Color::Blue);
-            lineAlp2[1] = sf::Vertex(reflex, sf::Color::Blue);
+//            lineAlp1[0] = sf::Vertex(futurePos, sf::Color::Black);
+//            lineAlp1[1] = sf::Vertex(nearest, sf::Color::Black);
+//
+//            lineAlp2[0] = sf::Vertex(futurePos, sf::Color::Blue);
+//            lineAlp2[1] = sf::Vertex(reflex, sf::Color::Blue);
 
             float rateOfChange = abs(nearest.x - (bar.getPosMidXOfPaddle())) / abs(reflex.x - (bar.getPosMidXOfPaddle()));
 
@@ -84,6 +84,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
                 rateOfChange = _SAFE_POS_;
             }
             
+//            std::cout << ball.isNearlyVertical() << std::endl;
             if (futurePos.x < (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) {
                 if (ball.isNearlyVertical()) {
                     bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * _SAFE_POS_, bar.getPosY()));
@@ -149,8 +150,8 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
         ball.draw(window);
         stage.draw(window);
         
-        window.draw(lineAlp1, 2, sf::Lines);
-        window.draw(lineAlp2, 2, sf::Lines);
+//        window.draw(lineAlp1, 2, sf::Lines);
+//        window.draw(lineAlp2, 2, sf::Lines);
 
         window.display();
     }

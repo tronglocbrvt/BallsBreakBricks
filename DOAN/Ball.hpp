@@ -37,15 +37,8 @@ private:
     float acceleration;
     
     bool crashedIntoTreasure;
-
-    TextShow point1;
-    TextShow point2;
-    TextShow point3;
-    TextShow point4;
     
-    TextShow pointX[9];
-    
-    sf::Vertex lineBall[2];
+//    sf::Vertex lineBall[2];
 
 public:
     ThePong();

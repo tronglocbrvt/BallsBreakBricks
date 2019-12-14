@@ -175,6 +175,13 @@ sf::Vector2f buildStage::nearestBrickToPoint(sf::Vector2f point, bool left){
     float minDis2Point = sqrt(sqr(_HEIGH_TABLE_GAME_) + sqr(_WIDTH_TABLE_GAME_));
     
     sf::Vector2f pointMin;
+    if (left) {
+        point = sf::Vector2f(_DIS_FROM_LEFT_, _DIS_FROM_TOP_);
+    }
+    else
+    {
+        point = sf::Vector2f(_DIS_FROM_LEFT_+_WIDTH_TABLE_GAME_, _DIS_FROM_TOP_);
+    }
     
     short start = 0;
     short finish = 0;
@@ -208,40 +215,6 @@ sf::Vector2f buildStage::nearestBrickToPoint(sf::Vector2f point, bool left){
         }
         
     }
-    
-    // do not has brick on this side
-    if (left) {
-        start = _NUMBER_OF_BRICKS_PER_LINE_ / 2;
-        finish = _NUMBER_OF_BRICKS_PER_LINE_;
-    }
-    else
-    {
-        start = 0;
-        finish = _NUMBER_OF_BRICKS_PER_LINE_ / 2;
-    }
-    
-    for (short i = _NUMBER_OF_BRICKS_PER_LINE_ -1; i >= 0; i--) {
-        for (short j = start; j < finish; j++) {
-            if (this->mSignBricks[i][j] > 0) {
-                float distance = Object::DisBet2Point(point, this->mStage[i][j]->getCentroid());
-                
-                if (minDis2Point > distance) {
-                    minDis2Point = distance;
-                    
-                    pointMin.x = this->mStage[i][j]->getCentroid().x;
-                    pointMin.y = this->mStage[i][j]->getCentroid().y;
-                    
-                }
-            }
-        }
-        
-        if (pointMin.x != 0) {
-            return pointMin;
-        }
-        
-    }
-    
-    
     
     return sf::Vector2f();
 }
