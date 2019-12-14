@@ -231,6 +231,7 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
     this->setLine(this->chooseLineOfFire(window));
     
     // start game
+    TheBar bar;
 
     stage.startClock();
     while (window.isOpen()) {
@@ -262,14 +263,14 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
         }
 		float timeEnd = -1;
 		int checkGift = 0;
-		TheBar bar;
+
 		short staticOfBall = ball.moveBall(copyPos(0,0,0,0), stage, score, timeEnd, checkGift, bar, bg);
         this->stage.updateTime();
 
         if (staticOfBall == 1) {    // crashed into bottom line
             this->health--;
             if (!this->pauseGame(window, textshow, sf::Keyboard::Space)) {  // esc game
-                return 0;
+//                return 0;
             }
             else {
                 this->bg.setTurn(3 - this->health +1);
