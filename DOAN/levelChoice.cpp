@@ -296,12 +296,16 @@ void levelChoice::mouseSelect(sf::RenderWindow& window) // bắt sự kiện cli
 	{
 		if (select == 2 || select == 5)
 		{
-			SpecialLevel SStage(select + 1);
-			SStage.runGame(window);
-
+			TextShow textshow(std::string("Level only with player"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
+			textshow.scale(0.9);
+			textshow.setPosition(810, 300);
+			textshow.setColor(151, 255, 255);
+			textshow.drawText(window);
+			window.display();
+			sf::sleep(sf::seconds(3));
 		}
 		else
-		CPlay(window, select + 1); // chạy chế độ tự động
+			CPlay(window, select + 1); // chạy chế độ tự động
 	}
 }
 
@@ -357,9 +361,13 @@ void levelChoice::runLevelChoice(sf::RenderWindow& window, int choice)
 					{
 						if (select == 2 || select == 5)
 						{
-							SpecialLevel SStage(select + 1);
-							SStage.runGame(window);
-
+							TextShow textshow(std::string("Level only with player"), std::string("HACKED.ttf"), _WIDTH_TABLE_GAME_ / 2 + _DIS_FROM_LEFT_, _HEIGH_TABLE_GAME_ * 3 / 4 + _DIS_FROM_TOP_);
+							textshow.scale(0.9);
+							textshow.setPosition(810, 300);
+							textshow.setColor(151, 255, 255);
+							textshow.drawText(window);
+							window.display();
+							sf::sleep(sf::seconds(3));
 						}
 						else
 							CPlay(window, select + 1); //  chạy player
