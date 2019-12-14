@@ -43,7 +43,10 @@ void doubleScore::drawItem(BackGround& bg)
 
 	bg.Giftimage.setSmooth(true);
 	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.scale(0.5, 0.5);
+	bg.Giftsprite.scale(1/bg.Giftsprite.getScale().x, 1 / bg.Giftsprite.getScale().y);
+	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
+	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
+	bg.Giftsprite.scale(width, height);
 	bg.Giftsprite.setPosition(800, 230);
 }
 
@@ -69,8 +72,11 @@ void divideScore::drawItem(BackGround& bg)
 	}
 
 	bg.Giftimage.setSmooth(true);
-	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.scale(0.5,0.5);
+	bg.Giftsprite.setTexture(bg.Giftimage); 
+	bg.Giftsprite.scale(1 / bg.Giftsprite.getScale().x, 1 / bg.Giftsprite.getScale().y);
+	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
+	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
+	bg.Giftsprite.scale(width, height);
 	bg.Giftsprite.setPosition(800, 230);
 }
 
@@ -103,7 +109,10 @@ void widenBar::drawItem(BackGround& bg)
 
 	bg.Giftimage.setSmooth(true);
 	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.scale(0.6, 0.6);
+	bg.Giftsprite.scale(1 / bg.Giftsprite.getScale().x, 1 / bg.Giftsprite.getScale().y);
+	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
+	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
+	bg.Giftsprite.scale(width, height);
 	bg.Giftsprite.setPosition(800, 230);
 }
 
@@ -137,6 +146,9 @@ void zoomBall::drawItem(BackGround& bg)
 
 	bg.Giftimage.setSmooth(true);
 	bg.Giftsprite.setTexture(bg.Giftimage);
-	bg.Giftsprite.scale(0.1, 0.1);
+	bg.Giftsprite.scale(1 / bg.Giftsprite.getScale().x, 1 / bg.Giftsprite.getScale().y);
+	float width = (float)_WIDTH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().x;
+	float height = (float)_HEIGH_GIFT_ / (float)bg.Giftsprite.getTexture()->getSize().y;
+	bg.Giftsprite.scale(width, height);
 	bg.Giftsprite.setPosition(800, 230);
 }

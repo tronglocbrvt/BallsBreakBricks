@@ -206,8 +206,7 @@ void ThePong::scale(float width, float heigh) {     // thay đổi kích thướ
     this->imgSpr.scale(width, heigh);
 }
 short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, BackGround& bg) {
-    
-    
+
 	if (timeEnd <= stage.getTimePlaying())
 	{
 		if (checkGift == 3) // thay đổi size ball
@@ -223,8 +222,9 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             bar.setLongBar(_WIDTH_BAR_);
         }
 
+		bg.Giftimage.~Texture();
 		bg.Giftsprite.setPosition(0, 0);
-
+		bg.Giftsprite.setRotation(0.1);
 		timeEnd = 1000;
 		checkGift = 0; // het vat pham
 
