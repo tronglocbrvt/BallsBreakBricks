@@ -14,9 +14,6 @@ bool pauseGame(sf::RenderWindow& window, ThePong &ball, BackGround &bg, TheBar &
                 if (sf::Keyboard::isKeyPressed(key))
                 {
                     cont = false;
-                    //if (key == sf::Keyboard::Space) {
-                    //    ball.resetPong(0);
-                    //}
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {

@@ -63,7 +63,6 @@ float Table::midTableY(){                                       // getter vị t
     return (this->startTableY() + _HEIGH_TABLE_GAME_ / 2);
 }
 float Table::startTableX(){                                     // vị trí bắt đầu của nền game
-//    return  (_WIDTH_SCREEN - _WIDTH_TABLE_GAME_) / 2;
     return _DIS_FROM_LEFT_;
 }
 float Table::startTableY(){

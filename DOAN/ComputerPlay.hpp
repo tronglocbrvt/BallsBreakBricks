@@ -3,6 +3,7 @@
 
 #define _LEFT_VECTICAL_ 0.8
 #define _RIGHT_VECTICAL_ 1.2
+#define _SAFE_POS_ 1.5
 
 #include "PvsP.hpp"
 

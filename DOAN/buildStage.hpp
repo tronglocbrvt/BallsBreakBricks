@@ -25,7 +25,6 @@ protected:
     
     Brick* mStage[_NUMBER_OF_BRICKS_PER_LINE_][_NUMBER_OF_BRICKS_PER_LINE_];
     
-//    rewardItem *mItem;
     
     sf::Clock clock;
     sf::Time time;
@@ -35,7 +34,6 @@ public:
     buildStage(int stage);
     buildStage(std::string nameFile);
     
-    //void breakTheBrick(const sf::FloatRect& ballBound);
 	void setTime(float);
     void startClock();
     void draw(sf::RenderWindow &window);

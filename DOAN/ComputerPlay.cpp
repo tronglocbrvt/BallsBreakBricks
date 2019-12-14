@@ -22,7 +22,6 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
     textshow.setOriginToMidle();
     textshow.setColor(4, 74, 194);
 
-//    EndGame(window, stage, bar.getScores());
     
     if (!pauseGame(window, ball, bg, bar, stage, textshow, sf::Keyboard::Space, 0, levelCur)) {
         return 0;
@@ -81,26 +80,25 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
 
             float rateOfChange = abs(nearest.x - (bar.getPosMidXOfPaddle())) / abs(reflex.x - (bar.getPosMidXOfPaddle()));
 
-//            std::cout << rateOfChange << " - " << abs(reflex.x - (bar.getPosMidXOfPaddle())) << " = " << abs(nearest.x - (bar.getPosMidXOfPaddle())) << std::endl;
-
-            if (rateOfChange > 2) {
-                rateOfChange = 2;
+            if (rateOfChange > _SAFE_POS_) {
+                rateOfChange = _SAFE_POS_;
             }
-
+            
             if (futurePos.x < (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) {
                 if (ball.isNearlyVertical()) {
-                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * _SAFE_POS_, bar.getPosY()));
                 }
-                else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+                else
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
             else
             {
                 if (ball.isNearlyVertical()) {
-                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * _SAFE_POS_, bar.getPosY()));
                 }
-                else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
+                else
+                    bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
-//            std::cout << ball.isNearlyVertical() << " = " << rateOfChange << " || " << (_LEFT_VECTICAL_ <= rateOfChange && rateOfChange <= _RIGHT_VECTICAL_) << std::endl;
             // di chuyển thanh tới đón bóng
             if (bar.getCatchPoint().x < futurePos.x) {
                 bar.moveBar(window, false, true);

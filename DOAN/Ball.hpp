@@ -21,6 +21,7 @@ class ThePong {
 private:
     
     sf::FloatRect pastBall;
+    sf::Vector2f pastTouchOnPaddle;
     
     float posX;
     float posY;

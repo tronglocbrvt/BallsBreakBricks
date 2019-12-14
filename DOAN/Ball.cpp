@@ -5,6 +5,7 @@
 ThePong::ThePong() {
 
     this->crashedIntoTreasure = false;
+    this->pastTouchOnPaddle = sf::Vector2f(_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
     
     // load file ảnh và cài đặt thông số cho quả bóng
     if (!this->textureBall.loadFromFile("res/img/pongball.png")) {
@@ -184,8 +185,8 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
     // đặt ngẫu nhiên tốc độ bóng
     srand(time(nullptr));
     this->velocityY = -_VELOCITY_Y_ * ((rand() % 100) * 1.0 / 100 + 1) * _HEIGH_TABLE_GAME_ / (_WIDTH_TABLE_GAME_);
-//    this->velocityX = _VELOCITY_X_ * (((rand() % 100) * 1.0 / 50 - 1) >= 0 ? 1 : -1) * (_VELOCITY_X_ / sqrt(sqr(_VELOCITY_X_) + sqr(this->velocityY)));
-    this->velocityX = 0;
+    this->velocityX = _VELOCITY_X_ * (((rand() % 100) * 1.0 / 50 - 1) >= 0 ? 1 : -1) * (_VELOCITY_X_ / sqrt(sqr(_VELOCITY_X_) + sqr(this->velocityY)));
+//    this->velocityX = 0;
     
     // điều hướng bóng
     if (toward != 0) {
@@ -206,7 +207,6 @@ void ThePong::scale(float width, float heigh) {     // thay đổi kích thướ
 }
 short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, BackGround& bg) {
     
-//    std::cout << this->posX << " - " << this->posY << std::endl;
     
 	if (timeEnd <= stage.getTimePlaying())
 	{
@@ -223,7 +223,6 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             bar.setLongBar(_WIDTH_BAR_);
         }
 
-		//bg.Giftimage.~Texture();
 		bg.Giftsprite.setPosition(0, 0);
 
 		timeEnd = 1000;
@@ -253,6 +252,8 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 	// kiểm tra chạm thanh
     if (this->checkClashToBar(positionBar)) {
 
+        this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
+        
         this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
         this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
 
@@ -262,19 +263,25 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
         }
         else{
             this->velocityY *= -1;
-
+            
             // cơ chế làm thay đổi hướng bóng khi chạm thanh
             float lengthVector = this->getVecloc();
             this->velocityX *= bar.rateOfChange(this->getBoundBall());
-            if (this->velocityX < 0.05) {
-                this->velocityX = this->velocityX / lengthVector + 0.1;
+            
+            if (abs(this->velocityX) < 0.01) {
+                if (this->velocityX >= 0) {
+                    this->velocityX = (this->velocityX / lengthVector + 0.005);
+                }
+                else this->velocityX = -(this->velocityX / lengthVector + 0.005);
             }
-            std::cout << bar.rateOfChange(this->getBoundBall()) / lengthVector << std::endl;
+            
             if (abs(this->velocityX) > lengthVector * cos(20 * M_PI / 180)) {
                 this->velocityX = lengthVector * cos(20 * M_PI / 180) * (this->velocityX / abs(this->velocityX));
+                
             }
             this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
         }
+        
     }
 
 	// kiểm tra chạm gạch
@@ -589,7 +596,7 @@ sf::Vector2f ThePong::middle(){
 
 
 bool ThePong::isNearlyVertical(){
-    return (abs(pastBall.left - this->posX) <= 5);
+    return (abs(this->pastTouchOnPaddle.x - this->posX) <= 3);
     
 }
 bool ThePong::isGotTreasure(){

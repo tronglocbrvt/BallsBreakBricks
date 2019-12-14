@@ -146,9 +146,6 @@ void buildStage::draw(sf::RenderWindow &window){
 		}
     }
 	
-    
-//    NormalBrick br(2);
-//    br.draw(window);
 }
 
 int buildStage::getmSignBricks(int i, int j)
@@ -248,10 +245,3 @@ sf::Vector2f buildStage::nearestBrickToPoint(sf::Vector2f point, bool left){
     
     return sf::Vector2f();
 }
-
-
-
-
-//                            this->mStage[i][j].setSize(sf::Vector2f(_WIDTH_BRICK_ , _WIDTH_BRICK_ / _GOLDEN_RATIO_));
-            
-//                            this->mStage[i][j].setPosition(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_));

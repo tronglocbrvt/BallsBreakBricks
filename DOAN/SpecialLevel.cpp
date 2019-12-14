@@ -163,14 +163,8 @@ void SpecialLevel::setLine(sf::Vector2i toward){
         }
 
         posiY = alp * posiX + bet;
-        
-        
-//        std::cout << posiX << " | " << posiY << std::endl;
-//        std::cout << "[" << posiX0 - _RADIUS_ << ", " << posiX0 + _RADIUS_ << "] |-| [" << posiY0 - _RADIUS_ << ", " << posiY0 + _RADIUS_ << "]" << std::endl;
-        
     }
     
-//    std::cout << posiX << " | " << posiY << std::endl;
     
     ball.setPosX(posiX - ball.getWidth()/2);
     ball.setPosY(posiY - ball.getHeight()/2);
@@ -216,7 +210,6 @@ sf::Vector2i SpecialLevel::chooseLineOfFire(sf::RenderWindow& window){
         window.clear();
 
         this->bg.draw(window);
-//        bar.draw(window);
         this->ball.draw(window);
         this->stage.draw(window);
         window.draw(this->wayOfBall, 2, sf::Lines);
@@ -273,17 +266,12 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
                     this->pauseGame(window, textshow, sf::Keyboard::P);
                 }
             }
-//            if (event.type == sf::Event::MouseMoved){
-//                static int count = 0;
-//                std::cout << "Yasuo " << (count++) << std::endl;
-//            }
             
         }
 		float timeEnd = -1;
 		int checkGift = 0;
 		TheBar bar;
 		short staticOfBall = ball.moveBall(copyPos(0,0,0,0), stage, score, timeEnd, checkGift, bar, bg);
-        //short staticOfBall = ball.moveBall(copyPos(0, 0, 0, 0), this->stage, score);
         this->stage.updateTime();
 
         if (staticOfBall == 1) {    // crashed into bottom line
@@ -313,11 +301,9 @@ short SpecialLevel::runGame(sf::RenderWindow &window){
         window.clear();
 
         this->bg.draw(window);
-//        bar.draw(window);
         this->ball.draw(window);
         this->stage.draw(window);
         this->gun.draw(window);
-//        window.draw(this->wayOfBall, 2, sf::Lines);
         
         window.display();
     }
