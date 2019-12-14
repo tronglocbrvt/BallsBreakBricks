@@ -3,6 +3,7 @@
 
 int CPlay(sf::RenderWindow& window, int levelCur)   // máy
 {
+    
     // khởi tạo sân, bóng, 2 thanh
     BackGround bg(1);
     ThePong ball;
@@ -56,9 +57,10 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             }
         }
         
+        
         if (ball.checkGoDown()) {
             sf::Vector2f futurePos = ball.posAtBotInFuture();
-
+            
             // tăng tốc nếu cần
             if (speepup) {
                 float rateDis = ((ball.distanceToPointFromCenter(futurePos)/ball.lengthOfVector()) / abs(bar.disToBar(futurePos)/bar.getSpeed()));
@@ -70,36 +72,35 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             // test
             sf::Vector2f nearest = stage.nearestBrickToPoint(futurePos, ball.checkGoLeft());
             sf::Vector2f reflex = ball.getReflexInfut(nearest.y, futurePos);
-            
+
             lineAlp1[0] = sf::Vertex(futurePos, sf::Color::Black);
             lineAlp1[1] = sf::Vertex(nearest, sf::Color::Black);
 
             lineAlp2[0] = sf::Vertex(futurePos, sf::Color::Blue);
             lineAlp2[1] = sf::Vertex(reflex, sf::Color::Blue);
-            
+
             float rateOfChange = abs(nearest.x - (bar.getPosMidXOfPaddle())) / abs(reflex.x - (bar.getPosMidXOfPaddle()));
-            
+
 //            std::cout << rateOfChange << " - " << abs(reflex.x - (bar.getPosMidXOfPaddle())) << " = " << abs(nearest.x - (bar.getPosMidXOfPaddle())) << std::endl;
-            
+
             if (rateOfChange > 2) {
                 rateOfChange = 2;
             }
-            
+
             if (futurePos.x < (_DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_/2)) {
-                if ((0.85 <= rateOfChange && rateOfChange <= 1.15) && ball.isNearlyVertical()) {
+                if (ball.isNearlyVertical()) {
                     bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
                 }
                 else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
             else
             {
-                if ((0.85 <= rateOfChange && rateOfChange <= 1.15) && ball.isNearlyVertical()) {
+                if (ball.isNearlyVertical()) {
                     bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() - bar.getLongBar()/2, bar.getPosY()));
                 }
                 else bar.setCatchPoint(sf::Vector2f(bar.getPosMidXOfPaddle() + bar.getLongBar()/4 * rateOfChange, bar.getPosY()));
             }
-            
-            
+//            std::cout << ball.isNearlyVertical() << " = " << rateOfChange << " || " << (_LEFT_VECTICAL_ <= rateOfChange && rateOfChange <= _RIGHT_VECTICAL_) << std::endl;
             // di chuyển thanh tới đón bóng
             if (bar.getCatchPoint().x < futurePos.x) {
                 bar.moveBar(window, false, true);
@@ -108,14 +109,13 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
             {
                 bar.moveBar(window, true, false);
             }
-            
-            
+
             speepup = false;
         }
         else
         {
             speepup = true;
-            
+
             bar.moveToMidTabGame();
         }
         
@@ -135,6 +135,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
                 }
             }
         }
+        
         if (stage.getAvailableBricks() == 0) {
             return EndGame(window, stage, bar.getScores(), levelCur, true);
         }

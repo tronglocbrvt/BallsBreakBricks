@@ -184,7 +184,8 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
     // đặt ngẫu nhiên tốc độ bóng
     srand(time(nullptr));
     this->velocityY = -_VELOCITY_Y_ * ((rand() % 100) * 1.0 / 100 + 1) * _HEIGH_TABLE_GAME_ / (_WIDTH_TABLE_GAME_);
-    this->velocityX = _VELOCITY_X_ * (((rand() % 100) * 1.0 / 50 - 1) >= 0 ? 1 : -1) * (_VELOCITY_X_ / sqrt(sqr(_VELOCITY_X_) + sqr(this->velocityY)));
+//    this->velocityX = _VELOCITY_X_ * (((rand() % 100) * 1.0 / 50 - 1) >= 0 ? 1 : -1) * (_VELOCITY_X_ / sqrt(sqr(_VELOCITY_X_) + sqr(this->velocityY)));
+    this->velocityX = 0;
     
     // điều hướng bóng
     if (toward != 0) {
@@ -265,6 +266,10 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             // cơ chế làm thay đổi hướng bóng khi chạm thanh
             float lengthVector = this->getVecloc();
             this->velocityX *= bar.rateOfChange(this->getBoundBall());
+            if (this->velocityX < 0.05) {
+                this->velocityX = this->velocityX / lengthVector + 0.1;
+            }
+            std::cout << bar.rateOfChange(this->getBoundBall()) / lengthVector << std::endl;
             if (abs(this->velocityX) > lengthVector * cos(20 * M_PI / 180)) {
                 this->velocityX = lengthVector * cos(20 * M_PI / 180) * (this->velocityX / abs(this->velocityX));
             }
@@ -522,7 +527,11 @@ bool ThePong::checkGoLeft(){
     return (this->velocityX < 0);
 }
 sf::Vector2f ThePong::posAtBotInFuture(){
-        
+    
+    if (abs(this->velocityX) < 0.001) {
+        return sf::Vector2f(this->posX, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_));
+    }
+    
     float alp = (this->velocityY / this->velocityX);
     float bet = (this->posY + this->posYend/2) - alp * (this->posX + this->posXend/2);
     
@@ -531,37 +540,37 @@ sf::Vector2f ThePong::posAtBotInFuture(){
     
     this->lineBall[0] = sf::Vertex(sf::Vector2f((this->posX + this->posXend/2), (this->posY + this->posYend/2)), sf::Color::Blue);
     this->lineBall[1] = sf::Vertex(sf::Vector2f(((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_)), sf::Color::Blue);
-    
+
     float posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp;
-    
+
     while (true) {
-        
+
         if (_DIS_FROM_LEFT_ + this->posXend/2 <= posXInFut && posXInFut <= _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2) {
             return sf::Vector2f(posXInFut, (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_));
         }
-        
+
         else
         {
             float posXCen;
             float posYCen;
-            
+
             if (posXInFut < _DIS_FROM_LEFT_ + this->posXend/2) {
-                
+
                 posXCen = _DIS_FROM_LEFT_ + this->posXend/2;
                 posYCen = alp * posXCen + bet;
-                
+
             }
             else
             {
-                
+
                 posXCen = _DIS_FROM_LEFT_ + _WIDTH_TABLE_GAME_ - this->posXend/2;
                 posYCen = alp * posXCen + bet;
-                
+
             }
-            
+
             alp *= -1;
             bet = (posYCen) - alp * (posXCen);
-            
+
             posXInFut = ((_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_) - bet) / alp;
         }
     }
