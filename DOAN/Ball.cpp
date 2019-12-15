@@ -235,7 +235,12 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             
             // cơ chế làm thay đổi hướng bóng khi chạm thanh
             float lengthVector = this->getVecloc();
-            this->velocityX *= bar.rateOfChange(this->getBoundBall());
+            float rateCh = bar.rateOfChange(this->getBoundBall());
+            
+            if (rateCh < 0.5) {
+                this->velocityX *= 0.5;
+            }
+            else this->velocityX *= rateCh;
 
             if (abs(this->velocityX) < 0.01) {
                 if (this->velocityX >= 0) {
@@ -695,11 +700,11 @@ sf::Vector2f ThePong::getReflexInfut(float posYFut, sf::Vector2f from){
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     
-    this->line.draw(window);
+//    this->line.draw(window);
 //    window.draw(this->lineBall, 2, sf::Lines);
     
-    window.draw(this->vertop, 2, sf::Lines);
-    window.draw(this->verbot, 2, sf::Lines);
+//    window.draw(this->vertop, 2, sf::Lines);
+//    window.draw(this->verbot, 2, sf::Lines);
     
     
 }

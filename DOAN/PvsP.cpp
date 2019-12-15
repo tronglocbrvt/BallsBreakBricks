@@ -288,9 +288,9 @@ int EndGame(sf::RenderWindow& window, buildStage &stage, float score, int level,
     tScoreAtEnd.setOriginToTopHead();
     tScoreAtEnd.setColor(148, 235, 19);
 
-//	listHighScore HighScore(window.getSize().x, window.getSize().y, mode);
-//	highScore scoreNew(total, level);
-//	HighScore.compareScore(scoreNew, mode);
+	listHighScore HighScore(window.getSize().x, window.getSize().y, mode);
+	highScore scoreNew(total, level);
+	HighScore.compareScore(scoreNew, mode);
 
 
     while (window.isOpen()) {
