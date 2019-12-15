@@ -141,6 +141,7 @@
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="highScore.cpp" />
     <ClCompile Include="levelChoice.cpp" />
+    <ClCompile Include="LinearLine.cpp" />
     <ClCompile Include="listHighScore.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mathfunction.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Help.hpp" />
     <ClInclude Include="highScore.hpp" />
     <ClInclude Include="levelChoice.hpp" />
+    <ClInclude Include="LinearLine.hpp" />
     <ClInclude Include="listHighScore.hpp" />
     <ClInclude Include="mathfunction.hpp" />
     <ClInclude Include="Menu.hpp" />

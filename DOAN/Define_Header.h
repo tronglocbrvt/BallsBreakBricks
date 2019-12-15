@@ -34,7 +34,7 @@
 #define _VELOCITY_X_BAR_ 1.5
 // tốc độ thay đổi thay trượt
 #define _VELOCITY_Y_BAR_STEP_ 0.1
-// tốc độ thay đổi vận tốc
+
 #define _ACCELERATION_ 1.05
 #define _ACCELERATION_BAR_ 5
 // cạnh quả bóng
