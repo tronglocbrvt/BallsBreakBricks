@@ -52,6 +52,7 @@ buildStage::buildStage(int stage) {
                     this->mStage[i][j] = new SpecBricks();
                     break;
                 default:
+                    this->mStage[i][j] = new NoneBrick();
                     continue;
                     break;
             }
@@ -112,6 +113,7 @@ buildStage::buildStage(std::string nameFile){
                     this->mStage[i][j] = new SpecBricks();
                     break;
                 default:
+                    this->mStage[i][j] = new NoneBrick();
                     continue;
                     break;
             }
@@ -128,6 +130,17 @@ buildStage::buildStage(std::string nameFile){
 //    }
 }
 
+buildStage::~buildStage(){
+    for (int i=0; i<_NUMBER_OF_BRICKS_PER_LINE_; i++) {
+        for (int j=0; j<_NUMBER_OF_BRICKS_PER_LINE_; j++) {
+            if (this->mStage[i][j] != nullptr) {
+//                delete this->mStage[i][j];
+            }
+            
+        }
+    }
+//    delete **this->mStage;
+}
 void buildStage::setTime(float temp)
 {
 	time = sf::seconds(temp);

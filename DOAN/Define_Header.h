@@ -31,7 +31,7 @@
 // vận tốc bóng theo y
 #define _VELOCITY_Y_ 0.5
 // vận tốc thanh trượt
-#define _VELOCITY_X_BAR_ 0.5
+#define _VELOCITY_X_BAR_ 1.5
 // tốc độ thay đổi thay trượt
 #define _VELOCITY_Y_BAR_STEP_ 0.1
 // tốc độ thay đổi vận tốc
@@ -53,6 +53,7 @@
 #define _NUMBER_OF_BRICKS_PER_LINE_ 17
 #define _DIS_BETWEEN_BRICKS_ 1
 #define _WIDTH_BRICK_ (_WIDTH_TABLE_GAME_ * 1.0 / _NUMBER_OF_BRICKS_PER_LINE_ - _DIS_BETWEEN_BRICKS_)
+#define _HEIGHT_BRICK_ (_WIDTH_BRICK_ / _GOLDEN_RATIO_)
 
 
 // color of brick

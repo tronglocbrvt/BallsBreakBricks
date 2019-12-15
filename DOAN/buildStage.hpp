@@ -33,6 +33,7 @@ public:
 	buildStage();
     buildStage(int stage);
     buildStage(std::string nameFile);
+    ~buildStage();
     
 	void setTime(float);
     void startClock();

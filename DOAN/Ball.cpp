@@ -30,7 +30,6 @@ ThePong::ThePong() {
     // điều chỉnh vị trí
     this->imgSpr.setPosition(this->posX, this->posY);
     
-
 }
 ThePong::ThePong(float x, float y, float veX, float veY) {
     // set vị trí theo điểm đầu
@@ -147,7 +146,7 @@ void ThePong::resetPong(short toward) { // đặt lại vị trí ban đầu cho
     srand(time(nullptr));
     this->velocityY = -_VELOCITY_Y_ * ((rand() % 100) * 1.0 / 100 + 1) * _HEIGH_TABLE_GAME_ / (_WIDTH_TABLE_GAME_);
     this->velocityX = _VELOCITY_X_ * (((rand() % 100) * 1.0 / 50 - 1) >= 0 ? 1 : -1) * (_VELOCITY_X_ / sqrt(sqr(_VELOCITY_X_) + sqr(this->velocityY)));
-//    this->velocityX = 0;
+//    this->velocityX = 0.005;
     
     // điều hướng bóng
     if (toward != 0) {
@@ -167,6 +166,8 @@ void ThePong::scale(float width, float heigh) {     // thay đổi kích thướ
     this->imgSpr.scale(width, heigh);
 }
 short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float& timeEnd, int& checkGift, TheBar& bar, BackGround& bg) {
+    
+//    std::cout << "Veloc: " << this->getVecloc() << std::endl;
 
 	if (timeEnd <= stage.getTimePlaying())
 	{
@@ -201,6 +202,8 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 	// thay đổi vị trí bóng
 	posX += velocityX;
 	posY += velocityY;
+    
+    this->adjustIfGoThroughBricks(stage);
 
 	// điều chỉnh bóng vượt biên
 	normalizePosX();
@@ -211,11 +214,14 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 		this->velocityX *= -1;
 	}
 
+//    std::cout << this->getVecloc() << std::endl;
 	// kiểm tra chạm thanh
     if (this->checkClashToBar(positionBar)) {
-		std::cout << getVelocityX() << " " << getVelocityY() << std::endl;
-
-//        this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
+//		std::cout << getVelocityX() << " " << getVelocityY() << std::endl;
+        this->updateVelocityX();
+        this->updateVelocityY();
+        
+        this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_);
         
         this->posX = pastPosX + (this->posX - pastPosX) * (_DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend - pastPosY) / (this->posY - pastPosY);
         this->posY = _DIS_FROM_TOP_ + _HEIGH_TABLE_GAME_ - _HEIGH_BAR_ - this->posYend;
@@ -285,12 +291,19 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 		bool crashed = false;
 		sf::FloatRect presentBall;
 		sf::FloatRect rectBrick;
+    
+        
+        
 		for (unsigned short i = startY; i <= toY; i++) {
 			for (unsigned short j = startX; j <= toX; j++) {
-				
+        
+//        for (unsigned short i = _NUMBER_OF_BRICKS_PER_LINE_-1; i >= 0; i--) {
+//            for (unsigned short j = 0; j < _NUMBER_OF_BRICKS_PER_LINE_; j++) {
 				// kiểm tra thật sự
 				sf::Vector2f ve;
 				if (stage.mSignBricks[i][j] != 0 && stage.mStage[i][j]->collision(this->imgSpr.getGlobalBounds())) {
+                    
+                    this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, this->posY);
 
 					if (!crashed) {
 						rectBrick = stage.mStage[i][j]->getBound();
@@ -333,7 +346,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 						if (stage.mSignBricks[i][j] == 9 && checkGift != 0)
 						{
 							stage.mSignBricks[i][j] = -1;
-							delete stage.mStage[i][j];
+//							delete stage.mStage[i][j];
 							stage.mStage[i][j] = new RockBrick;
 							stage.mStage[i][j]->set(_DIS_FROM_LEFT_ + j * (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_), _DIS_FROM_TOP_ + i * (_WIDTH_BRICK_ / _GOLDEN_RATIO_ + _DIS_BETWEEN_BRICKS_), _WIDTH_BRICK_, _WIDTH_BRICK_ / _GOLDEN_RATIO_, stage.mSignBricks[i][j]);
 							continue;
@@ -379,7 +392,7 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 							}
 						}
 						stage.mSignBricks[i][j] = 0;
-						delete stage.mStage[i][j];
+//						delete stage.mStage[i][j];
 					}
 
 				}
@@ -390,6 +403,8 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
 	}
 	// nếu chạm biên trên sẽ điều ngược lại trục tung
 	if (this->posY <= _DIS_FROM_TOP_) {
+        this->pastTouchOnPaddle = sf::Vector2f(this->posX + this->posXend/2, _DIS_FROM_TOP_);
+        
 		this->velocityY *= -1;
 	}
 
@@ -550,8 +565,107 @@ sf::Vector2f ThePong::middle(){
 }
 
 
+void ThePong::adjustIfGoThroughBricks(buildStage &stage){
+    this->normalizePosY();
+    this->normalizePosX();
+    
+    this->line.set(sf::Vector2f(this->pastBall.left + this->pastBall.width/2, this->pastBall.top + this->pastBall.height/2), sf::Vector2f(this->posX + this->posXend/2, this->posY + this->posYend/2));
+    
+    short rowFrom = int((this->pastBall.top + this->pastBall.height/2 - _DIS_FROM_TOP_) / (_HEIGHT_BRICK_ + _DIS_BETWEEN_BRICKS_));
+    short rowTo = int((this->posY + this->posYend/2 - _DIS_FROM_TOP_) / (_HEIGHT_BRICK_ + _DIS_BETWEEN_BRICKS_));
+    
+    if (rowFrom >= _NUMBER_OF_BRICKS_PER_LINE_ && rowTo >= _NUMBER_OF_BRICKS_PER_LINE_) {
+        return;
+    }
+    
+    if (rowFrom >= _NUMBER_OF_BRICKS_PER_LINE_) {
+        rowFrom = _NUMBER_OF_BRICKS_PER_LINE_ -1;
+    }
+    else if (rowTo >= _NUMBER_OF_BRICKS_PER_LINE_) {
+        rowTo = _NUMBER_OF_BRICKS_PER_LINE_ -1;
+    }
+    
+    short colFrom = int((this->pastBall.left + this->pastBall.width/2 - _DIS_FROM_LEFT_) / (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_));
+    short colTo = int((this->posX + this->posXend/2 - _DIS_FROM_LEFT_) / (_WIDTH_BRICK_ + _DIS_BETWEEN_BRICKS_));
+    
+    if (abs(rowTo - rowFrom) <= 1  && abs(colTo - colFrom) <= 1) {
+        return;
+    }
+    
+    short incrI = int(this->velocityY / abs(this->velocityY));
+    short incrJ = int(this->velocityX / abs(this->velocityX));
+    
+//    std::cout << "--------------||--------------" << std::endl;
+//    std::cout << rowFrom << " |>> I: " << rowTo << " = " << incrI << std::endl;
+//    std::cout << colFrom << " |>> J " << colTo << " = " << incrJ << std::endl;
+//
+//    std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << std::endl;
+    
+    for (short i = rowFrom; (incrI > 0 ? i <= rowTo : i >= rowTo); i += incrI) {
+        for (short j = colFrom; (incrJ > 0 ? j <= colTo : j >= colTo); j += incrJ) {
+            
+            if (stage.mSignBricks[i][j] != 0) {
+                
+//                std::cout << i << " - " << j << std::endl;
+                
+                if (line.checkVertial()) {  // bong di chuyen theo chieu doc
+                    
+                    if (stage.mStage[i][j]->contain(sf::Vector2f(this->posX + this->posXend/2, stage.mStage[i][j]->getBot()))) {    // bóng chạm ngay biên dươi
+                        
+                        this->posY = stage.mStage[i][j]->getBot();
+                        
+                        return;
+                        
+                    }
+                    else if (stage.mStage[i][j]->contain(sf::Vector2f(this->posX + this->posXend/2, stage.mStage[i][j]->getTop()))){
+                        
+                        this->posY = stage.mStage[i][j]->getTop() - this->posYend;
+                        
+                        return;
+                    }
+                    
+                }
+                else
+                {
+                    float x_bot = line.getX(stage.mStage[i][j]->getBot());
+                    float x_top = line.getX(stage.mStage[i][j]->getTop());
+                    
+                    float x_change_bot = line.getX(stage.mStage[i][j]->getBot()) - this->posYend/2 / line.getAlp() - this->posXend/2;
+                    
+                    if (stage.mStage[i][j]->contain(sf::Vector2f(x_bot, stage.mStage[i][j]->getBot())) || (stage.mStage[i][j]->contain(sf::Vector2f(x_change_bot, stage.mStage[i][j]->getBot()))) || (stage.mStage[i][j]->contain(sf::Vector2f(x_change_bot + this->posXend, stage.mStage[i][j]->getBot()))) ) {    // bóng chạm ngay biên dươi
+                        
+                        this->posY = stage.mStage[i][j]->getBot();
+                        this->posX = x_change_bot;
+                        
+                        return;
+                        
+                    }
+                    else if (stage.mStage[i][j]->contain(sf::Vector2f(x_top, stage.mStage[i][j]->getTop()))){
+                        
+                        if (this->line.getAlp() > 0) { // bóng sẽ đi theo hướng chếch lên
+                            this->posX = stage.mStage[i][j]->getLeft() - this->posXend;
+                            this->posY = this->line.getY(stage.mStage[i][j]->getLeft());
+                        }
+                        else
+                        {
+                            this->posX = stage.mStage[i][j]->getRight();
+                            this->line.getY(stage.mStage[i][j]->getRight());
+                            // posY is not change
+                        }
+                        
+                        return;
+                    }
+                    
+                }
+            }
+        }
+    }
+//    std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+    
+}
+
 bool ThePong::isNearlyVertical(){
-    return (abs(this->pastTouchOnPaddle.x - this->posX) <= 10);
+    return (abs(this->pastTouchOnPaddle.x - this->posX) <= 5);
 }
 bool ThePong::isGotTreasure(){
     return this->crashedIntoTreasure;
@@ -580,7 +694,11 @@ sf::Vector2f ThePong::getReflexInfut(float posYFut, sf::Vector2f from){
 void ThePong::draw(sf::RenderWindow& window) {      // vẽ bóng
     window.draw(this->imgSpr);
     
-    
+    this->line.draw(window);
 //    window.draw(this->lineBall, 2, sf::Lines);
+    
+    window.draw(this->vertop, 2, sf::Lines);
+    window.draw(this->verbot, 2, sf::Lines);
+    
     
 }

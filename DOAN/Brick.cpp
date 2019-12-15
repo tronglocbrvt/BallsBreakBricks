@@ -29,3 +29,20 @@ sf::Vector2f Brick::getCentroid(){
 sf::FloatRect Brick::getBound(){
     return this->imgSpr.getGlobalBounds();
 }
+
+bool Brick::contain(sf::Vector2f point){
+    sf::FloatRect bound = this->imgSpr.getGlobalBounds();
+    return ((bound.left <= point.x) && (point.x <= bound.left + bound.width) && (bound.top <= point.y) && (point.y <= bound.top + bound.height));
+}
+float Brick::getTop(){
+    return this->imgSpr.getGlobalBounds().top;
+}
+float Brick::getBot(){
+    return (this->imgSpr.getGlobalBounds().top + this->imgSpr.getGlobalBounds().height);
+}
+float Brick::getLeft(){
+    return this->imgSpr.getGlobalBounds().left;
+}
+float Brick::getRight(){
+    return (this->imgSpr.getGlobalBounds().left + this->imgSpr.getGlobalBounds().width);
+}

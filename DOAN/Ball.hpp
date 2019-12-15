@@ -9,9 +9,10 @@
 #include <string>
 #include <ctime>
 #include <math.h>
+#include <vector>
 #include "rewardItem.h"
 #include "buildStage.hpp"
-
+#include "LinearLine.hpp"
 
 #define _MAX_RAD_BET_VEC_Ox_ 10
 
@@ -39,6 +40,11 @@ private:
     bool crashedIntoTreasure;
     
 //    sf::Vertex lineBall[2];
+    LinearLine line;
+    
+    sf::Vertex vertop[2];
+    sf::Vertex verbot[2];
+    
 
 public:
     ThePong();
@@ -84,6 +90,8 @@ public:
     float lengthOfVector();
     float distanceToPointFromCenter(sf::Vector2f point);
     sf::Vector2f middle();
+    
+    void adjustIfGoThroughBricks(buildStage &stage);
     
     bool isNearlyVertical();
     bool isGotTreasure();
