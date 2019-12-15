@@ -12,7 +12,6 @@ protected:
 	sf::Texture textSpecial;
 	sf::Sprite imgSpecial;
 	int typeGift; // loại vật phẩm, ta sẽ random
-	float veloc;
 public:
     SpecBricks();
     virtual ~SpecBricks();

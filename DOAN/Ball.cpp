@@ -244,7 +244,8 @@ short ThePong::moveBall(Pos positionBar, buildStage& stage, float& score, float&
             }
             this->velocityY = -sqrt(sqr(lengthVector) - sqr(this->velocityX));
         }
-        
+		updateVelocityX();
+		updateVelocityY();
     }
 
 	// kiểm tra chạm gạch
