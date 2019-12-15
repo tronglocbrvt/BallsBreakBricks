@@ -99,6 +99,7 @@ void listHighScore::drawMenu(sf::RenderWindow& window, int mode)
 			Display::drawMenu(window);
 			window.draw(textHead); // vẽ tiêu đề chữ "High Score"
 			
+			int k = 0;
 			for (int i = 0; i < highScores.size(); i++) // in các điểm cao
 			{ 
 				highScores[i].textHigh.setFont(highScores[i].font);
@@ -109,7 +110,7 @@ void listHighScore::drawMenu(sf::RenderWindow& window, int mode)
 				else if (mode == 0 && i == 5)
 					highScores[i].name = "SPECIAL 2\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
 				else 
-					highScores[i].name = " LEVEL  " + std::to_string(highScores[i].level) + "\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
+					highScores[i].name = " LEVEL  " + std::to_string(++k) + "\t\t" + std::to_string(highScores[i].score) + "\t\t<" + std::to_string(highScores[i].date) + "/" + std::to_string(highScores[i].month) + "/" + std::to_string(highScores[i].year) + ">\t\t" + "<" + std::to_string(highScores[i].hour) + ":" + std::to_string(highScores[i].minute) + ">" + '\0';
 
 				highScores[i].textHigh.setString(highScores[i].name);
 				highScores[i].textHigh.setStyle(sf::Text::Regular);
