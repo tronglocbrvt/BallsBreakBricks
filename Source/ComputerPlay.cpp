@@ -57,9 +57,7 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
                 }
             }
         }
-
-        //=======================================================
-                //=======================================================
+        
         
         if (ball.checkGoDown()) {
             sf::Vector2f futurePos = ball.posAtBotInFuture();
@@ -121,8 +119,6 @@ int CPlay(sf::RenderWindow& window, int levelCur)   // máy
 
             bar.moveToMidTabGame();
         }
-//=======================================================
-        //=======================================================
        
 		short staticOfBall = ball.moveBall(copyPos(bar.getPosX(), bar.getPosY(), bar.getWidth(), bar.getHeigh()), stage, score, timeEnd, checkGift, bar, bg);        
 		stage.updateTime();
